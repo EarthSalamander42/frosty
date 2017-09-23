@@ -1,0 +1,17 @@
+"Dungeon"
+{
+	"dota_frostivus"
+	{
+		"MaxPlayers"		"6"
+	}
+
+	"Default_Keys"
+	{
+		"01"
+		{
+			"Key"		"Tab"
+			"Command"		"ToggleOverlayMapSize"
+			"Name"		"Custom Command"
+		}
+	}
+}
