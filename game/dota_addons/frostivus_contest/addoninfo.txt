@@ -1,0 +1,19 @@
+"AddonInfo"
+{
+	"addontitle"					"Frostivus: Rylai's Curse"
+	"addon_game_name"				"Frostivus: Rylai's Curse"
+	"addonversion"					"1.0"
+	"addontagline"					"Frostivus Holdout"
+	"addonauthor"					"Cookies #42, Maelstorm, zimberzimber, Plexus, Starboxx"
+	"addonSteamGroupName"			""
+	"addonContent_Campaign"			"0"
+	"addonDescription"				"Rylay's lore melted with Frostivus event."
+
+	"maps"							"frostivus_2017"
+	"IsPlayable"					"1"
+
+	"frostivus_2017"
+	{
+		"MaxPlayers"				"10"
+	}
+}

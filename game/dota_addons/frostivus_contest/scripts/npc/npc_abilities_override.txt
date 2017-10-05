@@ -1,0 +1,2181 @@
+// Dota Abilities Override File
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+	// Default item removal 
+	// -----------------------------------------------------------
+	"item_blink"							"REMOVE"
+	"item_force_staff"						"REMOVE"
+
+	//"item_javelin"						"REMOVE"
+	//"item_blades_of_attack"				"REMOVE"
+	//"item_broadsword"						"REMOVE"
+	//"item_chainmail"						"REMOVE"
+	//"item_claymore"						"REMOVE"
+	//"item_helm_of_iron_will"				"REMOVE"
+	//"item_mithril_hammer"					"REMOVE"
+	//"item_platemail"						"REMOVE"
+	//"item_quarterstaff"					"REMOVE"
+	//"item_quelling_blade"					"REMOVE"
+	//"item_ring_of_protection"				"REMOVE"
+	//"item_stout_shield"					"REMOVE"
+	//"item_gauntlets"						"REMOVE"
+	//"item_slippers"						"REMOVE"
+	//"item_mantle"							"REMOVE"
+	//"item_branches"						"REMOVE"
+	//"item_belt_of_strength"				"REMOVE"
+	//"item_boots_of_elves"					"REMOVE"
+	//"item_robe"							"REMOVE"
+	//"item_circlet"						"REMOVE"
+	//"item_ogre_axe"						"REMOVE"
+	//"item_blade_of_alacrity"				"REMOVE"
+	//"item_staff_of_wizardry"				"REMOVE"
+	//"item_ultimate_orb"					"REMOVE"
+	//"item_gloves"							"REMOVE"
+	//"item_lifesteal"						"REMOVE"
+	//"item_ring_of_regen"					"REMOVE"
+	//"item_sobi_mask"						"REMOVE"
+	//"item_boots"							"REMOVE"
+	//"item_gem"							"REMOVE"
+	//"item_cloak"							"REMOVE"
+	//"item_talisman_of_evasion"			"REMOVE"
+	//"item_cheese"							"REMOVE"
+	//"item_magic_stick"					"REMOVE"
+	//"item_recipe_magic_wand"				"REMOVE"
+	//"item_magic_wand"						"REMOVE"
+	//"item_ghost"							"REMOVE"
+	//"item_clarity"						"REMOVE"
+	//"item_flask"							"REMOVE"
+	//"item_dust"							"REMOVE"
+	//"item_bottle"							"REMOVE"
+	//"item_ward_observer"					"REMOVE"
+	//"item_ward_sentry"					"REMOVE"
+	//"item_tango"							"REMOVE"
+	//"item_tango_single"					"REMOVE"
+	//"item_courier"						"REMOVE"
+	//"item_tpscroll"						"REMOVE"
+	//"item_recipe_travel_boots"			"REMOVE"
+	//"item_travel_boots"					"REMOVE"
+	//"item_recipe_phase_boots"				"REMOVE"
+	//"item_phase_boots"					"REMOVE"
+	//"item_demon_edge"						"REMOVE"
+	//"item_eagle"							"REMOVE"
+	//"item_reaver"							"REMOVE"
+	//"item_relic"							"REMOVE"
+	//"item_hyperstone"						"REMOVE"
+	//"item_ring_of_health"					"REMOVE"
+	//"item_void_stone"						"REMOVE"
+	//"item_mystic_staff"					"REMOVE"
+	//"item_energy_booster"					"REMOVE"
+	//"item_point_booster"					"REMOVE"
+	//"item_vitality_booster"				"REMOVE"
+	//"item_recipe_power_treads"			"REMOVE"
+	//"item_power_treads"					"REMOVE"
+	//"item_recipe_hand_of_midas"			"REMOVE"
+	//"item_hand_of_midas"					"REMOVE"
+	//"item_recipe_oblivion_staff"			"REMOVE"
+	//"item_oblivion_staff"					"REMOVE"
+	//"item_recipe_pers"					"REMOVE"
+	//"item_pers"							"REMOVE"
+	//"item_recipe_poor_mans_shield"		"REMOVE"
+	//"item_poor_mans_shield"				"REMOVE"
+	//"item_recipe_bracer"					"REMOVE"
+	//"item_bracer"							"REMOVE"
+	//"item_recipe_wraith_band"				"REMOVE"
+	//"item_wraith_band"					"REMOVE"
+	//"item_recipe_null_talisman"			"REMOVE"
+	//"item_null_talisman"					"REMOVE"
+	//"item_recipe_mekansm"					"REMOVE"
+	//"item_mekansm"						"REMOVE"
+	//"item_recipe_vladmir"					"REMOVE"
+	//"item_vladmir"						"REMOVE"
+	//"item_flying_courier"					"REMOVE"
+	//"item_recipe_buckler"					"REMOVE"
+	//"item_buckler"						"REMOVE"
+	//"item_recipe_ring_of_basilius"		"REMOVE"
+	//"item_ring_of_basilius"				"REMOVE"
+	//"item_recipe_pipe"					"REMOVE"
+	//"item_pipe"							"REMOVE"
+	//"item_recipe_urn_of_shadows"			"REMOVE"
+	//"item_urn_of_shadows"					"REMOVE"
+	//"item_recipe_headdress"				"REMOVE"
+	//"item_headdress"						"REMOVE"
+	//"item_recipe_sheepstick"				"REMOVE"
+	//"item_sheepstick"						"REMOVE"
+	//"item_recipe_orchid"					"REMOVE"
+	//"item_orchid"							"REMOVE"
+	//"item_recipe_cyclone"					"REMOVE"
+	//"item_cyclone"						"REMOVE"
+	//"item_recipe_force_staff"				"REMOVE"
+	//"item_recipe_dagon"					"REMOVE"
+	//"item_recipe_dagon_2"					"REMOVE"
+	//"item_recipe_dagon_3"					"REMOVE"
+	//"item_recipe_dagon_4"					"REMOVE"
+	//"item_recipe_dagon_5"					"REMOVE"
+	//"item_dagon"							"REMOVE"
+	//"item_dagon_2"						"REMOVE"
+	//"item_dagon_3"						"REMOVE"
+	//"item_dagon_4"						"REMOVE"
+	//"item_dagon_5"						"REMOVE"
+	//"item_recipe_necronomicon"			"REMOVE"
+	//"item_recipe_necronomicon_2"			"REMOVE"
+	//"item_recipe_necronomicon_3"			"REMOVE"
+	//"item_necronomicon"					"REMOVE"
+	//"item_necronomicon_2"					"REMOVE"
+	//"item_necronomicon_3"					"REMOVE"
+	//"item_recipe_ultimate_scepter"		"REMOVE"
+	//"item_ultimate_scepter"				"REMOVE"
+	//"item_recipe_refresher"				"REMOVE"
+	//"item_refresher"						"REMOVE"
+	//"item_recipe_assault"					"REMOVE"
+	//"item_assault"						"REMOVE"
+	//"item_recipe_heart"					"REMOVE"
+	//"item_heart"							"REMOVE"
+	//"item_recipe_black_king_bar"			"REMOVE"
+	//"item_black_king_bar"					"REMOVE"
+	//"item_aegis"							"REMOVE"
+	//"item_recipe_shivas_guard"			"REMOVE"
+	//"item_shivas_guard"					"REMOVE"
+	//"item_recipe_bloodstone"				"REMOVE"
+	//"item_bloodstone"						"REMOVE"
+	//"item_recipe_sphere"					"REMOVE"
+	//"item_sphere"							"REMOVE"
+	//"item_recipe_vanguard"				"REMOVE"
+	//"item_vanguard"						"REMOVE"
+	//"item_recipe_blade_mail"				"REMOVE"
+	//"item_blade_mail"						"REMOVE"
+	//"item_recipe_soul_booster"			"REMOVE"
+	//"item_soul_booster"					"REMOVE"
+	//"item_recipe_hood_of_defiance"		"REMOVE"
+	//"item_hood_of_defiance"				"REMOVE"
+	//"item_recipe_rapier"					"REMOVE"
+	//"item_rapier"							"REMOVE"
+	//"item_recipe_monkey_king_bar"			"REMOVE"
+	//"item_monkey_king_bar"				"REMOVE"
+	//"item_recipe_radiance"				"REMOVE"
+	//"item_radiance"						"REMOVE"
+	//"item_recipe_butterfly"				"REMOVE"
+	//"item_butterfly"						"REMOVE"
+	//"item_recipe_greater_crit"			"REMOVE"
+	//"item_greater_crit"					"REMOVE"
+	//"item_recipe_basher"					"REMOVE"
+	//"item_basher"							"REMOVE"
+	//"item_recipe_bfury"					"REMOVE"
+	//"item_bfury"							"REMOVE"
+	//"item_recipe_manta"					"REMOVE"
+	//"item_manta"							"REMOVE"
+	//"item_recipe_lesser_crit"				"REMOVE"
+	//"item_lesser_crit"					"REMOVE"
+	//"item_recipe_armlet"					"REMOVE"
+	//"item_armlet"							"REMOVE"
+	//"item_recipe_invis_sword"				"REMOVE"
+	//"item_invis_sword"					"REMOVE"
+	//"item_recipe_sange_and_yasha"			"REMOVE"
+	//"item_sange_and_yasha"				"REMOVE"
+	//"item_recipe_satanic"					"REMOVE"
+	//"item_satanic"						"REMOVE"
+	//"item_recipe_mjollnir"				"REMOVE"
+	//"item_mjollnir"						"REMOVE"
+	//"item_recipe_skadi"					"REMOVE"
+	//"item_skadi"							"REMOVE"
+	//"item_recipe_sange"					"REMOVE"
+	//"item_sange"							"REMOVE"
+	//"item_recipe_helm_of_the_dominator"	"REMOVE"
+	//"item_helm_of_the_dominator"			"REMOVE"
+	//"item_recipe_maelstrom"				"REMOVE"
+	//"item_maelstrom"						"REMOVE"
+	//"item_recipe_desolator"				"REMOVE"
+	//"item_desolator"						"REMOVE"
+	//"item_recipe_yasha"					"REMOVE"
+	//"item_yasha"							"REMOVE"
+	//"item_recipe_mask_of_madness"			"REMOVE"
+	//"item_mask_of_madness"				"REMOVE"
+	//"item_recipe_diffusal_blade"			"REMOVE"
+	//"item_recipe_diffusal_blade_2"		"REMOVE"
+	//"item_diffusal_blade"					"REMOVE"
+	//"item_diffusal_blade_2"				"REMOVE"
+	//"item_recipe_ethereal_blade"			"REMOVE"
+	//"item_ethereal_blade"					"REMOVE"
+	//"item_recipe_soul_ring"				"REMOVE"
+	//"item_soul_ring"						"REMOVE"
+	//"item_recipe_arcane_boots"			"REMOVE"
+	//"item_arcane_boots"					"REMOVE"
+	//"item_orb_of_venom"					"REMOVE"
+	//"item_recipe_ancient_janggo"			"REMOVE"
+	//"item_ancient_janggo"					"REMOVE"
+	//"item_recipe_medallion_of_courage"	"REMOVE"
+	//"item_medallion_of_courage"			"REMOVE"
+	//"item_smoke_of_deceit"				"REMOVE"
+	//"item_recipe_veil_of_discord"			"REMOVE"
+	//"item_veil_of_discord"				"REMOVE"
+	//"item_recipe_rod_of_atos"				"REMOVE"
+	//"item_rod_of_atos"					"REMOVE"
+	//"item_recipe_abyssal_blade"			"REMOVE"
+	//"item_abyssal_blade"					"REMOVE"
+	//"item_recipe_heavens_halberd"			"REMOVE"
+	//"item_heavens_halberd"				"REMOVE"
+	//"item_recipe_ring_of_aquila"			"REMOVE"
+	//"item_ring_of_aquila"					"REMOVE"
+	//"item_recipe_tranquil_boots"			"REMOVE"
+	//"item_tranquil_boots"					"REMOVE"
+	//"item_shadow_amulet"					"REMOVE"
+	//"item_halloween_candy_corn"			"REMOVE"
+	//"item_mystery_hook"					"REMOVE"
+	//"item_mystery_arrow"					"REMOVE"
+	//"item_mystery_missile"				"REMOVE"
+	//"item_mystery_toss"					"REMOVE"
+	//"item_mystery_vacuum"					"REMOVE"
+	//"item_halloween_rapier"				"REMOVE"
+	//"item_greevil_whistle"				"REMOVE"
+	//"item_greevil_whistle_toggle"			"REMOVE"
+	//"item_present"						"REMOVE"
+	//"item_winter_stocking"				"REMOVE"
+	//"item_winter_skates"					"REMOVE"
+	//"item_winter_cake"					"REMOVE"
+	//"item_winter_cookie"					"REMOVE"
+	//"item_winter_coco"					"REMOVE"
+	//"item_winter_ham"						"REMOVE"
+	//"item_winter_kringle"					"REMOVE"
+	//"item_winter_mushroom"				"REMOVE"
+	//"item_winter_greevil_treat"			"REMOVE"
+	//"item_winter_greevil_garbage"			"REMOVE"
+	//"item_winter_greevil_chewy"			"REMOVE"
+	//"item_recipe_moon_shard"				"REMOVE"
+	//"item_moon_shard"						"REMOVE"
+	//"item_enchanted_mango"				"REMOVE"
+	//"item_recipe_travel_boots_2"			"REMOVE"
+	//"item_travel_boots_2"					"REMOVE"
+	//"item_recipe_lotus_orb"				"REMOVE"
+	//"item_lotus_orb"						"REMOVE"
+	//"item_recipe_crimson_guard"			"REMOVE"
+	//"item_crimson_guard"					"REMOVE"
+	//"item_recipe_silver_edge"				"REMOVE"
+	//"item_silver_edge"					"REMOVE"
+	//"item_recipe_octarine_core"			"REMOVE"
+	//"item_octarine_core"					"REMOVE"
+	//"item_recipe_solar_crest"				"REMOVE"
+	//"item_solar_crest"					"REMOVE"
+	//"item_recipe_guardian_greaves"		"REMOVE"
+	//"item_guardian_greaves"				"REMOVE"
+	//"item_recipe_glimmer_cape"			"REMOVE"
+	//"item_glimmer_cape"					"REMOVE"
+	//"item_recipe_bloodthorn"				"REMOVE"
+	//"item_bloodthorn"						"REMOVE"
+	//"item_recipe_echo_sabre"				"REMOVE"
+	//"item_echo_sabre"						"REMOVE"
+	//"item_recipe_aether_lens"				"REMOVE"
+	//"item_aether_lens"					"REMOVE"
+	//"item_recipe_dragon_lance"			"REMOVE"
+	//"item_dragon_lance"					"REMOVE"
+	//"item_blight_stone"					"REMOVE"
+
+	//=================================================================================================================
+	// 								ITEM OVERRIDES
+	//=================================================================================================================
+
+	//=================================================================================================================
+	// Roshan: Bash
+	//=================================================================================================================
+	"roshan_bash"
+	{
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"bash_chance"		"15"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"bonus_damage"		"50"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"stun_duration"		"1.2"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// 								HERO OVERRIDES
+	//=================================================================================================================
+
+	//=================================================================================================================
+	// Abaddon: Death Coil
+	//=================================================================================================================
+	"abaddon_death_coil"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"0"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"self_damage"			"100 150 200 250 300 350 400"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"target_damage"			"250 375 500 625 750 875 1000"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal_amount"			"250 375 500 625 750 875 1000"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"missile_speed"			"700"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Abaddon: Aphotic Shield
+	//=================================================================================================================
+	"abaddon_aphotic_shield"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"25"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"10.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_absorb"			"120 180 240 300 360 420 480"
+				"LinkedSpecialBonus"	"special_bonus_unique_abaddon"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Abaddon: Frostmourne
+	//=================================================================================================================
+	"abaddon_frostmourne"
+	{
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"debuff_duration"				"2.5"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"buff_duration"					"2.5"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"slow_pct"						"20"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"attack_slow_tooltip"			"20"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"move_speed_pct"				"10"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"attack_speed"					"10"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Abaddon: Borrowed Time
+	//=================================================================================================================
+	"abaddon_borrowed_time"
+	{
+		"AbilityCooldown"				"30"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"2"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hp_threshold"				"400"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"duration"					"5"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"duration_scepter"			"5"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"redirect"					"0.0"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"redirect_pct_tooltip_scepter"	"0"
+			}
+			"06"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"redirect_range_tooltip_scepter"	"700"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Alchemist: Acid Spray
+	//=================================================================================================================
+	"alchemist_acid_spray"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"10"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"42 63 84 105 126 147 168"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"armor_reduction"		"4"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"tick_rate"				"1.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Alchemist: Unstable Concoction
+	//=================================================================================================================
+	"alchemist_unstable_concoction"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"brew_time"					"5.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"brew_explosion"			"5.5"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"min_stun"					"0.25"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"max_stun"					"2.5"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"min_damage"				"0"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_damage"				"250 375 500 625 750 875 1000"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"200"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Alchemist: Unstable Concoction Throw
+	//=================================================================================================================
+	"alchemist_unstable_concoction_throw"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"1"
+
+		"AbilityManaCost"				"0"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"brew_time"					"5.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"min_stun"					"0.25"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"max_stun"					"2.5"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"min_damage"				"0"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_damage"				"250 375 500 625 750 875 1000"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"movement_speed"			"700"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"vision_range"				"300"
+			}
+			"08"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"midair_explosion_radius"	"200"
+			}
+			"09"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"brew_explosion"			"7.0"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Alchemist: Chemical Rage
+	//=================================================================================================================
+	"alchemist_chemical_rage"
+	{
+		"AbilityCooldown"				"30"
+
+		"AbilityManaCost"				"30"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"2"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"10.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"transformation_time"	"0.15"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"base_attack_time"		"1.25"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_health"			"0"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_health_regen"	"40 56 72 88 104 120 136"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bonus_mana_regen"		"4.5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_movespeed"		"50"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ancient Apparition: Cold Feet
+	//=================================================================================================================
+	"ancient_apparition_cold_feet"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityDuration"				"2.0"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage"				"50 75 100 125 150 175 200"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"break_distance"		"700"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"2.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cast_range_tooltip"	"700"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"charge_restore_time"	"10"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ancient Apparition: Ice Vortex
+	//=================================================================================================================
+	"ancient_apparition_ice_vortex"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityCooldown"				"5"
+
+		"AbilityDuration"				"10"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"400"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movement_speed_pct"	"-20"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"spell_resist_pct"		"-20"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vision_aoe"			"400"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ancient Apparition: Chilling Touch
+	//=================================================================================================================
+	"ancient_apparition_chilling_touch"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"20"
+
+		"AbilityDuration"				"10"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_attacks"			"3"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage"			"50 75 100 125 150 175 200"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"attack_speed_pct"		"-10"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ancient Apparition: Ice Blast
+	//=================================================================================================================
+	"ancient_apparition_ice_blast"
+	{
+		"AbilityCooldown"				"30"
+
+		"AbilityManaCost"				"30"
+
+		"AbilityDamage"					"200 300 400 500 600 700 800"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"2"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius_min"			"275"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"radius_grow"			"50.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius_max"			"550"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"path_radius"			"275 "
+			}
+			"05"
+			{	
+				"var_type"				"FIELD_FLOAT"
+				"frostbite_duration"	"10.0"
+			}
+			"06"
+			{	
+				"var_type"				"FIELD_FLOAT"
+				"dot_damage"			"10.0 15.0 20.0 25.0 30.0 35.0 40.0"
+			}
+			"07"
+			{	
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1500"
+			}
+			"08"
+			{	
+				"var_type"				"FIELD_FLOAT"
+				"kill_pct"				"10.0"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"target_sight_radius"	"550"
+			}
+			"10"
+			{	
+				"var_type"				"FIELD_FLOAT"
+				"frostbite_duration_scepter"	"10"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Antimage Mana Break
+	//=================================================================================================================
+	"antimage_mana_break"
+	{
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_per_burn"		"0.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_per_hit"			"15"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Antimage Blink
+	//=================================================================================================================
+	"antimage_blink"
+	{
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blink_range"			"700"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"min_blink_range"		"200"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Ability: Antimage Spell Shield
+	//=================================================================================================================
+	"antimage_spell_shield"
+	{
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"spell_shield_resistance"		"50"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"scepter_cooldown"				"30"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Antimage Mana Void
+	//=================================================================================================================
+	"antimage_mana_void"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"30"
+
+		"AbilityManaCost"				"30"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"2"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"mana_void_damage_per_mana"		"6.0 9.0 12.0 15.0 18.0 21.0 24.0"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"mana_void_ministun"			"0.1"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"mana_void_aoe_radius"			"500"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Arc Warden: Flux
+	//=================================================================================================================
+	"arc_warden_flux"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"2.5"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage_per_second"				"80 120 160 200 240 280 320"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"search_radius"					"400"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"think_interval"				"0.5"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"move_speed_slow_pct"			"25"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"cast_range_tooltip"			"700"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Arc Warden: Magnetic Field
+	//=================================================================================================================
+	"arc_warden_magnetic_field"
+	{
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"15"
+		
+		"AbilityCastRange"				"700"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"275"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"2.5"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"attack_speed_bonus"		"20"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"evasion_chance"			"100"
+			}
+		}
+	}
+		
+	//=================================================================================================================
+	// Arc Warden: Spark Wraith
+	//=================================================================================================================
+	"arc_warden_spark_wraith"
+	{
+		"AbilityCastRange"				"1000"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"400"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"activation_delay"				"1.0"
+			}			
+			"03"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"30"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"wraith_speed"					"700"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"spark_damage"					"150 225 300 375 450 525 600"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"think_interval"				"0.2"
+			}
+			"07"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"wraith_vision_radius"			"300"
+			}  
+			"08"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"wraith_vision_duration"		"3.34"
+			}
+			"09"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"ministun_duration"				"1.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Arc warden: Tempest Double
+	//=================================================================================================================
+	"arc_warden_tempest_double"
+	{
+		"AbilityCooldown"				"30"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"2"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"6"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Axe Berserker's Call
+	//=================================================================================================================
+	"axe_berserkers_call"
+	{
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_armor"			"100"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"2.0"
+			}	
+		}
+	}
+	
+	//=================================================================================================================
+	// Ability: Axe Battle Hunger
+	//=================================================================================================================
+	"axe_battle_hunger"
+	{
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"15"
+
+		"AbilityCastRange"				"700"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"10.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"slow"						"-10"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"speed_bonus"				"10"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"damage_per_second"			"25.0 37.5 50.0 62.5 75.0 87.5 100.0"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_reduction_scepter"	"0"
+			}
+		}		
+	}
+	
+	//=================================================================================================================
+	// Ability: Axe Counter Helix
+	//=================================================================================================================
+	"axe_counter_helix"
+	{
+		"AbilityCooldown"				"0.5"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilityDamage"					"200 300 400 500 600 700 800"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"500"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"trigger_chance"			"20"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"cooldown"					"0.5"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Ability: Axe Culling Blade
+	//=================================================================================================================
+	"axe_culling_blade"
+	{
+		"AbilityCooldown"				"30"
+
+		"AbilityManaCost"				"30"		
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"2"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"kill_threshold"			"400 600 800 1000 1200 1400 1600"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"200 300 400 500 600 700 800"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"speed_bonus"				"20"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"atk_speed_bonus_tooltip"	"20"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"speed_duration"			"5.0"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"speed_aoe"					"700"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"scepter_aoe"				"700"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Bane Enfeeble
+	//=================================================================================================================
+	"bane_enfeeble"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityDuration"				"5"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"enfeeble_attack_reduction"		"80 120 160 200 240 280 320"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Ability: Brain Sap
+	//=================================================================================================================
+	"bane_brain_sap"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"20"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"brain_sap_damage"				"120 180 240 300 360 420 480"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"tooltip_brain_sap_heal_amt"	"120 180 240 300 360 420 480"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"cooldown_scepter"				"10.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Bane: Nightmare
+	//=================================================================================================================
+	"bane_nightmare"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityDuration"				"4.0"
+
+		"AbilityDamage"					"25 37.5 50 62.5 75 87.5 100"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"nightmare_dot_interval"	"1.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"nightmare_invuln_time"		"1.0"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"4.0"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"animation_rate"			"0.2"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cast_range_tooltip"		"700"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Ability: Bane Fiend's Grip
+	//=================================================================================================================
+	"bane_fiends_grip"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityChannelTime"			"3.0"
+		"AbilityCooldown"				"30"
+
+		"AbilityManaCost"				"30"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"2"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"fiend_grip_tick_interval"		"0.5"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"fiend_grip_mana_drain"			"10"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"fiend_grip_duration"			"3.0"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"fiend_grip_damage"				"120 180 240 300 360 420 480"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Batrider: Sticky Napalm
+	//=================================================================================================================
+	"batrider_sticky_napalm"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"5"
+
+		"AbilityManaCost"				"10"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"20 30 40 50 60 70 80"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"400"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"10.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movement_speed_pct"	"-5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"turn_rate_pct"			"-70"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_stacks"			"10"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Batrider: Flamebreak
+	//=================================================================================================================
+	"batrider_flamebreak"
+	{
+		"AbilityCastRange"				"1000"
+
+		"AbilityCooldown"				"10.0"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"40 60 80 100 120 140 160"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_duration"		"4.0"
+			}			
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_total_tooltip"	"160 240 320 400 480 560 640"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"explosion_radius"		"400"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"collision_radius"		"100"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"0.5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"700"
+			}
+			"08"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"knockback_max_distance"	"400"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"knockback_height"		"100"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"knockback_duration"	"0.25"
+			}			
+		}
+	}
+
+	//=================================================================================================================
+	// Batrider: Firefly
+	//=================================================================================================================
+	"batrider_firefly"
+	{
+		"AbilityCooldown"				"420"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"30 45 60 75 90 105 120"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"200"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"10.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"tick_interval"			"0.5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tree_radius"			"1000"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Batrider: Flaming Lasso
+	//=================================================================================================================
+	"batrider_flaming_lasso"
+	{
+		"AbilityCastRange"				"100"
+
+		"AbilityCooldown"				"30"
+
+		"AbilityManaCost"				"30"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"2"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"2.5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"drag_distance"			"200"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"break_distance"		"425"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"grab_radius"			"400"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"grab_radius_scepter"	"400"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_scepter"		"0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Beastmaster: Wild Axes
+	//=================================================================================================================
+	"beastmaster_wild_axes"
+	{
+		"AbilityCastRange"				"1000"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"15"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"140"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"spread"					"353 353 353 353"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"range"						"1000"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"axe_damage"				"100 150 200 250 300 350 400"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Beastmaster: Call of the Wild Hawk
+	//=================================================================================================================
+	"beastmaster_call_of_the_wild"
+	{
+		"AbilityCooldown"				"20"
+
+		"AbilityManaCost"				"5"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"boar_duration"				"40"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hawk_hp_tooltip"			"200 300 400 500 600 700 800"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hawk_speed_tooltip"		"400"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hawk_daysight_tooltip"		"1000"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hawk_nightsight_tooltip"	"1000"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hawk_duration"				"60"
+			}
+		}
+	}
+	//=================================================================================================================
+	// Beastmaster: Call of the Wild Boar
+	//=================================================================================================================
+	"beastmaster_call_of_the_wild_boar"
+	{
+		"AbilityCooldown"				"20"
+
+		"AbilityManaCost"				"5"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hawk_duration"				"60"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"boar_hp_tooltip"			"400 600 800 1000 1200 1400 1600"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"boar_damage_tooltip"		"50 75 100 125 150 175 200"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"boar_moveslow_tooltip"		"20"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"boar_attackslow_tooltip"	"20"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"poison_duration_tooltip"	"2"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"boar_duration"				"40"
+			}		
+		}
+	}
+
+	//=================================================================================================================
+	// Beastmaster: Greater Hawk: Invisibility
+	//=================================================================================================================
+	"beastmaster_hawk_invisibility"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"fade_time"				"1.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"idle_invis_delay"		"3"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"fade_tooltip"			"0 0 4 4"		
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Beastmaster: Boar: Poison
+	//=================================================================================================================
+	"beastmaster_boar_poison"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_speed"			"-20"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movement_speed"		"-20"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"2.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Beastmaster: Inner Beast
+	//=================================================================================================================
+	"beastmaster_inner_beast"
+	{
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"700"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"25"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Beastmaster: Primal Roar
+	//=================================================================================================================
+	"beastmaster_primal_roar"
+	{
+		"AbilityCooldown"				"30"
+
+		"AbilityManaCost"				"30"
+
+		"AbilityCastRange"				"700"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"2"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"2.5"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"300 450 600 750 900 1050 1200"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"side_damage"				"200 300 400 500 600 700 800"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_radius"				"400"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"slow_movement_speed_pct"	"-30"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"slow_attack_speed_pct"		"-30"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"push_distance"				"300"
+			}
+			"08"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"push_duration"				"0.6"
+			}
+			"09"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"slow_duration"				"2.5"
+			}
+			"10"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cast_range_scepter"		"700"
+			}
+			"11"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"cooldown_scepter"			"30.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Bloodseeker's Bloodrage
+	//=================================================================================================================
+	"bloodseeker_bloodrage"
+	{
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"0"
+
+		"AbilityCastRange"				"700"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"10"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_increase_pct"		"25"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"health_bonus_pct"			"25"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"health_bonus_creep_pct"	"25"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Ability: Bloodseeker's Blood Rite/Bath
+	//=================================================================================================================
+	"bloodseeker_blood_bath"
+	{
+		"AbilityCastRange"				"1000"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityManaCost"				"20"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"600"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"silence_duration"			"3.5"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"200 300 400 500 600 700 800"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"delay"						"2.6"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"delay_plus_castpoint_tooltip"						"3.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Bloodseeker's Thirst
+	//=================================================================================================================
+	"bloodseeker_thirst"
+	{
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"min_bonus_pct"				"35"
+			}			
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_movement_speed"		"10"
+			}			
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage"				"50 75 100 125 150 175 200"
+			}		
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_bonus_pct"				"30"
+			}	
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"visibility_threshold_pct"	"30"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"invis_threshold_pct"		"30"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Bloodseeker's Rupture
+	//=================================================================================================================
+	"bloodseeker_rupture"
+	{
+		"AbilityCooldown"				"30"
+
+		"AbilityManaCost"				"30"
+
+		"AbilityCastRange"				"700"
+
+		"MaxLevel"						"7"
+		"LevelsBetweenUpgrades"			"2"
+		"RequiredLevel"					"2"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"7.5"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"movement_damage_pct"		"30 45 60 75 90 105 120"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_cap_amount"			"400"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"damage_cap_interval"		"0.25"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cast_range_tooltip"		"700"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_charges_scepter"		"1"
+			}
+			"07"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"charge_restore_time_scepter"	"30"
+			}
+		}
+	}
+}

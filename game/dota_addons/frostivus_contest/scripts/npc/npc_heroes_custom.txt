@@ -1,0 +1,290 @@
+"DOTAHeroes"
+{
+	//=================================================================================================================
+	// HERO: Abaddon
+	//=================================================================================================================
+	"npc_imba_hero_abaddon"
+	{
+		"override_hero"				"npc_dota_hero_abaddon"
+
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		"AttackDamageMin"			"200"
+		"AttackDamageMax"			"200"
+		"AttackRate"				"2.0"
+		"AttackRange"				"150"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"40"
+		"AttributeStrengthGain"		"12.5"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0.0"
+		"AttributeBaseIntelligence"	"0"
+		"AttributeIntelligenceGain"	"0.0"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"1.0"
+		"StatusManaRegen"			"1.5"
+		"StatusHealthRegen"			"0.0"
+
+		"ProjectileSpeed"			"900"
+	}	
+
+	//=================================================================================================================
+	// HERO: Alchemist
+	//=================================================================================================================
+	"npc_imba_hero_alchemist"
+	{
+		"override_hero"				"npc_dota_hero_alchemist"
+
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		"AttackDamageMin"			"200"
+		"AttackDamageMax"			"200"
+		"AttackRate"				"2.0"
+		"AttackRange"				"150"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"40"
+		"AttributeStrengthGain"		"12.5"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0.0"
+		"AttributeBaseIntelligence"	"0"
+		"AttributeIntelligenceGain"	"0.0"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"1.0"
+		"StatusManaRegen"			"1.5"
+		"StatusHealthRegen"			"0.0"
+
+		"ProjectileSpeed"			"900"
+	}
+
+	//=================================================================================================================
+	// HERO: Ancient Apparition
+	//=================================================================================================================
+	"npc_imba_hero_ancient_apparition"
+	{
+		"override_hero"				"npc_dota_hero_ancient_apparition"
+
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		"AttackDamageMin"			"150"
+		"AttackDamageMax"			"150"
+		"AttackRate"				"2.0"
+		"AttackRange"				"600"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"40"
+		"AttributeStrengthGain"		"12.5"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0.0"
+		"AttributeBaseIntelligence"	"0"
+		"AttributeIntelligenceGain"	"0.0"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"1.0"
+		"StatusManaRegen"			"1.5"
+		"StatusHealthRegen"			"0.0"
+
+		"ProjectileSpeed"			"900"
+
+		"ProjectileModel"			"particles/units/heroes/hero_ancient_apparition/ancient_apparition_base_attack.vpcf"
+	}
+
+	//=================================================================================================================
+	// HERO: Antimage
+	//=================================================================================================================
+	"npc_imba_hero_antimage"
+	{
+		"override_hero"				"npc_dota_hero_antimage"
+
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		"AttackDamageMin"			"200"
+		"AttackDamageMax"			"200"
+		"AttackRate"				"1.7"
+		"AttackRange"				"150"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"30"
+		"AttributeStrengthGain"		"10.0"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0.0"
+		"AttributeBaseIntelligence"	"0"
+		"AttributeIntelligenceGain"	"0.0"
+		"MovementSpeed"				"315"
+		"MovementTurnRate"			"1.0"
+		"StatusManaRegen"			"1.5"
+		"StatusHealthRegen"			"0.0"
+
+		"ProjectileSpeed"			"900"
+	}
+
+	//=================================================================================================================
+	// HERO: Arc Warden
+	//=================================================================================================================
+	"npc_imba_hero_arc_warden"
+	{
+		"override_hero"				"npc_dota_hero_arc_warden"
+
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		"AttackDamageMin"			"150"
+		"AttackDamageMax"			"150"
+		"AttackRate"				"2.0"
+		"AttackRange"				"600"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"40"
+		"AttributeStrengthGain"		"12.5"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0.0"
+		"AttributeBaseIntelligence"	"0"
+		"AttributeIntelligenceGain"	"0.0"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"1.0"
+		"StatusManaRegen"			"1.5"
+		"StatusHealthRegen"			"0.0"
+
+		"ProjectileSpeed"			"900"
+
+		"ProjectileModel"			"particles/units/heroes/hero_arc_warden/arc_warden_base_attack.vpcf"
+	}
+
+	//=================================================================================================================
+	// HERO: Axe
+	//=================================================================================================================
+	"npc_imba_hero_axe"
+	{
+		"override_hero"				"npc_dota_hero_axe"
+
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		"AttackDamageMin"			"200"
+		"AttackDamageMax"			"200"
+		"AttackRate"				"2.0"
+		"AttackRange"				"150"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"45"
+		"AttributeStrengthGain"		"13.75"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0.0"
+		"AttributeBaseIntelligence"	"0"
+		"AttributeIntelligenceGain"	"0.0"
+		"MovementSpeed"				"315"
+		"MovementTurnRate"			"1.0"
+		"StatusManaRegen"			"1.5"
+		"StatusHealthRegen"			"0.0"
+
+		"ProjectileSpeed"			"900"
+	}
+
+	//=================================================================================================================
+	// HERO: Bane
+	//=================================================================================================================
+	"npc_imba_hero_bane"
+	{
+		"override_hero"				"npc_dota_hero_bane"
+
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		"AttackDamageMin"			"150"
+		"AttackDamageMax"			"150"
+		"AttackRate"				"2.0"
+		"AttackRange"				"600"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"40"
+		"AttributeStrengthGain"		"12.5"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0.0"
+		"AttributeBaseIntelligence"	"0"
+		"AttributeIntelligenceGain"	"0.0"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"1.0"
+		"StatusManaRegen"			"1.5"
+		"StatusHealthRegen"			"0.0"
+
+		"ProjectileSpeed"			"900"
+
+		"ProjectileModel"			"particles/units/heroes/hero_bane/bane_projectile.vpcf"
+	}
+
+	//=================================================================================================================
+	// HERO: Batrider
+	//=================================================================================================================
+	"npc_imba_hero_batrider"
+	{
+		"override_hero"				"npc_dota_hero_batrider"
+
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		"AttackDamageMin"			"110"
+		"AttackDamageMax"			"110"
+		"AttackRate"				"2.0"
+		"AttackRange"				"600"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"40"
+		"AttributeStrengthGain"		"12.5"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0.0"
+		"AttributeBaseIntelligence"	"0"
+		"AttributeIntelligenceGain"	"0.0"
+		"MovementSpeed"				"315"
+		"MovementTurnRate"			"1.0"
+		"StatusManaRegen"			"1.5"
+		"StatusHealthRegen"			"0.0"
+
+		"ProjectileSpeed"			"900"
+
+		"ProjectileModel"			"particles/units/heroes/hero_batrider/batrider_base_attack.vpcf"
+	}
+
+	//=================================================================================================================
+	// HERO: Bestmaster
+	//=================================================================================================================
+	"npc_imba_hero_beastmaster"
+	{
+		"override_hero"				"npc_dota_hero_beastmaster"
+
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		"AttackDamageMin"			"200"
+		"AttackDamageMax"			"200"
+		"AttackRate"				"2.0"
+		"AttackRange"				"150"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"40"
+		"AttributeStrengthGain"		"12.5"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0.0"
+		"AttributeBaseIntelligence"	"0"
+		"AttributeIntelligenceGain"	"0.0"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"1.0"
+		"StatusManaRegen"			"1.5"
+		"StatusHealthRegen"			"0.0"
+
+		"ProjectileSpeed"			"900"
+	}
+
+	//=================================================================================================================
+	// HERO: Bloodseeker
+	//=================================================================================================================
+	"npc_imba_hero_bloodseeker"
+	{
+		"override_hero"				"npc_dota_hero_bloodseeker"
+
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+		"AttackDamageMin"			"200"
+		"AttackDamageMax"			"200"
+		"AttackRate"				"2.0"
+		"AttackRange"				"150"
+		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"40"
+		"AttributeStrengthGain"		"12.5"
+		"AttributeBaseAgility"		"0"
+		"AttributeAgilityGain"		"0.0"
+		"AttributeBaseIntelligence"	"0"
+		"AttributeIntelligenceGain"	"0.0"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"1.0"
+		"StatusManaRegen"			"1.5"
+		"StatusHealthRegen"			"0.0"
+
+		"ProjectileSpeed"			"900"
+	}
+}
