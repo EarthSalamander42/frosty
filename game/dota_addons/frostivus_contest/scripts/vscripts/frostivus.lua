@@ -242,9 +242,6 @@ function ArenaControlPointScoreThink(radiant_cp, dire_cp)
 	local radiant = CustomNetTables:GetTableValue("game_options", "radiant")
 	local dire = CustomNetTables:GetTableValue("game_options", "dire")
 
-	print("Radiant CP:", radiant_cp.score)
-	print("Dire CP", dire_cp.score)
-
 	-- Update scores
 	if radiant_cp.score >= 0 then
 		radiant.score = radiant.score + 1
@@ -257,14 +254,22 @@ function ArenaControlPointScoreThink(radiant_cp, dire_cp)
 		radiant.score = radiant.score + 1
 	end
 
---	-- Check if one of the teams won the game
---	if radiant.score >= KILLS_TO_END_GAME_FOR_TEAM then
---		GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
---		GAME_WINNER_TEAM = "Radiant"
---	elseif dire.score >= KILLS_TO_END_GAME_FOR_TEAM then
---		GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
---		GAME_WINNER_TEAM = "Dire"
---	end
+	-- Set new values
+	CustomNetTables:SetTableValue("arena_capture", "radiant_score", {radiant.score})
+	CustomNetTables:SetTableValue("arena_capture", "dire_score", {dire.score})
+
+	-- Update scoreboard
+	CustomGameEventManager:Send_ServerToAllClients("radiant_score_update", {})
+	CustomGameEventManager:Send_ServerToAllClients("dire_score_update", {})
+
+	-- Check if one of the teams won the game
+	if radiant.score >= KILLS_TO_END_GAME_FOR_TEAM then
+		GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+		GAME_WINNER_TEAM = "Radiant"
+	elseif dire.score >= KILLS_TO_END_GAME_FOR_TEAM then
+		GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+		GAME_WINNER_TEAM = "Dire"
+	end
 
 	-- Call this function again after 10 seconds
 	Timers:CreateTimer(10, function()
