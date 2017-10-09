@@ -95,14 +95,13 @@ end
 
 -- The overall game state has changed
 function GameMode:OnGameRulesStateChange(keys)
-DebugPrint("[BAREBONES] GameRules State Changed")
-DebugPrintTable(keys)
 local i = 10
 
 	-- This internal handling is used to set up main barebones functions
 	GameMode:_OnGameRulesStateChange(keys)
 
 	local new_state = GameRules:State_Get()
+	CustomNetTables:SetTableValue("game_options", "game_state", {state = new_state})
 
 	-------------------------------------------------------------------------------------------------
 	-- IMBA: Pick screen stuff
@@ -117,9 +116,6 @@ local i = 10
 	-------------------------------------------------------------------------------------------------
 
 	if new_state == DOTA_GAMERULES_STATE_PRE_GAME then
-		-- Shows various info to devs in pub-game to find lag issues
-		ImbaNetGraph(10.0)
-
 		Timers:CreateTimer(function() -- OnThink
 			if CHEAT_ENABLED == false then
 				if Convars:GetBool("sv_cheats") == true or GameRules:IsCheatMode() then
@@ -139,16 +135,8 @@ local i = 10
 	if new_state == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		Server_WaitToEnableXpGain()
 
-		for _, hero in pairs(HeroList:GetAllHeroes()) do
-			if hero.is_dev and not hero.has_graph then
-				hero.has_graph = true
-				CustomGameEventManager:Send_ServerToPlayer(hero:GetPlayerOwner(), "show_netgraph", {})
---				CustomGameEventManager:Send_ServerToPlayer(hero:GetPlayerOwner(), "show_netgraph_heronames", {})
-			end
-		end
-
-		if GetMapName() == "imba_diretide" then
-			Diretide()
+		if GetMapName() == "frostivus" then
+			Frostivus()
 		end
 
 		Timers:CreateTimer(60, function()
@@ -197,10 +185,6 @@ local normal_xp = npc:GetDeathXP()
 --		end
 	end
 
-	if npc:GetUnitName() == "npc_dummy_unit" or npc:GetUnitName() == "npc_dummy_unit_perma" then
-		dummy_created_count = dummy_created_count +1
-	end
-
 	if npc:IsRealHero() then
 		for i = 1, #IMBA_DEVS do
 			-- Granting access to admin stuff for Imba Devs
@@ -211,141 +195,11 @@ local normal_xp = npc:GetDeathXP()
 			end
 		end
 
-		Timers:CreateTimer(1, function() -- Silencer fix
-			if npc:HasModifier("modifier_silencer_int_steal") then
-				npc:RemoveModifierByName("modifier_silencer_int_steal")
-			end
-		end)
-	end
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Arc Warden clone handling
-	-------------------------------------------------------------------------------------------------
-
-	if npc:FindAbilityByName("arc_warden_tempest_double") and not npc.first_tempest_double_cast and npc:IsRealHero() then
-		npc.first_tempest_double_cast = true
-		local tempest_double_ability = npc:FindAbilityByName("arc_warden_tempest_double")
-		tempest_double_ability:SetLevel(4)
-		Timers:CreateTimer(0.1, function()
-			if not npc:HasModifier("modifier_arc_warden_tempest_double") then
-				tempest_double_ability:CastAbility()
-				tempest_double_ability:SetLevel(1)
-			end
-		end)
-	end
-
-	if npc:HasModifier("modifier_arc_warden_tempest_double") then
-
-		-- List of modifiers which carry over from the main hero to the clone
-		local clone_shared_buffs = {			
-			"modifier_imba_moon_shard_stacks_dummy",
-			"modifier_imba_moon_shard_consume_1",
-			"modifier_imba_moon_shard_consume_2",
-			"modifier_imba_moon_shard_consume_3",
-			"modifier_item_imba_soul_of_truth"
-		}
-		
-		-- Iterate through the main hero's potential modifiers
-		local main_hero = npc:GetOwner():GetAssignedHero()
-		for _, shared_buff in pairs(clone_shared_buffs) do
-			
-			-- If the main hero has this modifier, copy it to the clone
-			if main_hero:HasModifier(shared_buff) then
-				local shared_buff_modifier = main_hero:FindModifierByName(shared_buff)
-				local shared_buff_ability = shared_buff_modifier:GetAbility()
-
-				-- If a source ability was found, use it
-				if shared_buff_ability then
-					shared_buff_ability:ApplyDataDrivenModifier(main_hero, npc, shared_buff, {})
-
-				-- Else, it's a consumable item modifier. Create a dummy item to use the ability from.
-				else
-					-- Moon Shard
-					if string.find(shared_buff, "moon_shard") then
-
-						-- Create dummy item
-						local dummy_item = CreateItem("item_imba_moon_shard", npc, npc)
-						main_hero:AddItem(dummy_item)
-
-						-- Fetch dummy item's ability handle
-						for i = 0, 11 do
-							local current_item = main_hero:GetItemInSlot(i)
-							if current_item and current_item:GetName() == "item_imba_moon_shard" then
-								current_item:ApplyDataDrivenModifier(main_hero, npc, shared_buff, {})
-								break
-							end
-						end
-						main_hero:RemoveItem(dummy_item)
-					end
-
-					-- Soul of Truth
-					if shared_buff == "modifier_item_imba_soul_of_truth" then
-
-						-- Create dummy item
-						local dummy_item = CreateItem("item_imba_soul_of_truth", npc, npc)
-						main_hero:AddItem(dummy_item)
-
-						-- Fetch dummy item's ability handle
-						for i = 0, 11 do
-							local current_item = main_hero:GetItemInSlot(i)
-							if current_item and current_item:GetName() == "item_imba_soul_of_truth" then
-								current_item:ApplyDataDrivenModifier(main_hero, npc, shared_buff, {})
-								break
-							end
-						end
-						main_hero:RemoveItem(dummy_item)
-					end
-				end
-
-				-- Apply any stacks if relevant
-				if main_hero:GetModifierStackCount(shared_buff, nil) > 0 then
-					npc:SetModifierStackCount(shared_buff, main_hero, main_hero:GetModifierStackCount(shared_buff, nil))
-				end
-			end
-		end
-	end		
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Buyback penalty removal
-	-------------------------------------------------------------------------------------------------
-
-	Timers:CreateTimer(0.1, function()
-		if (not npc:IsNull()) and npc:HasModifier("modifier_buyback_gold_penalty") then
-			npc:RemoveModifierByName("modifier_buyback_gold_penalty")
-		end
-	end)
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Negative Vengeance Aura removal
-	-------------------------------------------------------------------------------------------------
-
-	if npc.vengeance_aura_target then
-		npc.vengeance_aura_target:RemoveModifierByName("modifier_imba_command_aura_negative_aura")
-		npc.vengeance_aura_target = nil
-	end
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Creep stats adjustment
-	-------------------------------------------------------------------------------------------------
-
-	if not npc:IsHero() and not npc:IsOwnedByAnyPlayer() then
-
-		-- Add passive buff to lane creeps
-		if string.find(npc:GetUnitName(), "dota_creep") then
-			local ability = npc:GetAbilityByIndex(0)
-			if ability then
-				ability:SetLevel(1)
-			end
-		end
+		FrostivusAltarRespawn(npc)
 	end
 end
 
--- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive
--- operations here
 function GameMode:OnEntityHurt(keys)
-	--DebugPrint("[BAREBONES] Entity Hurt")
-	--DebugPrintTable(keys)
-
 	--local damagebits = keys.damagebits -- This might always be 0 and therefore useless
 	--if keys.entindex_attacker ~= nil and keys.entindex_killed ~= nil then
 	--local entCause = EntIndexToHScript(keys.entindex_attacker)
@@ -353,19 +207,13 @@ function GameMode:OnEntityHurt(keys)
 	--end
 end
 
--- An item was picked up off the ground
 function GameMode:OnItemPickedUp(keys)
-	DebugPrint( '[BAREBONES] OnItemPickedUp' )
-	DebugPrintTable(keys)
-
 	--local heroEntity = EntIndexToHScript(keys.HeroEntityIndex)
 	--local itemEntity = EntIndexToHScript(keys.ItemEntityIndex)
 	--local player = PlayerResource:GetPlayer(keys.PlayerID)
 	--local itemname = keys.itemname
 end
 
--- A player has reconnected to the game. This function can be used to repaint Player-based particles or change
--- state as necessary
 function GameMode:OnPlayerReconnect(keys)
 	PrintTable(keys)
 
@@ -384,7 +232,6 @@ function GameMode:OnPlayerReconnect(keys)
 	-------------------------------------------------------------------------------------------------
 	-- IMBA: Player reconnect logic
 	-------------------------------------------------------------------------------------------------
-
 	-- Reinitialize the player's pick screen panorama, if necessary
 	if HeroSelection.HorriblyImplementedReconnectDetection then
 		HeroSelection.HorriblyImplementedReconnectDetection[player_id] = false
@@ -450,11 +297,7 @@ function GameMode:OnPlayerReconnect(keys)
 	end
 end
 
--- An item was purchased by a player
 function GameMode:OnItemPurchased( keys )
-	DebugPrint( '[BAREBONES] OnItemPurchased' )
-	DebugPrintTable(keys)
-
 	-- The playerID of the hero who is buying something
 	local plyID = keys.PlayerID
 	if not plyID then return end
@@ -464,10 +307,8 @@ function GameMode:OnItemPurchased( keys )
 	
 	-- The cost of the item purchased
 	local itemcost = keys.itemcost
-	
 end
 
--- An ability was used by a player
 function GameMode:OnAbilityUsed(keys)
 local player = keys.PlayerID
 local abilityname = keys.abilityname
@@ -478,167 +319,35 @@ if not hero then return end
 
 --	local abilityUsed = hero:FindAbilityByName(abilityname)
 --	if not abilityUsed then return end
-
-	if abilityname == "rubick_spell_steal" then
-		local target = abilityUsed:GetCursorTarget()
-		hero.spellStealTarget = target
-	end
-
-	local meepo_table = Entities:FindAllByName("npc_dota_hero_meepo")
-	if hero:GetUnitName() == "npc_dota_hero_meepo" then
-		for m = 1, #meepo_table do
-			if meepo_table[m]:IsClone() then
-				if abilityname == "item_sphere" then
-					print("Linken!")
-					local duration = abilityname:GetSpecialValueFor("block_cooldown")					
-					print("Duration", duration)
-					meepo_table[m]:AddNewModifier(meepo_table[m], ability, "modifier_item_sphere_target", {duration = duration})
-				end
-			end
-		end
-	end
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Remote Mines adjustment
-	-------------------------------------------------------------------------------------------------
-
-	-- if abilityname == "techies_remote_mines" then
-
-	-- 	local mine_caster = player:GetAssignedHero()
-	-- 	Timers:CreateTimer(0.01, function()
-	-- 		local nearby_units = FindUnitsInRadius(mine_caster:GetTeamNumber(), mine_caster:GetAbsOrigin(), nil, 1200, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
-	-- 		for _,unit in pairs(nearby_units) do
-
-	-- 			-- Only operate on remotes which need setup
-	-- 			if unit.needs_remote_mine_setup then
-	
-	-- 				-- Add extra abilities
-	-- 				unit:AddAbility("imba_techies_minefield_teleport")
-	-- 				unit:AddAbility("imba_techies_remote_auto_creep")
-	-- 				unit:AddAbility("imba_techies_remote_auto_hero")
-	-- 				local minefield_teleport = unit:FindAbilityByName("imba_techies_minefield_teleport")
-	-- 				local auto_creep = unit:FindAbilityByName("imba_techies_remote_auto_creep")
-	-- 				local auto_hero = unit:FindAbilityByName("imba_techies_remote_auto_hero")
-	-- 				auto_creep:SetLevel(1)
-	-- 				auto_hero:SetLevel(1)
-
-	-- 				-- Enable minefield teleport if the caster has a scepter
-	-- 				local scepter = HasScepter(mine_caster)
-	-- 				if scepter then
-	-- 					minefield_teleport:SetLevel(1)
-	-- 				end
-
-	-- 				-- Toggle abilities on according to the current caster setting
-	-- 				if mine_caster.auto_hero_exploding then
-	-- 					auto_hero:ToggleAbility()
-	-- 				elseif mine_caster.auto_creep_exploding then
-	-- 					auto_creep:ToggleAbility()
-	-- 				end
-
-	-- 				-- Set this mine's setup as done
-	-- 				unit.needs_remote_mine_setup = nil
-	-- 			end
-	-- 		end
-	-- 	end)
-	-- end
-
 end
 
--- A non-player entity (necro-book, chen creep, etc) used an ability
 function GameMode:OnNonPlayerUsedAbility(keys)
-	DebugPrint('[BAREBONES] OnNonPlayerUsedAbility')
-	DebugPrintTable(keys)
-
 	local abilityname = keys.abilityname
 end
 
--- A player changed their name
 function GameMode:OnPlayerChangedName(keys)
-	DebugPrint('[BAREBONES] OnPlayerChangedName')
-	DebugPrintTable(keys)
-
 	local newName = keys.newname
 	local oldName = keys.oldName
 end
 
 -- A player leveled up an ability
-function GameMode:OnPlayerLearnedAbility( keys)
-	DebugPrint('[BAREBONES] OnPlayerLearnedAbility')
-	DebugPrintTable(keys)
-
+function GameMode:OnPlayerLearnedAbility(keys)
 	local player = EntIndexToHScript(keys.player)
 	local abilityname = keys.abilityname
-
-	-- If it the ability is Homing Missiles, wait a bit and set count to 1	
-	if abilityname == "gyrocopter_homing_missile" then
-		Timers:CreateTimer(1, function()
-			-- Find homing missile modifier
-			local modifier_charges = player:GetAssignedHero():FindModifierByName("modifier_gyrocopter_homing_missile_charge_counter")
-			if modifier_charges then
-				modifier_charges:SetStackCount(3)
-			end
-		end)
-	end
 end
 
--- A channelled ability finished by either completing or being interrupted
 function GameMode:OnAbilityChannelFinished(keys)
-	DebugPrint('[BAREBONES] OnAbilityChannelFinished')
-	DebugPrintTable(keys)
-
 	local abilityname = keys.abilityname
 	local interrupted = keys.interrupted == 1
 end
 
--- A player leveled up
 function GameMode:OnPlayerLevelUp(keys)
-
 	local player = EntIndexToHScript(keys.player)
 	local hero = player:GetAssignedHero()
 	local hero_level = hero:GetLevel()
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Missing/Extra ability points correction
-	-------------------------------------------------------------------------------------------------
-	local missing_point_levels = {17, 19, 21, 22, 23, 24}
-	local extra_point_levels = {33, 34, 37, 38, 39}
-	local missing_point_levels_meepo = {17, 32, 33, 34, 36, 37, 38, 39}
-
-	if hero:GetUnitName() == "npc_dota_hero_meepo" then
-		-- Remove extra point on the appropriate levels for Meepo only
-		for _, current_level in pairs(missing_point_levels_meepo) do
-			if hero_level == current_level then
-				hero:SetAbilityPoints(hero:GetAbilityPoints() - 1)
-			end
-		end
-	else
-		-- Remove extra point on the appropriate levels
-		for _, current_level in pairs(extra_point_levels) do
-			if hero_level == current_level then
-				hero:SetAbilityPoints(hero:GetAbilityPoints() - 1)
-			end
-		end
-	end
-
-	-- Add missing point on the appropriate levels
-	for _, current_level in pairs(missing_point_levels) do
-		if hero_level == current_level then
-			hero:SetAbilityPoints(hero:GetAbilityPoints() + 1)
-		end
-	end
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Hero experience bounty adjustment
-	-------------------------------------------------------------------------------------------------
-
-	hero:SetCustomDeathXP(HERO_XP_BOUNTY_PER_LEVEL[hero_level])
 end
 
--- A player last hit a creep, a tower, or a hero
 function GameMode:OnLastHit(keys)
-	DebugPrint('[BAREBONES] OnLastHit')
-	DebugPrintTable(keys)
-
 	local isFirstBlood = keys.FirstBlood == 1
 	local isHeroKill = keys.HeroKill == 1
 	local isTowerKill = keys.TowerKill == 1
@@ -646,20 +355,13 @@ function GameMode:OnLastHit(keys)
 	local killedEnt = EntIndexToHScript(keys.EntKilled)
 end
 
--- A tree was cut down by tango, quelling blade, etc
 function GameMode:OnTreeCut(keys)
-	DebugPrint('[BAREBONES] OnTreeCut')
-	DebugPrintTable(keys)
-
 	local treeX = keys.tree_x
 	local treeY = keys.tree_y
 end
 
 -- A rune was activated by a player
-function GameMode:OnRuneActivated (keys)
-	DebugPrint('[BAREBONES] OnRuneActivated')
-	DebugPrintTable(keys)
-
+function GameMode:OnRuneActivated(keys)
 	local player = PlayerResource:GetPlayer(keys.PlayerID)
 	local rune = keys.rune
 
@@ -682,23 +384,18 @@ end
 
 -- A player took damage from a tower
 function GameMode:OnPlayerTakeTowerDamage(keys)
-	DebugPrint('[BAREBONES] OnPlayerTakeTowerDamage')
-	DebugPrintTable(keys)
-
 	local player = PlayerResource:GetPlayer(keys.PlayerID)
 	local damage = keys.damage
 end
 
 -- A player picked a hero
 function GameMode:OnPlayerPickHero(keys)
-
 	local hero_entity = EntIndexToHScript(keys.heroindex)
 	local player_id = hero_entity:GetPlayerID()
 end
 
 -- A player killed another player in a multi-team context
 function GameMode:OnTeamKillCredit(keys)
-
 	-- Typical keys:
 	-- herokills: 6
 	-- killer_userid: 0
@@ -710,127 +407,6 @@ function GameMode:OnTeamKillCredit(keys)
 	local killer_id = keys.killer_userid
 	local victim_id = keys.victim_userid
 	local killer_team = keys.teamnumber
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Comeback gold logic
-	-------------------------------------------------------------------------------------------------
-
-	UpdateComebackBonus(1, killer_team)
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Arena mode scoreboard updater
-	-------------------------------------------------------------------------------------------------
-	
-	if GetMapName() == "imba_arena" then
-		if killer_team == DOTA_TEAM_GOODGUYS then
-			local radiant_score = CustomNetTables:GetTableValue("arena_capture", "radiant_score")
-			CustomNetTables:SetTableValue("arena_capture", "radiant_score", {radiant_score["1"] + 1})
-			CustomGameEventManager:Send_ServerToAllClients("radiant_score_update", {})
-			if (radiant_score["1"] + 1) >= KILLS_TO_END_GAME_FOR_TEAM then
-				GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
-				GAME_WINNER_TEAM = "Radiant"
-			end
-		elseif killer_team == DOTA_TEAM_BADGUYS then
-			local dire_score = CustomNetTables:GetTableValue("arena_capture", "dire_score")
-			CustomNetTables:SetTableValue("arena_capture", "dire_score", {dire_score["1"] + 1})
-			CustomGameEventManager:Send_ServerToAllClients("dire_score_update", {})
-			if (dire_score["1"] + 1) >= KILLS_TO_END_GAME_FOR_TEAM then
-				GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
-				GAME_WINNER_TEAM = "Dire"
-			end
-		end
-	end
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Deathstreak logic
-	-------------------------------------------------------------------------------------------------		
-	if PlayerResource:IsValidPlayerID(killer_id) and PlayerResource:IsValidPlayerID(victim_id) then
-		-- Reset the killer's deathstreak
-		PlayerResource:ResetDeathstreak(killer_id)		
-
-		-- Increment the victim's deathstreak
-		PlayerResource:IncrementDeathstreak(victim_id)
-
-		-- Show Deathstreak message
-		local victim_hero_name = PlayerResource:GetPickedHeroName(victim_id)
-		local victim_player_name = PlayerResource:GetPlayerName(victim_id)
-		local victim_death_streak = PlayerResource:GetDeathstreak(victim_id)		
-		local line_duration = 7
-
-		if victim_death_streak then
-
-			if victim_death_streak >= 3 then
-				Notifications:BottomToAll({hero = victim_hero_name, duration = line_duration})
-				Notifications:BottomToAll({text = victim_player_name.." ", duration = line_duration, continue = true})
-			end
-
-			if victim_death_streak == 3 then
-				Notifications:BottomToAll({text = "#imba_deathstreak_3", duration = line_duration, continue = true})
-			elseif victim_death_streak == 4 then
-				Notifications:BottomToAll({text = "#imba_deathstreak_4", duration = line_duration, continue = true})
-			elseif victim_death_streak == 5 then
-				Notifications:BottomToAll({text = "#imba_deathstreak_5", duration = line_duration, continue = true})
-			elseif victim_death_streak == 6 then
-				Notifications:BottomToAll({text = "#imba_deathstreak_6", duration = line_duration, continue = true})
-			elseif victim_death_streak == 7 then
-				Notifications:BottomToAll({text = "#imba_deathstreak_7", duration = line_duration, continue = true})
-			elseif victim_death_streak == 8 then
-				Notifications:BottomToAll({text = "#imba_deathstreak_8", duration = line_duration, continue = true})
-			elseif victim_death_streak == 9 then
-				Notifications:BottomToAll({text = "#imba_deathstreak_9", duration = line_duration, continue = true})
-			elseif victim_death_streak >= 10 then
-				Notifications:BottomToAll({text = "#imba_deathstreak_10", duration = line_duration, continue = true})
-			end	
-		end
-	end
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Rancor logic
-	-------------------------------------------------------------------------------------------------
-
-	-- Victim stack loss
-	local victim_hero = PlayerResource:GetPickedHero(victim_id)
-	if victim_hero and victim_hero:HasModifier("modifier_imba_rancor") then
-		local current_stacks = victim_hero:GetModifierStackCount("modifier_imba_rancor", VENGEFUL_RANCOR_CASTER)
-		if current_stacks <= 2 then
-			victim_hero:RemoveModifierByName("modifier_imba_rancor")
-		else
-			victim_hero:SetModifierStackCount("modifier_imba_rancor", VENGEFUL_RANCOR_CASTER, current_stacks - math.floor(current_stacks / 2) - 1)
-		end
-	end
-	
-	-- Killer stack gain
-	if victim_hero and VENGEFUL_RANCOR and PlayerResource:IsImbaPlayer(killer_id) and killer_team ~= VENGEFUL_RANCOR_TEAM then
-		local eligible_rancor_targets = FindUnitsInRadius(victim_hero:GetTeamNumber(), victim_hero:GetAbsOrigin(), nil, 1500, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)
-		if eligible_rancor_targets[1] then
-			local rancor_stacks = 1
-
-			-- Double stacks if the killed unit was Venge
-			if victim_hero == VENGEFUL_RANCOR_CASTER then
-				rancor_stacks = rancor_stacks * 2
-			end
-
-			-- Add stacks and play particle effect
-			AddStacks(VENGEFUL_RANCOR_ABILITY, VENGEFUL_RANCOR_CASTER, eligible_rancor_targets[1], "modifier_imba_rancor", rancor_stacks, true)
-			local rancor_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_vengeful/vengeful_negative_aura.vpcf", PATTACH_ABSORIGIN, eligible_rancor_targets[1])
-			ParticleManager:SetParticleControl(rancor_pfx, 0, eligible_rancor_targets[1]:GetAbsOrigin())
-			ParticleManager:SetParticleControl(rancor_pfx, 1, VENGEFUL_RANCOR_CASTER:GetAbsOrigin())
-		end
-	end
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Vengeance Aura logic
-	-------------------------------------------------------------------------------------------------
-
-	if victim_hero and PlayerResource:IsImbaPlayer(killer_id) then
-		local vengeance_aura_ability = victim_hero:FindAbilityByName("imba_vengeful_command_aura")
-		local killer_hero = PlayerResource:GetPickedHero(killer_id)
-		if vengeance_aura_ability and vengeance_aura_ability:GetLevel() > 0 then
-			vengeance_aura_ability:ApplyDataDrivenModifier(victim_hero, killer_hero, "modifier_imba_command_aura_negative_aura", {})
-			victim_hero.vengeance_aura_target = killer_hero
-		end
-	end
-
 end
 
 function GameMode:OnEntityKilled( keys )
@@ -841,7 +417,9 @@ local killer = nil
 if keys.entindex_attacker then killer = EntIndexToHScript( keys.entindex_attacker ) end
 
 	if killed_unit then
-
+		if killed_unit:IsRealHero() then
+			FrostivusHeroKilled(killed_unit)
+		end
 	end
 end
 
@@ -870,16 +448,11 @@ function GameMode:OnConnectFull(keys)
 
 end
 
--- This function is called whenever illusions are created and tells you which was/is the original entity
 function GameMode:OnIllusionsCreated(keys)
 	local originalEntity = EntIndexToHScript(keys.original_entindex)
 end
 
--- This function is called whenever an item is combined to create a new item
 function GameMode:OnItemCombined(keys)
-	DebugPrint('[BAREBONES] OnItemCombined')
-	DebugPrintTable(keys)
-
 	-- The playerID of the hero who is buying something
 	local plyID = keys.PlayerID
 	if not plyID then return end
@@ -892,58 +465,19 @@ function GameMode:OnItemCombined(keys)
 	local itemcost = keys.itemcost
 end
 
--- This function is called whenever an ability begins its PhaseStart phase (but before it is actually cast)
 function GameMode:OnAbilityCastBegins(keys)
-	DebugPrint('[BAREBONES] OnAbilityCastBegins')
-	DebugPrintTable(keys)
-
 	local player = PlayerResource:GetPlayer(keys.PlayerID)
 	local abilityName = keys.abilityname
 end
 
--- This function is called whenever a tower is killed
 function GameMode:OnTowerKill(keys)
 	local gold = keys.gold
 	local killerPlayer = PlayerResource:GetPlayer(keys.killer_userid)
 	local tower_team = keys.teamnumber	
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Attack of the Ancients tower upgrade logic
-	-------------------------------------------------------------------------------------------------
-	
-	if TOWER_UPGRADE_MODE then		
-		
-		-- Find all friendly towers on the map
-		local towers = FindUnitsInRadius(tower_team, Vector(0, 0, 0), nil, 25000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
-		
-		-- Upgrade each tower
-		for _, tower in pairs(towers) do						
-			UpgradeTower(tower)			
-		end		
-		
-		-- Display upgrade message and play ominous sound
-		if tower_team == DOTA_TEAM_GOODGUYS then			
-			Notifications:BottomToAll({text = "#tower_abilities_radiant_upgrade", duration = 7, style = {color = "DodgerBlue"}})
-			EmitGlobalSound("powerup_01")			
-		else			
-			Notifications:BottomToAll({text = "#tower_abilities_dire_upgrade", duration = 7, style = {color = "DodgerBlue"}})
-			EmitGlobalSound("powerup_02")			
-		end
-	end
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Update comeback gold logic
-	-------------------------------------------------------------------------------------------------
-
-	local team = PlayerResource:GetTeam(keys.killer_userid)
-	UpdateComebackBonus(2, team)
 end
 
 -- This function is called whenever a player changes there custom team selection during Game Setup 
 function GameMode:OnPlayerSelectedCustomTeam(keys)
-	DebugPrint('[BAREBONES] OnPlayerSelectedCustomTeam')
-	DebugPrintTable(keys)
-
 	local player = PlayerResource:GetPlayer(keys.player_id)
 	local success = (keys.success == 1)
 	local team = keys.team_id
@@ -951,9 +485,6 @@ end
 
 -- This function is called whenever an NPC reaches its goal position/target
 function GameMode:OnNPCGoalReached(keys)
-	DebugPrint('[BAREBONES] OnNPCGoalReached')
-	DebugPrintTable(keys)
-
 	local goalEntity = EntIndexToHScript(keys.goal_entindex)
 	local nextGoalEntity = EntIndexToHScript(keys.next_goal_entindex)
 	local npc = EntIndexToHScript(keys.npc_entindex)

@@ -3,49 +3,8 @@
 
 function GameMode:_InitGameMode()
 
-	-- Setup rules
-	GameRules:SetHeroRespawnEnabled( ENABLE_HERO_RESPAWN )
-	GameRules:SetUseUniversalShopMode( UNIVERSAL_SHOP_MODE )
-	GameRules:SetSameHeroSelectionEnabled( true ) -- Let server handle hero duplicates
-	GameRules:SetHeroSelectionTime( HERO_SELECTION_TIME )
-	GameRules:SetPreGameTime( PRE_GAME_TIME)
-	GameRules:SetPostGameTime( POST_GAME_TIME )
-	GameRules:SetShowcaseTime( SHOWCASE_TIME )
-	GameRules:SetStrategyTime( STRATEGY_TIME )
-	GameRules:SetTreeRegrowTime( TREE_REGROW_TIME )
-	GameRules:SetUseCustomHeroXPValues ( USE_NONSTANDARD_HERO_XP_BOUNTY )
-	GameRules:SetGoldPerTick( GOLD_PER_TICK )
-	GameRules:SetGoldTickTime( GOLD_TICK_TIME )
-	GameRules:SetRuneSpawnTime( RUNE_SPAWN_TIME )
-	GameRules:SetUseBaseGoldBountyOnHeroes( USE_NONSTANDARD_HERO_GOLD_BOUNTY )
-	GameRules:SetHeroMinimapIconScale( MINIMAP_ICON_SIZE )
-	GameRules:SetCreepMinimapIconScale( MINIMAP_CREEP_ICON_SIZE )
-	GameRules:SetRuneMinimapIconScale( MINIMAP_RUNE_ICON_SIZE )
-	GameRules:EnableCustomGameSetupAutoLaunch( START_GAME_AUTOMATICALLY )
-	GameRules:SetFirstBloodActive( ENABLE_FIRST_BLOOD )
-	GameRules:SetHideKillMessageHeaders( HIDE_KILL_BANNERS )
-	GameRules:SetCustomGameSetupAutoLaunchDelay( AUTO_LAUNCH_DELAY )
-	GameRules:SetStartingGold( MAP_INITIAL_GOLD )
-
 	-- Register a listener for the game mode configuration
 	CustomGameEventManager:RegisterListener("set_game_mode", OnSetGameMode)
-
-	-- This is multiteam configuration stuff
-	local count = 0
-	for team,number in pairs(CUSTOM_TEAM_PLAYER_COUNT) do
-		if count >= MAX_NUMBER_OF_TEAMS then
-			GameRules:SetCustomGameTeamMaxPlayers(team, 0)
-		else
-			GameRules:SetCustomGameTeamMaxPlayers(team, number)
-		end
-		count = count + 1
-	end
-
-	if USE_CUSTOM_TEAM_COLORS then
-		for team,color in pairs(TEAM_COLORS) do
-			SetTeamCustomHealthbarColor(team, color[1], color[2], color[3])
-		end
-	end
 
 	--InitLogFile( "log/barebones.txt","")
 
@@ -100,12 +59,6 @@ function GameMode:_InitGameMode()
 			GameMode:StartEventTest()
 		end, "events test", 0)]]
 
-	local spew = 0
-	if BAREBONES_DEBUG_SPEW then
-		spew = 1
-	end
-	Convars:RegisterConvar('barebones_spew', tostring(spew), 'Set to 1 to start spewing barebones debug info.  Set to 0 to disable.', 0)
-
 	-- Change random seed
 	local timeTxt = string.gsub(string.gsub(GetSystemTime(), ':', ''), '0','')
 	math.randomseed(tonumber(timeTxt))
@@ -118,49 +71,7 @@ mode = nil
 
 -- This function is called as the first player loads and sets up the GameMode parameters
 function GameMode:_CaptureGameMode()
-	if mode == nil then
-
-		-- Set GameMode parameters
-		mode = GameRules:GetGameModeEntity()
-		mode:SetRecommendedItemsDisabled( RECOMMENDED_BUILDS_DISABLED )
-		mode:SetCameraDistanceOverride( CAMERA_DISTANCE_OVERRIDE )
-		mode:SetCustomBuybackCostEnabled( CUSTOM_BUYBACK_COST_ENABLED )
-		mode:SetCustomBuybackCooldownEnabled( CUSTOM_BUYBACK_COOLDOWN_ENABLED )
-		mode:SetBuybackEnabled( BUYBACK_ENABLED )
-		mode:SetTopBarTeamValuesOverride ( USE_CUSTOM_TOP_BAR_VALUES )
-		mode:SetTopBarTeamValuesVisible( TOP_BAR_VISIBLE )
-		mode:SetUseCustomHeroLevels ( USE_CUSTOM_HERO_LEVELS )
-		mode:SetCustomXPRequiredToReachNextLevel( XP_PER_LEVEL_TABLE )
-
-		mode:SetBotThinkingEnabled( USE_STANDARD_DOTA_BOT_THINKING )
-		mode:SetTowerBackdoorProtectionEnabled( ENABLE_TOWER_BACKDOOR_PROTECTION )
-
-		mode:SetFogOfWarDisabled( DISABLE_FOG_OF_WAR_ENTIRELY )
-		mode:SetGoldSoundDisabled( DISABLE_GOLD_SOUNDS )
-		mode:SetRemoveIllusionsOnDeath( REMOVE_ILLUSIONS_ON_DEATH )
-
-		mode:SetAlwaysShowPlayerInventory( SHOW_ONLY_PLAYER_INVENTORY )
-		mode:SetAnnouncerDisabled( DISABLE_ANNOUNCER )
-		if FORCE_PICKED_HERO ~= nil then
-			mode:SetCustomGameForceHero( FORCE_PICKED_HERO )
-		end
-		mode:SetFixedRespawnTime( FIXED_RESPAWN_TIME ) 
-		mode:SetFountainConstantManaRegen( FOUNTAIN_CONSTANT_MANA_REGEN )
-		mode:SetFountainPercentageHealthRegen( FOUNTAIN_PERCENTAGE_HEALTH_REGEN )
-		mode:SetFountainPercentageManaRegen( FOUNTAIN_PERCENTAGE_MANA_REGEN )
-		mode:SetLoseGoldOnDeath( LOSE_GOLD_ON_DEATH )
-		mode:SetMaximumAttackSpeed( MAXIMUM_ATTACK_SPEED )
-		mode:SetMinimumAttackSpeed( MINIMUM_ATTACK_SPEED )
-		mode:SetStashPurchasingDisabled ( DISABLE_STASH_PURCHASING )
-
-		for rune, spawn in pairs(ENABLED_RUNES) do
-			mode:SetRuneEnabled(rune, spawn)
-		end
-
-		mode:SetUnseenFogOfWarEnabled(USE_UNSEEN_FOG_OF_WAR)
-
-		self:OnFirstPlayerLoaded()
-	end 
+	self:OnFirstPlayerLoaded()
 end
 
 -- This function captures the game mode options when they are set

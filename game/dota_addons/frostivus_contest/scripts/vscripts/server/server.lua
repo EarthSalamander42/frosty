@@ -461,14 +461,14 @@ end
 
 function Server_SendEndGameInfo(json)
 	local request = CreateHTTPRequestScriptVM( "GET", "http://www.dota2imba.cn/XP_game_end_tmp_to_perm.php" )
-			request:SetHTTPRequestGetOrPostParameter("data_json",JSON:encode(json))
-			request:SetHTTPRequestGetOrPostParameter("auth",_AuthCode);
-			request:Send(function(result)
-				if result.StatusCode ~= 200 then
-					Server_SendEndGameInfo(json)
-					return
-				end
-			end)
+	request:SetHTTPRequestGetOrPostParameter("data_json",JSON:encode(json))
+	request:SetHTTPRequestGetOrPostParameter("auth",_AuthCode);
+	request:Send(function(result)
+		if result.StatusCode ~= 200 then
+			Server_SendEndGameInfo(json)
+			return
+		end
+	end)
 end
 
 local table_AFK_check_allHeroes = {}
@@ -484,9 +484,7 @@ function Serer_CheckForAFKPlayer()
 	for i=1,cycle_AFK_exp_max_round do
 		table_AFK_exp_round[i] = {}
 	end
-	for k,v in pairs(CustomNetTables:GetTableValue("game_options", "max_level")) do
-		_maxLv = v
-	end
+	_maxLv = 25
 	Timers(function()
 			for nPlayerID=0, DOTA_MAX_TEAM_PLAYERS-1 do
 				if PlayerResource:IsValidPlayer(nPlayerID) and not PlayerResource:IsFakeClient(nPlayerID) then

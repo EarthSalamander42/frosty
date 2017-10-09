@@ -20,8 +20,6 @@ require('internal/scoreboard_events')
 require('settings')
 require('events')
 
-StoreCurrentDayCycle()
-
 -- storage API
 --require('libraries/json')
 --require('libraries/storage')
@@ -42,15 +40,10 @@ function GameMode:PostLoadPrecache()
 end
 
 function GameMode:OnFirstPlayerLoaded()
-	if GetMapName() == "frostivus_holdout" then
-		GoodCamera = Entities:FindByName(nil, "radiant_capture_point")
-		BadCamera = Entities:FindByName(nil, "dire_capture_point")
-	else
-		GoodCamera = Entities:FindByName(nil, "dota_goodguys_fort")
-		BadCamera = Entities:FindByName(nil, "dota_badguys_fort")
+	if GetMapName() == "frostivus" then
+		GoodCamera = Entities:FindByName(nil, "altar_1")
+		BadCamera = Entities:FindByName(nil, "altar_7")
 	end
-
-	GameRules:GetGameModeEntity():SetUnseenFogOfWarEnabled(true)
 
 --	local developer_statues = {
 --		"npc_dota_developer_cookies",
@@ -58,6 +51,7 @@ function GameMode:OnFirstPlayerLoaded()
 --		"npc_dota_developer_zimber",
 --		"npc_dota_developer_starboxx",
 --		"npc_dota_developer_plexus",
+--		"npc_dota_developer_mc",
 --	}
 
 --	local current_location
@@ -97,20 +91,9 @@ function GameMode:ModifierFilter( keys )
 			return true
 		end
 
-	-------------------------------------------------------------------------------------------------
-	-- Frantic mode duration adjustment
-	-------------------------------------------------------------------------------------------------
-
-		if IMBA_FRANTIC_MODE_ON then
-			if modifier_owner:GetTeam() ~= modifier_caster:GetTeam() and keys.duration > 0 then
-				keys.duration = keys.duration * 0.3
-			end
-		end
-
-	-------------------------------------------------------------------------------------------------
-	-- Roshan special modifier rules
-	-------------------------------------------------------------------------------------------------
-
+		-------------------------------------------------------------------------------------------------
+		-- Roshan special modifier rules
+		-------------------------------------------------------------------------------------------------
 		if IsRoshan(modifier_owner) then
 			
 			-- Ignore stuns
@@ -129,10 +112,9 @@ function GameMode:ModifierFilter( keys )
 			end
 		end
 
-	-------------------------------------------------------------------------------------------------
-	-- Tenacity debuff duration reduction
-	-------------------------------------------------------------------------------------------------
-
+		-------------------------------------------------------------------------------------------------
+		-- Tenacity debuff duration reduction
+		-------------------------------------------------------------------------------------------------
 		if modifier_owner.GetTenacity then						
 			local original_duration = keys.duration
 
@@ -159,7 +141,6 @@ function GameMode:ModifierFilter( keys )
 		-------------------------------------------------------------------------------------------------
 		-- Rune pickup logic
 		-------------------------------------------------------------------------------------------------	
-
 		if modifier_caster == modifier_owner then
 			if modifier_caster:HasModifier("modifier_rune_doubledamage") then
 				local duration = modifier_caster:FindModifierByName("modifier_rune_doubledamage"):GetDuration()
@@ -197,38 +178,6 @@ function GameMode:ItemAddedFilter( keys )
 		item_name = item:GetName()
 	end
 
-	-------------------------------------------------------------------------------------------------
-	-- Aegis of the Immortal pickup logic
-	-------------------------------------------------------------------------------------------------
-
-	if item_name == "item_imba_aegis" then
-		-- If this is a player, do Aegis stuff
-		if unit:IsRealHero() and not unit:HasModifier("modifier_item_imba_aegis") then
-
-			-- Display aegis pickup message for all players
-			unit:AddNewModifier(unit, item, "modifier_item_imba_aegis",{})
-			local line_duration = 7
-			Notifications:BottomToAll({hero = unit:GetName(), duration = line_duration})
-			Notifications:BottomToAll({text = PlayerResource:GetPlayerName(unit:GetPlayerID()).." ", duration = line_duration, continue = true})
-			Notifications:BottomToAll({text = "#imba_player_aegis_message", duration = line_duration, style = {color = "DodgerBlue"}, continue = true})
-
-			-- Destroy the item
-			return false
-		-- If this is not a player, do nothing and drop another Aegis
-		else
-			local drop = CreateItem("item_imba_aegis", nil, nil)
-			CreateItemOnPositionSync(unit:GetAbsOrigin(), drop)
-			drop:LaunchLoot(false, 250, 0.5, unit:GetAbsOrigin() + RandomVector(100))
-
-			UTIL_Remove(item:GetContainer())
-			UTIL_Remove(item)
-
-			-- Destroy the item
-			return false
-		end
-		return false
-	end
-
 	return true
 end
 
@@ -257,7 +206,7 @@ function GameMode:OrderFilter(keys)
 	if keys.queue == 1 then
 		return true
 	end
-	
+
 	------------------------------------------------------------------------------------
 	-- Prevent Buyback during reincarnation
 	------------------------------------------------------------------------------------
@@ -269,26 +218,6 @@ function GameMode:OrderFilter(keys)
 
 	if keys.order_type == DOTA_UNIT_ORDER_CAST_NO_TARGET then
 		local ability = EntIndexToHScript(keys.entindex_ability)
-
-		-- Kunkka Torrent cast-handling
-		if ability:GetAbilityName() == "imba_kunkka_torrent" then
-			local range = ability.BaseClass.GetCastRange(ability,ability:GetCursorPosition(),unit) + GetCastRangeIncrease(unit)
-			if unit:HasModifier("modifier_imba_ebb_and_flow_tide_low") or unit:HasModifier("modifier_imba_ebb_and_flow_tsunami") then
-				range = range + ability:GetSpecialValueFor("tide_low_range")
-			end
-			local distance = (unit:GetAbsOrigin() - Vector(keys.position_x,keys.position_y,keys.position_z)):Length2D()
-		
-			if ( range >= distance) then
-				unit:AddNewModifier(unit, ability, "modifier_imba_torrent_cast", {duration = 0.41} )
-			end
-		end
-		
-		-- Kunkka Tidebringer cast-handling
-		if ability:GetAbilityName() == "imba_kunkka_tidebringer" then
-			ability.manual_cast = true
-		end
-	elseif unit:HasModifier("modifier_imba_torrent_cast") and keys.order_type == DOTA_UNIT_ORDER_HOLD_POSITION then
-		unit:RemoveModifierByName("modifier_imba_torrent_cast")
 	end
 
 	return true
@@ -315,232 +244,6 @@ function GameMode:DamageFilter( keys )
 		-- Lack of entities handling
 		if not attacker or not victim then
 			return false
-		end		
-		
-		-- If the attacker is holding an Arcane/Archmage/Cursed Rapier and the distance is over the cap, remove the spellpower bonus from it
-		if attacker:HasModifier("modifier_imba_arcane_rapier") or attacker:HasModifier("modifier_imba_arcane_rapier_2") or attacker:HasModifier("modifier_imba_rapier_cursed") then			
-			local distance = (attacker:GetAbsOrigin() - victim:GetAbsOrigin()):Length2D() 
-
-			if distance > IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF then				
-				local rapier_spellpower = 0
-
-				-- Get all modifiers, gather how much spellpower the target has from rapiers
-				local modifiers = attacker:FindAllModifiers()
-
-				for _,modifier in pairs(modifiers) do					
-					-- Increment Cursed Rapier's spellpower
-					if modifier:GetName() == "modifier_imba_rapier_cursed" then
-						rapier_spellpower = rapier_spellpower + modifier:GetAbility():GetSpecialValueFor("spell_power")						
-
-					-- Increment Archmage Rapier spellpower
-					elseif modifier:GetName() == "modifier_imba_arcane_rapier_2" then
-						rapier_spellpower = rapier_spellpower + modifier:GetAbility():GetSpecialValueFor("spell_power")						
-
-					-- Increment Arcane Rapier spellpower
-					elseif modifier:GetName() == "modifier_imba_arcane_rapier" then
-						rapier_spellpower = rapier_spellpower + modifier:GetAbility():GetSpecialValueFor("spell_power")						
-					end
-				end
-
-				-- If spellpower was accumulated, reduce the damage
-				if rapier_spellpower > 0 then					
-					keys.damage = keys.damage / (1 + rapier_spellpower * 0.01)
-				end
-			end
-		end				
-
-		-- Magic shield damage prevention
-		if victim:HasModifier("modifier_item_imba_initiate_robe_stacks") and victim:GetTeam() ~= attacker:GetTeam() then
-
-			-- Parameters
-			local shield_stacks = victim:GetModifierStackCount("modifier_item_imba_initiate_robe_stacks", nil)
-
-			-- Ignore part of incoming damage
-			if keys.damage > shield_stacks then
-				SendOverheadEventMessage(nil, OVERHEAD_ALERT_MAGICAL_BLOCK, victim, shield_stacks, nil)
-				victim:RemoveModifierByName("modifier_item_imba_initiate_robe_stacks")
-				keys.damage = keys.damage - shield_stacks
-			else
-				SendOverheadEventMessage(nil, OVERHEAD_ALERT_MAGICAL_BLOCK, victim, keys.damage, nil)
-				victim:SetModifierStackCount("modifier_item_imba_initiate_robe_stacks", victim, math.floor(shield_stacks - keys.damage))
-				keys.damage = 0
-			end
-		end
-
-		-- Magic barrier (pipe/hood) damage mitigation
-		if victim:HasModifier("modifier_imba_hood_of_defiance_active_shield") and victim:GetTeam() ~= attacker:GetTeam() and damage_type == DAMAGE_TYPE_MAGICAL then
-			local shield_modifier = victim:FindModifierByName("modifier_imba_hood_of_defiance_active_shield")
-
-			if shield_modifier and shield_modifier.AbsorbDamage then
-				keys.damage = shield_modifier:AbsorbDamage(keys.damage)
-			end
-		end		
-
-		-- Reaper's Scythe kill credit logic
-		if victim:HasModifier("modifier_imba_reapers_scythe") then
-			
-			-- Check if this is the killing blow
-			local victim_health = victim:GetHealth()
-			if keys.damage >= victim_health then
-
-				-- Prevent death and trigger Reaper's Scythe's on-kill effects
-				local scythe_modifier = victim:FindModifierByName("modifier_imba_reapers_scythe")
-				local scythe_caster = false
-				if scythe_modifier then
-					scythe_caster = scythe_modifier:GetCaster()
-				end
-				if scythe_caster then
-					keys.damage = 0
-
-					-- Find the Reaper's Scythe ability
-					local ability = scythe_caster:FindAbilityByName("imba_necrolyte_reapers_scythe")
-					if not ability then return nil end
-					local mod = victim:AddNewModifier(scythe_caster, ability, "modifier_imba_reapers_scythe_respawn", {})
-					scythe_modifier:Destroy()
-					-- Attempt to kill the target, crediting it to the caster of Reaper's Scythe
-					ApplyDamage({attacker = scythe_caster, victim = victim, ability = ability, damage = victim:GetHealth() + 10, damage_type = DAMAGE_TYPE_PURE, damage_flag = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS + DOTA_DAMAGE_FLAG_BYPASSES_BLOCK})
-				end
-			end
-		end		
-
-		-- Cheese auto-healing
-		if victim:HasModifier("modifier_imba_cheese_death_prevention") then
-
-			-- Only apply if it was a real hero
-			if victim:IsRealHero() then
-				
-				-- Check if death is imminent
-				local victim_health = victim:GetHealth()
-				if keys.damage >= victim_health and not ( victim:HasModifier("modifier_imba_dazzle_shallow_grave") or victim:HasModifier("modifier_imba_dazzle_nothl_protection") ) then
-
-					-- Find the cheese item handle
-					local cheese_modifier = victim:FindModifierByName("modifier_imba_cheese_death_prevention")
-					local item = cheese_modifier:GetAbility()
-
-					-- Spend a charge of Cheese if the cooldown is ready
-					if item:IsCooldownReady() then
-						
-						-- Reduce damage by your remaining amount of health
-						keys.damage = keys.damage - victim_health
-
-						-- Play sound
-						victim:EmitSound("DOTA_Item.Cheese.Activate")
-
-						-- Fully heal yourself
-						victim:Heal(victim:GetMaxHealth(), victim)
-						victim:GiveMana(victim:GetMaxMana())
-
-						-- Spend a charge
-						item:SetCurrentCharges( item:GetCurrentCharges() - 1 )
-
-						-- Trigger cooldown
-						item:StartCooldown( item:GetCooldown(1) * (1 - victim:GetCooldownReduction() * 0.01) )
-
-						-- If this was the last charge, remove the item
-						if item:GetCurrentCharges() == 0 then
-							victim:RemoveItem(item)
-						end
-					end
-				end
-			end
-			
-		end
-
-		-- Mirana's Sacred Arrow On The Prowl guaranteed critical
-		if victim:HasModifier("modifier_imba_sacred_arrow_stun") then
-			local modifier_stun_handler = victim:FindModifierByName("modifier_imba_sacred_arrow_stun")
-			if modifier_stun_handler then
-
-				-- If the table doesn't exist yet, initialize it
-				if not modifier_stun_handler.enemy_attackers then
-					modifier_stun_handler.enemy_attackers = {}
-				end
-
-				-- Cycle through the attackers table
-				local attacker_found = false
-				for _,enemy in pairs(modifier_stun_handler.enemy_attackers) do
-					if enemy == attacker then
-						attacker_found = true
-					end
-				end
-
-				-- If this attacker haven't attacked the stunned target yet, guarantee a critical
-				if not attacker_found then
-					
-					-- Get the modifier's ability
-					local stun_ability = modifier_stun_handler:GetAbility()
-					if stun_ability then
-
-						-- Get the critical damage count
-						local on_prow_crit_damage_pct = stun_ability:GetSpecialValueFor("on_prow_crit_damage_pct")
-
-						-- Increase damage and show the critical attack event
-						keys.damage = keys.damage * (1 + on_prow_crit_damage_pct * 0.01)
-
-						-- Overhead critical event
-						SendOverheadEventMessage(nil, OVERHEAD_ALERT_CRITICAL, victim, keys.damage, nil)
-
-						-- Add the attacker to the attackers table
-						table.insert(modifier_stun_handler.enemy_attackers, attacker)
-					end
-				end
-			end
-		end
-
-		-- Axe Battle Hunger kill credit
-		if victim:GetTeam() == attacker:GetTeam() and keys.damage > 0 and attacker:HasModifier("modifier_imba_battle_hunger_debuff_dot") then
-			-- Check if this is the killing blow
-			local victim_health = victim:GetHealth()
-			if keys.damage >= victim_health then
-				-- Prevent death and trigger Reaper's Scythe's on-kill effects
-				local battle_hunger_modifier = victim:FindModifierByName("modifier_imba_battle_hunger_debuff_dot")
-				local battle_hunger_caster = false
-				local battle_hunger_ability = false
-				if battle_hunger_modifier then
-					battle_hunger_caster = battle_hunger_modifier:GetCaster()
-					battle_hunger_ability = battle_hunger_modifier:GetAbility()
-				end
-				if battle_hunger_caster then
-					keys.damage = 0
-
-					if not battle_hunger_ability then return nil end
-
-					-- Attempt to kill the target, crediting it to Axe
-					ApplyDamage({attacker = battle_hunger_caster, victim = victim, ability = battle_hunger_ability, damage = victim:GetHealth() + 10, damage_type = DAMAGE_TYPE_PURE, damage_flag = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS + DOTA_DAMAGE_FLAG_BYPASSES_BLOCK})
-				end
-			end
-		end
-		
-		-- Juggernaut Deflect kill credit
-		if victim:HasModifier("modifier_imba_juggernaut_blade_fury_deflect_on_kill_credit") then
-			-- Check if this is the killing blow
-			local victim_health = victim:GetHealth()
-			local blade_fury_modifier = victim:FindModifierByName("modifier_imba_juggernaut_blade_fury_deflect_on_kill_credit")
-			if keys.damage >= victim_health then
-				-- Prevent death and trigger Reaper's Scythe's on-kill effects
-				local blade_fury_caster = false
-				local blade_fury_ability = false
-				if blade_fury_modifier then
-					blade_fury_caster = blade_fury_modifier:GetCaster()
-					blade_fury_ability = blade_fury_modifier:GetAbility()
-				end
-				if blade_fury_caster then
-					keys.damage = 0
-
-					-- Find the Reaper's Scythe ability
-					local scythe_ability = blade_fury_caster:FindModifierByName("modifier_imba_reapers_scythe")
-					if scythe_ability then return nil end
-			
-					-- Prevent denying when other sources of damage occurs
-					local blade_fury_damager = blade_fury_caster:FindAbilityByName("imba_juggernaut_blade_fury")
-					if not blade_fury_damager then return nil end
-			
-					-- if not attacker then return nil end
-					blade_fury_modifier:Destroy()
-					-- Attempt to kill the target, crediting it to the caster of Reaper's Scythe
-					ApplyDamage({attacker = blade_fury_caster, victim = victim, ability = blade_fury_ability, damage = victim:GetHealth() + 10, damage_type = DAMAGE_TYPE_PURE, damage_flag = DOTA_DAMAGE_FLAG_NO_DAMAGE_MULTIPLIERS + DOTA_DAMAGE_FLAG_BYPASSES_BLOCK})
-				end
-			end
 		end
 	end
 	return true
@@ -550,10 +253,7 @@ end
 	This function is called once and only once after all players have loaded into the game, right as the hero selection time begins.
 	It can be used to initialize non-hero player state or adjust the hero selection (i.e. force random etc)
 ]]
-
 function GameMode:OnAllPlayersLoaded()
-	DebugPrint("[IMBA] All Players have loaded into the game")
-
 	-------------------------------------------------------------------------------------------------
 	-- IMBA: Game filters setup
 	-------------------------------------------------------------------------------------------------
@@ -569,33 +269,12 @@ function GameMode:OnAllPlayersLoaded()
 	-- CHAT
 	self.chat = Chat(self.Players, self.Users, TEAM_COLORS)
 	--	Chat:constructor(players, users, teamColors)
-	print("Constructing Chat!")
+--	print("Constructing Chat!")
 end
 
 random_time = 1.0
 function GameMode:OnHeroInGame(hero)	
 local time_elapsed = 0
-
-	Timers:CreateTimer(function()
-		if not hero:IsNull() then
-			if hero:GetUnitName() == "npc_dota_hero_meepo" then
-			if not hero:IsClone() then
-				TrackMeepos()
-			end
-			end
-		end
-		return 0.5
-	end)
-
-	if IMBA_PICK_MODE_ALL_RANDOM then
-		Timers:CreateTimer(3.0, function()
-			HeroSelection:RandomHero({PlayerID = hero:GetPlayerID()})
-		end)
-	elseif IMBA_PICK_MODE_ALL_RANDOM_SAME_HERO then
-		Timers:CreateTimer(3.0, function()
-			HeroSelection:RandomSameHero({PlayerID = hero:GetPlayerID()})
-		end)
-	end
 
 	-- Disabling announcer for the player who picked a hero
 	Timers:CreateTimer(0.1, function()
@@ -644,10 +323,6 @@ local time_elapsed = 0
 end
 
 function GameMode:OnGameInProgress()
-
-	local adjusted_gold_tick_time = GOLD_TICK_TIME / ( 1 + CUSTOM_GOLD_BONUS * 0.01 )
-	GameRules:SetGoldTickTime( adjusted_gold_tick_time )
-
 	if GetMapName() == "imba_arena" then
 		-- Define the bonus gold positions
 		local bonus_gold_positions = {}
@@ -712,9 +387,49 @@ function GameMode:InitGameMode()
 	GameRules.HeroKV = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
 	GameRules.UnitKV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
+	HERO_SELECTION_TIME = 45.0 + 10.0 -- Add 10 additional seconds because there's a delay between entering game and hero applied
+	if IsInToolsMode() then HERO_SELECTION_TIME = 5.0 end
+	GameRules:SetUseUniversalShopMode(true)
+	GameRules:SetHeroSelectionTime(0.0)
+	GameRules:SetPreGameTime(90.0 + HERO_SELECTION_TIME)
+	GameRules:SetPostGameTime(60.0)
+	GameRules:SetShowcaseTime(0.0)
+	GameRules:SetStrategyTime(0.0)
+	GameRules:SetCustomGameSetupAutoLaunchDelay(10.0)
+--	GameRules:SetTreeRegrowTime( 180.0 )
+--	GameRules:SetGoldPerTick(1.0)
+--	GameRules:SetGoldTickTime(0.6)
+--	GameRules:SetRuneSpawnTime(120.0)
+--	GameRules:SetHeroMinimapIconScale(1.0)
+--	GameRules:SetCreepMinimapIconScale(1.0)
+--	GameRules:SetRuneMinimapIconScale(1.0)
+--	GameRules:EnableCustomGameSetupAutoLaunch(true)
+--	GameRules:SetFirstBloodActive(true)
+--	GameRules:SetHideKillMessageHeaders(false)
+
+	if mode == nil then
+		mode = GameRules:GetGameModeEntity()
+		mode:SetRecommendedItemsDisabled( false )
+		mode:SetCameraDistanceOverride( 1134 )
+		mode:SetCustomGameForceHero("npc_dota_hero_wisp")
+		mode:SetLoseGoldOnDeath(true)
+		mode:SetMaximumAttackSpeed(600.0)
+		mode:SetMinimumAttackSpeed(20.0)
+
+--		mode:SetTowerBackdoorProtectionEnabled( false )
+--		mode:SetFountainConstantManaRegen(10.0)
+--		mode:SetFountainPercentageHealthRegen(5.0)
+--		mode:SetFountainPercentageManaRegen(5.0)
+
+--		for rune, spawn in pairs(ENABLED_RUNES) do
+--			mode:SetRuneEnabled(rune, spawn)
+--		end
+
+		self:OnFirstPlayerLoaded()
+	end 
+
 	-- IMBA testbed command
 	Convars:RegisterCommand("imba_test", Dynamic_Wrap(GameMode, 'StartImbaTest'), "Spawns several units to help with testing", FCVAR_CHEAT)
-	Convars:RegisterCommand("game_time", GetGameLength, "Print the game time.", FCVAR_CHEAT)	
 
 	CustomGameEventManager:RegisterListener("remove_units", Dynamic_Wrap(GameMode, "RemoveUnits"))
 

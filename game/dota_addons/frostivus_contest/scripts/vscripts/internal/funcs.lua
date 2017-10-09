@@ -557,18 +557,6 @@ function GetCastRangeIncrease( unit )
     return cast_range_increase
 end
 
-function findtarget(source) -- simple list return function for finding a players current target entity
-	local t = source:GetCursorTarget()
-	local c = source:GetCaster()
-	if t and c then return t,c end
-end
-
-function findgroundtarget(source) -- simple list return function for finding a players current target entity
-	local t = source:GetCursorPosition()
-	local c = source:GetCaster()
-	if t and c then return t,c end
-end
-
 ----------------------------------------------------------------
 -- "Custom" modifier value fetching
 ----------------------------------------------------------------

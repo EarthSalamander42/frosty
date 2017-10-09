@@ -384,14 +384,6 @@ function HeroSelection:AssignHero(player_id, hero_name)
 			hero:MakeVisibleToTeam(DOTA_TEAM_BADGUYS, 0.5)
 		end)
 
-		-- Set up initial level 1 experience bounty
-		hero:SetCustomDeathXP(HERO_XP_BOUNTY_PER_LEVEL[1])
-
-		-- Set up initial level
-		if HERO_STARTING_LEVEL > 1 then
-			hero:AddExperience(XP_PER_LEVEL_TABLE[HERO_STARTING_LEVEL], DOTA_ModifyXP_CreepKill, false, true)
-		end
-
 		-- Set up initial gold
 		-- local has_randomed = PlayerResource:HasRandomed(player_id)
 		-- This randomed variable gets reset when the player chooses to Repick, so you can detect a rerandom
@@ -399,26 +391,17 @@ function HeroSelection:AssignHero(player_id, hero_name)
 		local has_repicked = PlayerResource:CustomGetHasRepicked(player_id)
 
 		if has_repicked and has_randomed then
-			PlayerResource:SetGold(player_id, HERO_RERANDOM_GOLD, false)
+			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD +100, false)
 		elseif has_repicked then
-			PlayerResource:SetGold(player_id, HERO_REPICK_GOLD, false)
-		elseif has_randomed or IMBA_PICK_MODE_ALL_RANDOM or IMBA_PICK_MODE_ALL_RANDOM_SAME_HERO then
-			PlayerResource:SetGold(player_id, HERO_RANDOM_GOLD, false)
+			PlayerResource:SetGold(player_id, HERO_REPICK_GOLD -100, false)
+		elseif has_randomed then
+			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD +200, false)
 		else
 			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD, false)
 		end
 
 		-- Initialize innate hero abilities
 		InitializeInnateAbilities(hero)
-
-		-- Initialize Invoker's innate invoke buff
-		-- TODO: This should be removed when another solution is found, like giving Invoker a hidden passive ability to apply the modifier
-		if hero:HasAbility("invoker_invoke") then
-			hero:AddNewModifier(hero, hero:FindAbilityByName("invoker_invoke"), "modifier_imba_invoke_buff", {})
-		end
-
-		-- Set up player color
-		PlayerResource:SetCustomPlayerColor(player_id, PLAYER_COLORS[player_id][1], PLAYER_COLORS[player_id][2], PLAYER_COLORS[player_id][3])
 
 		Timers:CreateTimer(3.0, function()
 			PlayerResource:SetCameraTarget(player_id, nil)
