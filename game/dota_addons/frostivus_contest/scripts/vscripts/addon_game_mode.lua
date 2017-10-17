@@ -7,6 +7,9 @@ require('hero_selection')
 
 function Precache(context)
 
+	-- Link lua modifiers
+	LinkLuaModifier("capture_start_trigger", "boss_scripts/capture_start_trigger.lua", LUA_MODIFIER_MOTION_NONE )
+	LinkLuaModifier("boss_thinker_dummy", "boss_scripts/boss_thinker_dummy.lua", LUA_MODIFIER_MOTION_NONE )
 	LinkLuaModifier("modifier_command_restricted", "modifier/modifier_command_restricted.lua", LUA_MODIFIER_MOTION_NONE )	
 
 	PrecacheResource("particle", "particles/econ/items/effigies/status_fx_effigies/gold_effigy_ambient_dire_lvl2.vpcf", context)
