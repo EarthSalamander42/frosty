@@ -1,0 +1,37 @@
+<root>
+	<scripts>
+		<include src="s2r://panorama/scripts/custom_game/modular.vjs_c" />
+	</scripts>
+
+	<styles>
+		<include src="s2r://panorama/styles/custom_game/modules/picking_player.vcss_c" />
+	</styles>
+
+	<script>
+		//Module definition
+		Modular.DefineThis({
+			//Set the hero of the player, then set the transform to none,
+			//which animates the hero portrait panel
+			SetPlayerName : function( playerID ) {
+				var pID = playerID;
+				var playerInfo = Game.GetPlayerInfo( playerID );
+				$('#PlayerName').text = Players.GetPlayerName(playerID);
+			},
+
+			SetPreviewHero : function( heroName ) {
+				$('#HeroPanel').style.backgroundImage = 'url("s2r://panorama/images/heroes/'+ heroName +'_png.vtex")';
+				$('#HeroPanel').style.transform = 'none';
+			},
+
+			SetHero : function( heroName ) {
+				$('#HeroPanel').style.backgroundImage = 'url("s2r://panorama/images/heroes/'+ heroName +'_png.vtex")';
+				$('#HeroPanel').style.transform = 'none';
+			}
+		});
+	</script>
+
+	<Panel class="PickingPlayer">
+		<Panel id="HeroPanel" />
+		<Label id="PlayerName" text="Player 1"/>
+	</Panel>
+</root>
