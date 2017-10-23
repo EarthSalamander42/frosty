@@ -59,6 +59,46 @@
 		}
 	}
 
+	//=================================================================================================================
+	// Bosses: passive buffs
+	//=================================================================================================================
+	"frostivus_boss_innate"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"rubick_empty1"
+		"ScriptFile"					"boss_scripts/boss_innate.lua"
+		"MaxLevel"						"1"
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"armor_per_power"			"2"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"magic_resist_per_power"	"5"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_per_power"			"20"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"health_per_power"			"20"
+			}
+		}
+	}
+
 	//=====================================================================================================
 	// Candy Box: Immune
 	//=====================================================================================================

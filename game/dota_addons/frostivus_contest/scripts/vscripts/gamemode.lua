@@ -92,72 +92,25 @@ function GameMode:ModifierFilter( keys )
 		end
 
 		-------------------------------------------------------------------------------------------------
-		-- Roshan special modifier rules
+		-- Special boss modifier rules
 		-------------------------------------------------------------------------------------------------
-		if IsRoshan(modifier_owner) then
+		if modifier_owner:HasModifier("modifier_frostivus_boss") then
 			
 			-- Ignore stuns
 			if modifier_name == "modifier_stunned" then
 				return false
 			end
-
-			-- Halve the duration of everything else
-			if modifier_caster ~= modifier_owner and keys.duration > 0 then
-				keys.duration = keys.duration * 0.5
-			end
-
-			-- Fury swipes capping
-			if modifier_owner:GetModifierStackCount("modifier_ursa_fury_swipes_damage_increase", nil) > 5 then
-				modifier_owner:SetModifierStackCount("modifier_ursa_fury_swipes_damage_increase", nil, 5)
-			end
 		end
 
 		-------------------------------------------------------------------------------------------------
-		-- Tenacity debuff duration reduction
+		-- Fight intervention prevention
 		-------------------------------------------------------------------------------------------------
-		if modifier_owner.GetTenacity then						
-			local original_duration = keys.duration
-
-			local tenacity = modifier_owner:GetTenacity()
-			if modifier_owner:GetTeam() ~= modifier_caster:GetTeam() and keys.duration > 0 and tenacity ~= 0 then				
-				keys.duration = keys.duration * (100 - tenacity) * 0.01
-			end
-
-			Timers:CreateTimer(FrameTime(), function()
-				if modifier_owner:IsNull() then
-					return false
-				end
-				local modifier_handler = modifier_owner:FindModifierByName(modifier_name)
-				if modifier_handler then
-					if modifier_handler.IgnoreTenacity then
-						if modifier_handler:IgnoreTenacity() then
-							modifier_handler:SetDuration(original_duration, true)
-						end
-					end
-				end
-			end)
+		if modifier_owner:HasModifier("modifier_fighting_boss") and modifier_owner:GetTeam() ~= modifier_caster:GetTeam() and not modifier_caster:HasModifier("modifier_frostivus_boss") then
+			return false
 		end
 
-		-------------------------------------------------------------------------------------------------
-		-- Rune pickup logic
-		-------------------------------------------------------------------------------------------------	
-		if modifier_caster == modifier_owner then
-			if modifier_caster:HasModifier("modifier_rune_doubledamage") then
-				local duration = modifier_caster:FindModifierByName("modifier_rune_doubledamage"):GetDuration()
-				modifier_caster:RemoveModifierByName("modifier_rune_doubledamage")
-				modifier_caster:AddNewModifier(modifier_caster, nil, "modifier_imba_double_damage_rune", {duration = duration})
-			elseif modifier_caster:HasModifier("modifier_rune_haste") then
-				local duration = modifier_caster:FindModifierByName("modifier_rune_haste"):GetDuration()
-				modifier_caster:RemoveModifierByName("modifier_rune_haste")
-				modifier_caster:AddNewModifier(modifier_caster, nil, "modifier_imba_haste_rune", {duration = duration})
-			elseif modifier_caster:HasModifier("modifier_rune_invis") then
---				PickupInvisibleRune(modifier_caster)
---				return false
-			elseif modifier_caster:HasModifier("modifier_rune_regen") then
-				local duration = modifier_caster:FindModifierByName("modifier_rune_regen"):GetDuration()
-				modifier_caster:RemoveModifierByName("modifier_rune_regen")
-				modifier_caster:AddNewModifier(modifier_caster, nil, "modifier_imba_regen_rune", {duration = duration})
-			end
+		if modifier_owner:HasModifier("modifier_frostivus_boss") and not modifier_caster:HasModifier("modifier_fighting_boss") and not modifier_caster:HasModifier("modifier_frostivus_boss") then
+			return false
 		end
 
 		return true
@@ -208,12 +161,10 @@ function GameMode:OrderFilter(keys)
 	end
 
 	------------------------------------------------------------------------------------
-	-- Prevent Buyback during reincarnation
+	-- Prevent Buyback
 	------------------------------------------------------------------------------------
 	if keys.order_type == DOTA_UNIT_ORDER_BUYBACK then
-		if unit:IsReincarnating() then
-			return false
-		end
+		return false
 	end
 
 	if keys.order_type == DOTA_UNIT_ORDER_CAST_NO_TARGET then
@@ -243,6 +194,15 @@ function GameMode:DamageFilter( keys )
 
 		-- Lack of entities handling
 		if not attacker or not victim then
+			return false
+		end
+
+		-- Fight interference prevention
+		if victim:HasModifier("modifier_fighting_boss") and not attacker:HasModifier("modifier_frostivus_boss") then
+			return false
+		end
+
+		if victim:HasModifier("modifier_frostivus_boss") and not attacker:HasModifier("modifier_fighting_boss") and not attacker:HasModifier("modifier_frostivus_boss") then
 			return false
 		end
 	end

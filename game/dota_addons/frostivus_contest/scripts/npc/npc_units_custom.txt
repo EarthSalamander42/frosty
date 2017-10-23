@@ -98,6 +98,78 @@
 	}
 
 	//=================================================================================
+	// BOSS: Zeus
+	//=================================================================================
+	"npc_frostivus_boss_zeus"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_hero"
+		"Model"						"models/heroes/zeus/zeus.vmdl"
+		"SoundSet"					"Creep_Good_Range"
+		"Level"						"1"
+		"ModelScale"				"2.5"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"frostivus_boss_innate"
+		"Ability2"					""
+		"Ability3"					""
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"250"
+		"AttackDamageMax"			"250"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"
+		"AttackAnimationPoint"		"0.0"
+		"AttackAcquisitionRange"	"0"
+		"AttackRange"				"0"
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
+		"HealthBarOffset"			"130"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"
+		"BountyGoldMin"				"0"
+		"BountyGoldMax"				"0"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"350"
+		"MovementTurnRate"			"1.0"
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"8000"
+		"StatusHealthRegen"			"0.0"
+		"StatusMana"				"1000"
+		"StatusManaRegen"			"0"
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"2000"
+		"VisionNighttimeRange"		"2000"
+	}
+
+	//=================================================================================
 	// Building: Main Altar
 	//=================================================================================
 	"npc_dota_altar"

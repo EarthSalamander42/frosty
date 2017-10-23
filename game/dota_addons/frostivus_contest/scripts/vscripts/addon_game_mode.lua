@@ -4,15 +4,12 @@ require('player_resource')
 require('gamemode')
 require('frostivus')
 require('hero_selection')
+require('boss_scripts/boss_functions')
 
 function Precache(context)
 
 	-- Link lua modifiers
-	LinkLuaModifier("capture_start_trigger", "boss_scripts/capture_start_trigger.lua", LUA_MODIFIER_MOTION_NONE )
-	LinkLuaModifier("boss_thinker_dummy", "boss_scripts/boss_thinker_dummy.lua", LUA_MODIFIER_MOTION_NONE )
 	LinkLuaModifier("modifier_command_restricted", "modifier/modifier_command_restricted.lua", LUA_MODIFIER_MOTION_NONE )	
-
-	PrecacheResource("particle", "particles/econ/items/effigies/status_fx_effigies/gold_effigy_ambient_dire_lvl2.vpcf", context)
 
 	-- Stuff
 	PrecacheResource("particle_folder", "particles/hero", context)
@@ -26,6 +23,11 @@ function Precache(context)
 	PrecacheResource("particle_folder", "particles/creeps/lane_creeps/", context)
 	PrecacheResource("particle_folder", "particles/customgames/capturepoints/", context)
 	PrecacheResource("particle", "particles/range_indicator.vpcf", context)
+
+	-- Other frostivus things to precache
+	PrecacheResource("particle_folder", "particles/arena_wall", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts", context)
+	PrecacheResource("particle_folder", "particles/hero/hero_zuus", context)
 
 	-- Models can also be precached by folder or individually
 	PrecacheResource("model_folder", "models/development", context)

@@ -49,13 +49,18 @@ local target = keys.unit
 		if target == self:GetParent() then
 
 			-- Notify the console that a boss fight (capture attempt) was started
-			print(self.boss_name.." boss hit, altar handle is "..self.altar_handle)
+			print(self.boss_name.." boss hit, altar handle is ")
+			print(self.altar_handle)
 
 			-- Send the boss fight event to all clients
-			CustomGameEventManager:Send_ServerToAllClients("AltarContestStarted", {boss_name = self.boss_name, team = attacker:GetTeam()})
+			local attacker_team = attacker:GetTeam()
+			CustomGameEventManager:Send_ServerToAllClients("AltarContestStarted", {boss_name = self.boss_name, team = attacker_team})
 
 			-- Grant the boss its appropriate AI think modifier
-			target:AddNewModifier(nil, nil, "boss_thinker_"..self.boss_name, {boss_name = self.boss_name, team = attacker:GetTeam()})
+			target:AddNewModifier(nil, nil, "boss_thinker_"..self.boss_name, {boss_name = self.boss_name, team = attacker:GetTeam(), altar_handle = self.altar_handle})
+
+			-- Lock the arena down
+			LockArena(self.altar_handle, attacker_team)
 
 			-- Delete the capture detection modifier
 			target:RemoveModifierByName("capture_start_trigger")

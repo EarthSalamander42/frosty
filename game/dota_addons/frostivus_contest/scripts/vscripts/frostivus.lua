@@ -28,6 +28,9 @@ function Frostivus()
 	Timers:CreateTimer(10, function()
 		ArenaControlPointScoreThink(radiant_control_point_loc, dire_control_point_loc)
 	end)
+
+	-- Spawn bosses
+	SpawnZeus(BOSS_SPAWN_POINT_TABLE.zeus)
 end
 
 function FrostivusPhase(PHASE)
