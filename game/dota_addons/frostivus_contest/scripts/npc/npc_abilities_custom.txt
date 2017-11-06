@@ -71,7 +71,7 @@
 		"AbilityTextureName"			"rubick_empty1"
 		"ScriptFile"					"boss_scripts/boss_innate.lua"
 		"MaxLevel"						"1"
-		
+
 		// Special
 		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
@@ -95,6 +95,36 @@
 			{
 				"var_type"					"FIELD_INTEGER"
 				"health_per_power"			"20"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Venomancer: Venomous Gale
+	//=================================================================================================================
+	"frostivus_boss_venomous_gale"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"venomancer_venomous_gale"
+		"ScriptFile"					"boss_scripts/boss_abilities/venomous_gale.lua"
+		"MaxLevel"						"1"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"projectile_speed"			"1200"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"projectile_radius"			"175"
 			}
 		}
 	}

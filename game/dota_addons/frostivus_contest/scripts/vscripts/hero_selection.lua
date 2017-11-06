@@ -364,7 +364,7 @@ function HeroSelection:AssignHero(player_id, hero_name)
 		-- IMBA: First hero spawn initialization
 		-------------------------------------------------------------------------------------------------
 		
-		hero:RespawnHero(false, false, false)
+		hero:RespawnHero(false, false)
 		PlayerResource:SetCameraTarget(player_id, hero)
 		Timers:CreateTimer(FrameTime(), function()
 			PlayerResource:SetCameraTarget(player_id, nil)

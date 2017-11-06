@@ -8,7 +8,8 @@
 
 BOSS_SPAWN_POINT_TABLE = {}
 
-BOSS_SPAWN_POINT_TABLE.zeus = "altar_4"
+BOSS_SPAWN_POINT_TABLE.zeus = "altar_2"
+BOSS_SPAWN_POINT_TABLE.venomancer = "altar_3"
 
 -------------------------------------------------------------------------------------------------
 -- Boss reward information

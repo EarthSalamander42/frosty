@@ -9,7 +9,7 @@ require('boss_scripts/boss_functions')
 function Precache(context)
 
 	-- Link lua modifiers
-	LinkLuaModifier("modifier_command_restricted", "modifier/modifier_command_restricted.lua", LUA_MODIFIER_MOTION_NONE )	
+	LinkLuaModifier("modifier_command_restricted", "modifier/modifier_command_restricted.lua", LUA_MODIFIER_MOTION_NONE )
 
 	-- Stuff
 	PrecacheResource("particle_folder", "particles/hero", context)
@@ -26,8 +26,22 @@ function Precache(context)
 
 	-- Other frostivus things to precache
 	PrecacheResource("particle_folder", "particles/arena_wall", context)
+	PrecacheResource("particle_folder", "particles/generic_particles", context)
+	PrecacheResource("soundfile", "soundevents/frostivus_soundevents.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts", context)
-	PrecacheResource("particle_folder", "particles/hero/hero_zuus", context)
+
+	-- Zeus boss
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_zuus/", context)
+	PrecacheResource("particle_folder", "particles/boss_zeus/", context)
+	PrecacheResource("particle_folder", "particles/econ/items/zeus/arcana_chariot/", context)
+	PrecacheResource("particle", "particles/econ/events/ti6/maelstorm_ti6.vpcf", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_disruptor.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_zuus.vsndevts", context)
+
+	-- Venomancer boss
+	PrecacheResource("particle_folder", "particles/boss_veno/", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_viper.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_venomancer.vsndevts", context)
 
 	-- Models can also be precached by folder or individually
 	PrecacheResource("model_folder", "models/development", context)

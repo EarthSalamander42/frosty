@@ -18,19 +18,10 @@ function Frostivus()
 	CustomGameEventManager:Send_ServerToAllClients("show_timer", {})
 	FrostivusPhase(PHASE)
 	FrostivusCountdown(1.0)
-	-- Set up control points
-	local radiant_control_point_loc = Entities:FindByName(nil, "altar_2")
-	local dire_control_point_loc = Entities:FindByName(nil, "altar_6")
- 	radiant_control_point_loc.score = 20
-	dire_control_point_loc.score = 20
-	ArenaControlPointThinkRadiant(radiant_control_point_loc)
-	ArenaControlPointThinkDire(dire_control_point_loc)
-	Timers:CreateTimer(10, function()
-		ArenaControlPointScoreThink(radiant_control_point_loc, dire_control_point_loc)
-	end)
 
 	-- Spawn bosses
 	SpawnZeus(BOSS_SPAWN_POINT_TABLE.zeus)
+	SpawnVenomancer(BOSS_SPAWN_POINT_TABLE.venomancer)
 end
 
 function FrostivusPhase(PHASE)
@@ -132,150 +123,86 @@ function FrostivusIncreaseTimer(time)
 	nCOUNTDOWNTIMER = nCOUNTDOWNTIMER + time
 end
 
-function FrostivusHeroKilled(hero)
-	if hero:GetTeamNumber() == 2 then
---		CustomNetTables:SetTableValue("game_options", "radiant", {score = CustomNetTables:GetTableValue("game_options", "radiant").score +1})
-		CustomNetTables:SetTableValue("game_options", "dire", {score = CustomNetTables:GetTableValue("game_options", "dire").score -1})
-	else
-		CustomNetTables:SetTableValue("game_options", "radiant", {score = CustomNetTables:GetTableValue("game_options", "radiant").score -1})
---		CustomNetTables:SetTableValue("game_options", "dire", {score = CustomNetTables:GetTableValue("game_options", "dire").score +1})
+function FrostivusHeroKilled(killer, hero)
+
+	-- Player death
+	if hero:HasModifier("modifier_fighting_boss") then
+
+		-- If any hero is alive, do nothing
+		local fighting_modifier = hero:FindModifierByName("modifier_fighting_boss")
+		local altar_handle = fighting_modifier.altar_handle
+		local altar_name = altar_handle:GetName()
+		local fight_heroes = altar_handle:FindModifierByName("modifier_altar_active").fighting_heroes
+		for _, hero in pairs(fight_heroes) do
+			if hero:IsAlive() then
+				return nil
+			end
+		end
+
+		-- Else, end the encounter
+		-- Notify the console that a boss fight (capture attempt) has ended in failure
+		local losing_team = hero:GetTeam()
+		print("boss on altar "..altar_name.." defeated team "..losing_team)
+
+		-- Send the failure event to the relevant team
+		CustomGameEventManager:Send_ServerToTeam(losing_team, "AltarContestEnd", {win = false})
+
+		-- Clear any ongoing modifiers
+		for _,hero in pairs(fight_heroes) do
+			hero:RemoveModifierByName("modifier_frostivus_zeus_positive_charge")
+			hero:RemoveModifierByName("modifier_frostivus_zeus_negative_charge")
+		end
+
+		-- Unlock the arena
+		UnlockArena(altar_name, false)
+
+		-- Delete the boss AI thinker modifier and re-apply the capture attempt detection modifier
+		local nearby_bosses = FindUnitsInRadius(hero:GetTeam(), altar_handle:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+		for _, boss in pairs(nearby_bosses) do
+			if boss:HasModifier("modifier_frostivus_boss") then
+				if boss:HasModifier("boss_thinker_zeus") then
+					boss:RemoveModifierByName("boss_thinker_zeus")
+					boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "zeus", altar_handle = altar_name})
+				elseif boss:HasModifier("boss_thinker_venomancer") then
+					boss:RemoveModifierByName("boss_thinker_venomancer")
+					boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "venomancer", altar_handle = altar_name})
+				end
+
+				-- Destroy adds
+				local nearby_summons = FindUnitsInRadius(boss:GetTeam(), altar_handle:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+				for _,summon in pairs(nearby_summons) do
+					if not summon:HasModifier("modifier_frostivus_boss") then
+						summon:Kill(nil, summon)
+					end
+				end
+
+				-- Reset boss status & position
+				boss:Heal(999999, nil)
+				boss:SetAbsOrigin(altar_handle:GetAbsOrigin() + Vector(0, 300, 0))
+				boss:SetForwardVector(Vector(0, 1, 0))
+			end
+		end
 	end
+
+-- I don't know what purpose this code serves, if you need it, uncomment it Cookies
+
+--	if hero:GetTeamNumber() == 2 then
+--		CustomNetTables:SetTableValue("game_options", "radiant", {score = CustomNetTables:GetTableValue("game_options", "radiant").score +1})
+--		CustomNetTables:SetTableValue("game_options", "dire", {score = CustomNetTables:GetTableValue("game_options", "dire").score -1})
+--	else
+--		CustomNetTables:SetTableValue("game_options", "radiant", {score = CustomNetTables:GetTableValue("game_options", "radiant").score -1})
+--		CustomNetTables:SetTableValue("game_options", "dire", {score = CustomNetTables:GetTableValue("game_options", "dire").score +1})
+--	end
 end
 
--- TODO: make a panorama panel to choose at wich altar to respawn
+-- TODO: make a panorama panel to choose at which altar to respawn
 function FrostivusAltarRespawn(hero)
-	if hero:GetTeamNumber() == 2 then
+	if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
 		altar = Entities:FindByName(nil, "altar_1")
 	else
 		altar = Entities:FindByName(nil, "altar_7")
 	end
 
-	local respawn_position = altar:GetAbsOrigin() + RandomVector(RandomFloat(200, 900))
+	local respawn_position = altar:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
 	FindClearSpaceForUnit(hero, respawn_position, true)
-end
-
--- Arena control point logic
-function ArenaControlPointThinkRadiant(control_point)
-
-	-- Create the control point particle, if this is the first iteration
-	if not control_point.particle then
-		control_point.particle = ParticleManager:CreateParticle("particles/customgames/capturepoints/cp_allied_wind.vpcf", PATTACH_CUSTOMORIGIN, nil)
-		ParticleManager:SetParticleControl(control_point.particle, 0, control_point:GetAbsOrigin())
-	end
-
-	-- Check how many heroes are near the control point
-	local allied_heroes = FindUnitsInRadius(DOTA_TEAM_GOODGUYS, control_point:GetAbsOrigin(), nil, 600, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
-	local enemy_heroes = FindUnitsInRadius(DOTA_TEAM_BADGUYS, control_point:GetAbsOrigin(), nil, 600, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
-	local score_change = #allied_heroes - #enemy_heroes
-
-	-- Calculate the new score
-	local old_score = control_point.score
-	control_point.score = math.max(math.min(control_point.score + score_change, 20), -20)
-
-	-- If this control point changed disposition, update the UI and particle accordingly
-	if old_score >= 0 and control_point.score < 0 then
-		CustomGameEventManager:Send_ServerToAllClients("radiant_point_to_dire", {})
-		ParticleManager:DestroyParticle(control_point.particle, true)
-		control_point.particle = ParticleManager:CreateParticle("particles/customgames/capturepoints/cp_wind_captured.vpcf", PATTACH_CUSTOMORIGIN, nil)
-		ParticleManager:SetParticleControl(control_point.particle, 0, control_point:GetAbsOrigin())
-		control_point:EmitSound("Imba.ControlPointTaken")
-	elseif old_score < 0 and control_point.score >= 0 then
-		CustomGameEventManager:Send_ServerToAllClients("radiant_point_to_radiant", {})
-		ParticleManager:DestroyParticle(control_point.particle, true)
-		control_point.particle = ParticleManager:CreateParticle("particles/customgames/capturepoints/cp_allied_wind.vpcf", PATTACH_CUSTOMORIGIN, nil)
-		ParticleManager:SetParticleControl(control_point.particle, 0, control_point:GetAbsOrigin())
-		control_point:EmitSound("Imba.ControlPointTaken")
-	end
-
-	-- Update the progress bar
-	CustomNetTables:SetTableValue("game_options", "radiant", {cp_score = control_point.score})
-	CustomGameEventManager:Send_ServerToAllClients("radiant_progress_update", {})
-
-	-- Run this function again after a second
-	Timers:CreateTimer(1, function()
-		ArenaControlPointThinkRadiant(control_point)
-	end)
-end
-
-function ArenaControlPointThinkDire(control_point)
-
-	-- Create the control point particle, if this is the first iteration
-	if not control_point.particle then
-		control_point.particle = ParticleManager:CreateParticle("particles/customgames/capturepoints/cp_metal_captured.vpcf", PATTACH_CUSTOMORIGIN, nil)
-		ParticleManager:SetParticleControl(control_point.particle, 0, control_point:GetAbsOrigin())
-	end
-
-	-- Check how many heroes are near the control point
-	local allied_heroes = FindUnitsInRadius(DOTA_TEAM_BADGUYS, control_point:GetAbsOrigin(), nil, 600, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
-	local enemy_heroes = FindUnitsInRadius(DOTA_TEAM_GOODGUYS, control_point:GetAbsOrigin(), nil, 600, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
-	local score_change = #allied_heroes - #enemy_heroes
-
-	-- Calculate the new score
-	local old_score = control_point.score
-	control_point.score = math.max(math.min(control_point.score + score_change, 20), -20)
-
-	-- If this control point changed disposition, update the UI and particle accordingly
-	if old_score >= 0 and control_point.score < 0 then
-		CustomGameEventManager:Send_ServerToAllClients("dire_point_to_radiant", {})
-		ParticleManager:DestroyParticle(control_point.particle, true)
-		control_point.particle = ParticleManager:CreateParticle("particles/customgames/capturepoints/cp_allied_metal.vpcf", PATTACH_CUSTOMORIGIN, nil)
-		ParticleManager:SetParticleControl(control_point.particle, 0, control_point:GetAbsOrigin())
-		control_point:EmitSound("Imba.ControlPointTaken")
-	elseif old_score < 0 and control_point.score >= 0 then
-		CustomGameEventManager:Send_ServerToAllClients("dire_point_to_dire", {})
-		ParticleManager:DestroyParticle(control_point.particle, true)
-		control_point.particle = ParticleManager:CreateParticle("particles/customgames/capturepoints/cp_metal_captured.vpcf", PATTACH_CUSTOMORIGIN, nil)
-		ParticleManager:SetParticleControl(control_point.particle, 0, control_point:GetAbsOrigin())
-		control_point:EmitSound("Imba.ControlPointTaken")
-	end
-
-	-- Update the progress bar
-	CustomNetTables:SetTableValue("game_options", "dire", {cp_score = control_point.score})
-	CustomGameEventManager:Send_ServerToAllClients("dire_progress_update", {})
-
-	-- Run this function again after a second
-	Timers:CreateTimer(1, function()
-		ArenaControlPointThinkDire(control_point)
-	end)
-end
-
-function ArenaControlPointScoreThink(radiant_cp, dire_cp)
-
-	-- Fetch current scores
-	local radiant = CustomNetTables:GetTableValue("game_options", "radiant")
-	local dire = CustomNetTables:GetTableValue("game_options", "dire")
-
-	-- Update scores
-	if radiant_cp.score >= 0 then
-		radiant.score = radiant.score + 1
-	else
-		dire.score = dire.score + 1
-	end
-	if dire_cp.score >= 0 then
-		dire.score = dire.score + 1
-	else
-		radiant.score = radiant.score + 1
-	end
-
-	-- Set new values
-	CustomNetTables:SetTableValue("arena_capture", "radiant_score", {radiant.score})
-	CustomNetTables:SetTableValue("arena_capture", "dire_score", {dire.score})
-
-	-- Update scoreboard
-	CustomGameEventManager:Send_ServerToAllClients("radiant_score_update", {})
-	CustomGameEventManager:Send_ServerToAllClients("dire_score_update", {})
-
-	-- Check if one of the teams won the game
-	if radiant.score >= KILLS_TO_END_GAME_FOR_TEAM then
-		GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
-		GAME_WINNER_TEAM = "Radiant"
-	elseif dire.score >= KILLS_TO_END_GAME_FOR_TEAM then
-		GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
-		GAME_WINNER_TEAM = "Dire"
-	end
-
-	-- Call this function again after 10 seconds
-	Timers:CreateTimer(10, function()
-		ArenaControlPointScoreThink(radiant_cp, dire_cp)
-	end)
 end
