@@ -41,6 +41,7 @@ function boss_thinker_zeus:DeclareFunctions()
 	local funcs = 
 	{
 		MODIFIER_EVENT_ON_DEATH,
+		MODIFIER_EVENT_ON_TAKEDAMAGE,
 	}
 	return funcs
 end
@@ -57,6 +58,9 @@ local target = keys.unit
 
 			-- Notify the console that a boss fight (capture attempt) has ended with a successful kill
 			print(self.boss_name.." boss is dead, winning team is "..self.team)
+
+			-- Hide Boss Bar
+			CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "hide_boss_hp", {})
 
 			-- Send the boss death event to all clients
 			CustomGameEventManager:Send_ServerToTeam(self.team, "AltarContestEnd", {win = true})
@@ -100,6 +104,7 @@ function boss_thinker_zeus:OnIntervalThink()
 		local power_stacks = boss:FindModifierByName("modifier_frostivus_boss"):GetStackCount()
 
 		-- Sends boss health information to fighting team's clients
+		UpdateBossBar(boss)
 		CustomGameEventManager:Send_ServerToTeam(self.team, "OnAltarContestThink", {boss_name = self.boss_name, health = boss:GetHealth(), max_health = boss:GetMaxHealth()})
 
 		-- Think
@@ -347,6 +352,27 @@ function boss_thinker_zeus:OnIntervalThink()
 		if self.boss_timer > 75 then
 			self:GodsWrath(altar_loc, altar_entity, 10.0, 300, 300)
 			self.boss_timer = self.boss_timer - 1
+		end
+	end
+end
+
+function boss_thinker_zeus:OnTakeDamage(keys)
+	if IsServer() then
+		local unit = keys.unit
+		local attacker = keys.attacker
+
+		if unit == self:GetParent() then
+			if attacker == unit then return nil end
+--			self.last_movement = GameRules:GetGameTime()
+
+			attacker.boss_attacked_time = GameRules:GetGameTime()
+			CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "show_boss_hp", {})
+
+			Timers:CreateTimer(5.0, function()
+				if GameRules:GetGameTime() - attacker.boss_attacked_time >= 5.0 then
+					CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "hide_boss_hp", {})
+				end
+			end)
 		end
 	end
 end

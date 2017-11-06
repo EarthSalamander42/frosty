@@ -13,7 +13,6 @@ function UpdateTimer( data )
 	timerText += data.timer_second_01;
 
 	$( "#Timer" ).text = timerText;
-	$( "#Timer_alt" ).text = timerText;
 }
 
 function OnUIUpdated(table_name, key, data)
@@ -22,6 +21,7 @@ function OnUIUpdated(table_name, key, data)
 }
 CustomNetTables.SubscribeNetTableListener("game_options", OnUIUpdated)
 
+var update_boss_level = false
 function UpdateScoreUI()
 {
 	var RadiantScore = CustomNetTables.GetTableValue("game_options", "radiant").score;
@@ -32,22 +32,6 @@ function UpdateScoreUI()
 
 	$("#DireScoreText").SetDialogVariableInt("dire_score", DireScore);
 	$("#DireScoreText").text = DireScore;
-
-	var RoshanTable = CustomNetTables.GetTableValue("game_options", "roshan");
-	if (JS_PHASE == 3)
-	{
-		if (RoshanTable !== null)
-		{
-			var RoshanHP = RoshanTable.HP;
-			var RoshanHP_percent = RoshanTable.HP_alt;
-			var RoshanMaxHP = RoshanTable.maxHP;
-			var RoshanLvl = RoshanTable.level;
-			$("#RoshanProgressBar").value = RoshanHP_percent / 100;
-
-			$("#RoshanHealth").text = RoshanHP + "/" + RoshanMaxHP;
-			$("#RoshanLevel").text = "Level: " + RoshanLvl;
-		}
-	}
 }
 
 function Phase(args)
@@ -62,26 +46,12 @@ function Phase(args)
 	}
 	if (args.Phase == 2)
 	{
-		$('#ScorePanel').MoveChildBefore($('#Timer'), $('#Roshan'));
-		$("#RoshanTarget").style.visibility = "visible";
+		$('#ScorePanel').MoveChildBefore($('#Timer'), $('#Boss'));
 	}
 	else if (args.Phase == 3)
 	{
 		$("#Frostivus2").style.visibility = "collapse";
-		$("#RoshanHP").style.visibility = "visible";
-	}
-}
-
-function RoshanTarget(args)
-{
-	$("#RoshanTarget").text = $.Localize(args.target);
-	if (args.team_target == 2)
-	{
-		$("#RoshanTarget").style.color = "green";
-	}
-	else if (args.team_target == 3)
-	{
-		$("#RoshanTarget").style.color = "red";
+		$("#BossHP").style.visibility = "visible";
 	}
 }
 
@@ -132,57 +102,44 @@ function ChooseAltar(number) {
 	}
 }
 
-function HallOfFame()
-{
-	var hudElements = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HUDElements");
-
-	hudElements.FindChildTraverse("topbar").style.visibility = "collapse";
-	hudElements.FindChildTraverse("shop").style.visibility = "collapse";
-	hudElements.FindChildTraverse("minimap_container").style.visibility = "collapse";
-	hudElements.FindChildTraverse("lower_hud").style.visibility = "collapse";
-
-	$("#RoshanHP").style.visibility = "collapse";
-	$("#HallOfFame").style.visibility = "visible";
-
-	/* Remove later, only tools testing */
-	$("#Frostivus").style.visibility = "collapse";
-	$("#Frostivus2").style.visibility = "collapse";
-
-	var RoshanTable = CustomNetTables.GetTableValue("game_options", "roshan");
-	var RoshanLvl = RoshanTable.level;
-	$("#RoshanLevel_alt").text = "Level: " + RoshanLvl
-
-	//Get the players for both teams
-	var radiantPlayers = Game.GetPlayerIDsOnTeam( DOTATeam_t.DOTA_TEAM_GOODGUYS );
-	var direPlayers = Game.GetPlayerIDsOnTeam( DOTATeam_t.DOTA_TEAM_BADGUYS );
-
-	//Assign radiant players
-	$.Each( radiantPlayers, function( player ) {
-		var playerPanel = Modular.Spawn( "picking_player", $("#RadiantPlayers"), "HoF" );
-		var playerInfo = Game.GetPlayerInfo( player )
-
-		playerPanels[player] = playerPanel;
-
-		playerPanels[player].SetHero(playerInfo.player_selected_hero);
-		playerPanel.SetPlayer( player );
-	});
-
-	//Assign dire players
-	$.Each( direPlayers, function( player ) {
-		var playerPanel = Modular.Spawn( "picking_player", $("#DirePlayers"), "HoF" );
-		var playerInfo = Game.GetPlayerInfo( player )
-
-		playerPanels[player] = playerPanel;
-
-		playerPanels[player].SetHero(playerInfo.player_selected_hero);
-		playerPanel.SetPlayer( player );
-	});
-}
-
 function OnPlayerReconnect( data ) {
 	$.Msg("Frostivus: Player has reconnected!")
 	var phase = data.Phase;
 	$.Msg("Phase: " + phase)
+}
+
+function ShowBossBar(args)
+{
+	$("#BossHP").style.visibility = "visible";
+
+	var BossTable = CustomNetTables.GetTableValue("game_options", "boss");
+	if (BossTable !== null)
+	{
+		var BossHP = BossTable.HP;
+		var BossHP_percent = BossTable.HP_alt;
+		var BossMaxHP = BossTable.maxHP;
+		var BossLvl = BossTable.level;
+		var BossLabel = BossTable.label;
+
+		$("#BossProgressBar").value = BossHP_percent / 100;
+		$("#BossHealth").text = BossHP + "/" + BossMaxHP;
+
+		if (update_boss_level == false)
+		{
+			$.Msg($("#BossLevel").text + BossLvl)
+			$.Msg("Setup Boss name: " + BossLabel)
+
+			$("#BossLevel").text = $("#BossLevel").text + BossLvl
+			$("#BossLabel").text = $.Localize(BossLabel)
+			update_boss_level = true
+		}
+	}
+}
+
+function HideBossBar(args)
+{
+	$("#BossHP").style.visibility = "collapse";
+	update_boss_level = false
 }
 
 (function()
@@ -193,7 +150,7 @@ function OnPlayerReconnect( data ) {
 	GameEvents.Subscribe("countdown", UpdateTimer);
 	GameEvents.Subscribe("update_score", UpdateScoreUI);
 	GameEvents.Subscribe("frostivus_phase", Phase);
-	GameEvents.Subscribe("roshan_target", RoshanTarget);
-	GameEvents.Subscribe("hall_of_fame", HallOfFame);
 	GameEvents.Subscribe("diretide_player_reconnected", OnPlayerReconnect);
+	GameEvents.Subscribe("show_boss_hp", ShowBossBar);
+	GameEvents.Subscribe("hide_boss_hp", HideBossBar);
 })();
