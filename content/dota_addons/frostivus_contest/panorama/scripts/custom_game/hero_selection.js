@@ -436,14 +436,6 @@ GameEvents.Subscribe( "pick_abilities", OnReceiveAbilities );
 /* Initialisation - runs when the element is created
 =========================================================================*/
 (function () {
-	// Banned Heroes
-	//STR
-//	$("#npc_dota_hero_magnataur").AddClass( "taken" );
-	///AGI
-	$("#npc_dota_hero_monkey_king").AddClass( "taken" );
-	//INT
-//	$("#npc_dota_hero_enigma").AddClass( "taken" );
-
 	// If this player is a spectator, just kill the whole pick screen
 	var localTeam = Players.GetTeam(Players.GetLocalPlayer())
 	if ( localTeam != 2 && localTeam != 3 ) {

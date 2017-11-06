@@ -224,9 +224,6 @@
 
 .ClassNormalOption,
 .ClassCustomOption {
-	width: 85px;
-	height: 50px;
-	margin: 3px 0px 3px 1px;
 	horizontal-align: left;
 	wash-color: #7090B060;
 	background-size: 100% 100%;
@@ -306,7 +303,6 @@
 
 .GameModeSelectText {
 	align: center center;
-	font-size: 30px;
 	font-family: "Radiance";
 	text-transform: uppercase;
 	font-weight: bold;
@@ -399,7 +395,6 @@
 //	text-align: left;
 	font-size: 26px;
 	font-family: "Bold";
-	color: green;
 }
 
 #AverageMMRTeamRadiant,
@@ -423,7 +418,6 @@
 	horizontal-align: right;
 	text-align: right;
 	padding-right: 3%;
-	color: darkred;
 }
 
 #SeparatorImage {
@@ -432,13 +426,10 @@
 }
 
 .PickListTitlePanel {
-	margin-left: 12%;
-	horizontal-align: left;
 	flow-children: right;
 }
 
 .PickListText {
-	horizontal-align: left;
 	font-size: 20px;
 	font-family: "Radiance";
 	color: white;

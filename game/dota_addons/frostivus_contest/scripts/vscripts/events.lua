@@ -410,15 +410,15 @@ function GameMode:OnTeamKillCredit(keys)
 end
 
 function GameMode:OnEntityKilled( keys )
-GameMode:_OnEntityKilled( keys )
+	GameMode:_OnEntityKilled( keys )
 
-local killed_unit = EntIndexToHScript( keys.entindex_killed )
-local killer = nil
-if keys.entindex_attacker then killer = EntIndexToHScript( keys.entindex_attacker ) end
+	local killed_unit = EntIndexToHScript( keys.entindex_killed )
+	local killer = nil
+	if keys.entindex_attacker then killer = EntIndexToHScript( keys.entindex_attacker ) end
 
 	if killed_unit then
 		if killed_unit:IsRealHero() then
-			FrostivusHeroKilled(killed_unit)
+			FrostivusHeroKilled(killer, killed_unit)
 		end
 	end
 end
