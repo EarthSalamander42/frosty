@@ -1,12 +1,9 @@
 nCOUNTDOWNTIMER = 0
 PHASE = 0
-
 FROSTIVUS_WINNER = 2
 COUNT_DOWN = 1
 PHASE_TIME = 481 -- 481
-if IsInToolsMode() then
-	PHASE_TIME = 481 -- 481
-end
+if IsInToolsMode() then PHASE_TIME = 481 end -- 481
 
 function Frostivus()
 	EmitGlobalSound("announcer_diretide_2012_announcer_welcome_05")
@@ -26,6 +23,8 @@ end
 
 function FrostivusPhase(PHASE)
 --	local units = FindUnitsInRadius(1, Vector(0,0,0), nil, 25000, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+
+	print("Phase:", PHASE)
 
 --	for _, unit in ipairs(units) do
 --		if unit:GetName() == "npc_dota_roshan" then
@@ -71,37 +70,6 @@ function FrostivusCountdown(tick)
 			nCOUNTDOWNTIMER = PHASE_TIME
 			PHASE = PHASE + 1
 			FrostivusPhase(PHASE)
-			print("Phase:", PHASE)
-			if PHASE == 2 then
-				if CustomNetTables:GetTableValue("game_options", "dire").score > CustomNetTables:GetTableValue("game_options", "radiant").score then
-					FROSTIVUS_WINNER = 3
-				end
-			elseif PHASE == 3 then
-				nCOUNTDOWNTIMER = 120
-				COUNT_DOWN = 0
-				local units = FindUnitsInRadius(DOTA_TEAM_GOODGUYS, Vector(0,0,0), nil, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)		
-				for _, unit in pairs(units) do
-					if unit:GetUnitName() == "npc_diretide_roshan" then
---						UpdateRoshanBar(unit, 0.03)
-					else
---						if unit:IsCreep() then
---							unit:RemoveSelf()						
---						end
-					end
-				end
-				local ents = Entities:FindAllByName("lane_*")
-				for _, ent in pairs(ents) do
-					ent:RemoveSelf()
-				end
-			elseif PHASE == 4 then
-				GameRules:SetGameWinner(DOTA_TEAM_NEUTRALS)
-			end
-		elseif nCOUNTDOWNTIMER == 120 and PHASE == 3 then
-			local hero = FindUnitsInRadius(2, Entities:FindByName(nil, "roshan_arena_"..FROSTIVUS_WINNER):GetAbsOrigin(), nil, 700, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_NONE, FIND_CLOSEST, false)
-			if #hero > 0 then
-				print("A hero is near...")
-				COUNT_DOWN = 1
-			end
 		end
 		return tick
 	end)

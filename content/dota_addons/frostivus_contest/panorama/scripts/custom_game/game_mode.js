@@ -21,7 +21,7 @@ function InitializeUI() {
 		$.Schedule(1, InitializeUI);
 		return;
 	} else if (is_host) {
-
+/*
 		// Make the game options panel visible
 		var game_options_panel = $('#game_options_container')
 		game_options_panel.style.visibility = 'visible';
@@ -78,6 +78,7 @@ function InitializeUI() {
 		} else if (map_info.map_display_name == "imba_diretide") {
 			$('#game_options_container').style.visibility = 'collapse';
 		}
+		*/
 	}
 }
 
@@ -90,7 +91,7 @@ function CheckForHostPrivileges() {
 		return player_info.player_has_host_privileges;
 	}
 }
-
+/*
 // Sets all options to Normal mode
 function SetQuickOptionsNormal() {
 
@@ -151,7 +152,7 @@ function SetGameOptions()
 
 	AnimatePanel($('#game_options_container'), { "transform": "translateX(-150px);", "opacity": "0;" }, 0.8);
 }
-
+*/
 // Shows/hides the community panel
 function ShowCommunityButton() {
 	var community_panel = $.GetContextPanel().FindChildTraverse("CommunityPanel");

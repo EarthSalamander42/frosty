@@ -1,7 +1,3 @@
--- This file contains all barebones-registered events and has already set up the passed-in parameters for your use.
--- Do not remove the GameMode:_Function calls in these events as it will mess with the internal barebones systems.
-
--- Cleanup a player when they leave
 function GameMode:OnDisconnect(keys)
 
 	-- GetConnectionState values:
@@ -26,18 +22,14 @@ function GameMode:OnDisconnect(keys)
 	-- If the game hasn't started, or has already ended, do nothing
 	if (GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME) or (GameRules:State_Get() < DOTA_GAMERULES_STATE_PRE_GAME) then
 		return nil
-
 	-- Else, start tracking player's reconnect/abandon state
 	else
-
 		-- Fetch player's player and hero information
 		local player_id = keys.PlayerID
 		local player_name = keys.name
 		local hero = PlayerResource:GetPickedHero(player_id)
 		local hero_name = PlayerResource:GetPickedHeroName(player_id)
 		local line_duration = 7
-
-		Server_DisableToGainXpForPlayer(player_id)
 
 		-- Start tracking
 		print("started keeping track of player "..player_id.."'s connection state")
@@ -108,7 +100,7 @@ local i = 10
 	-------------------------------------------------------------------------------------------------
 
 	if new_state == DOTA_GAMERULES_STATE_HERO_SELECTION then
-		HeroSelection:Start()
+		HeroSelection:HeroListPreLoad()
 	end
 
 	-------------------------------------------------------------------------------------------------
@@ -133,23 +125,18 @@ local i = 10
 	-- IMBA: Game started (horn sounded)
 	-------------------------------------------------------------------------------------------------
 	if new_state == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-		Server_WaitToEnableXpGain()
-
 		if GetMapName() == "frostivus" then
 			Frostivus()
 		end
 
 		Timers:CreateTimer(60, function()
 			StartGarbageCollector()
-			DefineLosingTeam()
 			return 60
 		end)
 	end
 
 	if new_state == DOTA_GAMERULES_STATE_POST_GAME then
 		CustomGameEventManager:Send_ServerToAllClients("end_game", {})
-		local winning_team = GAME_WINNER_TEAM
-		Server_CalculateXPForWinnerAndAll(winning_team)
 	end
 end
 
@@ -161,41 +148,20 @@ local npc = EntIndexToHScript(keys.entindex)
 local normal_xp = npc:GetDeathXP()
 
 	if npc then
-		if GetMapName() == "imba_10v10" or GetMapName() == "imba_custom_10v10" then
-			npc:SetDeathXP(normal_xp)
-		else
-			npc:SetDeathXP(normal_xp*1.5)
-		end
---		if npc:IsRealHero() and npc:GetUnitName() ~= "npc_dota_hero_wisp" or npc.is_real_wisp then
---			if not npc.has_label then
---				Timers:CreateTimer(5.0, function()
---					local title = Server_GetPlayerTitle(npc:GetPlayerID())
---					local rgb = Server_GetTitleColor(title)
---					npc:SetCustomHealthLabel(title, rgb[1], rgb[2], rgb[3])
---				end)
---				npc.has_label = true
---			end
---		elseif npc:IsIllusion() then
---			if not npc.has_label then
---				local title = Server_GetPlayerTitle(npc:GetPlayerID())
---				local rgb = Server_GetTitleColor(title)
---				npc:SetCustomHealthLabel(title, rgb[1], rgb[2], rgb[3])
---				npc.has_label = true
---			end
---		end
-	end
+		npc:SetDeathXP(normal_xp*1.5)
 
-	if npc:IsRealHero() then
-		for i = 1, #IMBA_DEVS do
-			-- Granting access to admin stuff for Imba Devs
-			if PlayerResource:GetSteamAccountID(npc:GetPlayerID()) == IMBA_DEVS[i] then
-				if not npc.is_dev then
-					npc.is_dev = true
+		if npc:IsRealHero() then
+			for i = 1, #IMBA_DEVS do
+				-- Granting access to admin stuff for Imba Devs
+				if PlayerResource:GetSteamAccountID(npc:GetPlayerID()) == IMBA_DEVS[i] then
+					if not npc.is_dev then
+						npc.is_dev = true
+					end
 				end
 			end
-		end
 
-		FrostivusAltarRespawn(npc)
+			FrostivusAltarRespawn(npc)
+		end
 	end
 end
 
@@ -216,85 +182,6 @@ end
 
 function GameMode:OnPlayerReconnect(keys)
 	PrintTable(keys)
-
-	local player_id = keys.PlayerID
-	Server_EnableToGainXPForPlyaer(player_id)
-	print("Player has reconnected:", player_id)
-
-	for _, hero in pairs(HeroList:GetAllHeroes()) do
-		if hero.is_dev and not hero.has_graph then
-			hero.has_graph = true
-			CustomGameEventManager:Send_ServerToPlayer(hero:GetPlayerOwner(), "show_netgraph", {})
---			CustomGameEventManager:Send_ServerToPlayer(hero:GetPlayerOwner(), "show_netgraph_heronames", {})
-		end
-	end
-
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Player reconnect logic
-	-------------------------------------------------------------------------------------------------
-	-- Reinitialize the player's pick screen panorama, if necessary
-	if HeroSelection.HorriblyImplementedReconnectDetection then
-		HeroSelection.HorriblyImplementedReconnectDetection[player_id] = false
-		Timers:CreateTimer(0.1, function()
-			if HeroSelection.HorriblyImplementedReconnectDetection[player_id] then
-				print("updating player "..player_id.."'s pick screen state")
-				local pick_state = HeroSelection.playerPickState[player_id].pick_state
-				local repick_state = HeroSelection.playerPickState[player_id].repick_state
-
-				local data = {
-					PlayerID = player_id,
-					PlayerPicks = HeroSelection.playerPicks,
-					pickState = pick_state,
-					repickState = repick_state
-				}
-
-				if IMBA_HERO_PICK_RULE == 0 then
-					data.PickedHeroes = {}
-					-- Set as all of the heroes that were selected
-					for _,v in pairs(HeroSelection.radiantPicks) do
-						table.insert(data.PickedHeroes, v)
-					end
-					for _,v in pairs(HeroSelection.direPicks) do
-						table.insert(data.PickedHeroes, v)
-					end
-				elseif IMBA_HERO_PICK_RULE == 1 then
-					-- Set as the team's pick to prevent same hero on the same team
-					if PlayerResource:GetTeam(player_id) == DOTA_TEAM_GOODGUYS then
-						data.PickedHeroes = HeroSelection.radiantPicks
-					else
-						data.PickedHeroes = HeroSelection.direPicks
-					end
-				else
-					data.PickedHeroes = {} --Set as empty, to allow all heroes to be selected
-				end
-
-				PrintTable(HeroSelection.playerPicks)
-
-				if PlayerResource:GetTeam(player_id) == DOTA_TEAM_GOODGUYS then
-					CustomGameEventManager:Send_ServerToAllClients("player_reconnected", {PlayerID = player_id, PickedHeroes = HeroSelection.radiantPicks, PlayerPicks = HeroSelection.playerPicks, pickState = pick_state, repickState = repick_state})
-				else
-					CustomGameEventManager:Send_ServerToAllClients("player_reconnected", {PlayerID = player_id, PickedHeroes = HeroSelection.direPicks, PlayerPicks = HeroSelection.playerPicks, pickState = pick_state, repickState = repick_state})
-				end
-			else
-				return 0.1
-			end
-		end)
-	end
-
-	-- If this is a reconnect from abandonment due to a long disconnect, remove the abandon state
-	if PlayerResource:GetHasAbandonedDueToLongDisconnect(player_id) then
-		local player_name = keys.name
-		local hero = PlayerResource:GetPickedHero(player_id)
-		local hero_name = PlayerResource:GetPickedHeroName(player_id)
-		local line_duration = 7
-		Notifications:BottomToAll({hero = hero_name, duration = line_duration})
-		Notifications:BottomToAll({text = player_name.." ", duration = line_duration, continue = true})
-		Notifications:BottomToAll({text = "#imba_player_reconnect_message", duration = line_duration, style = {color = "DodgerBlue"}, continue = true})
-		PlayerResource:IncrementTeamPlayerCount(player_id)
-
-		-- Stop redistributing gold to allies, if applicable
-		PlayerResource:StopAbandonGoldRedistribution(player_id)
-	end
 end
 
 function GameMode:OnItemPurchased( keys )
@@ -428,24 +315,20 @@ function GameMode:PlayerConnect(keys)
 end
 
 function GameMode:OnConnectFull(keys)
-	Server_SendAndGetInfoForAll()
-
 	GameMode:_OnConnectFull(keys)
 	
 	local entIndex = keys.index+1
-
-	-- The Player entity of the joining user
 	local ply = EntIndexToHScript(entIndex)
-	
-	-- The Player ID of the joining player
 	local player_id = ply:GetPlayerID()
 
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Player data initialization
-	-------------------------------------------------------------------------------------------------
+	print("Player has fully connected:", player_id)
 
+--	if player.is_dev then
+--		CustomGameEventManager:Send_ServerToPlayer(player:GetPlayerOwner(), "show_netgraph", {})
+--	end
+
+	ReconnectPlayer(player_id)
 	PlayerResource:InitPlayerData(player_id)
-
 end
 
 function GameMode:OnIllusionsCreated(keys)

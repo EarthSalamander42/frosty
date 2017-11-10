@@ -7,6 +7,7 @@
 		<include src="file://{resources}/scripts/custom_game/frostivus.js" />
 		<include src="file://{resources}/scripts/custom_game/Modular.js" />
 	</scripts>
+
 	<Panel class="Frostivus" hittest="false">
 		<Panel id="FrostivusAltarRespawn">
 			<Panel id="FrostivusAltar">
@@ -19,24 +20,44 @@
 				<Button id="AltarButton1" class="AltarButton" onactivate="ChooseAltar(1);">
 					<Label text="#frostivus_altar_1" />
 				</Button>
+
 				<Button id="AltarButton2" class="AltarButton" onactivate="ChooseAltar(2);">
 					<Label text="#frostivus_altar_2" />
 				</Button>
+
 				<Button id="AltarButton3" class="AltarButton" onactivate="ChooseAltar(3);">
 					<Label text="#frostivus_altar_3" />
 				</Button>
+
 				<Button id="AltarButton4" class="AltarButton" onactivate="ChooseAltar(4);">
 					<Label text="#frostivus_altar_4" />
 				</Button>
+
 				<Button id="AltarButton5" class="AltarButton" onactivate="ChooseAltar(5);">
 					<Label text="#frostivus_altar_5" />
 				</Button>
+
 				<Button id="AltarButton6" class="AltarButton" onactivate="ChooseAltar(6);">
 					<Label text="#frostivus_altar_6" />
 				</Button>
+
 				<Button id="AltarButton7" class="AltarButton" onactivate="ChooseAltar(7);">
 					<Label text="#frostivus_altar_7" />
 				</Button>
+			</Panel>
+		</Panel>
+
+		<Panel class="Diretide" hittest="false">
+			<Panel id="DiretidePanel">
+				<Panel id="BossHP" hittest="false">
+					<Label id="BossLabel" class="HoldoutLabelSmall" hittest="false" text=""/>
+					<Label id="BossLevel" class="HoldoutLabelSmall_alt" hittest="false" text="Level: "/>
+					<Panel id="BossProgressBarContainer" hittest="false">
+						<DOTAHeroImage id="BossIcon" hittest="false"/>
+						<ProgressBar id="BossProgressBar" hittest="false" value="1.0"/>
+						<Label id="BossHealth" class="HoldoutLabelSmall" hittest="false" text=""/>
+					</Panel>
+				</Panel>
 			</Panel>
 		</Panel>
 
@@ -54,9 +75,8 @@
 					<Label hittest="false" class="QuestGenericText" id="RadiantScoreText" text="999"/>
 				</Panel>
 				<Panel id="ScorePanel">
-					<Panel id="Roshan"/>
+					<Panel id="Boss"/>
 					<Label id="Timer" text="--:--"/>
-					<Label id="RoshanTarget" text=""/>
 				</Panel>
 				<Panel hittest="false" id="DireScore">
 					<Panel id="DireProgressBarPanel">
@@ -65,46 +85,6 @@
 					</Panel>
 					<Label hittest="false" class="QuestGenericText" id="DireScoreText" text="999"/>
 				</Panel>
-			</Panel>
-
-			<Panel id="RoshanHP" hittest="false">
-				<Label id="RoshanLabel" class="HoldoutLabelSmall" hittest="false" text="#npc_diretide_roshan"/>
-				<Label id="RoshanLevel" class="HoldoutLabelSmall_alt" hittest="false" text="Level: 1"/>
-				<Label id="Timer_alt" text="--:--"/>
-				<Panel id="RoshanProgressBarContainer" hittest="false">
-					<DOTAHeroImage id="BossIcon" hittest="false"/>
-					<ProgressBar id="RoshanProgressBar" hittest="false" value="1.0"/>
-					<Label id="RoshanHealth" class="HoldoutLabelSmall" hittest="false" text="15000/15000"/>
-				</Panel>
-			</Panel>
-		</Panel>
-
-		<Panel id="HallOfFame" hittest="false">
-			<Panel id="InfoContent" hittest="false">
-				<Label id="HoFTitle" class="HoldoutLabelSmall" hittest="false" text="Hall Of Fame"/>
-				<Label id="RoshanLevel_alt" class="HoldoutLabelSmall_alt" text="Level: 1"/>
-			</Panel>
-
-			<Panel id="PlayerContent" hittest="false">
-				<Panel id="RadiantPlayers">
-					<Label class="TeamTitle" text="#imba_radiant_team_title" />
-					<!-- JS Inserts player elements here -->
-				</Panel>
-
-				<Panel id="DirePlayers">
-					<Label class="TeamTitle" text="#imba_dire_team_title" />
-					<!-- JS Inserts player elements here -->
-				</Panel>
-			</Panel>
-
-			<Panel id="ButtonContent">
-				<Button id="FeedButton" onactivate="DOTADisplayURL('https://goo.gl/forms/nIqedrEqoacqT00F2');">
-					<Label text="#lag_issues" />
-				</Button>
-			
-				<Button id="CloseButton" onactivate="DOTADisconnectClicked();">
-					<Label text="#CustomEndScreenClose" />
-				</Button>
 			</Panel>
 		</Panel>
 	</Panel>

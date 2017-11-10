@@ -18,7 +18,7 @@
 				<Panel id="PickInfoPanel">
 					<Panel id="TeamRadiant">
 						<Panel id="LabelsRadiant">
-							<Label id="PickScreenTeamTitleRadiant" text="#imba_radiant_team_title" />
+							<Label id="PickScreenTeamTitleRadiant" text="#team_title_radiant" />
 							<Label id="AverageMMRTeamRadiant" text="#average_mmr" />
 						</Panel>
 						<Panel id="LeftPlayers">
@@ -32,7 +32,7 @@
 								<Panel id='PickTimer'>
 									<Label id='TimerTxt' text="" />
 								</Panel>
-								<Label id="GameModeSelectText" class="GameModeSelectText" text="#imba_gamemode_name_diretide" />
+								<Label id="GameModeSelectText" class="GameModeSelectText" text="#addon_game_name" />
 							</Panel>
 						</Panel>
 					</Panel>
@@ -40,7 +40,7 @@
 					<Panel id="TeamDire">
 						<Panel id="LabelsDire">
 							<Label id="AverageMMRTeamDire" text="#average_mmr" />
-							<Label id="PickScreenTeamTitleDire" text="#imba_dire_team_title" />
+							<Label id="PickScreenTeamTitleDire" text="#team_title_dire" />
 						</Panel>
 						<Panel id="RightPlayers">
 							<!-- JS Inserts player elements here -->
@@ -50,83 +50,85 @@
 
 				<Panel id="PickList">
 					<!-- Strength Heroes -->
-					<Panel class="PickTypePanel">
-						<Panel id="StrPickListPanel" class="PickListTitlePanel">
+					<Panel id="HeroListSTR" class="PickTypePanel">
+						<Panel class="PickListTitlePanel">
 <!--							<Image id="SeparatorImage" src="file://{images}/hud/pip_str.png"/> -->
+							<Label class="PickListText" text="#hero_list_title_strength" />
 						</Panel>
 
 						<Panel id="PickListSeparator1" class="PickListTitlePanel" />
+					</Panel>
 
-						<Panel id="HeroListSTR" class="ClassOptionRow">
-<!--						<Label id="BanTabMessage" text="#column_str_disabled" /> -->
-
-							<Panel id="npc_dota_hero_abaddon" class="ClassNormalOption" 
-								onactivate="SelectHero('npc_dota_hero_abaddon')" 
-								style="background-image: url('file://{images}/heroes/npc_dota_hero_abaddon.png');" />
-							<Panel id="npc_dota_hero_alchemist" class="ClassNormalOption" 
-								onactivate="SelectHero('npc_dota_hero_alchemist')" 
-								style="background-image: url('file://{images}/heroes/npc_dota_hero_alchemist.png');" />
-							<Panel id="npc_dota_hero_axe" class="ClassNormalOption"
-								onactivate="SelectHero('npc_dota_hero_axe')" 
-								style="background-image: url('file://{images}/heroes/npc_dota_hero_axe.png');" />
+					<!-- Agi Heroes -->
+					<Panel id="HeroListAGI" class="PickTypePanel">
+						<Panel class="PickListTitlePanel">
+<!--							<Image id="SeparatorImage" src="file://{images}/hud/pip_agi.png"/> -->>
+							<Label class="PickListText" text="#hero_list_title_agility" />
 						</Panel>
+
+						<Panel id="PickListSeparator2" class="PickListTitlePanel" />
+					</Panel>
+
+					<!-- Int Heroes -->
+					<Panel id="HeroListINT" class="PickTypePanel">
+						<Panel class="PickListTitlePanel">
+<!--							<Image id="SeparatorImage" src="file://{images}/hud/pip_int.png"/> -->
+							<Label class="PickListText" text="#hero_list_title_intellect" />
+						</Panel>
+
+						<Panel id="PickListSeparator3" class="PickListTitlePanel" />
+					</Panel>
+				</Panel>
+
+				<!-- Post-pick screen (hero view) -->
+				<Panel id="PostPickScreen">
+					<Panel id="PostPickScreenButtonContainer">
+						<Button id="EnterGameBtn" class="disabled" onactivate="EnterGame()" >
+							<Label id="EnterGameBtnTxt" text="" />
+						</Button>
+						<Button id="RepickBtn" onactivate="RepickHero()" >
+							<Label id="RepickBtnTxt" text="#repick_button" />
+						</Button>
 					</Panel>
 				</Panel>
 
 				<Panel id="BottomContainer">
+				<Panel id="HeroSelectionChat"/>
+					<Panel id="HeroDetailsContainer">
+							<Panel id="HeroDetailsPanel">
+								<Label id="PickedHeroName" text="#hero_name_filler"/>
+								<Panel id="PickedHeroAbilitiesPanel">
+									<Panel id="HeroAbilitiesParentPanel">
+										<DOTAAbilityImage id="PickedHeroAbility1" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname=""/>
+										<DOTAAbilityImage id="PickedHeroAbility2" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
+										<DOTAAbilityImage id="PickedHeroAbility3" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
+										<DOTAAbilityImage id="PickedHeroAbility4" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
+										<DOTAAbilityImage id="PickedHeroAbility5" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
+										<DOTAAbilityImage id="PickedHeroAbility6" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
+										<DOTAAbilityImage id="PickedHeroAbility7" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
+										<DOTAAbilityImage id="PickedHeroAbility8" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
+									</Panel>
+								</Panel>
 
-<!--				<Panel id="HeroSelectionChat"/> -->
-
-					<Panel id="HeroDetailsPanel">
-						<Label id="PickedHeroName" text="#imba_hero_name_filler"/>
-						<Panel id="PickedHeroPanel">
-							<DOTAHeroImage id="PickedHeroImage" heroname="" />
-							<Panel id="HeroAbilitiesParentPanel">
-								<DOTAAbilityImage id="PickedHeroAbility1" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname=""/>
-								<DOTAAbilityImage id="PickedHeroAbility2" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
-								<DOTAAbilityImage id="PickedHeroAbility3" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
-								<DOTAAbilityImage id="PickedHeroAbility4" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
-								<DOTAAbilityImage id="PickedHeroAbility5" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
-								<DOTAAbilityImage id="PickedHeroAbility6" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
+								<Panel id="PickedHeroPanel">
+									<Button id="PickHeroBtn" onactivate="PickHero()" >
+										<Label id="PickHeroBtnTxt" text="#imba_confirm_pick_button" />
+									</Button>
+									<DOTAHeroImage id="PickedHeroImage" heroname="" />
+								</Panel>
 							</Panel>
 						</Panel>
-						<Button id="PickHeroBtn" onactivate="PickHero()" >
-							<Label id="PickHeroBtnTxt" text="#imba_confirm_pick_button" />
-						</Button>
-					</Panel>
-
-					<!-- Custom Heroes -->
-					<Panel id="CustomPickList" class="PickTypePanel">
-						<Panel id="CustomPickListPanel" class="PickListTitlePanel">
-							<Image id="SeparatorImage" src="file://{images}/hud/pip_str.png"/>
-							<Label class="PickListText" text="#imba_custom_hero_pick_list_title" />
+					<!-- Keep this dummy panel to keep the previous child centered -->
+					<Panel id="CustomPickList">
+						<Panel id="RandomButtonContainer">
+							<Button id="RandomPickBtn" onactivate="SelectRandomHero()"/>
+							<Label id="RandomPickBtnTxt" text="#imba_random_pick_button" />
 						</Panel>
-
-						<Panel id="PickListSeparator4" class="PickListTitlePanel" />
-
-						<Panel class="ClassOptionRow">
-							<Panel id="npc_dota_hero_ghost_revenant" class="ClassCustomOption" 
-								onactivate="SelectHero('npc_dota_hero_ghost_revenant')" 
-								style="background-image: url('file://{images}/heroes/npc_dota_hero_razor.png');" />									
-							<Panel id="npc_dota_hero_storegga" class="ClassCustomOption" 
-								onactivate="SelectHero('npc_dota_hero_storegga')" 
-								style="background-image: url('file://{images}/heroes/npc_dota_hero_tiny.png');" />
-						</Panel>	
 					</Panel>
 				</Panel> <!-- End of middle section -->
 
-				<!-- Post-pick screen (hero view) -->
-				<Panel id="PostPickScreen">
-					<Button id="EnterGameBtn" class="disabled" onactivate="EnterGame()" >
-						<Label id="EnterGameBtnTxt" text="" />
-					</Button>
-					<Button id="RepickBtn" onactivate="RepickHero()" >
-						<Label id="RepickBtnTxt" text="#imba_repick_button" />
-					</Button>
-				</Panel>
-
 				<Panel id="WelcomePanel">
-					<Label id="WelcomeText" text="#imba_welcome"/>
+					<Label id="WelcomeText" text="#welcome_label"/>
 				</Panel>
 			</Panel>
 		</Panel>

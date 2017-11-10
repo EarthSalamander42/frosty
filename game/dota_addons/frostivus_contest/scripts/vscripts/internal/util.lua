@@ -311,60 +311,68 @@ function StartGarbageCollector()
 	end
 end
 
--- This function is responsible for deciding which team is behind, if any, and store it at a nettable.
-function DefineLosingTeam()
--- Losing team is defined as a team that is both behind in both the sums of networth and levels.
-local radiant_networth = 0
-local radiant_levels = 0
-local dire_networth = 0
-local dire_levels = 0
+function ReconnectPlayer(player_id)
+	print("Player is reconnecting:", player_id)
+	-- Reinitialize the player's pick screen panorama, if necessary
+	if HeroSelection.HorriblyImplementedReconnectDetection then
+		HeroSelection.HorriblyImplementedReconnectDetection[player_id] = false
+		Timers:CreateTimer(2.0, function()
+			if HeroSelection.HorriblyImplementedReconnectDetection[player_id] then
+				local pick_state = HeroSelection.playerPickState[player_id].pick_state
+				local repick_state = HeroSelection.playerPickState[player_id].repick_state
 
-	for i = 0, DOTA_MAX_TEAM_PLAYERS-1 do
-		if PlayerResource:IsValidPlayer(i) then
+				local data = {
+					PlayerID = player_id,
+					PickedHeroes = HeroSelection.picked_heroes,
+					pickState = pick_state,
+					repickState = repick_state
+				}
 
-			-- Only count connected players or bots
-			if PlayerResource:GetConnectionState(i) == 1 or PlayerResource:GetConnectionState(i) == 2 then
+				print("HERO SELECTION ARGS:")
+				print("Player ID:", player_id)
+				print("Pick State:", pick_state)
+				print("Re-Pick State:", repick_state)
 
-			-- Get player
-			local player = PlayerResource:GetPlayer(i)
-			
-				if player then				
-					-- Get team
-					local team = player:GetTeam()				
-
-					-- Get level, add it to the sum
-					local level = player:GetAssignedHero():GetLevel()				
-
-					-- Get networth
-					local hero_networth = 0
-					for i = 0, 8 do
-						local item = player:GetAssignedHero():GetItemInSlot(i)
-						if item then
-							hero_networth = hero_networth + GetItemCost(item:GetName())						
-						end
-					end
-
-					-- Add to the relevant team
-					if team == DOTA_TEAM_GOODGUYS then					
-						radiant_networth = radiant_networth + hero_networth					
-						radiant_levels = radiant_levels + level					
-					else					
-						dire_networth = dire_networth + hero_networth					
-						dire_levels = dire_levels + level					
-					end				
-				end
+				print("Sending picked heroes...")
+				PrintTable(HeroSelection.picked_heroes)
+				CustomGameEventManager:Send_ServerToAllClients("player_reconnected", {PlayerID = player_id, PickedHeroes = HeroSelection.picked_heroes, pickState = pick_state, repickState = repick_state})
+			else
+				print("Not fully reconnected yet:", player_id)
+				return 0.1
 			end
-		end
-	end	
+		end)
 
-	-- Check for the losing team. A team must be behind in both levels and networth.
-	if (radiant_networth < dire_networth) and (radiant_levels < dire_levels) then
-		-- Radiant is losing		
-		CustomNetTables:SetTableValue("gamerules", "losing_team", {losing_team = DOTA_TEAM_GOODGUYS})
-	elseif (radiant_networth > dire_networth) and (radiant_levels > dire_levels) then
-		-- Dire is losing		
-		CustomNetTables:SetTableValue("gamerules", "losing_team", {losing_team = DOTA_TEAM_BADGUYS})
-	else -- No team is losing - one of the team is better on levels, the other on gold. No experience bonus in this case		
-		CustomNetTables:SetTableValue("gamerules", "losing_team", {losing_team = 0})		
+		-- If this is a reconnect from abandonment due to a long disconnect, remove the abandon state
+		if PlayerResource:GetHasAbandonedDueToLongDisconnect(player_id) then
+			local player_name = keys.name
+			local hero = PlayerResource:GetPickedHero(player_id)
+			local hero_name = PlayerResource:GetPickedHeroName(player_id)
+			local line_duration = 7
+			Notifications:BottomToAll({hero = hero_name, duration = line_duration})
+			Notifications:BottomToAll({text = player_name.." ", duration = line_duration, continue = true})
+			Notifications:BottomToAll({text = "#imba_player_reconnect_message", duration = line_duration, style = {color = "DodgerBlue"}, continue = true})
+			PlayerResource:IncrementTeamPlayerCount(player_id)
+
+			-- Stop redistributing gold to allies, if applicable
+			PlayerResource:StopAbandonGoldRedistribution(player_id)
+		end
+	else
+		print("Player "..player_id.." has not fully connected before this time")
 	end
+end
+
+function UpdateBossBar(boss)
+	print("Boss Health:", boss:GetHealth())
+	print("Boss Health %:", boss:GetHealthPercent())
+	print("Boss Max Health:", boss:GetMaxHealth())
+	print("Boss Level:", boss:GetLevel())
+	print("Boss Name:", boss:GetUnitName())
+
+	CustomNetTables:SetTableValue("game_options", "boss", {
+		level = boss:GetLevel(),
+		HP = boss:GetHealth(),
+		HP_alt = boss:GetHealthPercent(),
+		maxHP = boss:GetMaxHealth(),
+		label = boss:GetUnitName()
+	})
 end
