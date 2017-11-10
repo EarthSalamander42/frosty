@@ -119,6 +119,13 @@ function FrostivusHeroKilled(killer, hero)
 		for _,hero in pairs(fight_heroes) do
 			hero:RemoveModifierByName("modifier_frostivus_zeus_positive_charge")
 			hero:RemoveModifierByName("modifier_frostivus_zeus_negative_charge")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_sting_debuff")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_venomous_gale")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_nova")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_unwilling_host")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_virulent_plague")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_sting_debuff")
 		end
 
 		-- Unlock the arena

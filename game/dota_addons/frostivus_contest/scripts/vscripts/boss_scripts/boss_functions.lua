@@ -91,14 +91,21 @@ end
 
 function modifier_altar_active:OnDestroy( params )
 	if IsServer() then
+
 		-- Clean fighting heroes list
+		local altar_handle = self:GetParent()
 		for _, hero in pairs(self.fighting_heroes) do
 
 			-- Give heroes a bounty, if appropriate
-			if self:GetParent().victory then
+			if altar_handle.victory and hero:IsRealHero() then
 				hero:AddExperience(BASE_BOSS_EXP_REWARD * (1 + BONUS_BOUNTY_PER_MINUTE * 0.01 * GameRules:GetDOTATime(false, false) / 60), DOTA_ModifyXP_CreepKill, false, true)
 				hero:ModifyGold(BASE_BOSS_GOLD_REWARD * (1 + BONUS_BOUNTY_PER_MINUTE * 0.01 * GameRules:GetDOTATime(false, false) / 60), false, DOTA_ModifyGold_CreepKill)
 				SendOverheadEventMessage(hero, OVERHEAD_ALERT_GOLD, hero, BASE_BOSS_GOLD_REWARD * (1 + BONUS_BOUNTY_PER_MINUTE * 0.01 * GameRules:GetDOTATime(false, false) / 60), nil)
+
+				-- Also change the altar's team, if necessary
+				if altar_handle:GetTeam() ~= hero:GetTeam() then
+					altar_handle:SetTeam(hero:GetTeam())
+				end
 			end
 			hero:RemoveModifierByName("modifier_fighting_boss")
 		end
@@ -182,6 +189,9 @@ function SpawnVenomancer(altar)
 	-- Cosmetics
 	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_venomous_gale"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_poison_nova"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_unwilling_host"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_green_death"):SetLevel(1)
 	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_head/poison_touch_head.vmdl"})
 	boss.head:FollowEntity(boss, true)
 	boss.shoulder = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_shoulder/poison_touch_shoulder.vmdl"})

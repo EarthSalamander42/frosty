@@ -40,6 +40,7 @@ function Precache(context)
 
 	-- Venomancer boss
 	PrecacheResource("particle_folder", "particles/boss_veno/", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_venomancer/", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_viper.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_venomancer.vsndevts", context)
 
