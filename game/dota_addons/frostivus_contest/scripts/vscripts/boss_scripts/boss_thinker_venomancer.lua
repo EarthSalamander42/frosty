@@ -28,6 +28,11 @@ function boss_thinker_venomancer:OnCreated( params )
 			self.altar_handle = params.altar_handle
 		end
 
+		-- Boss script constants
+		self.random_constants = {}
+		self.random_constants[1] = RandomInt(1, 360)
+		self.random_constants[2] = RandomInt(1, 360)
+
 		-- Start thinking
 		self.boss_timer = 0
 		self.events = {}
@@ -76,6 +81,12 @@ local target = keys.unit
 			local nearby_enemies = FindUnitsInRadius(target:GetTeam(), target:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 			for _,enemy in pairs(nearby_enemies) do
 				enemy:RemoveModifierByName("modifier_frostivus_venomancer_poison_sting_debuff")
+				enemy:RemoveModifierByName("modifier_frostivus_venomancer_venomous_gale")
+				enemy:RemoveModifierByName("modifier_frostivus_venomancer_poison_nova")
+				enemy:RemoveModifierByName("modifier_frostivus_venomancer_unwilling_host")
+				enemy:RemoveModifierByName("modifier_frostivus_venomancer_virulent_plague")
+				enemy:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
+				enemy:RemoveModifierByName("modifier_frostivus_venomancer_poison_sting_debuff")
 			end
 
 			-- Destroy any existing adds
@@ -111,36 +122,176 @@ function boss_thinker_venomancer:OnIntervalThink()
 		self.boss_timer = self.boss_timer + 0.1
 
 		-- Boss move script
-		-- Test of mechanics
-		if self.boss_timer > 2 and not self.events[1] then
-			self:VenomousGale(altar_loc, altar_entity, 3.0, RandomInt(0, 359), math.max(-24 - power_stacks * 4, -80), 100, 10, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+		if self.boss_timer > 0 and not self.events[1] then
+			self:VenomousGale(altar_loc, altar_entity, 3.0, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
 			self.events[1] = true
 		end
 
-		if self.boss_timer > 6 and not self.events[2] then
-			self:VenomousGale(altar_loc, altar_entity, 3.0, RandomInt(0, 359), math.max(-24 - power_stacks * 4, -80), 100, 10, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+		if self.boss_timer > 5 and not self.events[2] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
 			self.events[2] = true
 		end
 
-		-- Repeat
-		if self.boss_timer > 10 then
-			self.boss_timer = 0
-			self.events[1] = false
-			self.events[2] = false
-			self.events[3] = false
+		if self.boss_timer > 8 and not self.events[3] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[3] = true
 		end
 
-		if self.boss_timer > 15 and not self.events[1] then
-			self:SpawnScourgeWard(altar_loc, altar_entity, 1.0, 0, 700, math.min(5 + 0.4 * power_stacks, 10), 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
-			self.events[1] = true
+		if self.boss_timer > 11 and not self.events[4] then
+			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 9, 15, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[4] = true
 		end
 
-		if self.boss_timer > 16 and not self.events[2] then
-			self:SpawnVileWard(altar_loc, altar_entity, 1.0, 0, 400, math.min(8 + 0.5 * power_stacks, 15), 4, 8, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
-			self.events[2] = true
+		if self.boss_timer > 13 and not self.events[5] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[5] = true
 		end
 
+		if self.boss_timer > 16 and not self.events[6] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[6] = true
+		end
 
+		if self.boss_timer > 21 and not self.events[7] then
+			self:GreenDeath(altar_loc, altar_entity, 3.5, 15, 4.0, RandomInt(1, 360), 80, 4.0, 2000, 125, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[7] = true
+		end
+
+		if self.boss_timer > 30 and not self.events[8] then
+			self:PoisonNova(altar_loc, altar_entity, 3.0, 1, 300, 16, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[8] = true
+		end
+
+		if self.boss_timer > 34 and not self.events[9] then
+			self:SpawnScourgeWard(altar_loc, altar_entity, 1.0, RandomInt(1, 360), 800, math.min(5 + 0.4 * power_stacks, 10), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[9] = true
+		end
+
+		if self.boss_timer > 36 and not self.events[10] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[10] = true
+		end
+
+		if self.boss_timer > 39 and not self.events[11] then
+			self:Parasite(altar_loc, altar_entity, 2.0, 1, 3.0, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[11] = true
+		end
+
+		if self.boss_timer > 42 and not self.events[12] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[12] = true
+		end
+
+		if self.boss_timer > 45 and not self.events[13] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[13] = true
+		end
+
+		if self.boss_timer > 50 and not self.events[14] then
+			self:SpawnScourgeWard(altar_loc, altar_entity, 0.8, self.random_constants[1], 800, math.min(5 + 0.4 * power_stacks, 10), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[14] = true
+		end
+
+		if self.boss_timer > 51 and not self.events[15] then
+			self:SpawnScourgeWard(altar_loc, altar_entity, 0.8, self.random_constants[1] + 120, 800, math.min(5 + 0.4 * power_stacks, 10), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[15] = true
+		end
+
+		if self.boss_timer > 52 and not self.events[16] then
+			self:SpawnScourgeWard(altar_loc, altar_entity, 0.8, self.random_constants[1] + 240, 800, math.min(5 + 0.4 * power_stacks, 10), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[16] = true
+		end
+
+		if self.boss_timer > 53 and not self.events[17] then
+			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 15, 15, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[17] = true
+		end
+
+		if self.boss_timer > 55 and not self.events[18] then
+			self:Parasite(altar_loc, altar_entity, 2.0, 2, 3.0, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[18] = true
+		end
+
+		if self.boss_timer > 58 and not self.events[19] then
+			self:PoisonNova(altar_loc, altar_entity, 2.5, 1, 300, 9, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[19] = true
+		end
+
+		if self.boss_timer > 62 and not self.events[20] then
+			self:GreenDeath(altar_loc, altar_entity, 3.5, 15, 4.0, RandomInt(1, 360), 80, 4.0, 2000, 125, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[20] = true
+		end
+
+		if self.boss_timer > 71 and not self.events[21] then
+			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 10, 40, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[21] = true
+		end
+
+		if self.boss_timer > 73 and not self.events[22] then
+			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 10, 38, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[22] = true
+		end
+
+		if self.boss_timer > 75 and not self.events[23] then
+			self:SpawnVileWard(altar_loc, altar_entity, 1.0, RandomInt(1, 360), 450, math.min(8 + 0.5 * power_stacks, 15), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 8, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[23] = true
+		end
+
+		if self.boss_timer > 80 and not self.events[24] then
+			self:Parasite(altar_loc, altar_entity, 1.5, 2, 3.0, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[24] = true
+		end
+
+		if self.boss_timer > 82 and not self.events[25] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[25] = true
+		end
+
+		if self.boss_timer > 85 and not self.events[26] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[26] = true
+		end
+
+		if self.boss_timer > 91 and not self.events[27] then
+			self:PoisonNova(altar_loc, altar_entity, 2.5, 1, 300, 19, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[27] = true
+		end
+
+		if self.boss_timer > 94 and not self.events[28] then
+			self:SpawnVileWard(altar_loc, altar_entity, 0.8, self.random_constants[2], 450, math.min(8 + 0.5 * power_stacks, 15), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 8, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[28] = true
+		end
+
+		if self.boss_timer > 95 and not self.events[29] then
+			self:SpawnVileWard(altar_loc, altar_entity, 0.8, self.random_constants[2] + 180, 450, math.min(8 + 0.5 * power_stacks, 15), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 8, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[29] = true
+		end
+
+		if self.boss_timer > 96 and not self.events[30] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[30] = true
+		end
+
+		if self.boss_timer > 99 and not self.events[31] then
+			self:Parasite(altar_loc, altar_entity, 1.5, 2, 3.0, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[31] = true
+		end
+
+		if self.boss_timer > 101 and not self.events[32] then
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[32] = true
+		end
+
+		if self.boss_timer > 104 and not self.events[33] then
+			self:GreenDeath(altar_loc, altar_entity, 3.5, 15, 5.0, RandomInt(1, 360), 80, 4.0, 2000, 125, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[33] = true
+		end
+
+		-- Enrage
+		if self.boss_timer > 113 and not self.events[34] then
+			self:PoisonNova(altar_loc, altar_entity, 7.0, 10, 900, 100, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self.events[34] = true
+		end
 	end
 end
 
@@ -149,7 +300,7 @@ end
 ---------------------------
 
 -- Venomous Gale
-function boss_thinker_venomancer:VenomousGale(center_point, altar_handle, delay, angle, slow, damage, duration, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+function boss_thinker_venomancer:VenomousGale(center_point, altar_handle, delay, angle, radius, slow, damage, duration, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
 		local boss = self:GetParent()
 		local ability = boss:FindAbilityByName("frostivus_boss_venomous_gale")
@@ -172,12 +323,34 @@ function boss_thinker_venomancer:VenomousGale(center_point, altar_handle, delay,
 		end
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_veno_venomous_gale", cast_time = delay})
+		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_venomous_gale", cast_time = delay})
+
+		-- Draw warning particle over the target's head
+		local warning_pfx = ParticleManager:CreateParticle("particles/boss_veno/veno_gale_warning.vpcf", PATTACH_OVERHEAD_FOLLOW, target)
+		ParticleManager:SetParticleControl(warning_pfx, 0, target:GetAbsOrigin())
 
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(move_position)
+		local target_loc
 		Timers:CreateTimer(delay - 1.0, function()
-			boss:FaceTowards(boss:GetAbsOrigin() + (target:GetAbsOrigin() - boss:GetAbsOrigin()):Normalized())
+
+			-- Finalize boss facing and destroy overhead warning particle
+			target_loc = target:GetAbsOrigin()
+			boss:FaceTowards(boss:GetAbsOrigin() + (target_loc - boss:GetAbsOrigin()):Normalized())
+			ParticleManager:DestroyParticle(warning_pfx, true)
+			ParticleManager:ReleaseParticleIndex(warning_pfx)
+
+			-- Draw fixed warning particle on the ground
+			warning_pfx = ParticleManager:CreateParticle("particles/boss_veno/veno_gale_warning_end.vpcf", PATTACH_WORLDORIGIN, nil)
+			ParticleManager:SetParticleControl(warning_pfx, 0, target_loc + Vector(0, 0, 250))
+
+			-- Destroy warning particle
+			Timers:CreateTimer(3.0, function()
+				ParticleManager:DestroyParticle(warning_pfx, true)
+				ParticleManager:ReleaseParticleIndex(warning_pfx)
+			end)
+
+			-- Animate cast point
 			Timers:CreateTimer(0.6, function()
 				StartAnimation(boss, {duration = 0.57, activity=ACT_DOTA_CAST_ABILITY_1, rate=1.0})
 			end)
@@ -193,28 +366,124 @@ function boss_thinker_venomancer:VenomousGale(center_point, altar_handle, delay,
 			boss:EmitSound("Hero_Venomancer.VenomousGale")
 
 			-- Shoot projectile
-			self:VenomousGaleShoot(boss, ability, boss:GetAbsOrigin(), target:GetAbsOrigin(), slow, damage, duration)
+			self:VenomousGaleShoot(boss, boss, ability, boss:GetAbsOrigin(), target_loc, radius, slow, dot_damage, duration)
 		end)
 	end
 end
 
-function boss_thinker_venomancer:VenomousGaleShoot(boss, ability, source, target, slow, damage, duration)
+function boss_thinker_venomancer:VenomousGaleShoot(boss, caster, ability, source, target, radius, slow, damage, duration)
+	if IsServer() then
+
+		-- Draw mouth particle
+		local mouth_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_venomancer/venomancer_venomous_gale_mouth.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
+		local projectile_particle = "particles/boss_veno/venomous_gale.vpcf"
+		if caster:HasModifier("modifier_frostivus_boss") then
+			ParticleManager:SetParticleControlEnt(mouth_pfx, 0, caster, PATTACH_POINT_FOLLOW, "attach_mouth", caster:GetAbsOrigin(), true)
+			ParticleManager:ReleaseParticleIndex(mouth_pfx)
+		else
+			ParticleManager:SetParticleControlEnt(mouth_pfx, 0, caster, PATTACH_POINT_FOLLOW, "attach_attack1", caster:GetAbsOrigin(), true)
+			ParticleManager:ReleaseParticleIndex(mouth_pfx)
+			projectile_particle = "particles/units/heroes/hero_venomancer/venomancer_venomous_gale.vpcf"
+		end
+
+		-- Projectile geometry
+		local direction = (target - source):Normalized()
+		local speed = ability:GetSpecialValueFor("projectile_speed")
+
+		-- Launch projectile
+		local projectile =	{
+			Ability				= ability,
+			EffectName			= projectile_particle,
+			vSpawnOrigin		= source,
+			fDistance			= 1800,
+			fStartRadius		= radius,
+			fEndRadius			= radius,
+			Source				= boss,
+			bHasFrontalCone		= false,
+			bReplaceExisting	= false,
+			iUnitTargetTeam		= DOTA_UNIT_TARGET_TEAM_ENEMY,
+			iUnitTargetFlags	= DOTA_UNIT_TARGET_FLAG_NONE,
+			iUnitTargetType		= DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+			fExpireTime 		= GameRules:GetGameTime() + 10.0,
+			bDeleteOnHit		= false,
+			vVelocity			= Vector(direction.x,direction.y,0) * speed,
+			bProvidesVision		= false,
+			ExtraData			= {slow = slow, damage = damage, duration = duration}
+		}
+		ProjectileManager:CreateLinearProjectile(projectile)
+	end
 end
 
+-- Venomous Gale debuff modifier
+LinkLuaModifier("modifier_frostivus_venomancer_venomous_gale", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+modifier_frostivus_venomancer_venomous_gale = modifier_frostivus_venomancer_venomous_gale or class({})
+
+function modifier_frostivus_venomancer_venomous_gale:IsHidden() return false end
+function modifier_frostivus_venomancer_venomous_gale:IsPurgable() return false end
+function modifier_frostivus_venomancer_venomous_gale:IsDebuff() return true end
+
+function modifier_frostivus_venomancer_venomous_gale:OnCreated(keys)
+	if IsServer() then
+
+		-- Parameters
+		self.slow = 0
+		self.damage = 0
+		if keys.slow then
+			self.slow = keys.slow
+		end
+		if keys.damage then
+			self.damage = keys.damage
+		end
+
+		-- Client slow amount visibility
+		self:SetStackCount(self.slow)
+
+		-- Start thinking
+		self:StartIntervalThink(1.0)
+	end
+end
+
+function modifier_frostivus_venomancer_venomous_gale:OnIntervalThink()
+	if IsServer() then
+
+		-- Deal periodic damage
+		local owner = self:GetParent()
+		local caster = self:GetCaster()
+		if owner and caster then
+			ApplyDamage({victim = owner, attacker = caster, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, self.damage, nil)
+		end
+	end
+end
+
+function modifier_frostivus_venomancer_venomous_gale:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
+	}
+	return funcs
+end
+
+function modifier_frostivus_venomancer_venomous_gale:GetModifierMoveSpeedBonus_Percentage()
+	return (-1) * self:GetStackCount()
+end
+
+
+
 -- Spawn Scourge Ward
-function boss_thinker_venomancer:SpawnScourgeWard(center_point, altar_handle, delay, angle, center_distance, health, attack_delay, attack_count, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+function boss_thinker_venomancer:SpawnScourgeWard(center_point, altar_handle, delay, angle, center_distance, health, radius, slow, damage, duration, attack_delay, attack_count, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
 		local boss = self:GetParent()
 		local ward_position = RotatePosition(center_point, QAngle(0, angle, 0), center_point + Vector(0, 1, 0) * center_distance)
 		local ward_health = boss:GetMaxHealth() * health * 0.01
+		local dot_damage = boss:GetAttackDamage() * damage * 0.01
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_veno_scourge_ward", cast_time = delay})
+		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_scourge_ward", cast_time = delay})
 
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(center_point + Vector(0, 300, 0))
 		Timers:CreateTimer(delay - 0.4, function()
-			boss:FaceTowards(Vector(0, -1, 0))
+			boss:FaceTowards(ward_position)
 			StartAnimation(boss, {duration = 0.63, activity=ACT_DOTA_CAST_ABILITY_3, rate=1.0})
 		end)
 
@@ -233,28 +502,131 @@ function boss_thinker_venomancer:SpawnScourgeWard(center_point, altar_handle, de
 			scourge_ward:SetHealth(ward_health)
 
 			-- Add ward passive modifiers
-			--scourge_ward:AddNewModifier(nil, nil, "modifier_frostivus_venomancer_scourge_ward_thinker", {damage = sting_damage, attack_delay = attack_delay, debuff_duration = duration, center_x = center_point.x, center_y = center_point.y, center_z = center_point.z})
+			scourge_ward:AddNewModifier(nil, nil, "modifier_frostivus_venomancer_scourge_ward_thinker", {angle = angle, radius = radius, slow = slow, damage = dot_damage, debuff_duration = duration, attack_delay = attack_delay, attack_count = attack_count})
 
 			-- Play ward spawn sound
 			scourge_ward:EmitSound("Hero_Viper.Nethertoxin.Cast")
+
+			-- Make ward face spit direction
+			local target_direction = (center_point - ward_position):Normalized()
+			scourge_ward:FaceTowards(center_point + target_direction)
 		end)
 	end
 end
 
+-- Scourge Ward Thinker
+LinkLuaModifier("modifier_frostivus_venomancer_scourge_ward_thinker", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+modifier_frostivus_venomancer_scourge_ward_thinker = modifier_frostivus_venomancer_scourge_ward_thinker or class({})
+
+function modifier_frostivus_venomancer_scourge_ward_thinker:IsHidden() return true end
+function modifier_frostivus_venomancer_scourge_ward_thinker:IsPurgable() return false end
+function modifier_frostivus_venomancer_scourge_ward_thinker:IsDebuff() return false end
+
+function modifier_frostivus_venomancer_scourge_ward_thinker:OnCreated(keys)
+	if IsServer() then
+
+		-- Parameters
+		self.angle = 0
+		self.radius = 0
+		self.slow = 0
+		self.damage = 0
+		self.debuff_duration = 0
+		self.attack_delay = 1
+		self.attack_count = 1
+		if keys.angle then
+			self.angle = keys.angle
+		end
+		if keys.radius then
+			self.radius = keys.radius
+		end
+		if keys.slow then
+			self.slow = keys.slow
+		end
+		if keys.damage then
+			self.damage = keys.damage
+		end
+		if keys.debuff_duration then
+			self.debuff_duration = keys.debuff_duration
+		end
+		if keys.attack_delay then
+			self.attack_delay = keys.attack_delay
+		end
+		if keys.attack_count then
+			self.attack_count = keys.attack_count
+		end
+
+		-- Animate the ward
+		StartAnimation(self:GetParent(), {duration = self.attack_delay, activity=ACT_DOTA_IDLE, rate=1.0})
+
+		-- Start thinking
+		self:StartIntervalThink(self.attack_delay)
+	end
+end
+
+function modifier_frostivus_venomancer_scourge_ward_thinker:OnIntervalThink()
+	if IsServer() then
+
+		-- Parameters
+		local owner = self:GetParent()
+		local boss = owner:GetOwner()
+		local ability = boss:FindAbilityByName("frostivus_boss_venomous_gale")
+		local source_loc = owner:GetAbsOrigin()
+		local modifier_gale = boss:FindModifierByName("boss_thinker_venomancer")
+
+		-- Calculate launch geometry
+		local main_direction = RotatePosition(source_loc, QAngle(0, self.angle + 180, 0), source_loc + Vector(0, 1, 0) * 100)
+		main_direction = (main_direction - source_loc):Normalized()
+		local directions = {}
+		local half_amount = ( self.attack_count - 1 ) * 0.5
+		local start_amount = ( -1 ) * half_amount
+		local end_amount = half_amount
+		local angle_step = 0
+		if self.attack_count > 1 then
+			angle_step = 115 / (self.attack_count - 1)
+		end
+		for i = start_amount, end_amount do
+			directions[i] = RotatePosition(source_loc, QAngle(0, angle_step * i, 0), source_loc + main_direction * 100)
+		end
+
+		-- Start animating the cast
+		StartAnimation(owner, {duration = 1.0, activity=ACT_DOTA_CAST_ABILITY_1, rate=1.0})
+
+		-- Wait for the cast point
+		Timers:CreateTimer(0.3, function()
+
+			-- Play cast sound
+			owner:EmitSound("Hero_Venomancer.VenomousGale")
+
+			-- Launch projectiles
+			for _, direction in pairs(directions) do
+				modifier_gale:VenomousGaleShoot(boss, owner, ability, source_loc, direction, self.radius, self.slow, self.damage, self.debuff_duration)
+			end
+
+			-- Resume ward idle animation after attack backswing
+			Timers:CreateTimer(0.7, function()
+				StartAnimation(owner, {duration = self.attack_delay, activity=ACT_DOTA_IDLE, rate=1.0})
+			end)
+		end)
+	end
+end
+
+
+
 -- Spawn Vile Ward
-function boss_thinker_venomancer:SpawnVileWard(center_point, altar_handle, delay, angle, center_distance, health, attack_delay, attack_count, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+function boss_thinker_venomancer:SpawnVileWard(center_point, altar_handle, delay, angle, center_distance, health, radius, slow, damage, duration, attack_delay, attack_count, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
 		local boss = self:GetParent()
 		local ward_position = RotatePosition(center_point, QAngle(0, angle, 0), center_point + Vector(0, 1, 0) * center_distance)
 		local ward_health = boss:GetMaxHealth() * health * 0.01
+		local dot_damage = boss:GetAttackDamage() * damage * 0.01
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_veno_vile_ward", cast_time = delay})
+		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_vile_ward", cast_time = delay})
 
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(center_point + Vector(0, 300, 0))
 		Timers:CreateTimer(delay - 0.4, function()
-			boss:FaceTowards(Vector(0, -1, 0))
+			boss:FaceTowards(ward_position)
 			StartAnimation(boss, {duration = 0.63, activity=ACT_DOTA_CAST_ABILITY_3, rate=1.0})
 		end)
 
@@ -273,13 +645,582 @@ function boss_thinker_venomancer:SpawnVileWard(center_point, altar_handle, delay
 			vile_ward:SetHealth(ward_health)
 
 			-- Add ward passive modifiers
-			--vile_ward:AddNewModifier(nil, nil, "modifier_frostivus_venomancer_vile_ward_thinker", {damage = sting_damage, attack_delay = attack_delay, debuff_duration = duration, center_x = center_point.x, center_y = center_point.y, center_z = center_point.z})
+			vile_ward:AddNewModifier(nil, nil, "modifier_frostivus_venomancer_vile_ward_thinker", {radius = radius, slow = slow, damage = dot_damage, debuff_duration = duration, attack_delay = attack_delay, attack_count = attack_count})
 
 			-- Play ward spawn sound
 			vile_ward:EmitSound("Hero_Viper.Nethertoxin.Cast")
 		end)
 	end
 end
+
+-- Vile Ward Thinker
+LinkLuaModifier("modifier_frostivus_venomancer_vile_ward_thinker", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+modifier_frostivus_venomancer_vile_ward_thinker = modifier_frostivus_venomancer_vile_ward_thinker or class({})
+
+function modifier_frostivus_venomancer_vile_ward_thinker:IsHidden() return true end
+function modifier_frostivus_venomancer_vile_ward_thinker:IsPurgable() return false end
+function modifier_frostivus_venomancer_vile_ward_thinker:IsDebuff() return false end
+
+function modifier_frostivus_venomancer_vile_ward_thinker:OnCreated(keys)
+	if IsServer() then
+
+		-- Parameters
+		self.radius = 0
+		self.slow = 0
+		self.damage = 0
+		self.debuff_duration = 0
+		self.attack_delay = 1
+		self.attack_count = 4
+		if keys.radius then
+			self.radius = keys.radius
+		end
+		if keys.slow then
+			self.slow = keys.slow
+		end
+		if keys.damage then
+			self.damage = keys.damage
+		end
+		if keys.debuff_duration then
+			self.debuff_duration = keys.debuff_duration
+		end
+		if keys.attack_delay then
+			self.attack_delay = keys.attack_delay
+		end
+		if keys.attack_count then
+			self.attack_count = keys.attack_count
+		end
+
+		-- Animate the ward
+		StartAnimation(self:GetParent(), {duration = self.attack_delay, activity=ACT_DOTA_IDLE, rate=1.0})
+
+		-- Start thinking
+		self:StartIntervalThink(self.attack_delay)
+	end
+end
+
+function modifier_frostivus_venomancer_vile_ward_thinker:OnIntervalThink()
+	if IsServer() then
+
+		-- Parameters
+		local owner = self:GetParent()
+		local boss = owner:GetOwner()
+		local ability = boss:FindAbilityByName("frostivus_boss_venomous_gale")
+		local source_loc = owner:GetAbsOrigin()
+		local modifier_gale = boss:FindModifierByName("boss_thinker_venomancer")
+
+		-- Calculate launch geometry
+		local directions = {}
+		local half_amount = ( self.attack_count - 1 ) * 0.5
+		local start_amount = ( -1 ) * half_amount
+		local end_amount = half_amount
+		local angle_step = 360 / self.attack_count
+		for i = 1, self.attack_count do
+			directions[i] = RotatePosition(source_loc, QAngle(0, i * angle_step, 0), source_loc + Vector(0, 1, 0) * 100)
+		end
+
+		-- Start animating the cast
+		StartAnimation(owner, {duration = 1.0, activity=ACT_DOTA_ATTACK, rate=1.0})
+
+		-- Wait for the cast point
+		Timers:CreateTimer(0.3, function()
+
+			-- Play cast sound
+			owner:EmitSound("Hero_Venomancer.VenomousGale")
+
+			-- Launch projectiles
+			for _, direction in pairs(directions) do
+				modifier_gale:VenomousGaleShoot(boss, owner, ability, source_loc, direction, self.radius, self.slow, self.damage, self.debuff_duration)
+			end
+
+			-- Resume ward idle animation after attack backswing
+			Timers:CreateTimer(0.7, function()
+				StartAnimation(owner, {duration = self.attack_delay, activity=ACT_DOTA_IDLE, rate=1.0})
+			end)
+		end)
+	end
+end
+
+
+
+-- Poison Nova
+function boss_thinker_venomancer:PoisonNova(center_point, altar_handle, delay, damage, damage_amp, duration, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+	if IsServer() then
+		local boss = self:GetParent()
+		local ability = boss:FindAbilityByName("frostivus_boss_poison_nova")
+		local dot_damage = boss:GetAttackDamage() * damage * 0.01
+
+		-- Send cast bar event
+		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_poison_nova", cast_time = delay})
+
+		-- Move boss to cast position and animate cast
+		boss:MoveToPosition(center_point + Vector(0, 300, 0))
+		Timers:CreateTimer(delay - 0.4, function()
+			boss:FaceTowards(center_point)
+			StartAnimation(boss, {duration = 0.87, activity=ACT_DOTA_CAST_ABILITY_4, rate=1.0})
+		end)
+
+		-- Wait [delay] seconds
+		Timers:CreateTimer(delay, function()
+
+			-- Proc passive
+			self:SpawnPlagueWard(center_point, altar_handle, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+
+			-- Play cast sound
+			boss:EmitSound("Hero_Venomancer.PoisonNova")
+
+			-- Play particles
+			local nova_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_venomancer/venomancer_poison_nova.vpcf", PATTACH_WORLDORIGIN, nil)
+			ParticleManager:SetParticleControl(nova_pfx, 0, center_point)
+			ParticleManager:SetParticleControl(nova_pfx, 1, Vector(1100, 1, 900))
+			ParticleManager:SetParticleControl(nova_pfx, 2, Vector(0, 0, 0))
+			ParticleManager:ReleaseParticleIndex(nova_pfx)
+
+			local nova_caster_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_venomancer/venomancer_poison_nova_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, boss)
+			ParticleManager:SetParticleControl(nova_caster_pfx, 0, boss:GetAbsOrigin())
+			ParticleManager:ReleaseParticleIndex(nova_caster_pfx)
+
+			-- Poison enemies
+			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 950, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+			for _, enemy in pairs(nearby_enemies) do
+				enemy:EmitSound("Hero_Venomancer.PoisonNovaImpact")
+				enemy:AddNewModifier(boss, ability, "modifier_frostivus_venomancer_poison_nova", {damage = dot_damage, damage_amp = damage_amp, duration = duration})
+			end
+		end)
+	end
+end
+
+-- Poison Nova debuff modifier
+LinkLuaModifier("modifier_frostivus_venomancer_poison_nova", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+modifier_frostivus_venomancer_poison_nova = modifier_frostivus_venomancer_poison_nova or class({})
+
+function modifier_frostivus_venomancer_poison_nova:IsHidden() return false end
+function modifier_frostivus_venomancer_poison_nova:IsPurgable() return false end
+function modifier_frostivus_venomancer_poison_nova:IsDebuff() return true end
+
+function modifier_frostivus_venomancer_poison_nova:GetEffectName()
+	return "particles/units/heroes/hero_venomancer/venomancer_poison_debuff_nova.vpcf"
+end
+
+function modifier_frostivus_venomancer_poison_nova:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
+end
+
+function modifier_frostivus_venomancer_poison_nova:OnCreated(keys)
+	if IsServer() then
+
+		-- Parameters
+		self.damage = 0
+		self.damage_amp = 0
+		if keys.damage then
+			self.damage = keys.damage
+		end
+		if keys.damage_amp then
+			self.damage_amp = keys.damage_amp
+		end
+
+		-- Client amp amount visibility
+		self:SetStackCount(self.damage_amp)
+
+		-- Start thinking
+		self:StartIntervalThink(1.0)
+	end
+end
+
+function modifier_frostivus_venomancer_poison_nova:OnIntervalThink()
+	if IsServer() then
+
+		-- Deal periodic damage
+		local owner = self:GetParent()
+		local boss = self:GetCaster()
+		if owner and boss then
+			ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, self.damage, nil)
+		end
+	end
+end
+
+function modifier_frostivus_venomancer_poison_nova:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE
+	}
+	return funcs
+end
+
+function modifier_frostivus_venomancer_poison_nova:GetModifierIncomingDamage_Percentage()
+	return self:GetStackCount()
+end
+
+
+
+-- Unwilling Host
+function boss_thinker_venomancer:UnwillingHost(center_point, altar_handle, delay, radius, duration, damage, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+	if IsServer() then
+		local boss = self:GetParent()
+		local ability = boss:FindAbilityByName("frostivus_boss_unwilling_host")
+		local dot_damage = boss:GetAttackDamage() * damage * 0.01
+
+		-- Look for a valid target
+		local target = false
+		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+		for _,enemy in pairs(nearby_enemies) do
+			if enemy:HasModifier("modifier_fighting_boss") and not enemy:HasModifier("modifier_frostivus_venomancer_unwilling_host") then
+				target = enemy
+				break
+			end
+		end
+
+		-- If there's no valid target, do nothing
+		if not target then
+			return nil
+		end
+
+		-- Send cast bar event
+		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_unwilling_host", cast_time = delay})
+
+		-- Animate cast
+		Timers:CreateTimer(delay - 0.3, function()
+			boss:FaceTowards(target:GetAbsOrigin())
+			StartAnimation(boss, {duration = 1.0, activity=ACT_DOTA_ATTACK, rate=1.0})
+		end)
+
+		-- Wait [delay] seconds
+		Timers:CreateTimer(delay, function()
+
+			-- Proc passive
+			self:SpawnPlagueWard(center_point, altar_handle, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+
+			-- Play cast sound
+			boss:EmitSound("Hero_Venomancer.Attack")
+
+			-- Play the attack particle
+			local attack_pfx = ParticleManager:CreateParticle("particles/boss_veno/poison_sting_attack.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+			ParticleManager:SetParticleControlEnt(attack_pfx, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
+			ParticleManager:SetParticleControlEnt(attack_pfx, 9, boss, PATTACH_POINT_FOLLOW, "attach_mouth", boss:GetAbsOrigin(), true)
+			ParticleManager:ReleaseParticleIndex(attack_pfx)
+
+			-- Play impact sound
+			target:EmitSound("Hero_Venomancer.ProjectileImpact")
+
+			-- Apply debuff to the target
+			target:AddNewModifier(boss, ability, "modifier_frostivus_venomancer_unwilling_host", {damage = dot_damage, radius = radius, duration = duration})
+		end)
+	end
+end
+
+-- Unwilling Host debuff
+LinkLuaModifier("modifier_frostivus_venomancer_unwilling_host", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+modifier_frostivus_venomancer_unwilling_host = modifier_frostivus_venomancer_unwilling_host or class({})
+
+function modifier_frostivus_venomancer_unwilling_host:IsHidden() return false end
+function modifier_frostivus_venomancer_unwilling_host:IsPurgable() return false end
+function modifier_frostivus_venomancer_unwilling_host:IsDebuff() return true end
+
+function modifier_frostivus_venomancer_unwilling_host:GetEffectName()
+	return "particles/boss_veno/unwilling_host_debuff.vpcf"
+end
+
+function modifier_frostivus_venomancer_unwilling_host:GetEffectAttachType()
+	return PATTACH_ABSORIGIN_FOLLOW
+end
+
+function modifier_frostivus_venomancer_unwilling_host:OnCreated(keys)
+	if IsServer() then
+
+		-- Parameters
+		self.damage = 0
+		self.radius = 0
+		self.duration = 0
+		if keys.damage then
+			self.damage = keys.damage
+		end
+		if keys.radius then
+			self.radius = keys.radius
+		end
+		if keys.duration then
+			self.duration = keys.duration
+		end
+
+		-- Start thinking
+		self:StartIntervalThink(0.03)
+	end
+end
+
+function modifier_frostivus_venomancer_unwilling_host:OnIntervalThink()
+	if IsServer() then
+
+		-- Spread the virulent plague debuff to any nearby allies
+		local owner = self:GetParent()
+		local boss = self:GetCaster()
+		local ability = self:GetAbility()
+		local nearby_allies = FindUnitsInRadius(owner:GetTeam(), owner:GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+		for _, ally in pairs(nearby_allies) do
+			if ally ~= owner then
+				ally:AddNewModifier(boss, ability, "modifier_frostivus_venomancer_virulent_plague", {damage = self.damage, duration = self:GetDuration()})
+			end
+		end
+	end
+end
+
+-- Virulent Plague debuff
+LinkLuaModifier("modifier_frostivus_venomancer_virulent_plague", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+modifier_frostivus_venomancer_virulent_plague = modifier_frostivus_venomancer_virulent_plague or class({})
+
+function modifier_frostivus_venomancer_virulent_plague:IsHidden() return false end
+function modifier_frostivus_venomancer_virulent_plague:IsPurgable() return false end
+function modifier_frostivus_venomancer_virulent_plague:IsDebuff() return true end
+
+function modifier_frostivus_venomancer_virulent_plague:GetTexture()
+	return "custom/virulent_plague"
+end
+
+function modifier_frostivus_venomancer_virulent_plague:GetStatusEffectName()
+	return "particles/status_fx/status_effect_poison_venomancer.vpcf"
+end
+
+function modifier_frostivus_venomancer_virulent_plague:StatusEffectPriority()
+	return 10
+end
+
+function modifier_frostivus_venomancer_virulent_plague:OnCreated(keys)
+	if IsServer() then
+
+		-- Parameters
+		self.damage = 0
+		if keys.damage then
+			self.damage = keys.damage
+		end
+
+		-- Play initial contagion animation
+		local owner = self:GetParent()
+		local contagion_pfx = ParticleManager:CreateParticle("particles/boss_veno/virulent_plague_contagion.vpcf", PATTACH_ABSORIGIN_FOLLOW, owner)
+		ParticleManager:SetParticleControl(contagion_pfx, 0, owner:GetAbsOrigin())
+		ParticleManager:ReleaseParticleIndex(contagion_pfx)
+
+		-- Play contagion sound
+		owner:EmitSound("Hero_Venomancer.PoisonNovaImpact")
+
+		-- Start thinking
+		self:StartIntervalThink(1.0)
+	end
+end
+
+function modifier_frostivus_venomancer_virulent_plague:OnIntervalThink()
+	if IsServer() then
+
+		-- Deal periodic damage
+		local owner = self:GetParent()
+		local boss = self:GetCaster()
+		if owner and boss then
+			ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, self.damage, nil)
+		end
+	end
+end
+
+function modifier_frostivus_venomancer_virulent_plague:DeclareFunctions()
+	local funcs = {
+		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
+	}
+	return funcs
+end
+
+function modifier_frostivus_venomancer_virulent_plague:GetModifierMoveSpeedBonus_Percentage()
+	return -15
+end
+
+
+
+-- Parasite
+function boss_thinker_venomancer:Parasite(center_point, altar_handle, delay, amount, duration, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+	if IsServer() then
+		local boss = self:GetParent()
+
+		-- Look for valid targets
+		local targets_found = 0
+		local targets = {}
+		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+		for _,enemy in pairs(nearby_enemies) do
+			if enemy:HasModifier("modifier_fighting_boss") and not enemy:HasModifier("modifier_frostivus_venomancer_parasite") then
+				targets_found = targets_found + 1
+				targets[#targets+1] = enemy
+				if targets_found >= amount then
+					break
+				end
+			end
+		end
+
+		-- If there's no valid target, do nothing
+		if targets_found <= 0 then
+			return nil
+		end
+
+		-- Send cast bar event
+		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_parasite", cast_time = delay})
+
+		-- Draw warning particles
+		local warning_pfx = ParticleManager:CreateParticle("particles/boss_veno/veno_parasite_warning.vpcf", PATTACH_OVERHEAD_FOLLOW, targets[1])
+		ParticleManager:SetParticleControl(warning_pfx, 0, targets[1]:GetAbsOrigin())
+		local warning_pfx_2 = false
+		if targets[2] then
+			warning_pfx_2 = ParticleManager:CreateParticle("particles/boss_veno/veno_parasite_warning_b.vpcf", PATTACH_OVERHEAD_FOLLOW, targets[2])
+			ParticleManager:SetParticleControl(warning_pfx_2, 0, targets[2]:GetAbsOrigin())
+		end
+
+		-- Animate cast
+		Timers:CreateTimer(delay - 1.1, function()
+			boss:FaceTowards(center_point)
+			StartAnimation(boss, {duration = 2.8, activity=ACT_DOTA_IDLE_RARE, rate=1.0})
+		end)
+
+		-- Wait [delay] seconds
+		Timers:CreateTimer(delay, function()
+
+			-- Destroy warning particles
+			Timers:CreateTimer(duration, function()
+				ParticleManager:DestroyParticle(warning_pfx, true)
+				ParticleManager:ReleaseParticleIndex(warning_pfx)
+				if warning_pfx_2 then
+					ParticleManager:DestroyParticle(warning_pfx_2, true)
+					ParticleManager:ReleaseParticleIndex(warning_pfx_2)
+				end
+			end)
+
+			-- Proc passive
+			self:SpawnPlagueWard(center_point, altar_handle, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+
+			-- Affect targeted enemies
+			for _, target in pairs(targets) do
+
+				-- Apply movement-lock debuff
+				target:AddNewModifier(nil, nil, "modifier_frostivus_venomancer_parasite", {duration = duration})
+
+				-- Forced movement
+				target:MoveToPosition(center_point + (center_point - target:GetAbsOrigin()):Normalized() * 900)
+
+				-- Play hit particle/sound
+				target:EmitSound("Frostivus.ParasiteImpact")
+				local contagion_pfx = ParticleManager:CreateParticle("particles/boss_veno/virulent_plague_contagion.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+				ParticleManager:SetParticleControl(contagion_pfx, 0, target:GetAbsOrigin())
+				ParticleManager:ReleaseParticleIndex(contagion_pfx)
+			end
+		end)
+	end
+end
+
+-- Parasite debuff
+LinkLuaModifier("modifier_frostivus_venomancer_parasite", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+modifier_frostivus_venomancer_parasite = modifier_frostivus_venomancer_parasite or class({})
+
+function modifier_frostivus_venomancer_parasite:IsHidden() return true end
+function modifier_frostivus_venomancer_parasite:IsPurgable() return false end
+function modifier_frostivus_venomancer_parasite:IsDebuff() return true end
+
+function modifier_frostivus_venomancer_parasite:CheckState()
+	local state =	{
+		[MODIFIER_STATE_COMMAND_RESTRICTED] = true
+	}
+	return state
+end
+
+
+
+-- Green Death
+function boss_thinker_venomancer:GreenDeath(center_point, altar_handle, delay, damage, duration, angle, spawn_angle, spawn_frequency, projectile_speed, projectile_radius, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+	if IsServer() then
+		local boss = self:GetParent()
+		local ability = boss:FindAbilityByName("frostivus_boss_green_death")
+		local center_position = RotatePosition(center_point, QAngle(0, angle + 180, 0), center_point + Vector(0, 1, 0) * 900)
+		local impact_damage = boss:GetAttackDamage() * damage * 0.01
+
+		-- Send cast bar event
+		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_green_death", cast_time = delay})
+
+		-- Move boss to cast position and animate cast
+		boss:MoveToPosition(center_point)
+		Timers:CreateTimer(1.0, function()
+			boss:FaceTowards(center_position)
+			StartAnimation(boss, {duration = duration + delay - 1.0, activity=ACT_DOTA_FLAIL, rate=1.0})
+			Timers:CreateTimer(1.0, function()
+				boss:EmitSound("Frostivus.GreenDeathCharge")
+			end)
+		end)
+
+		-- Calculate projectile stuff
+		local projectile_direction = (RotatePosition(center_point, QAngle(0, angle + 180, 0), center_point + Vector(0, 1, 0) * 900) - center_point):Normalized() * projectile_speed
+		local elapsed_time = 0
+		local spawn_interval = 1 / spawn_frequency
+		local spawn_positions = {}
+		for i = 1, 21 do
+			spawn_positions[i] = RotatePosition(center_point, QAngle(0, angle + spawn_angle * (-0.5 + (i - 1) * 0.05) , 0), center_point + Vector(0, 1, 0) * 950)
+		end
+
+		-- Wait [delay] seconds
+		Timers:CreateTimer(delay, function()
+
+			-- Proc passive
+			self:SpawnPlagueWard(center_point, altar_handle, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+
+			-- Basic projectile data
+			local green_death_projectile =	{
+				Ability				= ability,
+				EffectName			= "particles/boss_veno/veno_green_death.vpcf",
+				vSpawnOrigin		= spawn_positions[1],
+				fDistance			= 1800,
+				fStartRadius		= projectile_radius,
+				fEndRadius			= projectile_radius,
+				Source				= boss,
+				bHasFrontalCone		= false,
+				bReplaceExisting	= false,
+				iUnitTargetTeam		= DOTA_UNIT_TARGET_TEAM_ENEMY,
+				iUnitTargetFlags	= DOTA_UNIT_TARGET_FLAG_NONE,
+				iUnitTargetType		= DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+				fExpireTime 		= GameRules:GetGameTime() + 10.0,
+				bDeleteOnHit		= false,
+				vVelocity			= Vector(projectile_direction.x, projectile_direction.y, 0),
+				bProvidesVision		= false,
+				ExtraData			= {damage = impact_damage}
+			}
+
+			-- Projectile launch loop
+			local switch = true
+			local set_a = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21}
+			local set_b = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20}
+			Timers:CreateTimer(0, function()
+
+				-- Launch projectile from spawn points
+				if switch then
+					for _, n in pairs(set_a) do
+						green_death_projectile.vSpawnOrigin = spawn_positions[n]
+						ProjectileManager:CreateLinearProjectile(green_death_projectile)
+					end
+				else
+					for _, n in pairs(set_b) do
+						green_death_projectile.vSpawnOrigin = spawn_positions[n]
+						ProjectileManager:CreateLinearProjectile(green_death_projectile)
+					end
+				end
+
+				-- Spawn sound
+				boss:EmitSound("Frostivus.GreenDeathLaunch")
+
+				-- Switch the switch
+				if switch then
+					switch = false
+				else
+					switch = true
+				end
+
+				-- Check if the duration is over
+				elapsed_time = elapsed_time + spawn_interval
+				if elapsed_time < duration and boss:IsAlive() then
+					return spawn_interval
+				end
+			end)
+		end)
+	end
+end
+
+
 
 -- Spawn Plague Ward passive
 function boss_thinker_venomancer:SpawnPlagueWard(center_point, altar_handle, inner_radius, outer_radius, health, damage, attack_delay, duration)
@@ -304,7 +1245,6 @@ function boss_thinker_venomancer:SpawnPlagueWard(center_point, altar_handle, inn
 		plague_ward:EmitSound("Hero_Venomancer.Plague_Ward")
 	end
 end
-
 
 -- Poison Sting cast modifier
 LinkLuaModifier("modifier_frostivus_venomancer_ward_poison_sting", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
@@ -348,14 +1288,15 @@ function modifier_frostivus_venomancer_ward_poison_sting:OnIntervalThink()
 
 		-- Search for valid attack targets
 		local owner = self:GetParent()
+		local owner_loc = owner:GetAbsOrigin()
 		local nearby_enemies = FindUnitsInRadius(owner:GetTeam(), self.center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)
 		
 		-- Spit poison on the first available enemy, if there is one
 		for _, enemy in pairs(nearby_enemies) do
 
 			-- Face target
-			local target_direction = (enemy:GetAbsOrigin() - owner:GetAbsOrigin()):Normalized()
-			owner:FaceTowards(target_direction)
+			local target_direction = (enemy:GetAbsOrigin() - owner_loc):Normalized()
+			owner:FaceTowards(owner_loc + target_direction)
 
 			-- Start animating the attack
 			StartAnimation(owner, {duration = 1.0, activity=ACT_DOTA_ATTACK, rate=1.0})
@@ -385,7 +1326,6 @@ function modifier_frostivus_venomancer_ward_poison_sting:OnIntervalThink()
 		end
 	end
 end
-
 
 -- Poison Sting debuff modifier
 LinkLuaModifier("modifier_frostivus_venomancer_poison_sting_debuff", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
@@ -441,588 +1381,4 @@ end
 
 function modifier_frostivus_venomancer_poison_sting_debuff:GetModifierMoveSpeedBonus_Percentage()
 	return (-5)
-end
-
-
-
-function boss_thinker_venomancer:LightningBolt(center_point, altar_handle, start_direction, amount, delay, inner_radius, outer_radius, damage)
-	local boss = self:GetParent()
-	local bolt_damage = boss:GetAttackDamage() * damage * 0.01
-
-	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_zeus_lightning_bolt", cast_time = delay})
-
-	-- Define bolt positions
-	local bolt_positions = {}
-	for i = 1, amount do
-		bolt_positions[i] = RotatePosition(center_point, QAngle(0, (i - 1) * 360 / amount, 0), center_point + start_direction * RandomInt(200, 800))
-	end
-
-	-- Draw particles
-	for _, bolt_position in pairs(bolt_positions) do
-		local warning_pfx = ParticleManager:CreateParticle("particles/boss_zeus/lightning_bolt_marker.vpcf", PATTACH_WORLDORIGIN, nil)
-		ParticleManager:SetParticleControl(warning_pfx, 0, bolt_position)
-		ParticleManager:SetParticleControl(warning_pfx, 1, Vector(delay, 0, 0))
-		ParticleManager:ReleaseParticleIndex(warning_pfx)
-	end
-
-	-- Play warning sound
-	altar_handle:EmitSound("Hero_Disruptor.KineticField")
-
-	-- Move boss to cast position and animate cast
-	boss:MoveToPosition(center_point + Vector(0, 300, 0))
-	Timers:CreateTimer(delay - 0.4, function()
-		StartAnimation(boss, {duration = 0.83, activity=ACT_DOTA_CAST_ABILITY_2, rate=1.0})
-	end)
-
-	-- Wait [delay] seconds
-	Timers:CreateTimer(delay, function()
-
-		-- If the fight is over, do nothing
-		if not altar_handle:HasModifier("modifier_altar_active") then
-			return nil
-		end
-
-		-- Play bolt cast sound
-		altar_handle:EmitSound("Hero_Zuus.LightningBolt.Cast")
-
-		-- Resolve bolts
-		for _, bolt_position in pairs(bolt_positions) do
-
-			-- Particles
-			local bolt_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_lightning_bolt.vpcf", PATTACH_WORLDORIGIN, nil)
-			ParticleManager:SetParticleControl(bolt_pfx, 0, bolt_position)
-			ParticleManager:SetParticleControl(bolt_pfx, 1, bolt_position + Vector(0, 0, 1000))
-			ParticleManager:ReleaseParticleIndex(bolt_pfx)
-
-			-- Impact sound
-			altar_handle:EmitSound("Hero_Zuus.LightningBolt")
-
-			-- Damage enemies
-			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), bolt_position, nil, outer_radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-			for _, enemy in pairs(nearby_enemies) do
-				local distance = (bolt_position - enemy:GetAbsOrigin()):Length2D()
-				local enemy_damage = bolt_damage
-				if distance > inner_radius and distance <= outer_radius then
-					enemy_damage = enemy_damage * (outer_radius - distance) / (outer_radius - inner_radius)
-				end
-				ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = enemy_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-				SendOverheadEventMessage(enemy, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, enemy_damage, nil)
-			end
-		end
-	end)
-end
-
--- Arc Lightning
-function boss_thinker_venomancer:ArcLightning(center_point, altar_handle, cast_delay, bounce_delay, bounce_radius, damage, damage_ramp)
-	local boss = self:GetParent()
-	local boss_position = boss:GetAbsOrigin()
-	local chain_damage = boss:GetAttackDamage() * damage * 0.01
-	local chain_target = false
-
-	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_zeus_arc_lightning", cast_time = delay})
-
-	-- Find nearest target hero to attack
-	local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), boss_position, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)
-	for _,enemy in pairs(nearby_enemies) do
-		if enemy:HasModifier("modifier_fighting_boss") then
-			chain_target = enemy
-			break
-		end
-	end
-
-	-- If there's no valid target, stop casting
-	if not chain_target then
-		return nil
-	end
-
-	-- Move boss to cast position and animate cast
-	local chain_target_position = chain_target:GetAbsOrigin()
-	boss:MoveToPosition(chain_target_position + (boss_position - chain_target_position):Normalized() * 300)
-	Timers:CreateTimer(cast_delay - 0.2, function()
-		StartAnimation(boss, {duration = 0.83, activity=ACT_DOTA_CAST_ABILITY_1, rate=1.0})
-	end)
-
-	-- Wait [cast_delay] seconds
-	Timers:CreateTimer(cast_delay, function()
-
-		-- If the fight is over, do nothing
-		if not altar_handle:HasModifier("modifier_altar_active") then
-			return nil
-		end
-
-		-- Throw initial bounce
-		boss:EmitSound("Hero_Zuus.ArcLightning.Cast")
-		self:ArcLightningBounce(altar_handle, boss, chain_target, chain_damage, damage_ramp, bounce_radius, bounce_delay)
-	end)
-end
-
-function boss_thinker_venomancer:ArcLightningBounce(altar_handle, source, target, damage, damage_ramp, bounce_radius, bounce_delay)
-	local boss = self:GetParent()
-	local target_location = target:GetAbsOrigin() 
-
-	-- If the fight is over, do nothing
-	if not altar_handle:HasModifier("modifier_altar_active") then
-		return nil
-	end
-
-	-- Perform this bounce
-	target:EmitSound("Hero_Zuus.ArcLightning.Target")
-	local arc_pfx = ParticleManager:CreateParticle("particles/boss_zeus/arc_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
-	ParticleManager:SetParticleControlEnt(arc_pfx, 0, source, PATTACH_POINT_FOLLOW, "attach_hitloc", source:GetAbsOrigin(), true)
-	ParticleManager:SetParticleControlEnt(arc_pfx, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target_location, true)
-	ParticleManager:ReleaseParticleIndex(arc_pfx)
-	ApplyDamage({attacker = boss, victim = target, ability = nil, damage = damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-	SendOverheadEventMessage(target, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, target, damage, nil)
-
-	-- Perform another bounce, if applicable
-	Timers:CreateTimer(bounce_delay, function()
-		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), target_location, nil, bounce_radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)
-		for _,enemy in pairs(nearby_enemies) do
-			if enemy:HasModifier("modifier_fighting_boss") and enemy ~= target then
-				self:ArcLightningBounce(target, enemy, damage * (1 + damage_ramp * 0.01), damage_ramp, bounce_radius, bounce_delay)
-				break
-			end
-		end
-	end)
-end
-
--- El Thor
-function boss_thinker_venomancer:ElThor(altar_handle, target, radius, delay, damage)
-	local boss = self:GetParent()
-	local thor_damage = boss:GetAttackDamage() * damage * 0.01
-
-	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_zeus_el_thor", cast_time = delay})
-
-	-- Draw stack up marker
-	local marker_pfx = ParticleManager:CreateParticle("particles/generic_particles/stack_up_center_zeus.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
-	ParticleManager:SetParticleControl(marker_pfx, 0, target:GetAbsOrigin())
-	ParticleManager:SetParticleControl(marker_pfx, 1, Vector(radius, delay, 0))
-	Timers:CreateTimer(delay, function()
-		ParticleManager:DestroyParticle(marker_pfx, false)
-		ParticleManager:ReleaseParticleIndex(marker_pfx)
-	end)
-
-	-- Play warning sound
-	target:EmitSound("Frostivus.ElThorWarning")
-
-	-- Face boss to cast position and animate cast
-	Timers:CreateTimer(delay - 0.63, function()
-		boss:FaceTowards((target:GetAbsOrigin() - boss:GetAbsOrigin()):Normalized())
-		StartAnimation(boss, {duration = 1.0, activity=ACT_DOTA_ATTACK, rate=1.0})
-	end)
-
-	-- Wait [delay] seconds
-	Timers:CreateTimer(delay, function()
-
-		-- If the fight is over, do nothing
-		if not altar_handle:HasModifier("modifier_altar_active") then
-			return nil
-		end
-
-		-- Play impact sound
-		target:EmitSound("Frostivus.ElThorImpact")
-
-		-- Particles
-		local target_position = target:GetAbsOrigin()
-		local thor_pfx = ParticleManager:CreateParticle("particles/boss_zeus/el_thor.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
-		ParticleManager:SetParticleControl(thor_pfx, 0, target:GetAbsOrigin())
-		ParticleManager:SetParticleControl(thor_pfx, 1, Vector(radius, radius, radius))
-		ParticleManager:ReleaseParticleIndex(thor_pfx)
-		local bolt_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_zuus/zuus_lightning_bolt.vpcf", PATTACH_WORLDORIGIN, nil)
-		ParticleManager:SetParticleControl(bolt_pfx, 0, target_position)
-		ParticleManager:SetParticleControl(bolt_pfx, 1, target_position + Vector(0, 0, 1000))
-		ParticleManager:ReleaseParticleIndex(bolt_pfx)
-
-		-- Count enemies
-		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), target:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-		local enemies_to_hit = {}
-		for _, enemy in pairs(nearby_enemies) do
-			if enemy:HasModifier("modifier_fighting_boss") then
-				enemies_to_hit[#enemies_to_hit+1] = enemy
-			end
-		end
-
-		-- Damage enemies
-		thor_damage = thor_damage / #enemies_to_hit
-		for _, victim in pairs(enemies_to_hit) do
-			ApplyDamage({victim = victim, attacker = boss, ability = nil, damage = thor_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-			SendOverheadEventMessage(victim, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, victim, thor_damage, nil)
-		end
-	end)
-end
-
--- Static Field
-function boss_thinker_venomancer:StaticField(center_point, altar_handle, delay, radius, damage)
-	local boss = self:GetParent()
-	local field_damage = boss:GetAttackDamage() * damage * 0.01
-
-	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_zeus_static_field", cast_time = delay})
-
-	-- Move boss to cast position and animate cast
-	boss:MoveToPosition(center_point + Vector(0, 300, 0))
-	Timers:CreateTimer(delay - 0.6, function()
-		StartAnimation(boss, {duration = 0.84, activity=ACT_DOTA_CAST_ABILITY_4, rate=1.0})
-	end)
-
-	-- Wait [delay] seconds
-	Timers:CreateTimer(delay, function()
-
-		-- If the fight is over, do nothing
-		if not altar_handle:HasModifier("modifier_altar_active") then
-			return nil
-		end
-
-		-- Play cast sound
-		altar_handle:EmitSound("Hero_Zuus.StaticField")
-
-		-- Debuff players with alternating charges
-		local positive = true
-		if RollPercentage(50) then
-			positive = false
-		end
-		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-		for _, enemy in pairs(nearby_enemies) do
-			if enemy:HasModifier("modifier_fighting_boss") then
-
-				-- Particle & modifier
-				if positive then
-					positive = false
-					enemy:AddNewModifier(boss, nil, "modifier_frostivus_zeus_positive_charge", {radius = radius, damage = field_damage})
-					local static_pfx = ParticleManager:CreateParticle("particles/econ/events/ti6/maelstorm_ti6.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
-					ParticleManager:SetParticleControlEnt(static_pfx, 0, boss, PATTACH_POINT_FOLLOW, "attach_attack1", boss:GetAbsOrigin(), true)
-					ParticleManager:SetParticleControlEnt(static_pfx, 1, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", enemy:GetAbsOrigin(), true)
-					ParticleManager:ReleaseParticleIndex(static_pfx)
-				else
-					positive = true
-					enemy:AddNewModifier(boss, nil, "modifier_frostivus_zeus_negative_charge", {radius = radius, damage = field_damage})
-					local static_pfx = ParticleManager:CreateParticle("particles/items_fx/chain_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
-					ParticleManager:SetParticleControlEnt(static_pfx, 0, boss, PATTACH_POINT_FOLLOW, "attach_attack2", boss:GetAbsOrigin(), true)
-					ParticleManager:SetParticleControlEnt(static_pfx, 1, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", enemy:GetAbsOrigin(), true)
-					ParticleManager:ReleaseParticleIndex(static_pfx)
-				end
-			end
-		end
-	end)
-end
-
--- Static Field positive modifier
-LinkLuaModifier("modifier_frostivus_zeus_positive_charge", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
-modifier_frostivus_zeus_positive_charge = modifier_frostivus_zeus_positive_charge or class({})
-
-function modifier_frostivus_zeus_positive_charge:IsHidden() return true end
-function modifier_frostivus_zeus_positive_charge:IsPurgable() return false end
-function modifier_frostivus_zeus_positive_charge:IsDebuff() return false end
-
-function modifier_frostivus_zeus_positive_charge:OnCreated(keys)
-	if IsServer() then
-
-		-- Particle
-		local parent = self:GetParent()
-		self.positive_pfx = ParticleManager:CreateParticle("particles/econ/events/ti6/mjollnir_shield_ti6.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
-		ParticleManager:SetParticleControl(self.positive_pfx, 0, parent:GetAbsOrigin())
-
-		-- Parameters
-		self.charged = true
-		self.radius = 0
-		self.damage = 0
-		if keys.radius then
-			self.radius = keys.radius
-		end
-		if keys.damage then
-			self.damage = keys.damage
-		end
-		self:StartIntervalThink(0.03)
-	end
-end
-
-function modifier_frostivus_zeus_positive_charge:OnDestroy()
-	if IsServer() then
-		ParticleManager:DestroyParticle(self.positive_pfx, true)
-		ParticleManager:ReleaseParticleIndex(self.positive_pfx)
-	end
-end
-
-function modifier_frostivus_zeus_positive_charge:OnIntervalThink()
-	if IsServer() and self.charged then
-
-		-- Search for nearby charged enemies
-		local boss = self:GetCaster()
-		local owner = self:GetParent()
-		local owner_position = owner:GetAbsOrigin()
-		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), owner_position, nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)
-		for _, enemy in pairs(nearby_enemies) do
-			if enemy ~= owner and (enemy:HasModifier("modifier_frostivus_zeus_positive_charge") or enemy:HasModifier("modifier_frostivus_zeus_negative_charge")) then
-				self.charged = false
-
-				-- Sound
-				enemy:EmitSound("Item.Maelstrom.Chain_Lightning")
-
-				-- Particle
-				local enemy_position = enemy:GetAbsOrigin()
-				local discharge_pfx = ParticleManager:CreateParticle("particles/econ/events/ti6/maelstorm_ti6.vpcf", PATTACH_ABSORIGIN_FOLLOW, owner)
-				ParticleManager:SetParticleControlEnt(discharge_pfx, 0, owner, PATTACH_POINT_FOLLOW, "attach_hitloc", owner_position, true)
-				ParticleManager:SetParticleControlEnt(discharge_pfx, 1, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", enemy_position, true)
-				ParticleManager:ReleaseParticleIndex(discharge_pfx)
-
-				-- Damage
-				ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-				SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, owner, self.damage, nil)
-
-				-- Destroy this modifier after a small duration
-				Timers:CreateTimer(0.7, function()
-					owner:RemoveModifierByName("modifier_frostivus_zeus_positive_charge")
-				end)
-
-				-- Knockback
-				local discharge_knockback = {}
-				if enemy:HasModifier("modifier_frostivus_zeus_positive_charge") then
-					discharge_knockback =
-					{
-						center_x = enemy_position.x,
-						center_y = enemy_position.y,
-						center_z = enemy_position.z,
-						duration = 0.35,
-						knockback_duration = 0.35,
-						knockback_distance = 300,
-						knockback_height = 70,
-						should_stun = 1
-					}
-				elseif enemy:HasModifier("modifier_frostivus_zeus_negative_charge") then
-					local knockback_origin = owner_position + (owner_position - enemy_position):Normalized() * 100
-					local distance = (owner_position - enemy_position):Length2D() * 0.5
-					discharge_knockback =
-					{
-						center_x = knockback_origin.x,
-						center_y = knockback_origin.y,
-						center_z = knockback_origin.z,
-						duration = 0.2,
-						knockback_duration = 0.2,
-						knockback_distance = distance,
-						knockback_height = 40,
-						should_stun = 1
-					}
-				end
-				owner:RemoveModifierByName("modifier_knockback")
-				owner:AddNewModifier(nil, nil, "modifier_knockback", discharge_knockback)
-
-				-- Stop looking for charged enemies
-				break
-			end
-		end
-	end
-end
-
--- Static Field negative modifier
-LinkLuaModifier("modifier_frostivus_zeus_negative_charge", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
-modifier_frostivus_zeus_negative_charge = modifier_frostivus_zeus_negative_charge or class({})
-
-function modifier_frostivus_zeus_negative_charge:IsHidden() return true end
-function modifier_frostivus_zeus_negative_charge:IsPurgable() return false end
-function modifier_frostivus_zeus_negative_charge:IsDebuff() return false end
-
-function modifier_frostivus_zeus_negative_charge:OnCreated(keys)
-	if IsServer() then
-
-		-- Particle
-		local parent = self:GetParent()
-		self.negative_pfx = ParticleManager:CreateParticle("particles/econ/events/ti7/mjollnir_shield_ti7.vpcf", PATTACH_ABSORIGIN_FOLLOW, parent)
-		ParticleManager:SetParticleControl(self.negative_pfx, 0, parent:GetAbsOrigin())
-
-		-- Parameters
-		self.charged = true
-		self.radius = 0
-		self.damage = 0
-		if keys.radius then
-			self.radius = keys.radius
-		end
-		if keys.damage then
-			self.damage = keys.damage
-		end
-		self:StartIntervalThink(0.03)
-	end
-end
-
-function modifier_frostivus_zeus_negative_charge:OnDestroy()
-	if IsServer() then
-		ParticleManager:DestroyParticle(self.negative_pfx, true)
-		ParticleManager:ReleaseParticleIndex(self.negative_pfx)
-	end
-end
-
-function modifier_frostivus_zeus_negative_charge:OnIntervalThink()
-	if IsServer() and self.charged then
-
-		-- Search for nearby charged enemies
-		local boss = self:GetCaster()
-		local owner = self:GetParent()
-		local owner_position = owner:GetAbsOrigin()
-		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), owner_position, nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)
-		for _, enemy in pairs(nearby_enemies) do
-			if enemy ~= owner and (enemy:HasModifier("modifier_frostivus_zeus_positive_charge") or enemy:HasModifier("modifier_frostivus_zeus_negative_charge")) then
-				self.charged = false
-
-				-- Sound
-				enemy:EmitSound("Item.Maelstrom.Chain_Lightning")
-
-				-- Particle
-				local enemy_position = enemy:GetAbsOrigin()
-				local discharge_pfx = ParticleManager:CreateParticle("particles/items_fx/chain_lightning.vpcf", PATTACH_ABSORIGIN_FOLLOW, owner)
-				ParticleManager:SetParticleControlEnt(discharge_pfx, 0, owner, PATTACH_POINT_FOLLOW, "attach_hitloc", owner_position, true)
-				ParticleManager:SetParticleControlEnt(discharge_pfx, 1, enemy, PATTACH_POINT_FOLLOW, "attach_hitloc", enemy_position, true)
-				ParticleManager:ReleaseParticleIndex(discharge_pfx)
-
-				-- Damage
-				ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-				SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, owner, self.damage, nil)
-
-				-- Destroy this modifier after a small duration
-				Timers:CreateTimer(0.7, function()
-					owner:RemoveModifierByName("modifier_frostivus_zeus_negative_charge")
-				end)
-
-				-- Knockback
-				local discharge_knockback = {}
-				if enemy:HasModifier("modifier_frostivus_zeus_negative_charge") then
-					discharge_knockback =
-					{
-						center_x = enemy_position.x,
-						center_y = enemy_position.y,
-						center_z = enemy_position.z,
-						duration = 0.35,
-						knockback_duration = 0.35,
-						knockback_distance = 300,
-						knockback_height = 70,
-						should_stun = 1
-					}
-				elseif enemy:HasModifier("modifier_frostivus_zeus_positive_charge") then
-					local knockback_origin = owner_position + (owner_position - enemy_position):Normalized() * 100
-					local distance = (owner_position - enemy_position):Length2D() * 0.5
-					discharge_knockback =
-					{
-						center_x = knockback_origin.x,
-						center_y = knockback_origin.y,
-						center_z = knockback_origin.z,
-						duration = 0.2,
-						knockback_duration = 0.2,
-						knockback_distance = distance,
-						knockback_height = 40,
-						should_stun = 1
-					}
-				end
-				owner:RemoveModifierByName("modifier_knockback")
-				owner:AddNewModifier(nil, nil, "modifier_knockback", discharge_knockback)
-
-				-- Stop looking for charged enemies
-				break
-			end
-		end
-	end
-end
-
--- God's Wrath
-function boss_thinker_venomancer:GodsWrath(center_point, altar_handle, delay, charge_movement, damage)
-	local boss = self:GetParent()
-	local wrath_damage = boss:GetAttackDamage() * damage * 0.01
-
-	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_zeus_thundergod_wrath", cast_time = delay})
-
-	-- Play warning sound
-	altar_handle:EmitSound("Hero_Zuus.GodsWrath.PreCast")
-
-	-- Move boss to cast position and animate cast
-	boss:MoveToPosition(center_point + Vector(0, 300, 0))
-	Timers:CreateTimer(delay - 0.4, function()
-		StartAnimation(boss, {duration = 0.83, activity=ACT_DOTA_CAST_ABILITY_5, rate=1.0})
-	end)
-
-	-- Pre-cast sound
-	Timers:CreateTimer(delay - 0.4, function()
-		if altar_handle:HasModifier("modifier_altar_active") then
-			altar_handle:EmitSound("Hero_Zuus.GodsWrath.PreCast")
-		end
-	end)
-
-	-- Wait [delay] seconds
-	Timers:CreateTimer(delay, function()
-
-		-- If the fight is over, do nothing
-		if not altar_handle:HasModifier("modifier_altar_active") then
-			return nil
-		end
-
-		-- Play cast sound
-		altar_handle:EmitSound("Hero_Zuus.GodsWrath")
-
-		-- Cast particle
-		local boss_position = boss:GetAbsOrigin()
-		local wrath_pfx = ParticleManager:CreateParticle("particles/econ/items/zeus/arcana_chariot/zeus_arcana_thundergods_wrath_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, boss)
-		ParticleManager:SetParticleControl(wrath_pfx, 0, boss_position + Vector(0, 0, 400))
-		ParticleManager:SetParticleControl(wrath_pfx, 1, boss_position)
-		ParticleManager:ReleaseParticleIndex(wrath_pfx)
-
-		-- Iterate through enemies
-		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-		for _, enemy in pairs(nearby_enemies) do
-
-			-- Impact sound
-			enemy:EmitSound("Hero_Zuus.GodsWrath.Target")
-
-			-- Impact particle
-			local enemy_position = enemy:GetAbsOrigin()
-			local impact_pfx = ParticleManager:CreateParticle("particles/econ/items/zeus/arcana_chariot/zeus_arcana_thundergods_wrath_start.vpcf", PATTACH_ABSORIGIN_FOLLOW, enemy)
-			ParticleManager:SetParticleControl(impact_pfx, 0, enemy_position + Vector(0, 0, 1000))
-			ParticleManager:SetParticleControl(impact_pfx, 1, enemy_position)
-			ParticleManager:ReleaseParticleIndex(impact_pfx)
-
-			-- Damage
-			ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = wrath_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-			SendOverheadEventMessage(enemy, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, wrath_damage, nil)
-
-			-- Resolve static field, if appropriate
-			if enemy:HasModifier("modifier_frostivus_zeus_positive_charge") or enemy:HasModifier("modifier_frostivus_zeus_negative_charge") then
-				self:GodsWrathMovement(center_point, enemy, charge_movement)
-			end
-		end
-	end)
-end
-
--- God's Wrath charge-based movement
-function boss_thinker_venomancer:GodsWrathMovement(center_point, target, charge_movement)
-	local boss = self:GetParent()
-	local target_position = target:GetAbsOrigin()
-	local total_movement = Vector(0, 0, 0)
-	local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-	for _, enemy in pairs(nearby_enemies) do
-		if (target:HasModifier("modifier_frostivus_zeus_positive_charge") and enemy:HasModifier("modifier_frostivus_zeus_negative_charge")) or (target:HasModifier("modifier_frostivus_zeus_negative_charge") and enemy:HasModifier("modifier_frostivus_zeus_positive_charge")) then
-			total_movement = total_movement + (enemy:GetAbsOrigin() - target_position):Normalized() * charge_movement
-		elseif  (target:HasModifier("modifier_frostivus_zeus_positive_charge") and enemy:HasModifier("modifier_frostivus_zeus_positive_charge")) or (target:HasModifier("modifier_frostivus_zeus_negative_charge") and enemy:HasModifier("modifier_frostivus_zeus_negative_charge")) then
-			total_movement = total_movement + (target_position - enemy:GetAbsOrigin()):Normalized() * charge_movement
-		end
-		Timers:CreateTimer(0.5, function()
-			enemy:RemoveModifierByName("modifier_frostivus_zeus_positive_charge")
-			enemy:RemoveModifierByName("modifier_frostivus_zeus_negative_charge")
-		end)
-	end
-
-	-- If there's any movement to be done apply the relevant knockback
-	if total_movement ~= Vector(0, 0, 0) then
-		local knockback_origin = target_position - total_movement:Normalized() * 100
-		local charge_knockback = {
-			center_x = knockback_origin.x,
-			center_y = knockback_origin.y,
-			center_z = knockback_origin.z,
-			duration = 0.3,
-			knockback_duration = 0.3,
-			knockback_distance = total_movement:Length2D(),
-			knockback_height = 50,
-			should_stun = 1
-		}
-		target:RemoveModifierByName("modifier_knockback")
-		target:AddNewModifier(nil, nil, "modifier_knockback", charge_knockback)
-	end
 end
