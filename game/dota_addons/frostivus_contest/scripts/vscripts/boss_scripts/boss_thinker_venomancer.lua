@@ -85,7 +85,7 @@ local target = keys.unit
 			end
 
 			-- Unlock the arena
-			UnlockArena(self.altar_handle, true)
+			UnlockArena(self.altar_handle, true, self.team)
 
 			-- Delete the boss AI thinker modifier
 			target:RemoveModifierByName("boss_thinker_venomancer")

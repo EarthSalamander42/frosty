@@ -49,8 +49,7 @@ local target = keys.unit
 		if target == self:GetParent() and attacker:IsAlive() then
 
 			-- Notify the console that a boss fight (capture attempt) was started
-			print(self.boss_name.." boss hit, altar handle is ")
-			print(self.altar_handle)
+			print(self.boss_name, "boss hit, altar handle is", self.altar_handle)
 
 			-- Send the boss fight event to all clients
 			local attacker_team = attacker:GetTeam()

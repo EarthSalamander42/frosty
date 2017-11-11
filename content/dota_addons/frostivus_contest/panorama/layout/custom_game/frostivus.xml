@@ -72,7 +72,6 @@
 						<ProgressBar id="RadiantProgressBar" value="20" max="20"/>
 						<ProgressBar id="RadiantTakenProgressBar" value="20" max="20"/>
 					</Panel>
-					<Label hittest="false" class="QuestGenericText" id="RadiantScoreText" text="999"/>
 				</Panel>
 				<Panel id="ScorePanel">
 					<Panel id="Boss"/>
@@ -83,7 +82,6 @@
 						<ProgressBar id="DireProgressBar" value="20" max="20"/>
 						<ProgressBar id="DireTakenProgressBar" value="20" max="20"/>
 					</Panel>
-					<Label hittest="false" class="QuestGenericText" id="DireScoreText" text="999"/>
 				</Panel>
 			</Panel>
 		</Panel>

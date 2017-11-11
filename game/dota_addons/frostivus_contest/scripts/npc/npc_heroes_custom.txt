@@ -1,56 +1,23 @@
 "DOTAHeroes"
 {
-	//=================================================================================================================
-	// HERO: Abaddon
-	//=================================================================================================================
-	"npc_dota_hero_abaddon"
-	{
-		"override_hero"				"npc_dota_hero_abaddon"
-
-		//Picking Screen
-		"IsCustom"					"0"
-		"IsImba"					"1"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_STRENGTH"
-
-		"Ability1"					"abaddon_death_coil"
-		"Ability2"					"abaddon_aphotic_shield"
-		"Ability3"					"abaddon_frostmourne"
-		"Ability4"					"abaddon_borrowed_time"
-	}
-
+	//Sample to modify a hero
 	//=================================================================================================================
 	// HERO: Antimage
 	//=================================================================================================================
-	"npc_dota_hero_antimage"
-	{
-		"override_hero"				"npc_dota_hero_antimage"
+//	"npc_dota_hero_antimage"
+//	{
+//		//Picking Screen
+//		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
 
-		//Picking Screen
-		"IsCustom"					"0"
-		"IsImba"					"1"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+//		//Abilities
+//		"Ability1"					"antimage_mana_break"
+//		"Ability2"					"antimage_blink"
+//		"Ability3"					"antimage_spell_shield"
+//		"Ability4"					"generic_hidden"		
+//		"Ability5"					"generic_hidden"		
+//		"Ability6"					"antimage_mana_void"		
+//	}
 
-		"Ability1"					"antimage_mana_break"
-		"Ability2"					"antimage_blink"
-		"Ability3"					"antimage_spell_shield"
-		"Ability4"					"antimage_mana_void"		
-	}
-
-	//=================================================================================================================
-	// HERO: Ancient Apparition
-	//=================================================================================================================
-	"npc_dota_hero_ancient_apparition"
-	{
-		"override_hero"				"npc_dota_hero_ancient_apparition"
-
-		//Picking Screen
-		"IsCustom"					"0"
-		"AttributePrimary"			"DOTA_ATTRIBUTE_INTELLECT"
-
-		"Ability1"					"ancient_apparition_cold_feet"		
-		"Ability2"					"ancient_apparition_ice_vortex"		
-		"Ability3"					"ancient_apparition_chilling_touch"	
-		"Ability4"					"ancient_apparition_ice_blast"		
-		//"Ability5"				"ancient_apparition_ice_blast_release"
-	}
+	//Sample to ban a hero
+//	"npc_dota_hero_abaddon" { "IsDisabled" "1" }
 }

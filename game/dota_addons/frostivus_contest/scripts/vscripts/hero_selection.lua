@@ -12,80 +12,44 @@ end
 
 function HeroSelection:HeroListPreLoad()
 	-- Retrieve heroes info
+	NPC_HEROES = LoadKeyValues("scripts/npc/npc_heroes.txt")
 	NPC_HEROES_CUSTOM = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
+
 	HeroSelection.strength_heroes = {}
 	HeroSelection.agility_heroes = {}
 	HeroSelection.intellect_heroes = {}
 
 	HeroSelection.vanilla_heroes = {}
-	HeroSelection.new_heroes = {}
+--	HeroSelection.new_heroes = {}
 	HeroSelection.random_heroes = {}
 	HeroSelection.disabled_heroes = {}
+	HeroSelection.heroes_custom = {}
 	HeroSelection.picked_heroes = {}
 
-	-- New function that retrieves kv infos
-	for hero, attributes in pairs(NPC_HEROES_CUSTOM) do
-		hero = string.gsub(hero, "imba", "dota")
-			
-		if GetKeyValueByHeroName(hero, "IsDisabled") == 2 then
-			table.insert(HeroSelection.disabled_heroes, hero)
+	for hero, attributes in pairs(NPC_HEROES) do
+		if hero == "Version" or hero == "npc_dota_hero_base" or hero == "npc_dota_hero_target_dummy" then
 		else
 			table.insert(HeroSelection.vanilla_heroes, hero)
-		end
-
-		if GetKeyValueByHeroName(hero, "IsCustom") == 1 then
-			HeroSelection:AddCustomHeroToList(hero)
-		elseif GetKeyValueByHeroName(hero, "IsCustom") == 0 then
 			HeroSelection:AddVanillaHeroToList(hero)
 		end
+	end
 
-		if GetKeyValueByHeroName(hero, "IsNew") == 1 then
-			table.insert(HeroSelection.new_heroes, hero)
+	for hero, attributes in pairs(NPC_HEROES_CUSTOM) do
+		hero = string.gsub(hero, "imba", "dota")
+		if string.find(hero, "npc_dota_hero_") then
+
+			if GetKeyValueByHeroName(hero, "IsDisabled") == 2 then
+				table.insert(HeroSelection.disabled_heroes, hero)
+			end
+
+			-- Add a specific label (not using it right now)
+--			if GetKeyValueByHeroName(hero, "IsNew") == 1 then
+--				table.insert(HeroSelection.new_heroes, hero)
+--			end
 		end
 	end
 
 	HeroSelection:HeroList()
-end
-
-function HeroSelection:AddCustomHeroToList(hero_name)
-	if GetKeyValueByHeroName(hero_name, "AttributePrimary") == "DOTA_ATTRIBUTE_STRENGTH" then
-		table.insert(HeroSelection.strength_heroes_custom, hero_name)
-	elseif GetKeyValueByHeroName(hero_name, "AttributePrimary") == "DOTA_ATTRIBUTE_AGILITY" then
-		table.insert(HeroSelection.agility_heroes_custom, hero_name)
-	elseif GetKeyValueByHeroName(hero_name, "AttributePrimary") == "DOTA_ATTRIBUTE_INTELLECT" then
-		table.insert(HeroSelection.intellect_heroes_custom, hero_name)
-	end
-	table.insert(HeroSelection.heroes_custom, hero_name)
-
-	a = {}
-	for k, n in pairs(HeroSelection.strength_heroes_custom) do
-		table.insert(a, n)
-		HeroSelection.strength_heroes_custom = {}
-	end
-	table.sort(a)
-	for i,n in ipairs(a) do
-		table.insert(HeroSelection.strength_heroes_custom, n)
-	end
-
-	a = {}
-	for k, n in pairs(HeroSelection.agility_heroes_custom) do
-		table.insert(a, n)
-		HeroSelection.agility_heroes_custom = {}
-	end
-	table.sort(a)
-	for i,n in ipairs(a) do
-		table.insert(HeroSelection.agility_heroes_custom, n)
-	end
-
-	a = {}
-	for k, n in pairs(HeroSelection.intellect_heroes_custom) do
-		table.insert(a, n)
-		HeroSelection.intellect_heroes_custom = {}
-	end
-	table.sort(a)
-	for i,n in ipairs(a) do
-		table.insert(HeroSelection.intellect_heroes_custom, n)
-	end
 end
 
 function HeroSelection:AddVanillaHeroToList(hero_name)
@@ -128,17 +92,21 @@ function HeroSelection:AddVanillaHeroToList(hero_name)
 	end
 end
 
+local only_once_alt = false
 function HeroSelection:HeroList()
 	CustomNetTables:SetTableValue("game_options", "hero_list", {
 		Strength = HeroSelection.strength_heroes,
 		Agility = HeroSelection.agility_heroes,
 		Intellect = HeroSelection.intellect_heroes,
-		New = HeroSelection.new_heroes,
+--		New = HeroSelection.new_heroes,
 		Disabled = HeroSelection.disabled_heroes,
 		Picked = HeroSelection.picked_heroes
 	})
 
-	HeroSelection:Start()
+	if only_once_alt == false then
+		only_once_alt = true
+		HeroSelection:Start()
+	end
 end
 
 --[[
@@ -180,11 +148,19 @@ function HeroSelection:Start()
 	-- Listen for pick and repick events
 	HeroSelection.listener_select = CustomGameEventManager:RegisterListener("hero_selected", HeroSelection.HeroSelect )
 	HeroSelection.listener_random = CustomGameEventManager:RegisterListener("hero_randomed", HeroSelection.RandomHero )
+	HeroSelection.listener_imba_random = CustomGameEventManager:RegisterListener("hero_imba_randomed", HeroSelection.RandomImbaHero )
 	HeroSelection.listener_repick = CustomGameEventManager:RegisterListener("hero_repicked", HeroSelection.HeroRepicked )
 	HeroSelection.listener_ui_initialize = CustomGameEventManager:RegisterListener("ui_initialized", HeroSelection.UiInitialized )
 	HeroSelection.listener_abilities_requested = CustomGameEventManager:RegisterListener("pick_abilities_requested", HeroSelection.PickAbilitiesRequested )
 
-	EmitGlobalSound("announcer_announcer_type_death_match")
+	-- Play relevant pick lines
+	if IMBA_PICK_MODE_ALL_RANDOM or IMBA_PICK_MODE_ALL_RANDOM_SAME_HERO then
+		EmitGlobalSound("announcer_announcer_type_all_random")	
+	elseif IMBA_PICK_MODE_ARENA_MODE then
+		EmitGlobalSound("announcer_announcer_type_death_match")
+	else
+		EmitGlobalSound("announcer_announcer_type_all_pick")
+	end
 end
 
 -- Horribly implemented reconnection detection
@@ -230,37 +206,42 @@ end
 	-- Roll a random hero
 	local random_hero = HeroSelection.random_heroes[RandomInt(1, #HeroSelection.random_heroes)]
 
-	-- Check if this random hero hasn't already been picked
-	if PlayerResource:GetTeam(id) == DOTA_TEAM_GOODGUYS then
-		for _, picked_hero in pairs(HeroSelection.radiantPicks) do
-			if random_hero == picked_hero then
-				HeroSelection:RandomHero({PlayerID = id})
-				break
-			end
-		end
-	else
-		for _, picked_hero in pairs(HeroSelection.direPicks) do
-			if random_hero == picked_hero then
-				HeroSelection:RandomHero({PlayerID = id})
-				break
-			end
-		end
-	end
-
 	for _, picked_hero in pairs(HeroSelection.disabled_heroes) do
 		if random_hero == picked_hero then
-			print("10v10 hero disabled")
+			print("Hero disabled, random again...")
 			HeroSelection:RandomHero({PlayerID = id})
 			break
 		end
 	end
 
+	for _, picked_hero in pairs(HeroSelection.picked_heroes) do
+		if random_hero == picked_hero then
+			print("Hero disabled, random again...")
+			HeroSelection:RandomHero({PlayerID = id})
+			break
+		end
+	end
+
+	-- Flag the player as having randomed
 	PlayerResource:SetHasRandomed(id)
+
+	-- If it's a valid hero, allow the player to select it
 	HeroSelection:HeroSelect({PlayerID = id, HeroName = random_hero, HasRandomed = true})
+
+	-- The person has randomed (separate from Set/HasRandomed, because those cannot be unset)
 	HeroSelection.playerPickState[id].random_state = true
+
+	-- Send a Custom Message in PreGame Chat to tell other players this player has randomed
 	Chat:PlayerRandomed(id, PlayerResource:GetPlayer(id), PlayerResource:GetTeam(id), random_hero)
 end
 
+--[[
+	HeroSelect
+	A player has selected a hero. This function is caled by the CustomGameEventManager
+	once a 'hero_selected' event was seen.
+	Params:
+		- event {table} - A table containing PlayerID and HeroID.
+]]
 function HeroSelection:HeroSelect(event)
 
 	-- If this player has not picked yet give him the hero
@@ -278,7 +259,6 @@ function HeroSelection:HeroSelect(event)
 				HeroSelection.direPicks[#HeroSelection.direPicks + 1] = event.HeroName
 			end
 
-			print("Added "..event.HeroName.." to the picked heroes list.")
 			table.insert(HeroSelection.picked_heroes, event.HeroName)
 
 			-- Send a pick event to all clients
@@ -299,6 +279,11 @@ function HeroSelection:HeroSelect(event)
 			-- Play pick sound to the player
 			EmitSoundOnClient("HeroPicker.Selected", PlayerResource:GetPlayer(event.PlayerID))
 		end
+	end
+
+	-- If this is All Random and the player picked a hero manually, refuse it
+	if IMBA_PICK_MODE_ALL_RANDOM or IMBA_PICK_MODE_ALL_RANDOM_SAME_HERO and (not event.HasRandomed) then
+		return nil
 	end
 
     for _, picked_hero in pairs(HeroSelection.radiantPicks) do
@@ -457,9 +442,7 @@ function HeroSelection:AssignHero(player_id, hero_name)
 			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD, false)
 		end
 
-		-- Initialize innate hero abilities
-		InitializeInnateAbilities(hero)
-
+		-- fail-safe, check it really needed else remove it
 		Timers:CreateTimer(3.0, function()
 			if not hero:HasModifier("modifier_command_restricted") then
 				PlayerResource:SetCameraTarget(player_id, nil)
@@ -482,7 +465,7 @@ end
 function HeroSelection:GetPickScreenAbilities(hero_name)
 local hero_abilities = {}
 
-	for i = 1, 8 do
+	for i = 1, 9 do
 		if GetKeyValueByHeroName(hero_name, "Ability"..i) ~= nil then
 			hero_abilities[i] = GetKeyValueByHeroName(hero_name, "Ability"..i)
 		end

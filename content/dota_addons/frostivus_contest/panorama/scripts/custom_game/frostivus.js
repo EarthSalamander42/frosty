@@ -1,6 +1,7 @@
 "use strict";
 
 var JS_PHASE = 0
+var update_boss_level = false
 var playerPanels = {};
 
 function UpdateTimer( data )
@@ -15,28 +16,9 @@ function UpdateTimer( data )
 	$( "#Timer" ).text = timerText;
 }
 
-function OnUIUpdated(table_name, key, data)
-{
-	UpdateScoreUI();
-}
-CustomNetTables.SubscribeNetTableListener("game_options", OnUIUpdated)
-
-var update_boss_level = false
-function UpdateScoreUI()
-{
-	var RadiantScore = CustomNetTables.GetTableValue("game_options", "radiant").score;
-	var DireScore = CustomNetTables.GetTableValue("game_options", "dire").score;
-
-	$("#RadiantScoreText").SetDialogVariableInt("radiant_score", RadiantScore);
-	$("#RadiantScoreText").text = RadiantScore;
-
-	$("#DireScoreText").SetDialogVariableInt("dire_score", DireScore);
-	$("#DireScoreText").text = DireScore;
-}
-
 function Phase(args)
 {
-	$("#PhaseLabel").text = $.Localize("#diretide_phase_" + args.Phase);
+	$("#PhaseLabel").text = $.Localize("#frostivus_phase_" + args.Phase);
 	JS_PHASE = args.Phase
 
 	if (args.Phase == 1)
@@ -57,7 +39,7 @@ function Phase(args)
 
 function FrostivusInfo()
 {
-	$.DispatchEvent("UIShowTextTooltip", $("#PhaseLabel"), $.Localize("#diretide_phase_" + JS_PHASE + "_desc"));
+	$.DispatchEvent("UIShowTextTooltip", $("#PhaseLabel"), $.Localize("#frostivus_phase_" + JS_PHASE + "_desc"));
 }
 
 var toggle = false
@@ -74,30 +56,25 @@ function FrostivusAltar() {
 
 function ChooseAltar(number) {
 	var altar = $("#AltarButton" + number)
-	var playerInfo = Game.GetPlayerInfo( Players.GetLocalPlayer() )
-//	$.Msg(playerInfo)
+	var playerInfo = Game.GetPlayerInfo(Players.GetLocalPlayer())
 
 	if (playerInfo.player_team_id == 2) {
 		if (altar.BHasClass("radiant")) {
-			/* remove selected class from the previous button */
 			var panel_table = $("#FrostivusAltarMenu").FindChildrenWithClassTraverse("selected");
 			for (var i = 0; i < panel_table.length; i++) {
 				panel_table[i].RemoveClass("selected")
 			}
-			// TODO: Send to lua wich altar is chosen
-
 			altar.AddClass("selected");
+			GameEvents.SendCustomGameEventToServer("spawn_point", {"player": Players.GetLocalPlayer(), "altar": number});
 		}
 	} else if (playerInfo.player_team_id == 3) {
 		if (altar.BHasClass("dire")) {
-			/* remove selected class from the previous button */
 			var panel_table = $("#FrostivusAltarMenu").FindChildrenWithClassTraverse("selected");
 			for (var i = 0; i < panel_table.length; i++) {
 				panel_table[i].RemoveClass("selected")
 			}
-			// TODO: Send to lua wich altar is chosen
-
 			altar.AddClass("selected");
+			GameEvents.SendCustomGameEventToServer("spawn_point", {"player": Players.GetLocalPlayer(), "altar": number});
 		}
 	}
 }
@@ -108,10 +85,7 @@ function OnPlayerReconnect( data ) {
 	$.Msg("Phase: " + phase)
 }
 
-function ShowBossBar(args)
-{
-	$("#BossHP").style.visibility = "visible";
-
+function UpdateBossBar(args) {
 	var BossTable = CustomNetTables.GetTableValue("game_options", "boss");
 	if (BossTable !== null)
 	{
@@ -126,20 +100,34 @@ function ShowBossBar(args)
 
 		if (update_boss_level == false)
 		{
-			$.Msg($("#BossLevel").text + BossLvl)
-			$.Msg("Setup Boss name: " + BossLabel)
-
-			$("#BossLevel").text = $("#BossLevel").text + BossLvl
+			$("#BossLevel").text = $.Localize("boss_level") + BossLvl
 			$("#BossLabel").text = $.Localize(BossLabel)
 			update_boss_level = true
 		}
 	}
 }
+CustomNetTables.SubscribeNetTableListener("game_options", UpdateBossBar)
+
+function ShowBossBar(args)
+{
+	$("#BossHP").style.visibility = "visible";
+}
 
 function HideBossBar(args)
 {
 	$("#BossHP").style.visibility = "collapse";
+	$("#BossLevel").text = "";
 	update_boss_level = false
+}
+
+function UpdateAltar(args)
+{
+	if (args.team == 2) {
+		$("#AltarButton" + args.altar).AddClass("radiant");
+	} else {
+		$("#AltarButton" + args.altar).AddClass("dire");
+	}
+	$.Msg("Adde a new altar: " + args.altar + "for team: " + args.team)
 }
 
 (function()
@@ -148,9 +136,9 @@ function HideBossBar(args)
 	$("#AltarButton7").AddClass("dire");
 
 	GameEvents.Subscribe("countdown", UpdateTimer);
-	GameEvents.Subscribe("update_score", UpdateScoreUI);
 	GameEvents.Subscribe("frostivus_phase", Phase);
 	GameEvents.Subscribe("diretide_player_reconnected", OnPlayerReconnect);
 	GameEvents.Subscribe("show_boss_hp", ShowBossBar);
 	GameEvents.Subscribe("hide_boss_hp", HideBossBar);
+	GameEvents.Subscribe("update_altar", UpdateAltar);
 })();

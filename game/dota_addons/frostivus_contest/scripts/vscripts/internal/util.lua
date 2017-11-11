@@ -289,28 +289,6 @@ function SystemMessage(token, vars)
 	CustomGameEventManager:Send_ServerToAllClients("custom_system_message", { token = token or "", vars = vars or {}})
 end
 
--- This function is responsible for cleaning dummy units and wisps that may have accumulated
-function StartGarbageCollector()	
---	print("started collector")
-
-	-- Find all dummy units in the game
-	local dummies = FindUnitsInRadius(DOTA_TEAM_BADGUYS, Vector(0,0,0), nil, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)		
-
-	-- Cycle each dummy. If it is alive for more than 1 minute, delete it.
-	local gametime = GameRules:GetGameTime()
-	for _, dummy in pairs(dummies) do
-		if dummy:GetUnitName() == "npc_dummy_unit" then			
-			local dummy_creation_time = dummy:GetCreationTime()
-			if gametime - dummy_creation_time > 60 then
-				print("NUKING A LOST DUMMY!")
-				UTIL_Remove(dummy)
-			else
-				print("dummy is still kinda new. Not removing it!")
-			end
-		end
-	end
-end
-
 function ReconnectPlayer(player_id)
 	print("Player is reconnecting:", player_id)
 	-- Reinitialize the player's pick screen panorama, if necessary
@@ -362,12 +340,6 @@ function ReconnectPlayer(player_id)
 end
 
 function UpdateBossBar(boss)
-	print("Boss Health:", boss:GetHealth())
-	print("Boss Health %:", boss:GetHealthPercent())
-	print("Boss Max Health:", boss:GetMaxHealth())
-	print("Boss Level:", boss:GetLevel())
-	print("Boss Name:", boss:GetUnitName())
-
 	CustomNetTables:SetTableValue("game_options", "boss", {
 		level = boss:GetLevel(),
 		HP = boss:GetHealth(),

@@ -159,45 +159,6 @@
 	color: red;
 }
 
-#RadiantScore,
-#DireScore
-{
-	flow-children: down;
-	width: 120px;
-	height: 110px;
-	align: center center;
-
-	background-image: url("file://{images}/custom_game/game_info/pumpkin.png");
-	background-repeat: no-repeat;
-	background-position: 50% 0%;
-	background-size: 70% 70%;
-}
-
-#RadiantScoreText,
-#DireScoreText
-{
-	margin-left: 45px;
-	margin-top: -30px;
-
-	color: green;
-	text-align: center;
-}
-
-#DireScoreText
-{
-	color: red;
-}
-
-.QuestGenericText
-{
-	font-family: TH Sarabun New,YDYGO 540,Gulim,MingLiU;
-	text-shadow: 2px 2px 1px 3.0 #333333b0;
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 40px;
-	text-align: center;
-}
-
 #PhaseLabel
 {
 	font-size: 18px;

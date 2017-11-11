@@ -7,16 +7,14 @@
 
 	"DOTA_GoodGuys"   								"Radiant"
 	"DOTA_BadGuys"    								"Dire"
-	"DOTA_Custom1"    								"Pink Dragon"
-	"DOTA_Custom2"    								"Orange Dog"
-	"DOTA_Custom3"    								"Blue Rooster"
-	"DOTA_Custom4"    								"Green Ram"
-	"DOTA_Custom5"    								"Brown Rat"
-	"DOTA_Custom6"    								"Cyan Boar"
-	"DOTA_Custom7"    								"Olive Snake"
-	"DOTA_Custom8"    								"Purple Horse"
 	
-	"addonname"										"Dota IMBA"
+	"addonname"										"The Degreeviling"
+	"frostivus_phase_1"								"Phase 1"
+	"frostivus_phase_1_desc"						"Description"
+	"frostivus_phase_2"								"Phase 2"
+	"frostivus_phase_2_desc"						"Description"
+	"frostivus_phase_3"								"Phase 3"
+	"frostivus_phase_3_desc"						"Description"
 
 	"custom_scoreboard_hero_name_and_desc"			"{s:hero_name}"
 	"scoreboard_tool_tip_mute_player"				"Mute Player"
@@ -31,9 +29,9 @@
 
 	//Picking Screen
 	"loading_pre_game"				"Loading heroes, please wait..."
-	"hero_list_title_strength"		"Strength Heroes"
-	"hero_list_title_agility"		"Agility Heroes"
-	"hero_list_title_intellect"		"Intelligence Heroes"
+	"hero_list_title_strength"		"Strength"
+	"hero_list_title_agility"		"Agility"
+	"hero_list_title_intellect"		"Intelligence"
 	"hero_list_title_custom"		"Custom Heroes"
 	"hero_name_filler"				"Lock In"
 	"team_title_radiant"			"The Radiant"
@@ -50,5 +48,20 @@
 	"new_hero"						"New Hero!"
 	"disabled_hero"					"Disabled Hero!"
 	"disabled_hero_10v10"			"10v10 Disabled Hero!"
-	"picked_hero"					"Picked hero!"	
+	"picked_hero"					"Picked hero!"
+	"random_pick_button"			"Random Hero"
+
+	//Altars
+	"frostivus_altar_button"		"Choose Spawn Point"
+
+	"frostivus_altar_1"				"Altar 1"
+	"frostivus_altar_2"				"Storm Altar"
+	"frostivus_altar_3"				"Altar 3"
+	"frostivus_altar_4"				"Altar 4"
+	"frostivus_altar_5"				"Altar 5"
+	"frostivus_altar_6"				"Altar 6"
+	"frostivus_altar_7"				"Altar 7"
+
+	//Bosses
+	"boss_level"					"Level: "
 }

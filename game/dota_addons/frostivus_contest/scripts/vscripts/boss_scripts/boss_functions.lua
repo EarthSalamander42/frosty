@@ -29,9 +29,10 @@ function LockArena(altar, team, attacker)
 	if direction:Length2D() > 850 then
 		FindClearSpaceForUnit(attacker, altar_loc + direction:Normalized() * 850, false)
 	end
+	CustomGameEventManager:Send_ServerToTeam(team, "show_boss_hp", {})
 end
 
-function UnlockArena(altar, victory)
+function UnlockArena(altar, victory, team)
 	local altar_handle = Entities:FindByName(nil, altar)
 	ParticleManager:DestroyParticle(altar_handle.arena_fence_pfx, true)
 	ParticleManager:ReleaseParticleIndex(altar_handle.arena_fence_pfx)
@@ -39,8 +40,16 @@ function UnlockArena(altar, victory)
 	-- Stop altar controlled modifier
 	altar_handle.victory = victory
 	altar_handle:RemoveModifierByName("modifier_altar_active")
-end
 
+	for i = 1, 7 do
+		if string.find(altar, i) then
+			CustomGameEventManager:Send_ServerToAllClients("update_altar", {altar = i, team = team})
+			Entities:FindByName(nil, "altar_"..i):SetTeam(team)
+		end
+	end
+
+	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {})
+end
 
 -- Fighting boss modifier
 LinkLuaModifier("modifier_fighting_boss", "boss_scripts/boss_functions.lua", LUA_MODIFIER_MOTION_NONE )

@@ -128,11 +128,6 @@ local i = 10
 		if GetMapName() == "frostivus" then
 			Frostivus()
 		end
-
-		Timers:CreateTimer(60, function()
-			StartGarbageCollector()
-			return 60
-		end)
 	end
 
 	if new_state == DOTA_GAMERULES_STATE_POST_GAME then
@@ -145,21 +140,16 @@ dummy_created_count = 0
 function GameMode:OnNPCSpawned(keys)
 GameMode:_OnNPCSpawned(keys)
 local npc = EntIndexToHScript(keys.entindex)
-local normal_xp = npc:GetDeathXP()
 
 	if npc then
-		npc:SetDeathXP(normal_xp*1.5)
-
 		if npc:IsRealHero() then
 			for i = 1, #IMBA_DEVS do
-				-- Granting access to admin stuff for Imba Devs
 				if PlayerResource:GetSteamAccountID(npc:GetPlayerID()) == IMBA_DEVS[i] then
 					if not npc.is_dev then
 						npc.is_dev = true
 					end
 				end
 			end
-
 			FrostivusAltarRespawn(npc)
 		end
 	end

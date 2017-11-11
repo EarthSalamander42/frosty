@@ -55,12 +55,11 @@ local target = keys.unit
 
 		-- Boss death
 		if target == self:GetParent() then
-
 			-- Notify the console that a boss fight (capture attempt) has ended with a successful kill
 			print(self.boss_name.." boss is dead, winning team is "..self.team)
 
 			-- Hide Boss Bar
-			CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "hide_boss_hp", {})
+--			CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "hide_boss_hp", {})
 
 			-- Send the boss death event to all clients
 			CustomGameEventManager:Send_ServerToTeam(self.team, "AltarContestEnd", {win = true})
@@ -84,7 +83,7 @@ local target = keys.unit
 			end
 
 			-- Unlock the arena
-			UnlockArena(self.altar_handle, true)
+			UnlockArena(self.altar_handle, true, self.team)
 
 			-- Delete the boss AI thinker modifier
 			target:RemoveModifierByName("boss_thinker_zeus")
@@ -363,16 +362,6 @@ function boss_thinker_zeus:OnTakeDamage(keys)
 
 		if unit == self:GetParent() then
 			if attacker == unit then return nil end
---			self.last_movement = GameRules:GetGameTime()
-
-			attacker.boss_attacked_time = GameRules:GetGameTime()
-			CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "show_boss_hp", {})
-
-			Timers:CreateTimer(5.0, function()
-				if GameRules:GetGameTime() - attacker.boss_attacked_time >= 5.0 then
-					CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "hide_boss_hp", {})
-				end
-			end)
 		end
 	end
 end

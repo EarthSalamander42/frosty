@@ -6,7 +6,6 @@ require('libraries/projectiles')
 require('libraries/projectiles_new')
 require('libraries/notifications')
 require('libraries/animations')
---	require('libraries/attachments')
 require('libraries/astar')
 require('libraries/keyvalues')
 
@@ -271,60 +270,7 @@ local time_elapsed = 0
 end
 
 function GameMode:OnGameInProgress()
-	if GetMapName() == "imba_arena" then
-		-- Define the bonus gold positions
-		local bonus_gold_positions = {}
-		bonus_gold_positions.fountain_radiant = {
-			stacks = 20,
-			center = Vector(-3776, -3776, 384),
-			radius = 1300
-		}
-		bonus_gold_positions.fountain_dire = {
-			stacks = 20,
-			center = Vector(3712, 3712, 384),
-			radius = 1300
-		}
-		bonus_gold_positions.center_arena = {
-			stacks = 40,
-			center = Vector(0, 0, 256),
-			radius = 900
-		}
 
-		-- Continuously update the amount of gold/exp to gain
-		Timers:CreateTimer(0, function()
-			-- Apply the modifier
-			local nearby_heroes = FindUnitsInRadius(DOTA_TEAM_GOODGUYS, Vector(0, 0, 0), nil, 6000, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
-			for _, hero in pairs(nearby_heroes) do
-				if not hero:HasModifier("modifier_imba_arena_passive_gold_thinker") then
-					hero:AddNewModifier(hero, nil, "modifier_imba_arena_passive_gold_thinker", {})
-				end
-				hero:FindModifierByName("modifier_imba_arena_passive_gold_thinker"):SetStackCount(12)
-			end
-
-			-- Update stack amount, when relevant
-			for _, position in pairs(bonus_gold_positions) do
-				nearby_heroes = FindUnitsInRadius(DOTA_TEAM_GOODGUYS, position.center, nil, position.radius, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
-				for _, hero in pairs(nearby_heroes) do
-					hero:FindModifierByName("modifier_imba_arena_passive_gold_thinker"):SetStackCount(position.stacks)
-				end
-			end
-			return 0.1
-		end)
-
-		-- Set up control points
-		local radiant_control_point_loc = Entities:FindByName(nil, "radiant_capture_point"):GetAbsOrigin()
-		local dire_control_point_loc = Entities:FindByName(nil, "dire_capture_point"):GetAbsOrigin()
-		RADIANT_CONTROL_POINT_DUMMY = CreateUnitByName("npc_dummy_unit_perma", radiant_control_point_loc, false, nil, nil, DOTA_TEAM_NOTEAM)
-		DIRE_CONTROL_POINT_DUMMY = CreateUnitByName("npc_dummy_unit_perma", dire_control_point_loc, false, nil, nil, DOTA_TEAM_NOTEAM)
-		RADIANT_CONTROL_POINT_DUMMY.score = 20
-		DIRE_CONTROL_POINT_DUMMY.score = 20
-		ArenaControlPointThinkRadiant(RADIANT_CONTROL_POINT_DUMMY)
-		ArenaControlPointThinkDire(DIRE_CONTROL_POINT_DUMMY)
-		Timers:CreateTimer(10, function()
-			ArenaControlPointScoreThink(RADIANT_CONTROL_POINT_DUMMY, DIRE_CONTROL_POINT_DUMMY)
-		end)
-		CustomGameEventManager:Send_ServerToAllClients("contest_started", {})
-	end
 end
 
 function GameMode:InitGameMode()
@@ -379,202 +325,14 @@ function GameMode:InitGameMode()
 	-- IMBA testbed command
 	Convars:RegisterCommand("imba_test", Dynamic_Wrap(GameMode, 'StartImbaTest'), "Spawns several units to help with testing", FCVAR_CHEAT)
 
-	CustomGameEventManager:RegisterListener("remove_units", Dynamic_Wrap(GameMode, "RemoveUnits"))
+	CustomGameEventManager:RegisterListener("spawn_point", AltarRespawn)
 
 	-- Panorama event stuff
 	initScoreBoardEvents()
 end
 
--- Starts the testbed if in tools mode
-function GameMode:StartImbaTest()
-
-	-- If not in tools mode, do nothing
-	if not IsInToolsMode() then
-		print("IMBA testbed is only available in tools mode.")
-		return nil
-	end
-
-	-- If the testbed was already initialized, do nothing
-	if IMBA_TESTBED_INITIALIZED then
-		print("Testbed already initialized.")
-		return nil
-	end
-
-	-- Define testbed zone reference point
-	local testbed_center = Vector(1500, -5000, 256)
-	if GetMapName() == "imba_arena" then
-		testbed_center = Vector(0, 0, 128)
-	end
-
-	-- Move any existing heroes to the testbed area, and grant them useful testing items
-	local player_heroes = HeroList:GetAllHeroes()
-	for _, hero in pairs(player_heroes) do
-		hero:SetAbsOrigin(testbed_center + Vector(-250, 0, 0))
-		hero:AddItemByName("item_imba_diffusal_blade_3")
-		hero:AddItemByName("item_imba_manta")
-		hero:AddItemByName("item_imba_blink")
-		hero:AddItemByName("item_imba_silver_edge")
-		hero:AddItemByName("item_black_king_bar")
-		hero:AddItemByName("item_imba_heart")
-		hero:AddItemByName("item_imba_siege_cuirass")
-		hero:AddItemByName("item_imba_butterfly")
-		hero:AddItemByName("item_ultimate_scepter")
-		hero:AddExperience(100000, DOTA_ModifyXP_Unspecified, false, true)
-		PlayerResource:SetCameraTarget(0, hero)
-	end
-	Timers:CreateTimer(0.1, function()
-		PlayerResource:SetCameraTarget(0, nil)
-	end)
-	ResolveNPCPositions(testbed_center + Vector(-300, 0, 0), 128)
-
-	-- Spawn some high health allies for benefic spell testing
-	local dummy_hero
-	local dummy_ability
-	for i = 1, 3 do
-		dummy_hero = CreateUnitByName("npc_dota_hero_axe", testbed_center + Vector(-500, (i-2) * 300, 0), true, player_heroes[1], player_heroes[1], DOTA_TEAM_GOODGUYS)
-		dummy_hero:AddExperience(25000, DOTA_ModifyXP_Unspecified, false, true)
-		dummy_hero:SetControllableByPlayer(0, true)
-		dummy_hero:AddItemByName("item_imba_heart")
-		dummy_hero:AddItemByName("item_imba_heart")
-
-		-- Add specific items to each dummy hero
-		if i == 1 then
-			dummy_hero:AddItemByName("item_imba_manta")
-			dummy_hero:AddItemByName("item_imba_diffusal_blade_3")
-		elseif i == 2 then
-			dummy_hero:AddItemByName("item_imba_silver_edge")
-			dummy_hero:AddItemByName("item_imba_necronomicon_5")
-		elseif i == 3 then
-			dummy_hero:AddItemByName("item_sphere")
-			dummy_hero:AddItemByName("item_black_king_bar")
-		end
-	end
-
-	-- Spawn some high health enemies to attack/spam abilities on
-	for i = 1, 3 do
-		dummy_hero = CreateUnitByName("npc_dota_hero_axe", testbed_center + Vector(300, (i-2) * 300, 0), true, player_heroes[1], player_heroes[1], DOTA_TEAM_BADGUYS)
-		dummy_hero:AddExperience(25000, DOTA_ModifyXP_Unspecified, false, true)
-		dummy_hero:SetControllableByPlayer(0, true)
-		dummy_hero:AddItemByName("item_imba_heart")
-		dummy_hero:AddItemByName("item_imba_heart")
-
-		-- Add specific items to each dummy hero
-		if i == 1 then
-			dummy_hero:AddItemByName("item_imba_manta")
-			dummy_hero:AddItemByName("item_imba_diffusal_blade_3")
-		elseif i == 2 then
-			dummy_hero:AddItemByName("item_imba_silver_edge")
-			dummy_hero:AddItemByName("item_imba_necronomicon_5")
-		elseif i == 3 then
-			dummy_hero:AddItemByName("item_sphere")
-			dummy_hero:AddItemByName("item_black_king_bar")
-		end
-	end
-
-	-- Spawn a rubick with spell steal leveled up
-	dummy_hero = CreateUnitByName("npc_dota_hero_rubick", testbed_center + Vector(600, 200, 0), true, player_heroes[1], player_heroes[1], DOTA_TEAM_BADGUYS)
-	dummy_hero:AddExperience(25000, DOTA_ModifyXP_Unspecified, false, true)
-	dummy_hero:SetControllableByPlayer(0, true)
-	dummy_hero:AddItemByName("item_imba_heart")
-	dummy_hero:AddItemByName("item_imba_heart")
-	dummy_ability = dummy_hero:FindAbilityByName("rubick_spell_steal")
-	if dummy_ability then
-		dummy_ability:SetLevel(6)
-	end
-
-	-- Spawn a pugna with nether ward leveled up and some CDR
-	dummy_hero = CreateUnitByName("npc_dota_hero_pugna", testbed_center + Vector(600, 0, 0), true, player_heroes[1], player_heroes[1], DOTA_TEAM_BADGUYS)
-	dummy_hero:AddExperience(25000, DOTA_ModifyXP_Unspecified, false, true)
-	dummy_hero:SetControllableByPlayer(0, true)
-	dummy_hero:AddItemByName("item_imba_heart")
-	dummy_hero:AddItemByName("item_imba_heart")
-	dummy_hero:AddItemByName("item_imba_triumvirate")
-	dummy_hero:AddItemByName("item_imba_octarine_core")
-	dummy_ability = dummy_hero:FindAbilityByName("imba_pugna_nether_ward")
-	if dummy_ability then
-		dummy_ability:SetLevel(7)
-	end
-
-	-- Spawn an antimage with a scepter and leveled up spell shield
-	dummy_hero = CreateUnitByName("npc_dota_hero_antimage", testbed_center + Vector(600, -200, 0), true, player_heroes[1], player_heroes[1], DOTA_TEAM_BADGUYS)
-	dummy_hero:AddExperience(25000, DOTA_ModifyXP_Unspecified, false, true)
-	dummy_hero:SetControllableByPlayer(0, true)
-	dummy_hero:AddItemByName("item_imba_heart")
-	dummy_hero:AddItemByName("item_imba_heart")
-	dummy_hero:AddItemByName("item_ultimate_scepter")
-	dummy_ability = dummy_hero:FindAbilityByName("imba_antimage_spell_shield")
-	if dummy_ability then
-		dummy_ability:SetLevel(7)
-	end
-
-	-- Spawn some assorted neutrals for reasons
-	neutrals_table = {}
-	neutrals_table[1] = {}
-	neutrals_table[2] = {}
-	neutrals_table[3] = {}
-	neutrals_table[4] = {}
-	neutrals_table[5] = {}
-	neutrals_table[6] = {}
-	neutrals_table[7] = {}
-	neutrals_table[8] = {}
-	neutrals_table[1].name = "npc_dota_neutral_big_thunder_lizard"
-	neutrals_table[1].position = Vector(-450, 800, 0)
-	neutrals_table[2].name = "npc_dota_neutral_granite_golem"
-	neutrals_table[2].position = Vector(-150, 800, 0)
-	neutrals_table[3].name = "npc_dota_neutral_black_dragon"
-	neutrals_table[3].position = Vector(150, 800, 0)
-	neutrals_table[4].name = "npc_dota_neutral_prowler_shaman"
-	neutrals_table[4].position = Vector(450, 800, 0)
-	neutrals_table[5].name = "npc_dota_neutral_satyr_hellcaller"
-	neutrals_table[5].position = Vector(-450, 600, 0)
-	neutrals_table[6].name = "npc_dota_neutral_mud_golem"
-	neutrals_table[6].position = Vector(-150, 600, 0)
-	neutrals_table[7].name = "npc_dota_neutral_enraged_wildkin"
-	neutrals_table[7].position = Vector(150, 600, 0)
-	neutrals_table[8].name = "npc_dota_neutral_centaur_khan"
-	neutrals_table[8].position = Vector(450, 600, 0)
-
-	for _, neutral in pairs(neutrals_table) do
-		dummy_hero = CreateUnitByName(neutral.name, testbed_center + neutral.position, true, player_heroes[1], player_heroes[1], DOTA_TEAM_NEUTRALS)
-		dummy_hero:SetControllableByPlayer(0, true)
-		dummy_hero:Hold()
-	end
-
-	-- Flag testbed as having been initialized
-	IMBA_TESTBED_INITIALIZED = true
-end
-
---	function GameMode:RemoveUnits(good, bad, neutral)
-function GameMode:RemoveUnits()
-local units = FindUnitsInRadius(DOTA_TEAM_GOODGUYS, Vector(0, 0, 0), nil, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAG_INVULNERABLE , FIND_ANY_ORDER, false )
-local units2 = FindUnitsInRadius(DOTA_TEAM_BADGUYS, Vector(0, 0, 0), nil, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAG_INVULNERABLE , FIND_ANY_ORDER, false )
-local units3 = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, FIND_UNITS_EVERYWHERE, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_CREEP, DOTA_UNIT_TARGET_FLAG_INVULNERABLE , FIND_ANY_ORDER, false )
-local count = 0
-
---	if good == true then
-		for _,v in pairs(units) do
-			if v:HasMovementCapability() and not v:GetUnitName() == "npc_dota_creep_goodguys_melee" then
-				count = count +1
-				v:RemoveSelf()
-			end
-		end
---	end
-
---	if bad == true then
-		for _,v in pairs(units2) do
-			if v:HasMovementCapability() and not v:GetUnitName() == "npc_dota_creep_badguys_melee" then
-				count = count +1
-				v:RemoveSelf()
-			end
-		end
---	end
-
---	if neutral == true then
-		for _,v in pairs(units3) do
-			if v:HasMovementCapability() then
-				count = count +1
-				v:RemoveSelf()
-			end
-		end
---	end
+function AltarRespawn(eventSourceIndex, args)	
+local hero = PlayerResource:GetPlayer(args["player"]):GetAssignedHero()
+local spawn_point = args["altar"]
+	hero.altar = spawn_point
 end

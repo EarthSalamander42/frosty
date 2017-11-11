@@ -6,7 +6,6 @@
 
 	<scripts>
 		<include src="file://{resources}/scripts/custom_game/simple_panel_animation.js" /> 
-		<include src="file://{resources}/scripts/custom_game/game_mode.js" />
 	</scripts>
 
 	<Panel class="AddonLoadingRoot">

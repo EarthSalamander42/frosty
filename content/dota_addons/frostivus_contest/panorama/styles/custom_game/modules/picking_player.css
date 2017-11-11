@@ -1,6 +1,6 @@
 .PickingPlayer {
 	width: 18%;
-	height: 80%;
+	height: 100%;
 	margin: 0% 2% 0% 0%;
 	flow-children: down;
 }
@@ -11,17 +11,16 @@
 
 #HeroPanel {
 	width: 100%;
-	height: 50%;
+	height: 60%;
 	background-color: black;
 	background-size: 100% 100%;
-	background-position: 0px 0px;
 	border: 1px solid #656565;
 }
 
 #PlayerName {
 	width: 100%;
-	height: 30%;
-	margin-top: 15%;
+	height: 35%;
+	margin-top: 5%;
 	font-size: 12px;
 	font-family: "Radiance";
 	horizontal-align: center;

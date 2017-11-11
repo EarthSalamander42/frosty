@@ -55,7 +55,7 @@ end
 -- Checks if the attacker's damage is classified as "hero damage".	 More `or`s may need to be added.
 function IsHeroDamage(attacker, damage)
 	if damage > 0 then
-		if(attacker:GetName() == "npc_dota_roshan" or attacker:IsControllableByAnyPlayer() or attacker:GetName() == "npc_dota_shadowshaman_serpentward") then
+		if(attacker:IsControllableByAnyPlayer() or attacker:GetName() == "npc_dota_shadowshaman_serpentward") then
 			return true
 		else
 			return false
@@ -206,15 +206,6 @@ function TrueKill(caster, target, ability)
 	-- Kills the target
 	if not target:HasModifier("modifier_imba_reincarnation_wraith_form") then
 		target:Kill(ability, caster)
-	end
-end
-
--- Checks if a given unit is Roshan
-function IsRoshan(unit)
-	if unit:GetName() == "npc_imba_roshan" or unit:GetName() == "npc_dota_roshan" then
-		return true
-	else
-		return false
 	end
 end
 
@@ -1539,8 +1530,6 @@ local vanilla_debuffs =
 	["modifier_ghost_frost_attack_slow"] = true,
 	["modifier_polar_furbolg_ursa_warrior_thunder_clap"] = true,
 	["modifier_ogre_magi_frost_armor_slow"] = true,
-	["modifier_imba_roshan_slam"] = true,
-	["modifier_imba_roshan_slam_armor"] = true,
 	["modifier_satyr_trickster_purge"] = true,
 	["modifier_broodmother_poison_sting_debuff"] = true,
 	["modifier_broodmother_poison_sting_dps_debuff"] = true,

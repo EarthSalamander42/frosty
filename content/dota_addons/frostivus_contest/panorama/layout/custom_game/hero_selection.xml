@@ -19,7 +19,6 @@
 					<Panel id="TeamRadiant">
 						<Panel id="LabelsRadiant">
 							<Label id="PickScreenTeamTitleRadiant" text="#team_title_radiant" />
-							<Label id="AverageMMRTeamRadiant" text="#average_mmr" />
 						</Panel>
 						<Panel id="LeftPlayers">
 							<!-- JS Inserts player elements here -->
@@ -39,7 +38,6 @@
 
 					<Panel id="TeamDire">
 						<Panel id="LabelsDire">
-							<Label id="AverageMMRTeamDire" text="#average_mmr" />
 							<Label id="PickScreenTeamTitleDire" text="#team_title_dire" />
 						</Panel>
 						<Panel id="RightPlayers">
@@ -53,7 +51,7 @@
 					<Panel id="HeroListSTR" class="PickTypePanel">
 						<Panel class="PickListTitlePanel">
 <!--							<Image id="SeparatorImage" src="file://{images}/hud/pip_str.png"/> -->
-							<Label class="PickListText" text="#hero_list_title_strength" />
+							<Label id="PickListTextSTR" class="PickListText" text="#hero_list_title_strength" />
 						</Panel>
 
 						<Panel id="PickListSeparator1" class="PickListTitlePanel" />
@@ -63,7 +61,7 @@
 					<Panel id="HeroListAGI" class="PickTypePanel">
 						<Panel class="PickListTitlePanel">
 <!--							<Image id="SeparatorImage" src="file://{images}/hud/pip_agi.png"/> -->>
-							<Label class="PickListText" text="#hero_list_title_agility" />
+							<Label id="PickListTextAGI" class="PickListText" text="#hero_list_title_agility" />
 						</Panel>
 
 						<Panel id="PickListSeparator2" class="PickListTitlePanel" />
@@ -73,7 +71,7 @@
 					<Panel id="HeroListINT" class="PickTypePanel">
 						<Panel class="PickListTitlePanel">
 <!--							<Image id="SeparatorImage" src="file://{images}/hud/pip_int.png"/> -->
-							<Label class="PickListText" text="#hero_list_title_intellect" />
+							<Label id="PickListTextINT" class="PickListText" text="#hero_list_title_intellect" />
 						</Panel>
 
 						<Panel id="PickListSeparator3" class="PickListTitlePanel" />
@@ -82,14 +80,7 @@
 
 				<!-- Post-pick screen (hero view) -->
 				<Panel id="PostPickScreen">
-					<Panel id="PostPickScreenButtonContainer">
-						<Button id="EnterGameBtn" class="disabled" onactivate="EnterGame()" >
-							<Label id="EnterGameBtnTxt" text="" />
-						</Button>
-						<Button id="RepickBtn" onactivate="RepickHero()" >
-							<Label id="RepickBtnTxt" text="#repick_button" />
-						</Button>
-					</Panel>
+					
 				</Panel>
 
 				<Panel id="BottomContainer">
@@ -107,6 +98,7 @@
 										<DOTAAbilityImage id="PickedHeroAbility6" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
 										<DOTAAbilityImage id="PickedHeroAbility7" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
 										<DOTAAbilityImage id="PickedHeroAbility8" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
+										<DOTAAbilityImage id="PickedHeroAbility9" class="PickedHeroAbility" onmouseout="DOTAHideAbilityTooltip()" abilityname="" />
 									</Panel>
 								</Panel>
 
@@ -116,13 +108,23 @@
 									</Button>
 									<DOTAHeroImage id="PickedHeroImage" heroname="" />
 								</Panel>
+
+								<Panel id="PostPickScreenButtonContainer">
+									<Button id="RepickBtn" onactivate="RepickHero()" >
+										<Label id="RepickBtnTxt" text="#repick_button" />
+									</Button>
+
+									<Button id="EnterGameBtn" class="disabled" onactivate="EnterGame()" >
+										<Label id="EnterGameBtnTxt" text="" />
+									</Button>
+								</Panel>
 							</Panel>
 						</Panel>
 					<!-- Keep this dummy panel to keep the previous child centered -->
 					<Panel id="CustomPickList">
 						<Panel id="RandomButtonContainer">
 							<Button id="RandomPickBtn" onactivate="SelectRandomHero()"/>
-							<Label id="RandomPickBtnTxt" text="#imba_random_pick_button" />
+							<Label id="RandomPickBtnTxt" text="#random_pick_button" />
 						</Panel>
 					</Panel>
 				</Panel> <!-- End of middle section -->

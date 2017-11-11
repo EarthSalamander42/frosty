@@ -7,8 +7,6 @@
 		"player_table",
 		"gamerules",
 		"shared_unit_control",
-		"netgraph",
-		"hero_list",
-		"boss"
+		"netgraph"
 	]
 }

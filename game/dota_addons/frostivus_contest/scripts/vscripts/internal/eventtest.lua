@@ -62,7 +62,6 @@ function GameMode:StartEventTest()
 	ListenToGameEvent("dota_player_deny", Dynamic_Wrap(GameMode, 'On_dota_player_deny'), self)
 	ListenToGameEvent("dota_barracks_kill", Dynamic_Wrap(GameMode, 'On_dota_barracks_kill'), self)
 	ListenToGameEvent("dota_tower_kill", Dynamic_Wrap(GameMode, 'On_dota_tower_kill'), self)
-	ListenToGameEvent("dota_roshan_kill", Dynamic_Wrap(GameMode, 'On_dota_roshan_kill'), self)
 	ListenToGameEvent("dota_courier_lost", Dynamic_Wrap(GameMode, 'On_dota_courier_lost'), self)
 	ListenToGameEvent("dota_courier_respawned", Dynamic_Wrap(GameMode, 'On_dota_courier_respawned'), self)
 	ListenToGameEvent("dota_glyph_used", Dynamic_Wrap(GameMode, 'On_dota_glyph_used'), self)
@@ -651,120 +650,75 @@ function GameMode:On_dota_tower_kill(data)
   PrintTable(data)
 end
 
-
-function GameMode:On_dota_roshan_kill(data)
-  print("[BAREBONES] dota_roshan_kill")
-  PrintTable(data)
-end
-
-
-function GameMode:On_dota_courier_lost(data)
-  print("[BAREBONES] dota_courier_lost")
-  PrintTable(data)
-end
-
-
-function GameMode:On_dota_courier_respawned(data)
-  print("[BAREBONES] dota_courier_respawned")
-  PrintTable(data)
-end
-
-
 function GameMode:On_dota_glyph_used(data)
   print("[BAREBONES] dota_glyph_used")
   PrintTable(data)
 end
-
-
-function GameMode:On_dota_super_creeps(data)
-  print("[BAREBONES] dota_super_creeps")
-  PrintTable(data)
-end
-
 
 function GameMode:On_dota_item_purchase(data)
   print("[BAREBONES] dota_item_purchase")
   PrintTable(data)
 end
 
-
 function GameMode:On_dota_item_gifted(data)
   print("[BAREBONES] dota_item_gifted")
   PrintTable(data)
 end
-
 
 function GameMode:On_dota_rune_pickup(data)
   print("[BAREBONES] dota_rune_pickup")
   PrintTable(data)
 end
 
-
 function GameMode:On_dota_rune_spotted(data)
   print("[BAREBONES] dota_rune_spotted")
   PrintTable(data)
 end
-
 
 function GameMode:On_dota_item_spotted(data)
   print("[BAREBONES] dota_item_spotted")
   PrintTable(data)
 end
 
-
-function GameMode:On_dota_no_battle_points(data)
-  print("[BAREBONES] dota_no_battle_points")
-  PrintTable(data)
-end
-
-
 function GameMode:On_dota_chat_informational(data)
   print("[BAREBONES] dota_chat_informational")
   PrintTable(data)
 end
-
 
 function GameMode:On_dota_action_item(data)
   print("[BAREBONES] dota_action_item")
   PrintTable(data)
 end
 
-
 function GameMode:On_dota_chat_ban_notification(data)
   print("[BAREBONES] dota_chat_ban_notification")
   PrintTable(data)
 end
-
 
 function GameMode:On_dota_chat_event(data)
   print("[BAREBONES] dota_chat_event")
   PrintTable(data)
 end
 
-
 function GameMode:On_dota_chat_timed_reward(data)
   print("[BAREBONES] dota_chat_timed_reward")
   PrintTable(data)
 end
-
 
 function GameMode:On_dota_pause_event(data)
   print("[BAREBONES] dota_pause_event")
   PrintTable(data)
 end
 
-
 function GameMode:On_dota_chat_kill_streak(data)
   print("[BAREBONES] dota_chat_kill_streak")
   PrintTable(data)
 end
 
-
 function GameMode:On_dota_chat_first_blood(data)
   print("[BAREBONES] dota_chat_first_blood")
   PrintTable(data)
 end
-
 
 function GameMode:On_dota_player_update_hero_selection(data)
   print("[BAREBONES] dota_player_update_hero_selection")

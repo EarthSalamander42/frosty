@@ -5,23 +5,6 @@
 	</scripts>
 
 	<script>
-		// Uncomment any of the following lines in order to disable that portion of the default UI
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_TIMEOFDAY, false );				//Time of day (clock).
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ACTION_PANEL, false );					//Hero actions UI.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ACTION_MINIMAP, false );				//Minimap.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_PANEL, false );				//Entire Inventory UI
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_SHOP, false );				//Shop portion of the Inventory.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_ITEMS, false );				//Player items.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_QUICKBUY, false );			//Quickbuy.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_COURIER, false );			//Courier controls.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_PROTECT, false );			//Glyph.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_GOLD, false );				//Gold display.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_SHOP_SUGGESTEDITEMS, false );			//Suggested items shop panel.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_MENU_BUTTONS, false );				//Top-left menu buttons in the HUD.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_BAR_BACKGROUND, false );			//Top-left menu buttons in the HUD.
-
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_HEROES, false );						//Heroes and team score at the top of the HUD.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_FLYOUT_SCOREBOARD, false );				//Lefthand flyout scoreboard.
 		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_TEAMS, false );			//Hero selection Radiant and Dire player lists.
 		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_GAME_NAME, false );		//Hero selection game mode name display.
 		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_CLOCK, false );			//Hero selection clock.
@@ -49,52 +32,26 @@
 		var CustomUIRoot = Parent.FindChildTraverse("CustomUIRoot");
 		Parent.FindChildTraverse("PreGame").style.visibility = "collapse";
 
-		//Buff Bar (increase size)
-//		var BuffBar = hudElements.FindChildTraverse("lower_hud").FindChildTraverse("buffs")
-//		BuffBar.style.width = "30%";
-//		BuffBar.style.marginLeft = "40%";
-
-		//DeBuff Bar (move it on top of the Buff Bar, instead being on the right)
-//		var DeBuffBar = hudElements.FindChildTraverse("lower_hud").FindChildTraverse("debuffs")
-//		DeBuffBar.style.width = "30%";
-//		DeBuffBar.style.marginBottom = "40.5%";
-//		DeBuffBar.style.marginRight = "30%";
-//		DeBuffBar.style.flowChildren = "right";
-
-		//Talent Window, need to be moved because of the custom HUD
-//		var TalentWindow = hudElements.FindChildTraverse("lower_hud").FindChildTraverse("StatBranchDrawer")
-//		TalentWindow.style.marginRight = "640px";
-
-		// Fix Level label not displaying right when having 4 digits
-//		var LevelLabel = TalentGuide.FindChildTraverse("center_block").FindChildTraverse("xp").FindChildTraverse("LevelLabel")
-//		LevelLabel.style.width = "50px";
-
 		//TopBar
-		var map_info = Game.GetMapInfo();
 		var topbar = hudElements.FindChildTraverse("topbar");
 		var topbarRadiant = topbar.FindChildTraverse("TopBarRadiantTeam");
 		var topbarDire = topbar.FindChildTraverse("TopBarDireTeam");
 
-		//Move the chat a bit higher to not overlap the custom HUD
-		if (map_info.map_display_name == "frostivus")
-		{
-			//Chat
-			var Chat = hudElements.FindChildTraverse("HudChat");
-			Chat.style.marginBottom = "11%";
-//			Chat.style.width = "35%";
-			Chat.style.zIndex = "10";
+		//Chat
+		var Chat = hudElements.FindChildTraverse("HudChat");
+		Chat.style.marginBottom = "11%";
+//		Chat.style.width = "35%";
+		Chat.style.zIndex = "10";
 
-			//Channel Bar
-			var ChannelBar = Parent.FindChildTraverse("ChannelBar");
-			ChannelBar.style.zIndex = "10";
-		}
+		//Channel Bar
+		var ChannelBar = Parent.FindChildTraverse("ChannelBar");
+		ChannelBar.style.zIndex = "10";
 
 		// Make the Radiant top-bar green
 		for (var tbg of topbarRadiant.FindChildrenWithClassTraverse("TeamBackground")) {
 			for (var tbbg of tbg.FindChildrenWithClassTraverse("TopBarBackground")) {
 				tbbg.style.height = "44px"
 				tbbg.style.backgroundSize = '0%';
-//				tbbg.style.backgroundColor = '#000000da';
 				tbbg.style.backgroundColor = '#08640Eda';
 			}
 		}
@@ -104,7 +61,6 @@
 			for (var tbbg of tbg.FindChildrenWithClassTraverse("TopBarBackground")) {
 				tbbg.style.height = "44px"
 				tbbg.style.backgroundSize = '0%';
-//				tbbg.style.backgroundColor = '#000000da';
 				tbbg.style.backgroundColor = '#640808da';
 			}
 		}
@@ -112,8 +68,6 @@
 
 	<Panel>
 	<!-- CustomUIElements go here.  They are not provided currently as valve's parser reads commented lines and attempts to link them in.-->
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/team_select.xml" />
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/game_mode.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/barebones_attachments.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/barebones_notifications.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/hero_selection.xml" />
