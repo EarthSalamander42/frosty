@@ -10,6 +10,8 @@ BOSS_SPAWN_POINT_TABLE = {}
 
 BOSS_SPAWN_POINT_TABLE.zeus = "altar_2"
 BOSS_SPAWN_POINT_TABLE.venomancer = "altar_3"
+BOSS_SPAWN_POINT_TABLE.lich = "altar_4"
+BOSS_SPAWN_POINT_TABLE.treant = "altar_5"
 
 -------------------------------------------------------------------------------------------------
 -- Boss reward information
@@ -23,10 +25,13 @@ BONUS_BOUNTY_PER_MINUTE = 10
 -- Barebones basics
 -------------------------------------------------------------------------------------------------
 
-DOTA_MAX_PLAYERS = 10						-- Maximum amount of players allowed in a game
+DOTA_MAX_PLAYERS = 20						-- Maximum amount of players allowed in a game
 
 ABANDON_TIME = 180															-- Time for a player to be considered as having abandoned the game (in seconds)
 FULL_ABANDON_TIME = 15														-- Time for a team to be considered as having abandoned the game (in seconds)
+
+ROSHAN_RESPAWN_TIME = RandomInt(2, 4) * 60									-- Roshan respawn timer (in seconds)
+AEGIS_DURATION = 300														-- Aegis expiration timer (in seconds)
 
 IMBA_DAMAGE_EFFECTS_DISTANCE_CUTOFF = 2500									-- Range at which most on-damage effects no longer trigger
 
@@ -81,6 +86,7 @@ ENABLED_RUNES[DOTA_RUNE_ARCANE] = true
 -------------------------------------------------------------------------------------------------
 
 GAME_WINNER_TEAM = "none"													-- Tracks game winner
+GAME_ROSHAN_KILLS = 0														-- Tracks amount of Roshan kills
 
 END_GAME_ON_KILLS = false													-- Should the game end after a certain number of kills?
 KILLS_TO_END_GAME_FOR_TEAM = 70												-- How many kills for a team should signify the end of the game?
@@ -110,5 +116,49 @@ HERO_ABILITY_LIST = LoadKeyValues("scripts/npc//KV/nonhidden_ability_list.kv")
 
 IMBA_DEVS = {
 	54896080,	-- Cookies
-	46875732	-- Firetoad
+	46875732,	-- Firetoad
+	95496383	-- ZimberZimber
+}
+
+-- HEROLIST
+normal_heroes = {
+	"npc_dota_hero_abaddon",
+	"npc_dota_hero_alchemist",
+	"npc_dota_hero_antimage",
+	"npc_dota_hero_axe",
+	"npc_dota_hero_crystal_maiden",
+	"npc_dota_hero_dazzle",
+	"npc_dota_hero_drow_ranger",
+	"npc_dota_hero_juggernaut",
+	"npc_dota_hero_lina",
+	"npc_dota_hero_omniknight",
+	"npc_dota_hero_pugna",
+	"npc_dota_hero_sniper",
+	"npc_dota_hero_spectre",
+	"npc_dota_hero_sven",
+	"npc_dota_hero_vengefulspirit",
+	"npc_dota_hero_witch_doctor",
+	"npc_dota_hero_skeleton_king",
+	"npc_dota_hero_jakiro",
+	"npc_dota_hero_warlock",
+	"npc_dota_hero_ursa",
+	"npc_dota_hero_clinkz",
+	"npc_dota_hero_phantom_assassin",
+	"npc_dota_hero_troll_warlord",
+	"npc_dota_hero_skywrath_mage",
+	"npc_dota_hero_beastmaster",
+	"npc_dota_hero_dragon_knight",
+	"npc_dota_hero_leshrac",
+	"npc_dota_hero_life_stealer",
+	"npc_dota_hero_windrunner",
+	"npc_dota_hero_huskar",
+	"npc_dota_hero_ogre_magi",
+	"npc_dota_hero_rubick",
+	"npc_dota_hero_luna",
+	"npc_dota_hero_wisp",
+	"npc_dota_hero_templar_assassin",
+	"npc_dota_hero_shredder",
+	"npc_dota_hero_bristleback",
+	"npc_dota_hero_oracle",
+	"npc_dota_hero_winter_wyvern"
 }

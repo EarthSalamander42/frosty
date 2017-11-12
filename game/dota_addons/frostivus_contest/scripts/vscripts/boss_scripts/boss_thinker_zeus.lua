@@ -41,7 +41,7 @@ function boss_thinker_zeus:DeclareFunctions()
 	local funcs = 
 	{
 		MODIFIER_EVENT_ON_DEATH,
-		MODIFIER_EVENT_ON_TAKEDAMAGE,
+		MODIFIER_EVENT_ON_TAKEDAMAGE
 	}
 	return funcs
 end
@@ -55,14 +55,25 @@ local target = keys.unit
 
 		-- Boss death
 		if target == self:GetParent() then
+
 			-- Notify the console that a boss fight (capture attempt) has ended with a successful kill
 			print(self.boss_name.." boss is dead, winning team is "..self.team)
 
 			-- Hide Boss Bar
---			CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "hide_boss_hp", {})
+			CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "hide_boss_hp", {})
 
 			-- Send the boss death event to all clients
 			CustomGameEventManager:Send_ServerToTeam(self.team, "AltarContestEnd", {win = true})
+
+			-- Play the capture particle to the winning team
+			local target_loc = target:GetAbsOrigin()
+			for player_id = 0, 20 do
+				if PlayerResource:GetPlayer(player_id) and PlayerResource:GetTeam(player_id) == self.team then
+					local win_pfx = ParticleManager:CreateParticleForPlayer("particles/boss_zeus/screen_zeus_win.vpcf", PATTACH_MAIN_VIEW, nil, PlayerResource:GetPlayer(player_id))
+					ParticleManager:SetParticleControl(win_pfx, 0, target_loc)
+					ParticleManager:ReleaseParticleIndex(win_pfx)
+				end
+			end
 
 			-- Respawn the boss and grant it its new capture detection modifier
 			local boss
@@ -76,14 +87,14 @@ local target = keys.unit
 			end)
 
 			-- Clear any ongoing modifiers
-			local nearby_enemies = FindUnitsInRadius(target:GetTeam(), target:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+			local nearby_enemies = FindUnitsInRadius(target:GetTeam(), target_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 			for _,enemy in pairs(nearby_enemies) do
 				enemy:RemoveModifierByName("modifier_frostivus_zeus_positive_charge")
 				enemy:RemoveModifierByName("modifier_frostivus_zeus_negative_charge")
 			end
 
 			-- Unlock the arena
-			UnlockArena(self.altar_handle, true, self.team)
+			UnlockArena(self.altar_handle, true, "frostivus_altar_aura_zeus")
 
 			-- Delete the boss AI thinker modifier
 			target:RemoveModifierByName("boss_thinker_zeus")
@@ -359,12 +370,22 @@ function boss_thinker_zeus:OnTakeDamage(keys)
 	if IsServer() then
 		local unit = keys.unit
 		local attacker = keys.attacker
-
+		 
 		if unit == self:GetParent() then
 			if attacker == unit then return nil end
+			--	self.last_movement = GameRules:GetGameTime()
+			 
+			attacker.boss_attacked_time = GameRules:GetGameTime()
+			CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "show_boss_hp", {})
+			 
+			Timers:CreateTimer(5.0, function()
+				if GameRules:GetGameTime() - attacker.boss_attacked_time >= 5.0 then
+					CustomGameEventManager:Send_ServerToTeam(attacker:GetTeamNumber(), "hide_boss_hp", {})
+				end
+			end)
 		end
 	end
-end
+ end
 
 ---------------------------
 -- Zeus' moves
@@ -375,7 +396,7 @@ function boss_thinker_zeus:LightningBolt(center_point, altar_handle, start_direc
 	local bolt_damage = boss:GetAttackDamage() * damage * 0.01
 
 	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_zeus_lightning_bolt", cast_time = delay})
+	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_zeus_lightning_bolt", cast_time = delay})
 
 	-- Define bolt positions
 	local bolt_positions = {}
@@ -396,6 +417,7 @@ function boss_thinker_zeus:LightningBolt(center_point, altar_handle, start_direc
 
 	-- Move boss to cast position and animate cast
 	boss:MoveToPosition(center_point + Vector(0, 300, 0))
+	boss:FaceTowards(center_point)
 	Timers:CreateTimer(delay - 0.4, function()
 		StartAnimation(boss, {duration = 0.83, activity=ACT_DOTA_CAST_ABILITY_2, rate=1.0})
 	end)
@@ -446,7 +468,7 @@ function boss_thinker_zeus:ArcLightning(center_point, altar_handle, cast_delay, 
 	local chain_target = false
 
 	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_zeus_arc_lightning", cast_time = delay})
+	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_zeus_arc_lightning", cast_time = delay})
 
 	-- Find nearest target hero to attack
 	local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), boss_position, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)
@@ -465,6 +487,7 @@ function boss_thinker_zeus:ArcLightning(center_point, altar_handle, cast_delay, 
 	-- Move boss to cast position and animate cast
 	local chain_target_position = chain_target:GetAbsOrigin()
 	boss:MoveToPosition(chain_target_position + (boss_position - chain_target_position):Normalized() * 300)
+	boss:FaceTowards(chain_target_position)
 	Timers:CreateTimer(cast_delay - 0.2, function()
 		StartAnimation(boss, {duration = 0.83, activity=ACT_DOTA_CAST_ABILITY_1, rate=1.0})
 	end)
@@ -519,7 +542,7 @@ function boss_thinker_zeus:ElThor(altar_handle, target, radius, delay, damage)
 	local thor_damage = boss:GetAttackDamage() * damage * 0.01
 
 	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_zeus_el_thor", cast_time = delay})
+	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_zeus_el_thor", cast_time = delay})
 
 	-- Draw stack up marker
 	local marker_pfx = ParticleManager:CreateParticle("particles/generic_particles/stack_up_center_zeus.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
@@ -585,10 +608,11 @@ function boss_thinker_zeus:StaticField(center_point, altar_handle, delay, radius
 	local field_damage = boss:GetAttackDamage() * damage * 0.01
 
 	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_zeus_static_field", cast_time = delay})
+	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_zeus_static_field", cast_time = delay})
 
 	-- Move boss to cast position and animate cast
 	boss:MoveToPosition(center_point + Vector(0, 300, 0))
+	boss:FaceTowards(center_point)
 	Timers:CreateTimer(delay - 0.6, function()
 		StartAnimation(boss, {duration = 0.84, activity=ACT_DOTA_CAST_ABILITY_4, rate=1.0})
 	end)
@@ -854,13 +878,14 @@ function boss_thinker_zeus:GodsWrath(center_point, altar_handle, delay, charge_m
 	local wrath_damage = boss:GetAttackDamage() * damage * 0.01
 
 	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "#boss_zeus_thundergod_wrath", cast_time = delay})
+	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_zeus_thundergod_wrath", cast_time = delay})
 
 	-- Play warning sound
 	altar_handle:EmitSound("Hero_Zuus.GodsWrath.PreCast")
 
 	-- Move boss to cast position and animate cast
 	boss:MoveToPosition(center_point + Vector(0, 300, 0))
+	boss:FaceTowards(center_point)
 	Timers:CreateTimer(delay - 0.4, function()
 		StartAnimation(boss, {duration = 0.83, activity=ACT_DOTA_CAST_ABILITY_5, rate=1.0})
 	end)

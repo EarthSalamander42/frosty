@@ -10,6 +10,7 @@ function Precache(context)
 
 	-- Link lua modifiers
 	LinkLuaModifier("modifier_command_restricted", "modifier/modifier_command_restricted.lua", LUA_MODIFIER_MOTION_NONE )
+	LinkLuaModifier("modifier_passive_bounty", "modifier/aura_abilities/modifier_passive_bounty.lua", LUA_MODIFIER_MOTION_NONE )
 
 	-- Stuff
 	PrecacheResource("particle_folder", "particles/hero", context)
@@ -40,6 +41,7 @@ function Precache(context)
 
 	-- Venomancer boss
 	PrecacheResource("particle_folder", "particles/boss_veno/", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_venomancer/", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_viper.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_venomancer.vsndevts", context)
 

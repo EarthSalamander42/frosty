@@ -60,6 +60,76 @@
 	}
 
 	//=================================================================================================================
+	// Lightning Altar: experience aura
+	//=================================================================================================================
+	"frostivus_altar_aura_zeus"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"frostivus_altar_aura_zeus"
+		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_zeus.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Poison Altar: speed aura
+	//=================================================================================================================
+	"frostivus_altar_aura_veno"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"frostivus_altar_aura_veno"
+		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_veno.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Fire Altar: gold aura
+	//=================================================================================================================
+	"frostivus_altar_aura_fire"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"frostivus_altar_aura_fire"
+		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_fire.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Nature Altar: defense aura
+	//=================================================================================================================
+	"frostivus_altar_aura_treant"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"frostivus_altar_aura_treant"
+		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_treant.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Ice Altar: damage aura
+	//=================================================================================================================
+	"frostivus_altar_aura_lich"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"frostivus_altar_aura_lich"
+		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_lich.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
 	// Bosses: passive buffs
 	//=================================================================================================================
 	"frostivus_boss_innate"
@@ -68,7 +138,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"rubick_empty1"
+		"AbilityTextureName"			"attribute_bonus"
 		"ScriptFile"					"boss_scripts/boss_innate.lua"
 		"MaxLevel"						"1"
 
@@ -119,14 +189,51 @@
 			"01"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"projectile_speed"			"1200"
-			}
-			"02"
-			{
-				"var_type"					"FIELD_INTEGER"
-				"projectile_radius"			"175"
+				"projectile_speed"			"1400"
 			}
 		}
+	}
+
+	//=================================================================================================================
+	// Venomancer: Poison Nova
+	//=================================================================================================================
+	"frostivus_boss_poison_nova"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"venomancer_poison_nova"
+		"ScriptFile"					"boss_scripts/boss_abilities/poison_nova.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Venomancer: Unwilling Host
+	//=================================================================================================================
+	"frostivus_boss_unwilling_host"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"custom/unwilling_host"
+		"ScriptFile"					"boss_scripts/boss_abilities/unwilling_host.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Venomancer: Green Death
+	//=================================================================================================================
+	"frostivus_boss_green_death"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"venomancer_poison_nova"
+		"ScriptFile"					"boss_scripts/boss_abilities/green_death.lua"
+		"MaxLevel"						"1"
 	}
 
 	//=====================================================================================================

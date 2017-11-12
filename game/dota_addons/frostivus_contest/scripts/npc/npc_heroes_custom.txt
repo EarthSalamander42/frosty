@@ -1,23 +1,933 @@
 "DOTAHeroes"
 {
-	//Sample to modify a hero
+	//=================================================================================================================
+	// HERO: Abaddon
+	//=================================================================================================================
+	"npc_dota_hero_abaddon"
+	{
+		"override_hero"			"npc_dota_hero_abaddon"
+
+		//"Ability1"				"custom_abaddon_death_coil"
+		"Ability2"				"abaddon_aphotic_shield"
+		"Ability3"				"abaddon_frostmourne"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"abaddon_borrowed_time"
+		"Ability10"				"special_bonus_movement_speed_25"
+		"Ability11"				"special_bonus_exp_boost_20"
+		"Ability12"				"special_bonus_armor_6"
+		"Ability13"				"special_bonus_unique_abaddon_2"
+		"Ability14"				"special_bonus_cooldown_reduction_15"
+		"Ability15"				"special_bonus_attack_damage_90"
+		"Ability16"				"special_bonus_unique_abaddon"
+		"Ability17"				"special_bonus_unique_abaddon_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Alchemist
+	//=================================================================================================================
+	"npc_dota_hero_alchemist"
+	{
+		"override_hero"			"npc_dota_hero_alchemist"
+
+		"Ability1"				"alchemist_acid_spray"
+		"Ability2"				"alchemist_unstable_concoction"
+		//"Ability3"				"custom_alchemist_goblins_greed"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"alchemist_chemical_rage"
+		"Ability7"				"alchemist_unstable_concoction_throw"
+		"Ability10"				"special_bonus_attack_speed_25"
+		"Ability11"				"special_bonus_armor_5"
+		"Ability12"				"special_bonus_hp_250"
+		"Ability13"				"special_bonus_attack_damage_50"
+		"Ability14"				"special_bonus_cleave_25"
+		"Ability15"				"special_bonus_unique_alchemist_2"
+		"Ability16"				"special_bonus_unique_alchemist_3"
+		"Ability17"				"special_bonus_unique_alchemist"
+	}
+
 	//=================================================================================================================
 	// HERO: Antimage
 	//=================================================================================================================
-//	"npc_dota_hero_antimage"
-//	{
-//		//Picking Screen
-//		"AttributePrimary"			"DOTA_ATTRIBUTE_AGILITY"
+	"npc_dota_hero_antimage"
+	{
+		"override_hero"			"npc_dota_hero_antimage"
 
-//		//Abilities
-//		"Ability1"					"antimage_mana_break"
-//		"Ability2"					"antimage_blink"
-//		"Ability3"					"antimage_spell_shield"
-//		"Ability4"					"generic_hidden"		
-//		"Ability5"					"generic_hidden"		
-//		"Ability6"					"antimage_mana_void"		
-//	}
+		"Ability1"				"antimage_mana_break"
+		"Ability2"				"antimage_blink"
+		//"Ability3"				"custom_antimage_spell_shield"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		//"Ability6"				"custom_antimage_mana_void"
+		"Ability10"				"special_bonus_hp_175"
+		"Ability11"				"special_bonus_attack_speed_20"
+		"Ability12"				"special_bonus_unique_antimage"
+		"Ability13"				"special_bonus_agility_15"
+		"Ability14"				"special_bonus_unique_antimage_5"
+		"Ability15"				"special_bonus_unique_antimage_3"
+		"Ability16"				"special_bonus_unique_antimage_4"
+		"Ability17"				"special_bonus_unique_antimage_2"
+	}
 
-	//Sample to ban a hero
-//	"npc_dota_hero_abaddon" { "IsDisabled" "1" }
+	//=================================================================================================================
+	// HERO: Axe
+	//=================================================================================================================
+	"npc_dota_hero_axe"
+	{
+		"override_hero"			"npc_dota_hero_axe"
+
+		"Ability1"				"axe_berserkers_call"
+		//"Ability2"				"custom_axe_battle_hunger"
+		"Ability3"				"axe_counter_helix"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		//"Ability6"				"custom_axe_culling_blade"
+		"Ability10"				"special_bonus_strength_8"
+		"Ability11"				"special_bonus_attack_speed_40"
+		"Ability12"				"special_bonus_mp_regen_3"
+		"Ability13"				"special_bonus_movement_speed_30"
+		"Ability14"				"special_bonus_hp_regen_20"
+		"Ability15"				"special_bonus_unique_axe_3"
+		"Ability16"				"special_bonus_unique_axe_2"
+		"Ability17"				"special_bonus_unique_axe"
+	}
+
+	//=================================================================================================================
+	// HERO: Beastmaster
+	//=================================================================================================================
+	"npc_dota_hero_beastmaster"
+	{
+		"override_hero"			"npc_dota_hero_beastmaster"
+
+		"Ability1"				"beastmaster_wild_axes"
+		"Ability2"				"beastmaster_call_of_the_wild"
+		"Ability3"				"beastmaster_inner_beast"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		//"Ability6"				"custom_beastmaster_primal_roar"
+		"Ability10"				"special_bonus_exp_boost_25"
+		"Ability11"				"special_bonus_movement_speed_30"
+		"Ability12"				"special_bonus_armor_7"
+		"Ability13"				"special_bonus_unique_beastmaster_2"
+		"Ability14"				"special_bonus_unique_beastmaster"
+		"Ability15"				"special_bonus_hp_500"
+		"Ability16"				"special_bonus_unique_beastmaster_4"
+		"Ability17"				"special_bonus_unique_beastmaster_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Bristleback
+	//=================================================================================================================
+	"npc_dota_hero_bristleback"
+	{
+		"override_hero"			"npc_dota_hero_bristleback"
+
+		"Ability1"				"bristleback_viscous_nasal_goo"
+		//"Ability2"				"custom_bristleback_quill_spray"
+		"Ability3"				"bristleback_bristleback"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"bristleback_warpath"
+		"Ability10"				"special_bonus_movement_speed_20"
+		"Ability11"				"special_bonus_mp_regen_2"
+		"Ability12"				"special_bonus_hp_250"
+		"Ability13"				"special_bonus_unique_bristleback"
+		"Ability14"				"special_bonus_hp_regen_20"
+		"Ability15"				"special_bonus_unique_bristleback_2"
+		"Ability16"				"special_bonus_spell_lifesteal_15"
+		"Ability17"				"special_bonus_unique_bristleback_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Clinkz
+	//=================================================================================================================
+	"npc_dota_hero_clinkz"
+	{
+		"override_hero"			"npc_dota_hero_clinkz"
+
+		"Ability1"				"clinkz_strafe"
+		"Ability2"				"clinkz_searing_arrows"
+		"Ability3"				"clinkz_wind_walk"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		//"Ability6"				"custom_clinkz_death_pact"
+		"Ability10"				"special_bonus_magic_resistance_12"
+		"Ability11"				"special_bonus_armor_5"
+		"Ability12"				"special_bonus_evasion_15"
+		"Ability13"				"special_bonus_unique_clinkz_1"
+		"Ability14"				"special_bonus_attack_range_100"
+		"Ability15"				"special_bonus_hp_regen_20"
+		"Ability16"				"special_bonus_unique_clinkz_2"
+		"Ability17"				"special_bonus_unique_clinkz_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Crystal Maiden
+	//=================================================================================================================
+	"npc_dota_hero_crystal_maiden"
+	{
+		"override_hero"			"npc_dota_hero_crystal_maiden"
+
+		"Ability1"				"crystal_maiden_crystal_nova"
+		//"Ability2"				"custom_crystal_maiden_frostbite"
+		//"Ability3"				"custom_crystal_maiden_brilliance_aura"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"crystal_maiden_freezing_field"
+		"Ability10"				"special_bonus_hp_200"
+		"Ability11"				"special_bonus_cast_range_100"
+		"Ability12"				"special_bonus_unique_crystal_maiden_4"
+		"Ability13"				"special_bonus_gold_income_15"
+		"Ability14"				"special_bonus_attack_speed_250"
+		"Ability15"				"special_bonus_unique_crystal_maiden_3"
+		"Ability16"				"special_bonus_unique_crystal_maiden_1"
+		"Ability17"				"special_bonus_unique_crystal_maiden_2"
+	}
+
+	//=================================================================================================================
+	// HERO: Dazzle
+	//=================================================================================================================
+	"npc_dota_hero_dazzle"
+	{
+		"override_hero"			"npc_dota_hero_dazzle"
+
+		"Ability1"				"dazzle_poison_touch"
+		"Ability2"				"dazzle_shallow_grave"
+		//"Ability3"				"custom_dazzle_shadow_wave"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"dazzle_weave"
+		"Ability10"				"special_bonus_attack_damage_60"
+		"Ability11"				"special_bonus_hp_175"
+		"Ability12"				"special_bonus_cast_range_125"
+		"Ability13"				"special_bonus_unique_dazzle_2"
+		"Ability14"				"special_bonus_movement_speed_50"
+		"Ability15"				"special_bonus_unique_dazzle_3"
+		"Ability16"				"special_bonus_unique_dazzle_1"
+		"Ability17"				"special_bonus_unique_dazzle_4"
+	}
+
+	//=================================================================================================================
+	// HERO: Dragon Knight
+	//=================================================================================================================
+	"npc_dota_hero_dragon_knight"
+	{
+		"override_hero"			"npc_dota_hero_dragon_knight"
+
+		//"Ability1"				"custom_dragon_knight_breathe_fire"
+		//"Ability2"				"custom_dragon_knight_dragon_tail"
+		"Ability3"				"dragon_knight_dragon_blood"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"dragon_knight_elder_dragon_form"
+		"Ability10"				"special_bonus_mp_regen_2"
+		"Ability11"				"special_bonus_attack_speed_30"
+		"Ability12"				"special_bonus_attack_damage_35"
+		"Ability13"				"special_bonus_hp_300"
+		"Ability14"				"special_bonus_gold_income_25"
+		"Ability15"				"special_bonus_unique_dragon_knight"
+		"Ability16"				"special_bonus_strength_40"
+		"Ability17"				"special_bonus_unique_dragon_knight_2"
+	}
+
+	//=================================================================================================================
+	// HERO: Drow Ranger
+	//=================================================================================================================
+	"npc_dota_hero_drow_ranger"
+	{
+		"override_hero"			"npc_dota_hero_drow_ranger"
+
+		//"Ability1"				"custom_drow_ranger_frost_arrows"
+		"Ability2"				"drow_ranger_wave_of_silence"
+		//"Ability3"				"custom_drow_ranger_trueshot"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"drow_ranger_marksmanship"
+		"Ability10"				"special_bonus_movement_speed_20"
+		"Ability11"				"special_bonus_all_stats_5"
+		"Ability12"				"special_bonus_attack_speed_25"
+		"Ability13"				"special_bonus_unique_drow_ranger_2"
+		"Ability14"				"special_bonus_unique_drow_ranger_3"
+		"Ability15"				"special_bonus_unique_drow_ranger_4"
+		"Ability16"				"special_bonus_unique_drow_ranger_1"
+		"Ability17"				"special_bonus_cooldown_reduction_50"
+	}
+
+	//=================================================================================================================
+	// HERO: Huskar
+	//=================================================================================================================
+	"npc_dota_hero_huskar"
+	{
+		"override_hero"			"npc_dota_hero_huskar"
+
+		"Ability1"				"huskar_inner_vitality"
+		"Ability2"				"huskar_burning_spear"
+		"Ability3"				"huskar_berserkers_blood"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		//"Ability6"				"custom_huskar_life_break"
+		"Ability10"				"special_bonus_hp_175"
+		"Ability11"				"special_bonus_attack_damage_20"
+		"Ability12"				"special_bonus_unique_huskar_2"
+		"Ability13"				"special_bonus_lifesteal_15"
+		"Ability14"				"special_bonus_strength_15"
+		"Ability15"				"special_bonus_unique_huskar"
+		"Ability16"				"special_bonus_attack_range_125"
+		"Ability17"				"special_bonus_unique_huskar_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Jakiro
+	//=================================================================================================================
+	"npc_dota_hero_jakiro"
+	{
+		"override_hero"			"npc_dota_hero_jakiro"
+
+		//"Ability1"				"custom_jakiro_dual_breath"
+		//"Ability2"				"custom_jakiro_ice_path"
+		//"Ability3"				"custom_jakiro_liquid_fire"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"jakiro_macropyre"
+		"Ability10"				"special_bonus_exp_boost_25"
+		"Ability11"				"special_bonus_spell_amplify_8"
+		"Ability12"				"special_bonus_attack_range_250"
+		"Ability13"				"special_bonus_unique_jakiro_2"
+		"Ability14"				"special_bonus_unique_jakiro_4"
+		"Ability15"				"special_bonus_gold_income_25"
+		"Ability16"				"special_bonus_unique_jakiro_3"
+		"Ability17"				"special_bonus_unique_jakiro"
+	}
+
+	//=================================================================================================================
+	// HERO: Juggernaut
+	//=================================================================================================================
+	"npc_dota_hero_juggernaut"
+	{
+		"override_hero"			"npc_dota_hero_juggernaut"
+
+		"Ability1"				"juggernaut_blade_fury"
+		"Ability2"				"juggernaut_healing_ward"
+		"Ability3"				"juggernaut_blade_dance"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"juggernaut_omni_slash"
+		"Ability10"				"special_bonus_all_stats_5"
+		"Ability11"				"special_bonus_movement_speed_20"
+		"Ability12"				"special_bonus_unique_juggernaut"
+		"Ability13"				"special_bonus_attack_speed_25"
+		"Ability14"				"special_bonus_armor_10"
+		"Ability15"				"special_bonus_unique_juggernaut_3"
+		"Ability16"				"special_bonus_hp_600"
+		"Ability17"				"special_bonus_unique_juggernaut_2"
+	}
+
+	//=================================================================================================================
+	// HERO: Leshrac
+	//=================================================================================================================
+	"npc_dota_hero_leshrac"
+	{
+		"override_hero"			"npc_dota_hero_leshrac"
+
+		"Ability1"				"leshrac_split_earth"
+		"Ability2"				"leshrac_diabolic_edict"
+		//"Ability3"				"custom_leshrac_lightning_storm"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"leshrac_pulse_nova"
+		"Ability10"				"special_bonus_armor_5"
+		"Ability11"				"special_bonus_mp_250"
+		"Ability12"				"special_bonus_strength_15"
+		"Ability13"				"special_bonus_movement_speed_40"
+		"Ability14"				"special_bonus_evasion_25"
+		"Ability15"				"special_bonus_unique_leshrac_3"
+		"Ability16"				"special_bonus_unique_leshrac_1"
+		"Ability17"				"special_bonus_unique_leshrac_2"
+	}
+
+	//=================================================================================================================
+	// HERO: Lifestealer
+	//=================================================================================================================
+	"npc_dota_hero_life_stealer"
+	{
+		"override_hero"			"npc_dota_hero_life_stealer"
+
+		"Ability1"				"life_stealer_rage"
+		"Ability2"				"life_stealer_feast"
+		"Ability3"				"life_stealer_open_wounds"
+		"Ability4"				"life_stealer_assimilate"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"life_stealer_infest"
+		"Ability7"				"life_stealer_control"
+		"Ability8"				"life_stealer_consume"
+		"Ability9"				"life_stealer_assimilate_eject"
+		"Ability10"				"special_bonus_hp_200"
+		"Ability11"				"special_bonus_attack_speed_20"
+		"Ability12"				"special_bonus_attack_damage_30"
+		"Ability13"				"special_bonus_movement_speed_35"
+		"Ability14"				"special_bonus_evasion_20"
+		"Ability15"				"special_bonus_unique_lifestealer_2"
+		"Ability16"				"special_bonus_unique_lifestealer_3"
+		"Ability17"				"special_bonus_unique_lifestealer"
+	}
+
+	//=================================================================================================================
+	// HERO: Lina
+	//=================================================================================================================
+	"npc_dota_hero_lina"
+	{
+		"override_hero"			"npc_dota_hero_lina"
+
+		"Ability1"				"lina_dragon_slave"
+		"Ability2"				"lina_light_strike_array"
+		"Ability3"				"lina_fiery_soul"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		//"Ability6"				"custom_lina_laguna_blade"
+		"Ability10"				"special_bonus_attack_damage_25"
+		"Ability11"				"special_bonus_cast_range_100"
+		"Ability12"				"special_bonus_hp_300"
+		"Ability13"				"special_bonus_unique_lina_3"
+		"Ability14"				"special_bonus_spell_amplify_10"
+		"Ability15"				"special_bonus_unique_lina_2"
+		"Ability16"				"special_bonus_unique_lina_1"
+		"Ability17"				"special_bonus_attack_range_175"
+	}
+
+	//=================================================================================================================
+	// HERO: Luna
+	//=================================================================================================================
+	"npc_dota_hero_luna"
+	{
+		"override_hero"			"npc_dota_hero_luna"
+
+		"Ability1"				"luna_lucent_beam"
+		//"Ability2"				"custom_luna_moon_glaive"
+		"Ability3"				"luna_lunar_blessing"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"luna_eclipse"
+		"Ability10"				"special_bonus_attack_speed_20"
+		"Ability11"				"special_bonus_cast_range_150"
+		"Ability12"				"special_bonus_unique_luna_2"
+		"Ability13"				"special_bonus_unique_luna_3"
+		"Ability14"				"special_bonus_all_stats_10"
+		"Ability15"				"special_bonus_unique_luna_1"
+		"Ability16"				"special_bonus_lifesteal_25"
+		"Ability17"				"special_bonus_unique_luna_5"
+	}
+
+	//=================================================================================================================
+	// HERO: Lycan
+	//=================================================================================================================
+	"npc_dota_hero_lycan"
+	{
+		"override_hero"			"npc_dota_hero_lycan"
+
+		"Ability1"				"lycan_summon_wolves"
+		"Ability2"				"lycan_howl"
+		"Ability3"				"lycan_feral_impulse"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"lycan_shapeshift"
+		"Ability10"				"special_bonus_armor_5"
+		"Ability11"				"special_bonus_attack_damage_20"
+		"Ability12"				"special_bonus_unique_lycan_3"
+		"Ability13"				"special_bonus_cooldown_reduction_12"
+		"Ability14"				"special_bonus_unique_lycan_1"
+		"Ability15"				"special_bonus_unique_lycan_4"
+		"Ability16"				"special_bonus_unique_lycan_5"
+		"Ability17"				"special_bonus_unique_lycan_2"
+	}
+
+	//=================================================================================================================
+	// HERO: Ogre Magi
+	//=================================================================================================================
+	"npc_dota_hero_ogre_magi"
+	{
+		"override_hero"			"npc_dota_hero_ogre_magi"
+
+		"Ability1"				"ogre_magi_fireblast"
+		"Ability2"				"custom_ogre_magi_ignite"
+		"Ability3"				"ogre_magi_bloodlust"
+		"Ability4"				"ogre_magi_unrefined_fireblast"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"ogre_magi_multicast"
+		"Ability10"				"special_bonus_gold_income_10"
+		"Ability11"				"special_bonus_cast_range_100"
+		"Ability12"				"special_bonus_attack_damage_90"
+		"Ability13"				"special_bonus_hp_300"
+		"Ability14"				"special_bonus_strength_30"
+		"Ability15"				"special_bonus_unique_ogre_magi"
+		"Ability16"				"special_bonus_movement_speed_90"
+		"Ability17"				"special_bonus_unique_ogre_magi_2"
+	}
+
+	//=================================================================================================================
+	// HERO: Omniknight
+	//=================================================================================================================
+	"npc_dota_hero_omniknight"
+	{
+		"override_hero"			"npc_dota_hero_omniknight"
+
+		//"Ability1"				"custom_omniknight_purification"
+		"Ability2"				"omniknight_repel"
+		//"Ability3"				"custom_omniknight_degen_aura"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"omniknight_guardian_angel"
+		"Ability10"				"special_bonus_gold_income_15"
+		"Ability11"				"special_bonus_unique_omniknight_4"
+		"Ability12"				"special_bonus_exp_boost_35"
+		"Ability13"				"special_bonus_attack_damage_90"
+		"Ability14"				"special_bonus_unique_omniknight_2"
+		"Ability15"				"special_bonus_mp_regen_6"
+		"Ability16"				"special_bonus_unique_omniknight_1"
+		"Ability17"				"special_bonus_unique_omniknight_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Oracle
+	//=================================================================================================================
+	"npc_dota_hero_oracle"
+	{
+		"override_hero"			"npc_dota_hero_oracle"
+
+		"Ability1"				"oracle_fortunes_end"
+		"Ability2"				"oracle_fates_edict"
+		"Ability3"				"oracle_purifying_flames"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"oracle_false_promise"
+		"Ability10"				"special_bonus_unique_oracle_2"
+		"Ability11"				"special_bonus_exp_boost_25"
+		"Ability12"				"special_bonus_cast_range_150"
+		"Ability13"				"special_bonus_gold_income_15"
+		"Ability14"				"special_bonus_movement_speed_75"
+		"Ability15"				"special_bonus_unique_oracle_4"
+		"Ability16"				"special_bonus_unique_oracle_3"
+		"Ability17"				"special_bonus_unique_oracle"
+	}
+
+	//=================================================================================================================
+	// HERO: Phantom Assassin
+	//=================================================================================================================
+	"npc_dota_hero_phantom_assassin"
+	{
+		"override_hero"			"npc_dota_hero_phantom_assassin"
+
+		"Ability1"				"phantom_assassin_stifling_dagger"
+		"Ability2"				"phantom_assassin_phantom_strike"
+		//"Ability3"				"custom_phantom_assassin_blur"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"phantom_assassin_coup_de_grace"
+		"Ability10"				"special_bonus_hp_150"
+		"Ability11"				"special_bonus_attack_damage_15"
+		"Ability12"				"special_bonus_corruption_4"
+		"Ability13"				"special_bonus_cleave_20"
+		"Ability14"				"special_bonus_lifesteal_20"
+		"Ability15"				"special_bonus_unique_phantom_assassin"
+		"Ability16"				"special_bonus_unique_phantom_assassin_2"
+		"Ability17"				"special_bonus_unique_phantom_assassin_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Pugna
+	//=================================================================================================================
+	"npc_dota_hero_pugna"
+	{
+		"override_hero"			"npc_dota_hero_pugna"
+
+		"Ability1"				"pugna_nether_blast"
+		"Ability2"				"pugna_decrepify"
+		"Ability3"				"pugna_nether_ward"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		//"Ability6"				"custom_pugna_life_drain"
+		"Ability10"				"special_bonus_movement_speed_25"
+		"Ability11"				"special_bonus_hp_225"
+		"Ability12"				"special_bonus_unique_pugna_4"
+		"Ability13"				"special_bonus_unique_pugna_6"
+		"Ability14"				"special_bonus_unique_pugna_1"
+		"Ability15"				"special_bonus_unique_pugna_5"
+		"Ability16"				"special_bonus_unique_pugna_2"
+		"Ability17"				"special_bonus_unique_pugna_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Rubick
+	//=================================================================================================================
+	"npc_dota_hero_rubick"
+	{
+		"override_hero"			"npc_dota_hero_rubick"
+
+		//"Ability1"				"custom_rubick_telekinesis"
+		"Ability2"				"rubick_fade_bolt"
+		"Ability3"				"rubick_null_field"
+		"Ability4"				"rubick_empty1"
+		"Ability5"				"rubick_empty2"
+		"Ability6"				"rubick_spell_steal"
+		"Ability7"				"rubick_telekinesis_land"
+		"Ability8"				"rubick_hidden1"
+		"Ability9"				"rubick_hidden2"
+		"Ability10"				"rubick_hidden3"
+		"Ability11"				"special_bonus_hp_200"
+		"Ability12"				"special_bonus_attack_damage_60"
+		"Ability13"				"special_bonus_cast_range_100"
+		"Ability14"				"special_bonus_unique_rubick_2"
+		"Ability15"				"special_bonus_unique_rubick_3"
+		"Ability16"				"special_bonus_unique_rubick"
+		"Ability17"				"special_bonus_unique_rubick_4"
+		"Ability18"				"special_bonus_unique_rubick_5"
+	}
+
+	//=================================================================================================================
+	// HERO: Skywrath Mage
+	//=================================================================================================================
+	"npc_dota_hero_skywrath_mage"
+	{
+		"override_hero"			"npc_dota_hero_skywrath_mage"
+
+		"Ability1"				"skywrath_mage_arcane_bolt"
+		"Ability2"				"skywrath_mage_concussive_shot"
+		"Ability3"				"skywrath_mage_ancient_seal"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"skywrath_mage_mystic_flare"
+		"Ability10"				"special_bonus_movement_speed_25"
+		"Ability11"				"special_bonus_intelligence_8"
+		"Ability12"				"special_bonus_unique_skywrath"
+		"Ability13"				"special_bonus_unique_skywrath_2"
+		"Ability14"				"special_bonus_unique_skywrath_4"
+		"Ability15"				"special_bonus_unique_skywrath_3"
+		"Ability16"				"special_bonus_gold_income_50"
+		"Ability17"				"special_bonus_unique_skywrath_5"
+	}
+
+	//=================================================================================================================
+	// HERO: Sniper
+	//=================================================================================================================
+	"npc_dota_hero_sniper"
+	{
+		"override_hero"			"npc_dota_hero_sniper"
+
+		"Ability1"				"sniper_shrapnel"
+		"Ability2"				"sniper_headshot"
+		"Ability3"				"sniper_take_aim"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"sniper_assassinate"
+		"Ability10"				"special_bonus_cooldown_reduction_12"
+		"Ability11"				"special_bonus_attack_damage_20"
+		"Ability12"				"special_bonus_attack_speed_40"
+		"Ability13"				"special_bonus_unique_sniper_1"
+		"Ability14"				"special_bonus_unique_sniper_3"
+		"Ability15"				"special_bonus_unique_sniper_4"
+		"Ability16"				"special_bonus_attack_range_125"
+		"Ability17"				"special_bonus_unique_sniper_2"
+	}
+
+	//=================================================================================================================
+	// HERO: Spectre
+	//=================================================================================================================
+	"npc_dota_hero_spectre"
+	{
+		"override_hero"			"npc_dota_hero_spectre"
+
+		//"Ability1"				"custom_spectre_spectral_dagger"
+		"Ability2"				"spectre_desolate"
+		"Ability3"				"spectre_dispersion"
+		"Ability4"				"spectre_reality"
+		"Ability5"				"generic_hidden"
+		//"Ability6"				"custom_spectre_haunt"
+		"Ability10"				"special_bonus_hp_regen_5"
+		"Ability11"				"special_bonus_unique_spectre_2"
+		"Ability12"				"special_bonus_all_stats_8"
+		"Ability13"				"special_bonus_unique_spectre"
+		"Ability14"				"special_bonus_hp_500"
+		"Ability15"				"special_bonus_unique_spectre_3"
+		"Ability16"				"special_bonus_unique_spectre_4"
+		"Ability17"				"special_bonus_unique_spectre_5"
+	}
+
+	//=================================================================================================================
+	// HERO: Sven
+	//=================================================================================================================
+	"npc_dota_hero_sven"
+	{
+		"override_hero"			"npc_dota_hero_sven"
+
+		"Ability1"				"sven_storm_bolt"
+		//"Ability2"				"custom_sven_great_cleave"
+		"Ability3"				"sven_warcry"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"sven_gods_strength"
+		"Ability10"				"special_bonus_strength_8"
+		"Ability11"				"special_bonus_mp_regen_2"
+		"Ability12"				"special_bonus_movement_speed_30"
+		"Ability13"				"special_bonus_attack_damage_30"
+		"Ability14"				"special_bonus_lifesteal_25"
+		"Ability15"				"special_bonus_unique_sven_3"
+		"Ability16"				"special_bonus_unique_sven_2"
+		"Ability17"				"special_bonus_unique_sven"
+	}
+
+	//=================================================================================================================
+	// HERO: Templar Assassin
+	//=================================================================================================================
+	"npc_dota_hero_templar_assassin"
+	{
+		"override_hero"			"npc_dota_hero_templar_assassin"
+
+		//"Ability1"				"custom_templar_assassin_refraction"
+		"Ability2"				"templar_assassin_meld"
+		"Ability3"				"templar_assassin_psi_blades"
+		"Ability4"				"templar_assassin_trap"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"templar_assassin_psionic_trap"
+		"Ability10"				"special_bonus_attack_speed_25"
+		"Ability11"				"special_bonus_hp_250"
+		"Ability12"				"special_bonus_armor_7"
+		"Ability13"				"special_bonus_unique_templar_assassin_3"
+		"Ability14"				"special_bonus_unique_templar_assassin_4"
+		"Ability15"				"special_bonus_unique_templar_assassin_2"
+		"Ability16"				"special_bonus_unique_templar_assassin_5"
+		"Ability17"				"special_bonus_unique_templar_assassin"
+	}
+
+	//=================================================================================================================
+	// HERO: Timbersaw
+	//=================================================================================================================
+	"npc_dota_hero_shredder"
+	{
+		"override_hero"			"npc_dota_hero_shredder"
+
+		//"Ability1"				"custom_shredder_whirling_death"
+		"Ability2"				"shredder_timber_chain"
+		"Ability3"				"shredder_reactive_armor"
+		"Ability4"				"shredder_chakram_2"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"shredder_chakram"
+		"Ability7"				"shredder_return_chakram"
+		"Ability8"				"shredder_return_chakram_2"
+		"Ability10"				"special_bonus_spell_amplify_6"
+		"Ability11"				"special_bonus_exp_boost_25"
+		"Ability12"				"special_bonus_attack_damage_100"
+		"Ability13"				"special_bonus_unique_timbersaw_2"
+		"Ability14"				"special_bonus_strength_15"
+		"Ability15"				"special_bonus_cooldown_reduction_10"
+		"Ability16"				"special_bonus_unique_timbersaw"
+		"Ability17"				"special_bonus_unique_timbersaw_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Troll Warlord
+	//=================================================================================================================
+	"npc_dota_hero_troll_warlord"
+	{
+		"override_hero"			"npc_dota_hero_troll_warlord"
+
+		"Ability1"				"troll_warlord_berserkers_rage"
+		"Ability2"				"troll_warlord_whirling_axes_ranged"
+		"Ability3"				"troll_warlord_whirling_axes_melee"
+		"Ability4"				"troll_warlord_fervor"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"troll_warlord_battle_trance"
+		"Ability10"				"special_bonus_agility_10"
+		"Ability11"				"special_bonus_hp_200"
+		"Ability12"				"special_bonus_unique_troll_warlord_2"
+		"Ability13"				"special_bonus_unique_troll_warlord_3"
+		"Ability14"				"special_bonus_evasion_20"
+		"Ability15"				"special_bonus_attack_damage_50"
+		"Ability16"				"special_bonus_unique_troll_warlord"
+		"Ability17"				"special_bonus_unique_troll_warlord_4"
+	}
+
+	//=================================================================================================================
+	// HERO: Ursa
+	//=================================================================================================================
+	"npc_dota_hero_ursa"
+	{
+		"override_hero"			"npc_dota_hero_ursa"
+
+		"Ability1"				"ursa_earthshock"
+		"Ability2"				"ursa_overpower"
+		//"Ability3"				"custom_ursa_fury_swipes"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"ursa_enrage"
+		"Ability10"				"special_bonus_mp_regen_175"
+		"Ability11"				"special_bonus_strength_8"
+		"Ability12"				"special_bonus_agility_16"
+		"Ability13"				"special_bonus_unique_ursa_2"
+		"Ability14"				"special_bonus_unique_ursa_3"
+		"Ability15"				"special_bonus_unique_ursa_4"
+		"Ability16"				"special_bonus_unique_ursa_5"
+		"Ability17"				"special_bonus_unique_ursa"
+	}
+
+	//=================================================================================================================
+	// HERO: Vengeful Spirit
+	//=================================================================================================================
+	"npc_dota_hero_vengefulspirit"
+	{
+		"override_hero"			"npc_dota_hero_vengefulspirit"
+
+		"Ability1"				"vengefulspirit_magic_missile"
+		"Ability2"				"vengefulspirit_wave_of_terror"
+		"Ability3"				"vengefulspirit_command_aura"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"vengefulspirit_nether_swap"
+		"Ability10"				"special_bonus_magic_resistance_15"
+		"Ability11"				"special_bonus_unique_vengeful_spirit_4"
+		"Ability12"				"special_bonus_agility_15"
+		"Ability13"				"special_bonus_unique_vengeful_spirit_6"
+		"Ability14"				"special_bonus_unique_vengeful_spirit_5"
+		"Ability15"				"special_bonus_unique_vengeful_spirit_2"
+		"Ability16"				"special_bonus_unique_vengeful_spirit_1"
+		"Ability17"				"special_bonus_unique_vengeful_spirit_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Warlock
+	//=================================================================================================================
+	"npc_dota_hero_warlock"
+	{
+		"override_hero"			"npc_dota_hero_warlock"
+
+		"Ability1"				"warlock_fatal_bonds"
+		"Ability2"				"warlock_shadow_word"
+		"Ability3"				"warlock_upheaval"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"warlock_rain_of_chaos"
+		"Ability10"				"special_bonus_unique_warlock_5"
+		"Ability11"				"special_bonus_cast_range_125"
+		"Ability12"				"special_bonus_exp_boost_40"
+		"Ability13"				"special_bonus_unique_warlock_3"
+		"Ability14"				"special_bonus_unique_warlock_4"
+		"Ability15"				"special_bonus_unique_warlock_6"
+		"Ability16"				"special_bonus_unique_warlock_2"
+		"Ability17"				"special_bonus_unique_warlock_1"
+	}
+
+	//=================================================================================================================
+	// HERO: Windrunner
+	//=================================================================================================================
+	"npc_dota_hero_windrunner"
+	{
+		"override_hero"			"npc_dota_hero_windrunner"
+
+		"Ability1"				"windrunner_shackleshot"
+		"Ability2"				"windrunner_powershot"
+		"Ability3"				"windrunner_windrun"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"windrunner_focusfire"
+		"Ability10"				"special_bonus_mp_regen_175"
+		"Ability11"				"special_bonus_unique_windranger_2"
+		"Ability12"				"special_bonus_unique_windranger_3"
+		"Ability13"				"special_bonus_attack_range_75"
+		"Ability14"				"special_bonus_cooldown_reduction_25"
+		"Ability15"				"special_bonus_unique_windranger"
+		"Ability16"				"special_bonus_unique_windranger_4"
+		"Ability17"				"special_bonus_unique_windranger_5"
+	}
+
+	//=================================================================================================================
+	// HERO: Winter Wyvern
+	//=================================================================================================================
+	"npc_dota_hero_winter_wyvern"
+	{
+		"override_hero"			"npc_dota_hero_winter_wyvern"
+
+		"Ability1"				"winter_wyvern_arctic_burn"
+		"Ability2"				"winter_wyvern_splinter_blast"
+		"Ability3"				"winter_wyvern_cold_embrace"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"winter_wyvern_winters_curse"
+		"Ability10"				"special_bonus_gold_income_15"
+		"Ability11"				"special_bonus_attack_damage_50"
+		"Ability12"				"special_bonus_hp_350"
+		"Ability13"				"special_bonus_night_vision_600"
+		"Ability14"				"special_bonus_unique_winter_wyvern_1"
+		"Ability15"				"special_bonus_unique_winter_wyvern_2"
+		"Ability16"				"special_bonus_unique_winter_wyvern_3"
+		"Ability17"				"special_bonus_unique_winter_wyvern_4"
+	}
+
+	//=================================================================================================================
+	// HERO: Wisp
+	//=================================================================================================================
+	"npc_dota_hero_wisp"
+	{
+		"override_hero"			"npc_dota_hero_wisp"
+
+		"Ability1"				"wisp_tether"
+		"Ability2"				"wisp_spirits"
+		"Ability3"				"wisp_overcharge"
+		"Ability4"				"wisp_spirits_in"
+		"Ability5"				"wisp_spirits_out"
+		"Ability6"				"wisp_relocate"
+		"Ability7"				"wisp_tether_break"
+		"Ability11"				"special_bonus_unique_wisp_3"
+		"Ability12"				"special_bonus_attack_damage_60"
+		"Ability13"				"special_bonus_unique_wisp"
+		"Ability14"				"special_bonus_unique_wisp_5"
+		"Ability15"				"special_bonus_gold_income_25"
+		"Ability16"				"special_bonus_unique_wisp_4"
+		"Ability17"				"special_bonus_unique_wisp_2"
+		"Ability18"				"special_bonus_hp_regen_50"
+	}
+
+	//=================================================================================================================
+	// HERO: Witch Doctor
+	//=================================================================================================================
+	"npc_dota_hero_witch_doctor"
+	{
+		"override_hero"			"npc_dota_hero_witch_doctor"
+
+		"Ability1"				"witch_doctor_paralyzing_cask"
+		"Ability2"				"witch_doctor_voodoo_restoration"
+		"Ability3"				"witch_doctor_maledict"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"witch_doctor_death_ward"
+		"Ability10"				"special_bonus_attack_damage_75"
+		"Ability11"				"special_bonus_armor_5"
+		"Ability12"				"special_bonus_unique_witch_doctor_3"
+		"Ability13"				"special_bonus_gold_income_20"
+		"Ability14"				"special_bonus_unique_witch_doctor_1"
+		"Ability15"				"special_bonus_unique_witch_doctor_4"
+		"Ability16"				"special_bonus_unique_witch_doctor_2"
+		"Ability17"				"special_bonus_unique_witch_doctor_5"
+	}
+
+	//=================================================================================================================
+	// HERO: Wraith King
+	//=================================================================================================================
+	"npc_dota_hero_skeleton_king"
+	{
+		"override_hero"			"npc_dota_hero_skeleton_king"
+
+		"Ability1"				"skeleton_king_hellfire_blast"
+		//"Ability2"				"custom_skeleton_king_vampiric_aura"
+		"Ability3"				"skeleton_king_mortal_strike"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"skeleton_king_reincarnation"
+		"Ability10"				"special_bonus_unique_wraith_king_3"
+		"Ability11"				"special_bonus_attack_speed_20"
+		"Ability12"				"special_bonus_strength_15"
+		"Ability13"				"special_bonus_unique_wraith_king_5"
+		"Ability14"				"special_bonus_unique_wraith_king_1"
+		"Ability15"				"special_bonus_unique_wraith_king_6"
+		"Ability16"				"special_bonus_unique_wraith_king_2"
+		"Ability17"				"special_bonus_unique_wraith_king_4"
+	}
 }

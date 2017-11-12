@@ -22,7 +22,21 @@ function Frostivus()
 end
 
 function FrostivusPhase(PHASE)
+--	local units = FindUnitsInRadius(1, Vector(0,0,0), nil, 25000, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+
 	print("Phase:", PHASE)
+
+--	for _, unit in ipairs(units) do
+--		if unit:GetName() == "npc_dota_roshan" then
+--			local AImod = unit:FindModifierByName("modifier_imba_roshan_ai_diretide")
+--			if AImod then
+--				AImod:SetStackCount(PHASE)
+--				unit:Interrupt()
+--			else
+--				print("ERROR - Could not find Roshans AI modifier")
+--			end
+--		end
+--	end
 	CustomGameEventManager:Send_ServerToAllClients("frostivus_phase", {Phase = tostring(PHASE)})
 end
 
@@ -61,6 +75,18 @@ function FrostivusCountdown(tick)
 	end)
 end
 
+function UpdateRoshanBar(roshan, level, time)
+	Timers:CreateTimer(function()
+		CustomNetTables:SetTableValue("game_options", "roshan", {
+			level = level,
+			HP = roshan:GetHealth(),
+			HP_alt = roshan:GetHealthPercent(),
+			maxHP = roshan:GetMaxHealth()
+		})
+		return time
+	end)
+end
+
 function FrostivusIncreaseTimer(time)
 	nCOUNTDOWNTIMER = nCOUNTDOWNTIMER + time
 end
@@ -93,10 +119,16 @@ function FrostivusHeroKilled(killer, hero)
 		for _,hero in pairs(fight_heroes) do
 			hero:RemoveModifierByName("modifier_frostivus_zeus_positive_charge")
 			hero:RemoveModifierByName("modifier_frostivus_zeus_negative_charge")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_sting_debuff")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_venomous_gale")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_nova")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_unwilling_host")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_virulent_plague")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
 		end
 
 		-- Unlock the arena
-		UnlockArena(altar_name, false, losing_team)
+		UnlockArena(altar_name, false)
 
 		-- Delete the boss AI thinker modifier and re-apply the capture attempt detection modifier
 		local nearby_bosses = FindUnitsInRadius(hero:GetTeam(), altar_handle:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
@@ -139,15 +171,11 @@ end
 
 -- TODO: make a panorama panel to choose at which altar to respawn
 function FrostivusAltarRespawn(hero)
-	if not hero.altar then
-		if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
-			hero.altar = "1"
-		else
-			hero.altar = "7"
-		end
+	if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+		altar = Entities:FindByName(nil, "altar_1")
+	else
+		altar = Entities:FindByName(nil, "altar_7")
 	end
-
-	local altar = Entities:FindByName(nil, "altar_"..hero.altar)
 
 	local respawn_position = altar:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
 	FindClearSpaceForUnit(hero, respawn_position, true)

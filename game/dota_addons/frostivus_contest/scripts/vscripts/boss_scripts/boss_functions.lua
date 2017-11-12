@@ -29,10 +29,9 @@ function LockArena(altar, team, attacker)
 	if direction:Length2D() > 850 then
 		FindClearSpaceForUnit(attacker, altar_loc + direction:Normalized() * 850, false)
 	end
-	CustomGameEventManager:Send_ServerToTeam(team, "show_boss_hp", {})
 end
 
-function UnlockArena(altar, victory, team)
+function UnlockArena(altar, victory, aura_ability)
 	local altar_handle = Entities:FindByName(nil, altar)
 	ParticleManager:DestroyParticle(altar_handle.arena_fence_pfx, true)
 	ParticleManager:ReleaseParticleIndex(altar_handle.arena_fence_pfx)
@@ -41,14 +40,18 @@ function UnlockArena(altar, victory, team)
 	altar_handle.victory = victory
 	altar_handle:RemoveModifierByName("modifier_altar_active")
 
-	for i = 1, 7 do
-		if string.find(altar, i) then
-			CustomGameEventManager:Send_ServerToAllClients("update_altar", {altar = i, team = team})
-			Entities:FindByName(nil, "altar_"..i):SetTeam(team)
+	-- Adjust altar aura if necessary
+	if victory then
+		if altar_handle:FindAbilityByName(aura_ability) then
+			local modifier_name = "modifier_"..aura_ability
+			local aura_modifier = altar_handle:FindModifierByName(modifier_name)
+			aura_modifier:SetStackCount(aura_modifier:GetStackCount() + 1)
+		else
+			altar_handle:AddAbility(aura_ability)
+			altar_handle:FindAbilityByName(aura_ability):SetLevel(1)
+			altar_handle.aura_strength = 0
 		end
 	end
-
-	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {})
 end
 
 -- Fighting boss modifier
@@ -100,14 +103,21 @@ end
 
 function modifier_altar_active:OnDestroy( params )
 	if IsServer() then
+
 		-- Clean fighting heroes list
+		local altar_handle = self:GetParent()
 		for _, hero in pairs(self.fighting_heroes) do
 
 			-- Give heroes a bounty, if appropriate
-			if self:GetParent().victory then
+			if altar_handle.victory and hero:IsRealHero() then
 				hero:AddExperience(BASE_BOSS_EXP_REWARD * (1 + BONUS_BOUNTY_PER_MINUTE * 0.01 * GameRules:GetDOTATime(false, false) / 60), DOTA_ModifyXP_CreepKill, false, true)
 				hero:ModifyGold(BASE_BOSS_GOLD_REWARD * (1 + BONUS_BOUNTY_PER_MINUTE * 0.01 * GameRules:GetDOTATime(false, false) / 60), false, DOTA_ModifyGold_CreepKill)
 				SendOverheadEventMessage(hero, OVERHEAD_ALERT_GOLD, hero, BASE_BOSS_GOLD_REWARD * (1 + BONUS_BOUNTY_PER_MINUTE * 0.01 * GameRules:GetDOTATime(false, false) / 60), nil)
+
+				-- Also change the altar's team, if necessary
+				if altar_handle:GetTeam() ~= hero:GetTeam() then
+					altar_handle:SetTeam(hero:GetTeam())
+				end
 			end
 			hero:RemoveModifierByName("modifier_fighting_boss")
 		end
@@ -191,6 +201,9 @@ function SpawnVenomancer(altar)
 	-- Cosmetics
 	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_venomous_gale"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_poison_nova"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_unwilling_host"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_green_death"):SetLevel(1)
 	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_head/poison_touch_head.vmdl"})
 	boss.head:FollowEntity(boss, true)
 	boss.shoulder = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_shoulder/poison_touch_shoulder.vmdl"})

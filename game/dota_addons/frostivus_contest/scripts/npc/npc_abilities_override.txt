@@ -299,4 +299,462 @@
 			}
 		}
 	}
+
+	//=================================================================================================================
+	// Abaddon: Borrowed Time
+	//=================================================================================================================
+	"abaddon_borrowed_time"
+	{
+		"AbilityCooldown"					"30 25 20"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hp_threshold"				"400"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"3.0"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration_scepter"			"4.0"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"redirect"					"0.5"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"redirect_pct_tooltip_scepter"	"50"
+			}
+			"06"
+			{
+				"var_type"							"FIELD_FLOAT"
+				"redirect_range_tooltip_scepter"	"900"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Clinkz: Wind Walk
+	//=================================================================================================================
+	"clinkz_wind_walk"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"10.0 12.0 14.0 16.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"fade_time"					"0.6"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"move_speed_bonus_pct"		"5 10 15 20"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Dazzle: Shallow Grave
+	//=================================================================================================================
+	"dazzle_shallow_grave"
+	{
+		"AbilityCastRange"			"1000"
+
+		"AbilityCooldown"			"65 55 45 35"
+
+		"AbilityDuration"			"5.0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{	
+				"var_type"			"FIELD_FLOAT"
+				"duration_tooltip"	"5.0"
+			}
+			"02"
+			{	
+				"var_type"			"FIELD_INTEGER"
+				"range_tooltip"		"1000"
+			}
+			"03"
+			{	
+				"var_type"			"FIELD_INTEGER"
+				"scepter_radius"	"900"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Huskar: Inner Vitality
+	//=================================================================================================================
+	"huskar_inner_vitality"
+	{
+		"AbilityCooldown"				"60 55 50 45"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal"					"15"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"attrib_bonus"			"0.28 0.36 0.42 0.50"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"hurt_attrib_bonus"		"0.48 0.56 0.62 0.70"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"hurt_percent"			"0.35"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"tooltip_attrib_bonus"			"28 36 42 50"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"tooltip_hurt_attrib_bonus"		"48 56 62 70"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Huskar: Burning Spear
+	//=================================================================================================================
+	"huskar_burning_spear"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"health_cost"					"15"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"burn_damage"					"2 4 6 8"
+				"LinkedSpecialBonus"			"special_bonus_unique_huskar_2"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Huskar: bonus Burning Spear DPS
+	//=================================================================================================================
+	"special_bonus_unique_huskar_2"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"8"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Juggernaut: Blade Fury
+	//=================================================================================================================
+	"juggernaut_blade_fury"
+	{
+		"AbilityCooldown"					"36 32 28 24"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"blade_fury_damage_tick"	"0.2"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"blade_fury_radius"			"250"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"blade_fury_damage"			"120 160 195 240"
+				"LinkedSpecialBonus"		"special_bonus_unique_juggernaut_3"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"2.5"
+				"LinkedSpecialBonus"		"special_bonus_unique_juggernaut"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Blade Fury duration
+	//=================================================================================================================
+	"special_bonus_unique_juggernaut"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"value"				"1.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Blade Fury damage
+	//=================================================================================================================
+	"special_bonus_unique_juggernaut_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"120"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Juggernaut: Healing Ward
+	//=================================================================================================================
+	"juggernaut_healing_ward"
+	{
+		"AbilityCooldown"				"45.0"
+		"AbilityDuration"				"10.0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"healing_ward_heal_amount"			"2 3 4 5"
+			}
+			"02"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"healing_ward_aura_radius"			"500"
+			}
+			"03"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"healing_ward_movespeed_tooltip"	"420"
+			}
+			"04"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"healing_ward_duration_tooltip"		"10"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Lifestealer: Rage
+	//=================================================================================================================
+	"life_stealer_rage"
+	{
+		"AbilityCooldown"				"20"
+
+		"AbilityDuration"				"2.5"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_speed_bonus"	"80 120 160 200"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"2.5"
+				"LinkedSpecialBonus"	"special_bonus_unique_lifestealer"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Rage duration
+	//=================================================================================================================
+	"special_bonus_unique_lifestealer"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"value"					"1.5"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Lifestealer: Feast
+	//=================================================================================================================
+	"life_stealer_feast"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"hp_leech_percent"		"0.75 1.0 1.25 1.5"
+				"LinkedSpecialBonus"	"special_bonus_unique_lifestealer_3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Feast damage
+	//=================================================================================================================
+	"special_bonus_unique_lifestealer_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"value"				"0.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Lifestealer: Infest
+	//=================================================================================================================
+	"life_stealer_infest"
+	{
+		"AbilityCooldown"				"100"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"700"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"150 275 400"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"infest_scepter_duration"	"8"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"damage_increase_pct"		"50"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cast_range_scepter"		"500"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cooldown_scepter"			"25"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Omniknight: Repel
+	//=================================================================================================================
+	"omniknight_repel"
+	{
+		"AbilityCastRange"				"500"
+
+		"AbilityCooldown"				"30 26 22 18"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"5"
+				"LinkedSpecialBonus"	"special_bonus_unique_omniknight_3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Repel duration
+	//=================================================================================================================
+	"special_bonus_unique_omniknight_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"2"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Rubick: Null Field
+	//=================================================================================================================
+	"rubick_null_field"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"magic_damage_reduction_pct"	"6 10 14 18"
+				"LinkedSpecialBonus"			"special_bonus_unique_rubick_3"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"1200"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Null Field amp/resistance
+	//=================================================================================================================
+	"special_bonus_unique_rubick_3"
+	{
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"4"
+			}
+		}
+	}
 }
