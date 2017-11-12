@@ -6,13 +6,11 @@ require('libraries/projectiles')
 require('libraries/projectiles_new')
 require('libraries/notifications')
 require('libraries/animations')
---	require('libraries/attachments')
 require('libraries/astar')
 require('libraries/keyvalues')
 
 require('internal/gamemode')
 require('internal/events')
-require('server/server')
 require('libraries/json')
 require('internal/constants')
 require('internal/scoreboard_events')
@@ -96,8 +94,8 @@ function GameMode:ModifierFilter( keys )
 		-------------------------------------------------------------------------------------------------
 		if modifier_owner:HasModifier("modifier_frostivus_boss") then
 			
-			-- Ignore stuns
-			if modifier_name == "modifier_stunned" then
+			-- Ignore stuns and knockbacks
+			if modifier_name == "modifier_stunned" or modifier_name == "modifier_knockback" then
 				return false
 			end
 		end
@@ -274,7 +272,7 @@ end
 function GameMode:OnGameInProgress()
 
 	-- Apply the gold/experience thinker to the central altar
-	local central_altar = Entities:FindByName(nil, "altar04")
+	local central_altar = Entities:FindByName(nil, "altar_4")
 	central_altar:AddNewModifier(nil, nil, "modifier_passive_bounty", {})
 end
 

@@ -7,7 +7,11 @@
 	{
 		"override_hero"			"npc_dota_hero_abaddon"
 
-		//"Ability1"				"custom_abaddon_death_coil"
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
+
+		"Ability1"				"custom_abaddon_death_coil"
 		"Ability2"				"abaddon_aphotic_shield"
 		"Ability3"				"abaddon_frostmourne"
 		"Ability4"				"generic_hidden"
@@ -30,9 +34,13 @@
 	{
 		"override_hero"			"npc_dota_hero_alchemist"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
+
 		"Ability1"				"alchemist_acid_spray"
 		"Ability2"				"alchemist_unstable_concoction"
-		//"Ability3"				"custom_alchemist_goblins_greed"
+		"Ability3"				"custom_alchemist_goblins_greed"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
 		"Ability6"				"alchemist_chemical_rage"
@@ -53,6 +61,10 @@
 	"npc_dota_hero_antimage"
 	{
 		"override_hero"			"npc_dota_hero_antimage"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"antimage_mana_break"
 		"Ability2"				"antimage_blink"
@@ -77,6 +89,10 @@
 	{
 		"override_hero"			"npc_dota_hero_axe"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
+
 		"Ability1"				"axe_berserkers_call"
 		//"Ability2"				"custom_axe_battle_hunger"
 		"Ability3"				"axe_counter_helix"
@@ -94,37 +110,18 @@
 	}
 
 	//=================================================================================================================
-	// HERO: Beastmaster
-	//=================================================================================================================
-	"npc_dota_hero_beastmaster"
-	{
-		"override_hero"			"npc_dota_hero_beastmaster"
-
-		"Ability1"				"beastmaster_wild_axes"
-		"Ability2"				"beastmaster_call_of_the_wild"
-		"Ability3"				"beastmaster_inner_beast"
-		"Ability4"				"generic_hidden"
-		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_beastmaster_primal_roar"
-		"Ability10"				"special_bonus_exp_boost_25"
-		"Ability11"				"special_bonus_movement_speed_30"
-		"Ability12"				"special_bonus_armor_7"
-		"Ability13"				"special_bonus_unique_beastmaster_2"
-		"Ability14"				"special_bonus_unique_beastmaster"
-		"Ability15"				"special_bonus_hp_500"
-		"Ability16"				"special_bonus_unique_beastmaster_4"
-		"Ability17"				"special_bonus_unique_beastmaster_3"
-	}
-
-	//=================================================================================================================
 	// HERO: Bristleback
 	//=================================================================================================================
 	"npc_dota_hero_bristleback"
 	{
 		"override_hero"			"npc_dota_hero_bristleback"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
+
 		"Ability1"				"bristleback_viscous_nasal_goo"
-		//"Ability2"				"custom_bristleback_quill_spray"
+		"Ability2"				"bristleback_quill_spray"
 		"Ability3"				"bristleback_bristleback"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
@@ -145,6 +142,10 @@
 	"npc_dota_hero_clinkz"
 	{
 		"override_hero"			"npc_dota_hero_clinkz"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"clinkz_strafe"
 		"Ability2"				"clinkz_searing_arrows"
@@ -169,6 +170,10 @@
 	{
 		"override_hero"			"npc_dota_hero_crystal_maiden"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+
 		"Ability1"				"crystal_maiden_crystal_nova"
 		//"Ability2"				"custom_crystal_maiden_frostbite"
 		//"Ability3"				"custom_crystal_maiden_brilliance_aura"
@@ -191,6 +196,10 @@
 	"npc_dota_hero_dazzle"
 	{
 		"override_hero"			"npc_dota_hero_dazzle"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"dazzle_poison_touch"
 		"Ability2"				"dazzle_shallow_grave"
@@ -215,6 +224,10 @@
 	{
 		"override_hero"			"npc_dota_hero_dragon_knight"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
+
 		//"Ability1"				"custom_dragon_knight_breathe_fire"
 		//"Ability2"				"custom_dragon_knight_dragon_tail"
 		"Ability3"				"dragon_knight_dragon_blood"
@@ -238,6 +251,10 @@
 	{
 		"override_hero"			"npc_dota_hero_drow_ranger"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
 		//"Ability1"				"custom_drow_ranger_frost_arrows"
 		"Ability2"				"drow_ranger_wave_of_silence"
 		//"Ability3"				"custom_drow_ranger_trueshot"
@@ -255,11 +272,42 @@
 	}
 
 	//=================================================================================================================
+	// HERO: Gyrocopter
+	//=================================================================================================================
+	"npc_dota_hero_gyrocopter"
+	{
+		"override_hero"			"npc_dota_hero_gyrocopter"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
+		"Ability1"				"gyrocopter_rocket_barrage"
+		"Ability2"				"gyrocopter_homing_missile"
+		"Ability3"				"gyrocopter_flak_cannon"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"gyrocopter_call_down"
+		"Ability10"				"special_bonus_attack_damage_25"
+		"Ability11"				"special_bonus_hp_200"
+		"Ability12"				"special_bonus_unique_gyrocopter_2"
+		"Ability13"				"special_bonus_unique_gyrocopter_3"
+		"Ability14"				"special_bonus_movement_speed_50"
+		"Ability15"				"special_bonus_unique_gyrocopter_4"
+		"Ability16"				"special_bonus_unique_gyrocopter_1"
+		"Ability17"				"special_bonus_unique_gyrocopter_5"
+	}
+
+	//=================================================================================================================
 	// HERO: Huskar
 	//=================================================================================================================
 	"npc_dota_hero_huskar"
 	{
 		"override_hero"			"npc_dota_hero_huskar"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"huskar_inner_vitality"
 		"Ability2"				"huskar_burning_spear"
@@ -284,6 +332,10 @@
 	{
 		"override_hero"			"npc_dota_hero_jakiro"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+
 		//"Ability1"				"custom_jakiro_dual_breath"
 		//"Ability2"				"custom_jakiro_ice_path"
 		//"Ability3"				"custom_jakiro_liquid_fire"
@@ -306,6 +358,10 @@
 	"npc_dota_hero_juggernaut"
 	{
 		"override_hero"			"npc_dota_hero_juggernaut"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"juggernaut_blade_fury"
 		"Ability2"				"juggernaut_healing_ward"
@@ -330,6 +386,10 @@
 	{
 		"override_hero"			"npc_dota_hero_leshrac"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
 		"Ability1"				"leshrac_split_earth"
 		"Ability2"				"leshrac_diabolic_edict"
 		//"Ability3"				"custom_leshrac_lightning_storm"
@@ -352,6 +412,10 @@
 	"npc_dota_hero_life_stealer"
 	{
 		"override_hero"			"npc_dota_hero_life_stealer"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"life_stealer_rage"
 		"Ability2"				"life_stealer_feast"
@@ -379,6 +443,10 @@
 	{
 		"override_hero"			"npc_dota_hero_lina"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
 		"Ability1"				"lina_dragon_slave"
 		"Ability2"				"lina_light_strike_array"
 		"Ability3"				"lina_fiery_soul"
@@ -402,6 +470,10 @@
 	{
 		"override_hero"			"npc_dota_hero_luna"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
 		"Ability1"				"luna_lucent_beam"
 		//"Ability2"				"custom_luna_moon_glaive"
 		"Ability3"				"luna_lunar_blessing"
@@ -419,26 +491,32 @@
 	}
 
 	//=================================================================================================================
-	// HERO: Lycan
+	// HERO: Monkey King
 	//=================================================================================================================
-	"npc_dota_hero_lycan"
+	"npc_dota_hero_monkey_king"
 	{
-		"override_hero"			"npc_dota_hero_lycan"
+		"override_hero"			"npc_dota_hero_monkey_king"
 
-		"Ability1"				"lycan_summon_wolves"
-		"Ability2"				"lycan_howl"
-		"Ability3"				"lycan_feral_impulse"
-		"Ability4"				"generic_hidden"
-		"Ability5"				"generic_hidden"
-		"Ability6"				"lycan_shapeshift"
-		"Ability10"				"special_bonus_armor_5"
-		"Ability11"				"special_bonus_attack_damage_20"
-		"Ability12"				"special_bonus_unique_lycan_3"
-		"Ability13"				"special_bonus_cooldown_reduction_12"
-		"Ability14"				"special_bonus_unique_lycan_1"
-		"Ability15"				"special_bonus_unique_lycan_4"
-		"Ability16"				"special_bonus_unique_lycan_5"
-		"Ability17"				"special_bonus_unique_lycan_2"
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
+		"Ability1"				"monkey_king_boundless_strike"
+		"Ability2"				"monkey_king_tree_dance"
+		"Ability3"				"monkey_king_primal_spring"
+		"Ability4"				"monkey_king_jingu_mastery"
+		"Ability5"				"monkey_king_mischief"
+		"Ability6"				"monkey_king_wukongs_command"
+		"Ability7"				"monkey_king_primal_spring_early"
+		"Ability8"				"monkey_king_untransform"
+		"Ability10"				"special_bonus_unique_monkey_king_5"
+		"Ability11"				"special_bonus_attack_speed_20"
+		"Ability12"				"special_bonus_unique_monkey_king_7"
+		"Ability13"				"special_bonus_unique_monkey_king_2"
+		"Ability14"				"special_bonus_unique_monkey_king"
+		"Ability15"				"special_bonus_unique_monkey_king_3"
+		"Ability16"				"special_bonus_unique_monkey_king_4"
+		"Ability17"				"special_bonus_unique_monkey_king_6"
 	}
 
 	//=================================================================================================================
@@ -447,6 +525,10 @@
 	"npc_dota_hero_ogre_magi"
 	{
 		"override_hero"			"npc_dota_hero_ogre_magi"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"ogre_magi_fireblast"
 		"Ability2"				"custom_ogre_magi_ignite"
@@ -471,6 +553,10 @@
 	{
 		"override_hero"			"npc_dota_hero_omniknight"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+
 		//"Ability1"				"custom_omniknight_purification"
 		"Ability2"				"omniknight_repel"
 		//"Ability3"				"custom_omniknight_degen_aura"
@@ -493,6 +579,10 @@
 	"npc_dota_hero_oracle"
 	{
 		"override_hero"			"npc_dota_hero_oracle"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"oracle_fortunes_end"
 		"Ability2"				"oracle_fates_edict"
@@ -517,6 +607,10 @@
 	{
 		"override_hero"			"npc_dota_hero_phantom_assassin"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
 		"Ability1"				"phantom_assassin_stifling_dagger"
 		"Ability2"				"phantom_assassin_phantom_strike"
 		//"Ability3"				"custom_phantom_assassin_blur"
@@ -540,6 +634,10 @@
 	{
 		"override_hero"			"npc_dota_hero_pugna"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+
 		"Ability1"				"pugna_nether_blast"
 		"Ability2"				"pugna_decrepify"
 		"Ability3"				"pugna_nether_ward"
@@ -562,6 +660,10 @@
 	"npc_dota_hero_rubick"
 	{
 		"override_hero"			"npc_dota_hero_rubick"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		//"Ability1"				"custom_rubick_telekinesis"
 		"Ability2"				"rubick_fade_bolt"
@@ -590,6 +692,10 @@
 	{
 		"override_hero"			"npc_dota_hero_skywrath_mage"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+
 		"Ability1"				"skywrath_mage_arcane_bolt"
 		"Ability2"				"skywrath_mage_concussive_shot"
 		"Ability3"				"skywrath_mage_ancient_seal"
@@ -612,6 +718,10 @@
 	"npc_dota_hero_sniper"
 	{
 		"override_hero"			"npc_dota_hero_sniper"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"sniper_shrapnel"
 		"Ability2"				"sniper_headshot"
@@ -636,6 +746,10 @@
 	{
 		"override_hero"			"npc_dota_hero_spectre"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
+
 		//"Ability1"				"custom_spectre_spectral_dagger"
 		"Ability2"				"spectre_desolate"
 		"Ability3"				"spectre_dispersion"
@@ -658,6 +772,10 @@
 	"npc_dota_hero_sven"
 	{
 		"override_hero"			"npc_dota_hero_sven"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"sven_storm_bolt"
 		//"Ability2"				"custom_sven_great_cleave"
@@ -682,6 +800,10 @@
 	{
 		"override_hero"			"npc_dota_hero_templar_assassin"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
 		//"Ability1"				"custom_templar_assassin_refraction"
 		"Ability2"				"templar_assassin_meld"
 		"Ability3"				"templar_assassin_psi_blades"
@@ -704,6 +826,10 @@
 	"npc_dota_hero_shredder"
 	{
 		"override_hero"			"npc_dota_hero_shredder"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		//"Ability1"				"custom_shredder_whirling_death"
 		"Ability2"				"shredder_timber_chain"
@@ -730,6 +856,10 @@
 	{
 		"override_hero"			"npc_dota_hero_troll_warlord"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
 		"Ability1"				"troll_warlord_berserkers_rage"
 		"Ability2"				"troll_warlord_whirling_axes_ranged"
 		"Ability3"				"troll_warlord_whirling_axes_melee"
@@ -747,15 +877,46 @@
 	}
 
 	//=================================================================================================================
+	// HERO: Undying
+	//=================================================================================================================
+	"npc_dota_hero_undying"
+	{
+		"override_hero"			"npc_dota_hero_undying"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+
+		//"Ability1"				"custom_undying_decay"
+		"Ability2"				"undying_soul_rip"
+		"Ability3"				"undying_tombstone"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"undying_flesh_golem"
+		"Ability10"				"special_bonus_cast_range_100"
+		"Ability11"				"special_bonus_hp_regen_8"
+		"Ability12"				"special_bonus_unique_undying_3"
+		"Ability13"				"special_bonus_unique_undying_4"
+		"Ability14"				"special_bonus_unique_undying"
+		"Ability15"				"special_bonus_unique_undying_5"
+		"Ability16"				"special_bonus_reincarnation_200"
+		"Ability17"				"special_bonus_unique_undying_2"
+	}
+
+	//=================================================================================================================
 	// HERO: Ursa
 	//=================================================================================================================
 	"npc_dota_hero_ursa"
 	{
 		"override_hero"			"npc_dota_hero_ursa"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
 		"Ability1"				"ursa_earthshock"
 		"Ability2"				"ursa_overpower"
-		//"Ability3"				"custom_ursa_fury_swipes"
+		"Ability3"				"ursa_fury_swipes"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
 		"Ability6"				"ursa_enrage"
@@ -775,6 +936,10 @@
 	"npc_dota_hero_vengefulspirit"
 	{
 		"override_hero"			"npc_dota_hero_vengefulspirit"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"vengefulspirit_magic_missile"
 		"Ability2"				"vengefulspirit_wave_of_terror"
@@ -799,12 +964,16 @@
 	{
 		"override_hero"			"npc_dota_hero_warlock"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+
 		"Ability1"				"warlock_fatal_bonds"
 		"Ability2"				"warlock_shadow_word"
 		"Ability3"				"warlock_upheaval"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		"Ability6"				"warlock_rain_of_chaos"
+		//"Ability6"				"custom_warlock_rain_of_chaos"
 		"Ability10"				"special_bonus_unique_warlock_5"
 		"Ability11"				"special_bonus_cast_range_125"
 		"Ability12"				"special_bonus_exp_boost_40"
@@ -821,6 +990,10 @@
 	"npc_dota_hero_windrunner"
 	{
 		"override_hero"			"npc_dota_hero_windrunner"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"windrunner_shackleshot"
 		"Ability2"				"windrunner_powershot"
@@ -845,6 +1018,10 @@
 	{
 		"override_hero"			"npc_dota_hero_winter_wyvern"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+
 		"Ability1"				"winter_wyvern_arctic_burn"
 		"Ability2"				"winter_wyvern_splinter_blast"
 		"Ability3"				"winter_wyvern_cold_embrace"
@@ -867,6 +1044,10 @@
 	"npc_dota_hero_wisp"
 	{
 		"override_hero"			"npc_dota_hero_wisp"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"wisp_tether"
 		"Ability2"				"wisp_spirits"
@@ -892,12 +1073,16 @@
 	{
 		"override_hero"			"npc_dota_hero_witch_doctor"
 
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+
 		"Ability1"				"witch_doctor_paralyzing_cask"
 		"Ability2"				"witch_doctor_voodoo_restoration"
 		"Ability3"				"witch_doctor_maledict"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		"Ability6"				"witch_doctor_death_ward"
+		//"Ability6"				"custom_witch_doctor_death_ward"
 		"Ability10"				"special_bonus_attack_damage_75"
 		"Ability11"				"special_bonus_armor_5"
 		"Ability12"				"special_bonus_unique_witch_doctor_3"
@@ -908,26 +1093,79 @@
 		"Ability17"				"special_bonus_unique_witch_doctor_5"
 	}
 
-	//=================================================================================================================
-	// HERO: Wraith King
-	//=================================================================================================================
-	"npc_dota_hero_skeleton_king"
-	{
-		"override_hero"			"npc_dota_hero_skeleton_king"
-
-		"Ability1"				"skeleton_king_hellfire_blast"
-		//"Ability2"				"custom_skeleton_king_vampiric_aura"
-		"Ability3"				"skeleton_king_mortal_strike"
-		"Ability4"				"generic_hidden"
-		"Ability5"				"generic_hidden"
-		"Ability6"				"skeleton_king_reincarnation"
-		"Ability10"				"special_bonus_unique_wraith_king_3"
-		"Ability11"				"special_bonus_attack_speed_20"
-		"Ability12"				"special_bonus_strength_15"
-		"Ability13"				"special_bonus_unique_wraith_king_5"
-		"Ability14"				"special_bonus_unique_wraith_king_1"
-		"Ability15"				"special_bonus_unique_wraith_king_6"
-		"Ability16"				"special_bonus_unique_wraith_king_2"
-		"Ability17"				"special_bonus_unique_wraith_king_4"
-	}
+	"npc_dota_hero_ancient_apparition"		{ "IsDisabled" "1" }
+	"npc_dota_hero_skeleton_king"			{ "IsDisabled" "1" }
+	"npc_dota_hero_beastmaster"				{ "IsDisabled" "1" }
+	"npc_dota_hero_bane"					{ "IsDisabled" "1" }
+	"npc_dota_hero_bloodseeker"				{ "IsDisabled" "1" }
+	"npc_dota_hero_chen"					{ "IsDisabled" "1" }
+	"npc_dota_hero_dark_seer"				{ "IsDisabled" "1" }
+	"npc_dota_hero_doom_bringer"			{ "IsDisabled" "1" }
+	"npc_dota_hero_earthshaker"				{ "IsDisabled" "1" }
+	"npc_dota_hero_enchantress"				{ "IsDisabled" "1" }
+	"npc_dota_hero_enigma"					{ "IsDisabled" "1" }
+	"npc_dota_hero_faceless_void"			{ "IsDisabled" "1" }
+	"npc_dota_hero_furion"					{ "IsDisabled" "1" }
+	"npc_dota_hero_kunkka"					{ "IsDisabled" "1" }
+	"npc_dota_hero_lich"					{ "IsDisabled" "1" }
+	"npc_dota_hero_lion"					{ "IsDisabled" "1" }
+	"npc_dota_hero_mirana"					{ "IsDisabled" "1" }
+	"npc_dota_hero_morphling"				{ "IsDisabled" "1" }
+	"npc_dota_hero_necrolyte"				{ "IsDisabled" "1" }
+	"npc_dota_hero_nevermore"				{ "IsDisabled" "1" }
+	"npc_dota_hero_night_stalker"			{ "IsDisabled" "1" }
+	"npc_dota_hero_puck"					{ "IsDisabled" "1" }
+	"npc_dota_hero_pudge"					{ "IsDisabled" "1" }
+	"npc_dota_hero_rattletrap"				{ "IsDisabled" "1" }
+	"npc_dota_hero_razor"					{ "IsDisabled" "1" }
+	"npc_dota_hero_riki"					{ "IsDisabled" "1" }
+	"npc_dota_hero_sand_king"				{ "IsDisabled" "1" }
+	"npc_dota_hero_shadow_shaman"			{ "IsDisabled" "1" }
+	"npc_dota_hero_slardar"					{ "IsDisabled" "1" }
+	"npc_dota_hero_storm_spirit"			{ "IsDisabled" "1" }
+	"npc_dota_hero_tidehunter"				{ "IsDisabled" "1" }
+	"npc_dota_hero_tinker"					{ "IsDisabled" "1" }
+	"npc_dota_hero_tiny"					{ "IsDisabled" "1" }
+	"npc_dota_hero_venomancer"				{ "IsDisabled" "1" }
+	"npc_dota_hero_viper"					{ "IsDisabled" "1" }
+	"npc_dota_hero_weaver"					{ "IsDisabled" "1" }
+	"npc_dota_hero_zuus"					{ "IsDisabled" "1" }
+	"npc_dota_hero_broodmother"				{ "IsDisabled" "1" }
+	"npc_dota_hero_queenofpain"				{ "IsDisabled" "1" }
+	"npc_dota_hero_batrider"				{ "IsDisabled" "1" }
+	"npc_dota_hero_death_prophet"			{ "IsDisabled" "1" }
+	"npc_dota_hero_bounty_hunter"			{ "IsDisabled" "1" }
+	"npc_dota_hero_silencer"				{ "IsDisabled" "1" }
+	"npc_dota_hero_spirit_breaker"			{ "IsDisabled" "1" }
+	"npc_dota_hero_invoker"					{ "IsDisabled" "1" }
+	"npc_dota_hero_obsidian_destroyer"		{ "IsDisabled" "1" }
+	"npc_dota_hero_shadow_demon"			{ "IsDisabled" "1" }
+	"npc_dota_hero_lycan"					{ "IsDisabled" "1" }
+	"npc_dota_hero_lone_druid"				{ "IsDisabled" "1" }
+	"npc_dota_hero_brewmaster"				{ "IsDisabled" "1" }
+	"npc_dota_hero_phantom_lancer"			{ "IsDisabled" "1" }
+	"npc_dota_hero_treant"					{ "IsDisabled" "1" }
+	"npc_dota_hero_chaos_knight"			{ "IsDisabled" "1" }
+	"npc_dota_hero_disruptor"				{ "IsDisabled" "1" }
+	"npc_dota_hero_naga_siren"				{ "IsDisabled" "1" }
+	"npc_dota_hero_nyx_assassin"			{ "IsDisabled" "1" }
+	"npc_dota_hero_keeper_of_the_light"		{ "IsDisabled" "1" }
+	"npc_dota_hero_visage"					{ "IsDisabled" "1" }
+	"npc_dota_hero_meepo"					{ "IsDisabled" "1" }
+	"npc_dota_hero_magnataur"				{ "IsDisabled" "1" }
+	"npc_dota_hero_centaur"					{ "IsDisabled" "1" }
+	"npc_dota_hero_slark"					{ "IsDisabled" "1" }
+	"npc_dota_hero_medusa"					{ "IsDisabled" "1" }
+	"npc_dota_hero_tusk"					{ "IsDisabled" "1" }
+	"npc_dota_hero_elder_titan"				{ "IsDisabled" "1" }
+	"npc_dota_hero_earth_spirit"			{ "IsDisabled" "1" }
+	"npc_dota_hero_ember_spirit"			{ "IsDisabled" "1" }
+	"npc_dota_hero_legion_commander"		{ "IsDisabled" "1" }
+	"npc_dota_hero_phoenix"					{ "IsDisabled" "1" }
+	"npc_dota_hero_terrorblade"				{ "IsDisabled" "1" }
+	"npc_dota_hero_techies"					{ "IsDisabled" "1" }
+	"npc_dota_hero_arc_warden"				{ "IsDisabled" "1" }
+	"npc_dota_hero_abyssal_underlord"		{ "IsDisabled" "1" }
+	"npc_dota_hero_dark_willow"				{ "IsDisabled" "1" }
+	"npc_dota_hero_pangolier"				{ "IsDisabled" "1" }
 }

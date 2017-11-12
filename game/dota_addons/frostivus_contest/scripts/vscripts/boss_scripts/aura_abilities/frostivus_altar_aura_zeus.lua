@@ -26,7 +26,7 @@ function modifier_frostivus_altar_aura_zeus:GetAuraSearchTeam()
 end
 
 function modifier_frostivus_altar_aura_zeus:GetAuraSearchType()
-	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
+	return DOTA_UNIT_TARGET_HERO
 end
 
 function modifier_frostivus_altar_aura_zeus:GetModifierAura()
@@ -43,4 +43,4 @@ modifier_frostivus_altar_aura_zeus_buff = modifier_frostivus_altar_aura_zeus_buf
 
 function modifier_frostivus_altar_aura_zeus_buff:IsHidden() return false end
 function modifier_frostivus_altar_aura_zeus_buff:IsPurgable() return false end
-function modifier_frostivus_altar_aura_zeus_buff:IsDebuff() return true end
+function modifier_frostivus_altar_aura_zeus_buff:IsDebuff() return false end

@@ -76,7 +76,7 @@ function FrostivusHeroKilled(killer, hero)
 		local altar_name = altar_handle:GetName()
 		local fight_heroes = altar_handle:FindModifierByName("modifier_altar_active").fighting_heroes
 		for _, hero in pairs(fight_heroes) do
-			if hero:IsAlive() then
+			if hero and hero:IsAlive() then
 				return nil
 			end
 		end

@@ -13,28 +13,30 @@ function modifier_frostivus_altar_aura_treant:IsHidden() return true end
 function modifier_frostivus_altar_aura_treant:IsPurgable() return false end
 function modifier_frostivus_altar_aura_treant:IsDebuff() return false end
 
-function modifier_frostivus_altar_aura_treant:GetAuraRadius()
-	return 25000
+function modifier_frostivus_altar_aura_treant:OnCreated()
+	if IsServer() then
+		self:StartIntervalThink(1.0)
+	end
 end
 
-function modifier_frostivus_altar_aura_treant:GetAuraSearchFlags()
-	return DOTA_UNIT_TARGET_FLAG_NONE
-end
-
-function modifier_frostivus_altar_aura_treant:GetAuraSearchTeam()
-	return DOTA_UNIT_TARGET_TEAM_FRIENDLY
-end
-
-function modifier_frostivus_altar_aura_treant:GetAuraSearchType()
-	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
-end
-
-function modifier_frostivus_altar_aura_treant:GetModifierAura()
-	return "modifier_frostivus_altar_aura_treant_buff"
-end
-
-function modifier_frostivus_altar_aura_treant:IsAura()
-	return true
+function modifier_frostivus_altar_aura_treant:OnIntervalThink()
+	if IsServer() then
+		
+		-- Iterate through aura targets
+		local team = self:GetCaster():GetTeam()
+		local stacks = self:GetStackCount()
+		local caster = self:GetCaster()
+		local ability = self:GetAbility()
+		local all_heroes = HeroList:GetAllHeroes()
+		for _, hero in pairs(all_heroes) do
+			if hero:IsRealHero() and hero:GetTeam() == team then
+				if not hero:HasModifier("modifier_frostivus_altar_aura_treant_buff") then
+					hero:AddNewModifier(caster, ability, "modifier_frostivus_altar_aura_treant_buff", {})
+				end
+				hero:FindModifierByName("modifier_frostivus_altar_aura_treant_buff"):SetStackCount(stacks)
+			end
+		end
+	end
 end
 
 -- Aura buff
@@ -43,7 +45,8 @@ modifier_frostivus_altar_aura_treant_buff = modifier_frostivus_altar_aura_treant
 
 function modifier_frostivus_altar_aura_treant_buff:IsHidden() return false end
 function modifier_frostivus_altar_aura_treant_buff:IsPurgable() return false end
-function modifier_frostivus_altar_aura_treant_buff:IsDebuff() return true end
+function modifier_frostivus_altar_aura_treant_buff:IsDebuff() return false end
+function modifier_frostivus_altar_aura_treant_buff:IsPermanent() return true end
 
 function modifier_frostivus_altar_aura_treant_buff:DeclareFunctions()
 	local funcs = {
@@ -55,13 +58,13 @@ function modifier_frostivus_altar_aura_treant_buff:DeclareFunctions()
 end
 
 function modifier_frostivus_altar_aura_treant_buff:GetModifierPhysicalArmorBonus()
-	return 4 + 1 * self:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_treant"):GetStackCount()
+	return 4 + 1 * self:GetStackCount()
 end
 
 function modifier_frostivus_altar_aura_treant_buff:GetModifierMagicalResistanceBonus()
-	return 16 + 4 * self:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_treant"):GetStackCount()
+	return 16 + 4 * self:GetStackCount()
 end
 
 function modifier_frostivus_altar_aura_treant_buff:GetModifierExtraHealthPercentage()
-	return 10 + 2 * self:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_treant"):GetStackCount()
+	return 10 + 2 * self:GetStackCount()
 end

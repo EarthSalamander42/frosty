@@ -29,6 +29,16 @@ function LockArena(altar, team, attacker)
 	if direction:Length2D() > 850 then
 		FindClearSpaceForUnit(attacker, altar_loc + direction:Normalized() * 850, false)
 	end
+
+	-- Also force the attacker's owner (if any) inside the arena
+	if attacker:GetOwnerEntity() then
+		local owner = attacker:GetOwnerEntity()
+		local direction = (owner:GetAbsOrigin() - altar_loc)
+		if direction:Length2D() > 850 then
+			FindClearSpaceForUnit(owner, altar_loc + direction:Normalized() * 850, false)
+		end
+	end
+
 	CustomGameEventManager:Send_ServerToTeam(team, "show_boss_hp", {})
 end
 
@@ -142,7 +152,7 @@ function modifier_altar_active:OnIntervalThink()
 		for _, fighter in pairs(nearby_fighters) do
 
 			-- Add any allies to the fighter list
-			if fighter:GetTeam() == self.team and not fighter:HasModifier("modifier_fighting_boss") then
+			if fighter:GetTeam() == self.team and not fighter:HasModifier("modifier_fighting_boss") and fighter:IsRealHero() then
 				self.fighting_heroes[#self.fighting_heroes+1] = fighter
 				fighter:AddNewModifier(nil, nil, "modifier_fighting_boss", {altar_name = altar_handle:GetName()})
 			end

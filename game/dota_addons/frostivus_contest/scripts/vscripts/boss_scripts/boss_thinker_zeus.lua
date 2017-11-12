@@ -431,8 +431,8 @@ function boss_thinker_zeus:LightningBolt(center_point, altar_handle, start_direc
 				if distance > inner_radius and distance <= outer_radius then
 					enemy_damage = enemy_damage * (outer_radius - distance) / (outer_radius - inner_radius)
 				end
-				ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = enemy_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-				SendOverheadEventMessage(enemy, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, enemy_damage, nil)
+				local damage_dealt = ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = enemy_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+				SendOverheadEventMessage(enemy, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, damage_dealt, nil)
 			end
 		end
 	end)
@@ -499,8 +499,8 @@ function boss_thinker_zeus:ArcLightningBounce(altar_handle, source, target, dama
 	ParticleManager:SetParticleControlEnt(arc_pfx, 0, source, PATTACH_POINT_FOLLOW, "attach_hitloc", source:GetAbsOrigin(), true)
 	ParticleManager:SetParticleControlEnt(arc_pfx, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target_location, true)
 	ParticleManager:ReleaseParticleIndex(arc_pfx)
-	ApplyDamage({attacker = boss, victim = target, ability = nil, damage = damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-	SendOverheadEventMessage(target, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, target, damage, nil)
+	local damage_dealt = ApplyDamage({attacker = boss, victim = target, ability = nil, damage = damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+	SendOverheadEventMessage(target, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, target, damage_dealt, nil)
 
 	-- Perform another bounce, if applicable
 	Timers:CreateTimer(bounce_delay, function()
@@ -574,8 +574,8 @@ function boss_thinker_zeus:ElThor(altar_handle, target, radius, delay, damage)
 		-- Damage enemies
 		thor_damage = thor_damage / #enemies_to_hit
 		for _, victim in pairs(enemies_to_hit) do
-			ApplyDamage({victim = victim, attacker = boss, ability = nil, damage = thor_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-			SendOverheadEventMessage(victim, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, victim, thor_damage, nil)
+			local damage_dealt = ApplyDamage({victim = victim, attacker = boss, ability = nil, damage = thor_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(victim, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, victim, damage_dealt, nil)
 		end
 	end)
 end
@@ -696,8 +696,8 @@ function modifier_frostivus_zeus_positive_charge:OnIntervalThink()
 				ParticleManager:ReleaseParticleIndex(discharge_pfx)
 
 				-- Damage
-				ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-				SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, owner, self.damage, nil)
+				local damage_dealt = ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+				SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, owner, damage_dealt, nil)
 
 				-- Destroy this modifier after a small duration
 				Timers:CreateTimer(0.7, function()
@@ -803,8 +803,8 @@ function modifier_frostivus_zeus_negative_charge:OnIntervalThink()
 				ParticleManager:ReleaseParticleIndex(discharge_pfx)
 
 				-- Damage
-				ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-				SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, owner, self.damage, nil)
+				local damage_dealt = ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+				SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, owner, damage_dealt, nil)
 
 				-- Destroy this modifier after a small duration
 				Timers:CreateTimer(0.7, function()
@@ -894,7 +894,7 @@ function boss_thinker_zeus:GodsWrath(center_point, altar_handle, delay, charge_m
 		ParticleManager:ReleaseParticleIndex(wrath_pfx)
 
 		-- Iterate through enemies
-		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
 		for _, enemy in pairs(nearby_enemies) do
 
 			-- Impact sound
@@ -908,8 +908,8 @@ function boss_thinker_zeus:GodsWrath(center_point, altar_handle, delay, charge_m
 			ParticleManager:ReleaseParticleIndex(impact_pfx)
 
 			-- Damage
-			ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = wrath_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-			SendOverheadEventMessage(enemy, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, wrath_damage, nil)
+			local damage_dealt = ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = wrath_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(enemy, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, damage_dealt, nil)
 
 			-- Resolve static field, if appropriate
 			if enemy:HasModifier("modifier_frostivus_zeus_positive_charge") or enemy:HasModifier("modifier_frostivus_zeus_negative_charge") then

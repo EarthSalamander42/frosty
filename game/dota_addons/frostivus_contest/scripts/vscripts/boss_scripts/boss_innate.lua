@@ -31,6 +31,24 @@ function modifier_frostivus_boss:OnCreated()
 	self.damage_per_power = 250 * ability:GetSpecialValueFor("damage_per_power") * 0.01
 
 	self:ForceRefresh()
+
+	self:StartIntervalThink(0.1)
+end
+
+function modifier_frostivus_boss:OnIntervalThink()
+	if IsServer() then
+
+		-- Prevent excessive quill spray and fury swipes stacks
+		local boss = self:GetParent()
+		local quill_modifier = boss:FindModifierByName("modifier_bristleback_quill_spray")
+		local swipes_modifier = boss:FindModifierByName("modifier_ursa_fury_swipes_damage_increase")
+		if quill_modifier then
+			quill_modifier:SetStackCount(math.min(4, quill_modifier:GetStackCount()))
+		end
+		if swipes_modifier then
+			swipes_modifier:SetStackCount(math.min(4, swipes_modifier:GetStackCount()))
+		end
+	end
 end
 
 function modifier_frostivus_boss:CheckState()

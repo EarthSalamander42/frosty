@@ -21,8 +21,8 @@ function frostivus_boss_green_death:OnProjectileHit_ExtraData(target, location, 
 			ParticleManager:ReleaseParticleIndex(impact_pfx)
 
 			-- Deal damage
-			ApplyDamage({victim = target, attacker = caster, ability = nil, damage = damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-			SendOverheadEventMessage(target, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, target, damage, nil)
+			local damage_dealt = ApplyDamage({victim = target, attacker = caster, ability = nil, damage = damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(target, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, target, damage_dealt, nil)
 		end
 	end
 end

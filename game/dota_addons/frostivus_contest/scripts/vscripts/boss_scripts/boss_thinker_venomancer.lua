@@ -354,7 +354,7 @@ function boss_thinker_venomancer:VenomousGale(center_point, altar_handle, delay,
 			ParticleManager:SetParticleControl(warning_pfx, 0, target_loc + Vector(0, 0, 250))
 
 			-- Destroy warning particle
-			Timers:CreateTimer(3.0, function()
+			Timers:CreateTimer(2.5, function()
 				ParticleManager:DestroyParticle(warning_pfx, true)
 				ParticleManager:ReleaseParticleIndex(warning_pfx)
 			end)
@@ -459,8 +459,8 @@ function modifier_frostivus_venomancer_venomous_gale:OnIntervalThink()
 		local owner = self:GetParent()
 		local caster = self:GetCaster()
 		if owner and caster then
-			ApplyDamage({victim = owner, attacker = caster, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, self.damage, nil)
+			local damage_dealt = ApplyDamage({victim = owner, attacker = caster, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, damage_dealt, nil)
 		end
 	end
 end
@@ -842,8 +842,8 @@ function modifier_frostivus_venomancer_poison_nova:OnIntervalThink()
 		local owner = self:GetParent()
 		local boss = self:GetCaster()
 		if owner and boss then
-			ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, self.damage, nil)
+			local damage_dealt = ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, damage_dealt, nil)
 		end
 	end
 end
@@ -1020,8 +1020,8 @@ function modifier_frostivus_venomancer_virulent_plague:OnIntervalThink()
 		local owner = self:GetParent()
 		local boss = self:GetCaster()
 		if owner and boss then
-			ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, self.damage, nil)
+			local damage_dealt = ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, damage_dealt, nil)
 		end
 	end
 end
@@ -1375,8 +1375,8 @@ function modifier_frostivus_venomancer_poison_sting_debuff:OnIntervalThink()
 		local caster = EntIndexToHScript(self.ward_caster)
 		if caster then
 			local boss = caster:GetOwner()
-			ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, self.damage, nil)
+			local damage_dealt = ApplyDamage({victim = owner, attacker = boss, ability = nil, damage = self.damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(owner, OVERHEAD_ALERT_BONUS_POISON_DAMAGE, owner, damage_dealt, nil)
 		end
 	end
 end

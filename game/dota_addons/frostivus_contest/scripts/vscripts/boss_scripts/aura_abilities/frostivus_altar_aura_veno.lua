@@ -13,28 +13,30 @@ function modifier_frostivus_altar_aura_veno:IsHidden() return true end
 function modifier_frostivus_altar_aura_veno:IsPurgable() return false end
 function modifier_frostivus_altar_aura_veno:IsDebuff() return false end
 
-function modifier_frostivus_altar_aura_veno:GetAuraRadius()
-	return 25000
+function modifier_frostivus_altar_aura_veno:OnCreated()
+	if IsServer() then
+		self:StartIntervalThink(1.0)
+	end
 end
 
-function modifier_frostivus_altar_aura_veno:GetAuraSearchFlags()
-	return DOTA_UNIT_TARGET_FLAG_NONE
-end
-
-function modifier_frostivus_altar_aura_veno:GetAuraSearchTeam()
-	return DOTA_UNIT_TARGET_TEAM_FRIENDLY
-end
-
-function modifier_frostivus_altar_aura_veno:GetAuraSearchType()
-	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
-end
-
-function modifier_frostivus_altar_aura_veno:GetModifierAura()
-	return "modifier_frostivus_altar_aura_veno_buff"
-end
-
-function modifier_frostivus_altar_aura_veno:IsAura()
-	return true
+function modifier_frostivus_altar_aura_veno:OnIntervalThink()
+	if IsServer() then
+		
+		-- Iterate through aura targets
+		local team = self:GetCaster():GetTeam()
+		local stacks = self:GetStackCount()
+		local caster = self:GetCaster()
+		local ability = self:GetAbility()
+		local all_heroes = HeroList:GetAllHeroes()
+		for _, hero in pairs(all_heroes) do
+			if hero:IsRealHero() and hero:GetTeam() == team then
+				if not hero:HasModifier("modifier_frostivus_altar_aura_veno_buff") then
+					hero:AddNewModifier(caster, ability, "modifier_frostivus_altar_aura_veno_buff", {})
+				end
+				hero:FindModifierByName("modifier_frostivus_altar_aura_veno_buff"):SetStackCount(stacks)
+			end
+		end
+	end
 end
 
 -- Aura buff
@@ -43,7 +45,8 @@ modifier_frostivus_altar_aura_veno_buff = modifier_frostivus_altar_aura_veno_buf
 
 function modifier_frostivus_altar_aura_veno_buff:IsHidden() return false end
 function modifier_frostivus_altar_aura_veno_buff:IsPurgable() return false end
-function modifier_frostivus_altar_aura_veno_buff:IsDebuff() return true end
+function modifier_frostivus_altar_aura_veno_buff:IsDebuff() return false end
+function modifier_frostivus_altar_aura_veno_buff:IsPermanent() return true end
 
 function modifier_frostivus_altar_aura_veno_buff:DeclareFunctions()
 	local funcs = {
@@ -55,13 +58,13 @@ function modifier_frostivus_altar_aura_veno_buff:DeclareFunctions()
 end
 
 function modifier_frostivus_altar_aura_veno_buff:GetModifierMoveSpeedBonus_Percentage()
-	return 10 + 2 * self:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_veno"):GetStackCount()
+	return 10 + 2 * self:GetStackCount()
 end
 
 function modifier_frostivus_altar_aura_veno_buff:GetModifierAttackSpeedBonus_Constant()
-	return 20 + 10 * self:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_veno"):GetStackCount()
+	return 20 + 10 * self:GetStackCount()
 end
 
 function modifier_frostivus_altar_aura_veno_buff:GetModifierPercentageCooldownStacking()
-	return 10 + 2 * self:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_veno"):GetStackCount()
+	return 10 + 2 * self:GetStackCount()
 end

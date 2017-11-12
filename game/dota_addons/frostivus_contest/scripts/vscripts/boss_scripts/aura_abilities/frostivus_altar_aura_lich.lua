@@ -13,28 +13,30 @@ function modifier_frostivus_altar_aura_lich:IsHidden() return true end
 function modifier_frostivus_altar_aura_lich:IsPurgable() return false end
 function modifier_frostivus_altar_aura_lich:IsDebuff() return false end
 
-function modifier_frostivus_altar_aura_lich:GetAuraRadius()
-	return 25000
+function modifier_frostivus_altar_aura_lich:OnCreated()
+	if IsServer() then
+		self:StartIntervalThink(1.0)
+	end
 end
 
-function modifier_frostivus_altar_aura_lich:GetAuraSearchFlags()
-	return DOTA_UNIT_TARGET_FLAG_NONE
-end
-
-function modifier_frostivus_altar_aura_lich:GetAuraSearchTeam()
-	return DOTA_UNIT_TARGET_TEAM_FRIENDLY
-end
-
-function modifier_frostivus_altar_aura_lich:GetAuraSearchType()
-	return DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC
-end
-
-function modifier_frostivus_altar_aura_lich:GetModifierAura()
-	return "modifier_frostivus_altar_aura_lich_buff"
-end
-
-function modifier_frostivus_altar_aura_lich:IsAura()
-	return true
+function modifier_frostivus_altar_aura_lich:OnIntervalThink()
+	if IsServer() then
+		
+		-- Iterate through aura targets
+		local team = self:GetCaster():GetTeam()
+		local stacks = self:GetStackCount()
+		local caster = self:GetCaster()
+		local ability = self:GetAbility()
+		local all_heroes = HeroList:GetAllHeroes()
+		for _, hero in pairs(all_heroes) do
+			if hero:IsRealHero() and hero:GetTeam() == team then
+				if not hero:HasModifier("modifier_frostivus_altar_aura_lich_buff") then
+					hero:AddNewModifier(caster, ability, "modifier_frostivus_altar_aura_lich_buff", {})
+				end
+				hero:FindModifierByName("modifier_frostivus_altar_aura_lich_buff"):SetStackCount(stacks)
+			end
+		end
+	end
 end
 
 -- Aura buff
@@ -43,7 +45,8 @@ modifier_frostivus_altar_aura_lich_buff = modifier_frostivus_altar_aura_lich_buf
 
 function modifier_frostivus_altar_aura_lich_buff:IsHidden() return false end
 function modifier_frostivus_altar_aura_lich_buff:IsPurgable() return false end
-function modifier_frostivus_altar_aura_lich_buff:IsDebuff() return true end
+function modifier_frostivus_altar_aura_lich_buff:IsDebuff() return false end
+function modifier_frostivus_altar_aura_lich_buff:IsPermanent() return true end
 
 function modifier_frostivus_altar_aura_lich_buff:DeclareFunctions()
 	local funcs = {
@@ -54,9 +57,9 @@ function modifier_frostivus_altar_aura_lich_buff:DeclareFunctions()
 end
 
 function modifier_frostivus_altar_aura_lich_buff:GetModifierBaseDamageOutgoing_Percentage()
-	return 30 + 10 * self:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_lich"):GetStackCount()
+	return 30 + 10 * self:GetStackCount()
 end
 
 function modifier_frostivus_altar_aura_lich_buff:GetModifierSpellAmplify_Percentage()
-	return 15 + 5 * self:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_lich"):GetStackCount()
+	return 15 + 5 * self:GetStackCount()
 end

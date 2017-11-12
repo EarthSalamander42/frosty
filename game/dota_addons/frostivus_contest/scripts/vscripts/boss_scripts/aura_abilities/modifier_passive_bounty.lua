@@ -10,8 +10,8 @@ function modifier_passive_bounty:OnCreated(keys)
 	if IsServer() then
 
 		-- Parameters
-		self.passive_gpm = 240
-		self.passive_xpm = 240
+		local passive_gpm = 300
+		local passive_xpm = 300
 		self.gold_per_tick = passive_gpm / 30
 		self.xp_per_tick = passive_xpm / 30
 
@@ -28,18 +28,28 @@ function modifier_passive_bounty:OnIntervalThink()
 			if PlayerResource:GetPlayer(player_id) then
 				local hero = PlayerResource:GetSelectedHeroEntity(player_id)
 				if hero then
+					
+					-- Altar buffs
 					local gold_bonus_modifier = hero:FindModifierByName("modifier_frostivus_altar_aura_fire_buff")
 					local exp_bonus_modifier = hero:FindModifierByName("modifier_frostivus_altar_aura_zeus_buff")
+					local extra_gold = 0
+					local extra_exp = 0
+
+					-- Greevil's greed
+					if hero:HasModifier("custom_alchemist_goblins_greed_passive") then
+						local greed_ability = hero:FindAbilityByName("custom_alchemist_goblins_greed")
+						extra_gold = extra_gold + greed_ability:GetLevelSpecialValueFor("gold_per_tick", greed_ability:GetLevel() - 1)
+					end
+
 					if gold_bonus_modifier then
-						hero:ModifyGold(self.gold_per_tick + (90 + gold_bonus_modifier:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_fire"):GetStackCount() * 30) / 30, false, DOTA_ModifyGold_GameTick)
-					else
-						hero:ModifyGold(self.gold_per_tick, false, DOTA_ModifyGold_GameTick)
+						extra_gold = extra_gold + 3 + gold_bonus_modifier:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_fire"):GetStackCount()
 					end
 					if exp_bonus_modifier then
-						hero:AddExperience(self.xp_per_tick + (90 + exp_bonus_modifier::GetCaster():FindModifierByName("modifier_frostivus_altar_aura_zeus"):GetStackCount() * 30) / 30, DOTA_ModifyXP_CreepKill, false, true)
-					else
-						hero:AddExperience(self.xp_per_tick, DOTA_ModifyXP_CreepKill, false, true)
+						extra_exp = extra_exp + 4 + 2 * exp_bonus_modifier:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_zeus"):GetStackCount()
 					end
+
+					hero:ModifyGold(self.gold_per_tick + extra_gold, false, DOTA_ModifyGold_GameTick)
+					hero:AddExperience(self.xp_per_tick + extra_exp, DOTA_ModifyXP_CreepKill, false, true)
 				end
 			end
 		end

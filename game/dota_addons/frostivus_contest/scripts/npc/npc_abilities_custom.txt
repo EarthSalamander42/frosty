@@ -68,7 +68,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"frostivus_altar_aura_zeus"
+		"AbilityTextureName"			"custom/frostivus_altar_aura_zeus"
 		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_zeus.lua"
 		"MaxLevel"						"1"
 	}
@@ -82,7 +82,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"frostivus_altar_aura_veno"
+		"AbilityTextureName"			"custom/frostivus_altar_aura_veno"
 		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_veno.lua"
 		"MaxLevel"						"1"
 	}
@@ -96,7 +96,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"frostivus_altar_aura_fire"
+		"AbilityTextureName"			"custom/frostivus_altar_aura_fire"
 		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_fire.lua"
 		"MaxLevel"						"1"
 	}
@@ -110,7 +110,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"frostivus_altar_aura_treant"
+		"AbilityTextureName"			"custom/frostivus_altar_aura_treant"
 		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_treant.lua"
 		"MaxLevel"						"1"
 	}
@@ -124,7 +124,7 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"frostivus_altar_aura_lich"
+		"AbilityTextureName"			"custom/frostivus_altar_aura_lich"
 		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_lich.lua"
 		"MaxLevel"						"1"
 	}
@@ -234,6 +234,130 @@
 		"AbilityTextureName"			"venomancer_poison_nova"
 		"ScriptFile"					"boss_scripts/boss_abilities/green_death.lua"
 		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Abaddon's Mist Coil
+	//=================================================================================================================
+	"custom_abaddon_death_coil"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"										"ability_lua"
+		"ScriptFile"									"hero/mist_coil.lua"
+		"AbilityBehavior"								"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"							"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"							"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellImmunityType"								"SPELL_IMMUNITY_ALLIES_YES"
+		"AbilityUnitDamageType"							"DAMAGE_TYPE_MAGICAL"
+		"FightRecapLevel"								"1"
+		"AbilityTextureName"							"abaddon_death_coil"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"								"0.25"
+		"AbilityCooldown"								"4.5"
+		"AbilityCastRange"								"1200"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"								"50 60 70 80"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"									"soundevents/game_sounds_heroes/game_sounds_abaddon.vsndevts"
+			"particle" 									"particles/units/heroes/hero_abaddon/abaddon_death_coil.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"projectile_speed"						"1600"
+			}
+			"02"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"damage"								"100 150 200 250"
+			}
+			"03"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"heal"									"100 150 200 250"
+			}
+			"04"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"bonus_heal_pct"						"7 8 9 10"
+				"LinkedSpecialBonus"					"special_bonus_unique_abaddon_2"
+			}
+			"05"
+			{
+				"var_type"								"FIELD_FLOAT"
+				"mist_duration"							"4.0"
+			}
+			"06"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"ally_heal_pct"							"20 30 40 50"
+			}
+			"07"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"enemy_damage_pct"						"20 30 40 50"
+			}
+			"08"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"self_damage"							"50 75 100 125"
+			}
+			"09"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"talent_extra_heal"						"4"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Alchemist's Greevil's Greed
+	//=================================================================================================================
+	"custom_alchemist_goblins_greed"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"										"ability_lua"
+		"ScriptFile"									"hero/greevils_greed.lua"
+		"AbilityBehavior"								"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"							"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"							"DOTA_UNIT_TARGET_HERO"
+		"AbilityTextureName"							"alchemist_goblins_greed"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"bonus_gpm"								"30 60 90 120"
+			}
+			"02"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"gold_per_hit"							"4 6 8 10"
+			}
+			"03"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"gold_per_tick"							"1 2 3 4"
+			}
+		}
 	}
 
 	//=====================================================================================================
