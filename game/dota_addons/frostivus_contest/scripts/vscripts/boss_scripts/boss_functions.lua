@@ -22,7 +22,8 @@ function LockArena(altar, team, attacker)
 	ParticleManager:SetParticleControl(altar_handle.arena_fence_pfx, 0, altar_loc)
 
 	-- Apply altar controller modifier to altar entity
-	altar_handle:AddNewModifier(nil, nil, "modifier_altar_active", {team = team})
+	local bounties = GetAltarBountyValue(altar_handle, altar)
+	altar_handle:AddNewModifier(nil, nil, "modifier_altar_active", {team = team, gold_bounty = bounties[1], exp_bounty = bounties[2]})
 
 	-- Force attacker to be inside the arena when the fight starts
 	local direction = (attacker:GetAbsOrigin() - altar_loc)
@@ -39,6 +40,7 @@ function LockArena(altar, team, attacker)
 		end
 	end
 
+	altar_handle.victory = false
 	CustomGameEventManager:Send_ServerToTeam(team, "show_boss_hp", {})
 end
 
@@ -47,21 +49,11 @@ function UnlockArena(altar, victory, team, aura_ability)
 	ParticleManager:DestroyParticle(altar_handle.arena_fence_pfx, true)
 	ParticleManager:ReleaseParticleIndex(altar_handle.arena_fence_pfx)
 
-	-- Stop altar controlled modifier
-	altar_handle.victory = victory
-	altar_handle:RemoveModifierByName("modifier_altar_active")
-
-	-- Update altar scoreboard
-	for i = 1, 7 do
-		if string.find(altar, i) then
-			CustomGameEventManager:Send_ServerToAllClients("update_altar", {altar = i, team = team})
-			Entities:FindByName(nil, "altar_"..i):SetTeam(team)
-		end
-	end
 	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {})
 
 	-- Adjust altar aura if necessary
 	if victory then
+		altar_handle.victory = true
 		if altar_handle:FindAbilityByName(aura_ability) then
 			local modifier_name = "modifier_"..aura_ability
 			local aura_modifier = altar_handle:FindModifierByName(modifier_name)
@@ -69,9 +61,19 @@ function UnlockArena(altar, victory, team, aura_ability)
 		else
 			altar_handle:AddAbility(aura_ability)
 			altar_handle:FindAbilityByName(aura_ability):SetLevel(1)
-			altar_handle.aura_strength = 0
+		end
+
+		-- Update altar scoreboard
+		for i = 1, 7 do
+			if string.find(altar, i) then
+				CustomGameEventManager:Send_ServerToAllClients("update_altar", {altar = i, team = team})
+				altar_handle:SetTeam(team)
+			end
 		end
 	end
+
+	-- Stop altar controlled modifier
+	altar_handle:RemoveModifierByName("modifier_altar_active")
 end
 
 -- Fighting boss modifier
@@ -112,8 +114,16 @@ end
 function modifier_altar_active:OnCreated( params )
 	if IsServer() then
 		self.team = "no team passed"
+		self.gold_bounty = 300
+		self.exp_bounty = 300
 		if params.team then
 			self.team = params.team
+		end
+		if params.gold_bounty then
+			self.gold_bounty = params.gold_bounty
+		end
+		if params.exp_bounty then
+			self.exp_bounty = params.exp_bounty
 		end
 
 		self.fighting_heroes = {}
@@ -130,14 +140,9 @@ function modifier_altar_active:OnDestroy( params )
 
 			-- Give heroes a bounty, if appropriate
 			if altar_handle.victory and hero:IsRealHero() then
-				hero:AddExperience(BASE_BOSS_EXP_REWARD * (1 + BONUS_BOUNTY_PER_MINUTE * 0.01 * GameRules:GetDOTATime(false, false) / 60), DOTA_ModifyXP_CreepKill, false, true)
-				hero:ModifyGold(BASE_BOSS_GOLD_REWARD * (1 + BONUS_BOUNTY_PER_MINUTE * 0.01 * GameRules:GetDOTATime(false, false) / 60), false, DOTA_ModifyGold_CreepKill)
-				SendOverheadEventMessage(hero, OVERHEAD_ALERT_GOLD, hero, BASE_BOSS_GOLD_REWARD * (1 + BONUS_BOUNTY_PER_MINUTE * 0.01 * GameRules:GetDOTATime(false, false) / 60), nil)
-
-				-- Also change the altar's team, if necessary
-				if altar_handle:GetTeam() ~= hero:GetTeam() then
-					altar_handle:SetTeam(hero:GetTeam())
-				end
+				hero:AddExperience(self.exp_bounty, DOTA_ModifyXP_CreepKill, false, true)
+				hero:ModifyGold(self.gold_bounty, false, DOTA_ModifyGold_CreepKill)
+				SendOverheadEventMessage(hero, OVERHEAD_ALERT_GOLD, hero, self.gold_bounty, nil)
 			end
 			hero:RemoveModifierByName("modifier_fighting_boss")
 		end
@@ -189,6 +194,65 @@ function modifier_altar_active:OnIntervalThink()
 		end
 	end
 end
+
+-- Bounty-defining function, per boss
+function GetAltarBountyValue(altar, altar_name)
+
+	local gold_bounty = 300
+	local exp_bounty = 300
+
+	-- Zeus (easy)
+	if altar_name == "altar_2" then
+		gold_bounty = 300
+		exp_bounty = 300
+	-- Veno (medium)
+	elseif altar_name == "altar_3" then
+		gold_bounty = 400
+		exp_bounty = 400
+	-- Lich (hard)
+	elseif altar_name == "altar_4" then
+		gold_bounty = 500
+		exp_bounty = 500
+	-- Treant (medium)
+	elseif altar_name == "altar_5" then
+		gold_bounty = 400
+		exp_bounty = 400
+	-- Fire (easy)
+	elseif altar_name == "altar_6" then
+		gold_bounty = 300
+		exp_bounty = 300
+	end
+
+	-- Zeus (easy)
+	if altar:HasModifier("modifier_frostivus_altar_aura_zeus") then
+		local stacks = altar:FindModifierByName("modifier_frostivus_altar_aura_zeus"):GetStackCount()
+		gold_bounty = gold_bounty + 75 * stacks
+		exp_bounty = exp_bounty + 75 * stacks
+	-- Veno (medium)
+	elseif altar:HasModifier("modifier_frostivus_altar_aura_veno") then
+		local stacks = altar:FindModifierByName("modifier_frostivus_altar_aura_veno"):GetStackCount()
+		gold_bounty = gold_bounty + 100 * stacks
+		exp_bounty = exp_bounty + 100 * stacks
+	-- Lich (hard)
+	elseif altar:HasModifier("modifier_frostivus_altar_aura_lich") then
+		local stacks = altar:FindModifierByName("modifier_frostivus_altar_aura_lich"):GetStackCount()
+		gold_bounty = gold_bounty + 125 * stacks
+		exp_bounty = exp_bounty + 125 * stacks
+	-- Treant (medium)
+	elseif altar:HasModifier("modifier_frostivus_altar_aura_treant") then
+		local stacks = altar:FindModifierByName("modifier_frostivus_altar_aura_treant"):GetStackCount()
+		gold_bounty = gold_bounty + 100 * stacks
+		exp_bounty = exp_bounty + 100 * stacks
+	-- Fire (easy)
+	elseif altar:HasModifier("modifier_frostivus_altar_aura_fire") then
+		local stacks = altar:FindModifierByName("modifier_frostivus_altar_aura_fire"):GetStackCount()
+		gold_bounty = gold_bounty + 75 * stacks
+		exp_bounty = exp_bounty + 75 * stacks
+	end
+
+	return {gold_bounty, exp_bounty}
+end
+
 
 
 ---------------------

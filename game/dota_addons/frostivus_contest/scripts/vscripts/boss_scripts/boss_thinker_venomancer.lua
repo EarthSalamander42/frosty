@@ -70,8 +70,8 @@ local target = keys.unit
 			local target_loc = target:GetAbsOrigin()
 			for player_id = 0, 20 do
 				if PlayerResource:GetPlayer(player_id) and PlayerResource:GetTeam(player_id) == self.team then
-					local win_pfx = ParticleManager:CreateParticleForPlayer("particles/boss_veno/screen_veno_win.vpcf", PATTACH_MAIN_VIEW, nil, PlayerResource:GetPlayer(player_id))
-					ParticleManager:SetParticleControl(win_pfx, 0, target_loc)
+					local win_pfx = ParticleManager:CreateParticleForPlayer("particles/boss_veno/screen_veno_win.vpcf", PATTACH_EYES_FOLLOW, PlayerResource:GetSelectedHeroEntity(player_id), PlayerResource:GetPlayer(player_id))
+					self:AddParticle(win_pfx, false, false, -1, false, false)
 					ParticleManager:ReleaseParticleIndex(win_pfx)
 				end
 			end
