@@ -95,7 +95,7 @@ function GameMode:ModifierFilter( keys )
 		if modifier_owner:HasModifier("modifier_frostivus_boss") then
 			
 			-- Ignore stuns and knockbacks
-			if modifier_name == "modifier_stunned" or modifier_name == "modifier_knockback" then
+			if modifier_name == "modifier_stunned" or modifier_name == "modifier_knockback" or modifier_name == "modifier_rooted" then
 				return false
 			end
 		end

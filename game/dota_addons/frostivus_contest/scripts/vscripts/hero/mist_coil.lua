@@ -55,7 +55,6 @@ function custom_abaddon_death_coil:OnProjectileHit(target, location)
 		-- Increase healing with the talent
 		local talent_ability = caster:FindAbilityByName("special_bonus_unique_abaddon_2")
 		if talent_ability and talent_ability:GetLevel() > 0 then
-			print("talent activated!")
 			bonus_heal_pct = bonus_heal_pct + self:GetSpecialValueFor("talent_extra_heal")
 		end
 

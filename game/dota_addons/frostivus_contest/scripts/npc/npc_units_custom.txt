@@ -153,8 +153,8 @@
 		//----------------------------------------------------------------
 		"StatusHealth"				"8000"
 		"StatusHealthRegen"			"0.0"
-		"StatusMana"				"1000"
-		"StatusManaRegen"			"0"
+		"StatusMana"				"600"
+		"StatusManaRegen"			"8"
 
 		// Team
 		//----------------------------------------------------------------
@@ -227,8 +227,8 @@
 		//----------------------------------------------------------------
 		"StatusHealth"				"7000"
 		"StatusHealthRegen"			"0.0"
-		"StatusMana"				"1000"
-		"StatusManaRegen"			"0"
+		"StatusMana"				"800"
+		"StatusManaRegen"			"10"
 
 		// Team
 		//----------------------------------------------------------------
@@ -299,7 +299,7 @@
 		//----------------------------------------------------------------
 		"StatusHealth"				"140"
 		"StatusHealthRegen"			"0.0"
-		"StatusMana"				"50"
+		"StatusMana"				"100"
 		"StatusManaRegen"			"0"
 
 		// Team
@@ -371,7 +371,7 @@
 		//----------------------------------------------------------------
 		"StatusHealth"				"350"
 		"StatusHealthRegen"			"0.0"
-		"StatusMana"				"100"
+		"StatusMana"				"200"
 		"StatusManaRegen"			"0"
 
 		// Team
@@ -443,7 +443,7 @@
 		//----------------------------------------------------------------
 		"StatusHealth"				"560"
 		"StatusHealthRegen"			"0.0"
-		"StatusMana"				"200"
+		"StatusMana"				"300"
 		"StatusManaRegen"			"0"
 
 		// Team

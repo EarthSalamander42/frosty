@@ -68,10 +68,10 @@
 
 		"Ability1"				"antimage_mana_break"
 		"Ability2"				"antimage_blink"
-		//"Ability3"				"custom_antimage_spell_shield"
+		"Ability3"				"custom_antimage_spell_shield"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_antimage_mana_void"
+		"Ability6"				"antimage_mana_void"
 		"Ability10"				"special_bonus_hp_175"
 		"Ability11"				"special_bonus_attack_speed_20"
 		"Ability12"				"special_bonus_unique_antimage"
@@ -94,11 +94,11 @@
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"axe_berserkers_call"
-		//"Ability2"				"custom_axe_battle_hunger"
+		"Ability2"				"custom_axe_battle_hunger"
 		"Ability3"				"axe_counter_helix"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_axe_culling_blade"
+		"Ability6"				"axe_culling_blade"
 		"Ability10"				"special_bonus_strength_8"
 		"Ability11"				"special_bonus_attack_speed_40"
 		"Ability12"				"special_bonus_mp_regen_3"
@@ -137,33 +137,6 @@
 	}
 
 	//=================================================================================================================
-	// HERO: Clinkz
-	//=================================================================================================================
-	"npc_dota_hero_clinkz"
-	{
-		"override_hero"			"npc_dota_hero_clinkz"
-
-		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
-		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
-
-		"Ability1"				"clinkz_strafe"
-		"Ability2"				"clinkz_searing_arrows"
-		"Ability3"				"clinkz_wind_walk"
-		"Ability4"				"generic_hidden"
-		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_clinkz_death_pact"
-		"Ability10"				"special_bonus_magic_resistance_12"
-		"Ability11"				"special_bonus_armor_5"
-		"Ability12"				"special_bonus_evasion_15"
-		"Ability13"				"special_bonus_unique_clinkz_1"
-		"Ability14"				"special_bonus_attack_range_100"
-		"Ability15"				"special_bonus_hp_regen_20"
-		"Ability16"				"special_bonus_unique_clinkz_2"
-		"Ability17"				"special_bonus_unique_clinkz_3"
-	}
-
-	//=================================================================================================================
 	// HERO: Crystal Maiden
 	//=================================================================================================================
 	"npc_dota_hero_crystal_maiden"
@@ -175,8 +148,8 @@
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"crystal_maiden_crystal_nova"
-		//"Ability2"				"custom_crystal_maiden_frostbite"
-		//"Ability3"				"custom_crystal_maiden_brilliance_aura"
+		"Ability2"				"custom_crystal_maiden_frostbite"
+		"Ability3"				"crystal_maiden_brilliance_aura"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
 		"Ability6"				"crystal_maiden_freezing_field"
@@ -255,7 +228,7 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
-		//"Ability1"				"custom_drow_ranger_frost_arrows"
+		"Ability1"				"drow_ranger_frost_arrows"
 		"Ability2"				"drow_ranger_wave_of_silence"
 		//"Ability3"				"custom_drow_ranger_trueshot"
 		"Ability4"				"generic_hidden"
@@ -296,33 +269,6 @@
 		"Ability15"				"special_bonus_unique_gyrocopter_4"
 		"Ability16"				"special_bonus_unique_gyrocopter_1"
 		"Ability17"				"special_bonus_unique_gyrocopter_5"
-	}
-
-	//=================================================================================================================
-	// HERO: Huskar
-	//=================================================================================================================
-	"npc_dota_hero_huskar"
-	{
-		"override_hero"			"npc_dota_hero_huskar"
-
-		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
-		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
-
-		"Ability1"				"huskar_inner_vitality"
-		"Ability2"				"huskar_burning_spear"
-		"Ability3"				"huskar_berserkers_blood"
-		"Ability4"				"generic_hidden"
-		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_huskar_life_break"
-		"Ability10"				"special_bonus_hp_175"
-		"Ability11"				"special_bonus_attack_damage_20"
-		"Ability12"				"special_bonus_unique_huskar_2"
-		"Ability13"				"special_bonus_lifesteal_15"
-		"Ability14"				"special_bonus_strength_15"
-		"Ability15"				"special_bonus_unique_huskar"
-		"Ability16"				"special_bonus_attack_range_125"
-		"Ability17"				"special_bonus_unique_huskar_3"
 	}
 
 	//=================================================================================================================
@@ -488,6 +434,33 @@
 		"Ability15"				"special_bonus_unique_luna_1"
 		"Ability16"				"special_bonus_lifesteal_25"
 		"Ability17"				"special_bonus_unique_luna_5"
+	}
+
+	//=================================================================================================================
+	// HERO: Medusa
+	//=================================================================================================================
+	"npc_dota_hero_medusa"
+	{
+		"override_hero"			"npc_dota_hero_medusa"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
+		"Ability1"				"medusa_split_shot"
+		"Ability2"				"medusa_mystic_snake"
+		"Ability3"				"medusa_mana_shield"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"medusa_stone_gaze"
+		"Ability10"				"special_bonus_attack_damage_25"
+		"Ability11"				"special_bonus_evasion_12"
+		"Ability12"				"special_bonus_attack_speed_30"
+		"Ability13"				"special_bonus_unique_medusa_3"
+		"Ability14"				"special_bonus_mp_800"
+		"Ability15"				"special_bonus_unique_medusa"
+		"Ability16"				"special_bonus_unique_medusa_2"
+		"Ability17"				"special_bonus_unique_medusa_4"
 	}
 
 	//=================================================================================================================
@@ -958,6 +931,33 @@
 	}
 
 	//=================================================================================================================
+	// HERO: Viper
+	//=================================================================================================================
+	"npc_dota_hero_viper"
+	{
+		"override_hero"			"npc_dota_hero_viper"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
+		"Ability1"				"viper_poison_attack"
+		"Ability2"				"viper_nethertoxin"
+		"Ability3"				"viper_corrosive_skin"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"viper_viper_strike"
+		"Ability10"				"special_bonus_attack_speed_20"
+		"Ability11"				"special_bonus_spell_lifesteal_8"
+		"Ability12"				"special_bonus_attack_range_100"
+		"Ability13"				"special_bonus_unique_viper_1"
+		"Ability14"				"special_bonus_unique_viper_2"
+		"Ability15"				"special_bonus_unique_viper_4"
+		"Ability16"				"special_bonus_unique_viper_3"
+		"Ability17"				"special_bonus_attack_damage_120"
+	}
+
+	//=================================================================================================================
 	// HERO: Warlock
 	//=================================================================================================================
 	"npc_dota_hero_warlock"
@@ -1127,7 +1127,7 @@
 	"npc_dota_hero_tinker"					{ "IsDisabled" "1" }
 	"npc_dota_hero_tiny"					{ "IsDisabled" "1" }
 	"npc_dota_hero_venomancer"				{ "IsDisabled" "1" }
-	"npc_dota_hero_viper"					{ "IsDisabled" "1" }
+	"npc_dota_hero_clinkz"					{ "IsDisabled" "1" }
 	"npc_dota_hero_weaver"					{ "IsDisabled" "1" }
 	"npc_dota_hero_zuus"					{ "IsDisabled" "1" }
 	"npc_dota_hero_broodmother"				{ "IsDisabled" "1" }

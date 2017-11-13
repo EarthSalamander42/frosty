@@ -62,7 +62,7 @@
 		},
 		{
 			_class = "C_OP_StopAfterCPDuration"
-			m_flDuration = 14.0
+			m_flDuration = 6.0
 		},
 		{
 			_class = "C_OP_Noise"
