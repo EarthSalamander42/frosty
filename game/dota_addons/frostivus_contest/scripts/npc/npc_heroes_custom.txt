@@ -176,7 +176,7 @@
 
 		"Ability1"				"dazzle_poison_touch"
 		"Ability2"				"dazzle_shallow_grave"
-		//"Ability3"				"custom_dazzle_shadow_wave"
+		"Ability3"				"custom_dazzle_shadow_wave"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
 		"Ability6"				"dazzle_weave"
@@ -228,9 +228,9 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
-		"Ability1"				"drow_ranger_frost_arrows"
+		"Ability1"				"custom_drow_ranger_frost_arrows"
 		"Ability2"				"drow_ranger_wave_of_silence"
-		//"Ability3"				"custom_drow_ranger_trueshot"
+		"Ability3"				"drow_ranger_trueshot"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
 		"Ability6"				"drow_ranger_marksmanship"
@@ -1155,7 +1155,7 @@
 	"npc_dota_hero_magnataur"				{ "IsDisabled" "1" }
 	"npc_dota_hero_centaur"					{ "IsDisabled" "1" }
 	"npc_dota_hero_slark"					{ "IsDisabled" "1" }
-	"npc_dota_hero_medusa"					{ "IsDisabled" "1" }
+	"npc_dota_hero_huskar"					{ "IsDisabled" "1" }
 	"npc_dota_hero_tusk"					{ "IsDisabled" "1" }
 	"npc_dota_hero_elder_titan"				{ "IsDisabled" "1" }
 	"npc_dota_hero_earth_spirit"			{ "IsDisabled" "1" }

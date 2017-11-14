@@ -576,6 +576,147 @@
 		}
 	}
 
+	//=================================================================================================================
+	// Dazzle's Shadow Wave
+	//=================================================================================================================
+	"custom_dazzle_shadow_wave"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"										"ability_lua"
+		"AbilityTextureName"							"dazzle_shadow_wave"
+		"ScriptFile"									"hero/shadow_wave.lua"
+		"FightRecapLevel"								"1"
+		"AbilityBehavior"								"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"							"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"							"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"								"900"
+		"AbilityManaCost"								"90 100 110 120"
+		"AbilityCooldown"								"10 9 8 7"
+		"AbilityCastPoint"								"0.3"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"									"soundevents/game_sounds_heroes/game_sounds_dazzle.vsndevts"
+			"particle"									"particles/units/heroes/hero_dazzle/dazzle_shadow_wave.vpcf"
+			"particle"									"particles/status_fx/status_effect_alacrity.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"bounce_distance"						"900"
+			}
+			"02"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"base_heal"								"80 100 120 140"
+				"LinkedSpecialBonus"					"special_bonus_unique_dazzle_2"
+			}
+			"03"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"bonus_heal"							"8 10 12 14"
+			}
+			"04"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"buff_ms"								"12"
+			}
+			"05"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"buff_as"								"15 35 55 75"
+			}
+			"06"
+			{
+				"var_type"								"FIELD_FLOAT"
+				"buff_duration"							"3.5"
+			}
+			"07"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"cooldown"								"10 9 8 7"
+			}
+			"08"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"talent_cooldown"						"3"
+			}
+			"09"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"talent_healing"						"35"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Drow Ranger's Frost Arrows
+	//=================================================================================================================
+	"custom_drow_ranger_frost_arrows"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"							"ability_lua"
+		"AbilityBehavior"					"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityTextureName"				"drow_ranger_frost_arrows"
+		"ScriptFile"						"hero/frost_arrows.lua"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"						"soundevents/game_sounds_heroes/game_sounds_drowranger.vsndevts"
+			"particle"						"particles/heroes/drow_swift_arrow_.vpcf"
+			"particle"						"particles/units/heroes/hero_drow/drow_frost_arrow.vpcf"
+			"particle"						"particles/generic_gameplay/generic_slowed_cold.vpcf"
+			"particle"  					"particles/status_fx/status_effect_frost.vpcf"
+			"particle"						"particles/heroes/drow_swift_arrows_buff.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"ms_slow"					"-16 -32 -48 -64"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"slow_duration"				"1.5"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"agi_bonus"					"10 14 18 22"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"ms_bonus"					"5"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"buff_duration"				"3.5"
+			}
+		}
+	}
+
 	//=====================================================================================================
 	// Candy Box: Immune
 	//=====================================================================================================

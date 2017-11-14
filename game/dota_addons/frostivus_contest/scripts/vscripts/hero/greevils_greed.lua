@@ -14,7 +14,6 @@ custom_alchemist_goblins_greed_passive = custom_alchemist_goblins_greed_passive 
 function custom_alchemist_goblins_greed_passive:IsDebuff() return false end
 function custom_alchemist_goblins_greed_passive:IsHidden() return true end
 function custom_alchemist_goblins_greed_passive:IsPurgable() return false end
-function custom_alchemist_goblins_greed_passive:AllowIllusionDuplicate() return false end
 
 function custom_alchemist_goblins_greed_passive:DeclareFunctions()
 	local funcs = {
@@ -25,7 +24,7 @@ end
 
 function custom_alchemist_goblins_greed_passive:OnAttackLanded(keys)
 	if IsServer() then
-		if keys.attacker == self:GetParent() and keys.target:IsHero() then
+		if keys.attacker == self:GetParent() and keys.target:IsHero() and keys.attacker:IsRealHero() then
 			local attacker = keys.attacker
 			local ability = self:GetAbility()
 			local gold = ability:GetLevelSpecialValueFor("gold_per_hit", ability:GetLevel() -1)

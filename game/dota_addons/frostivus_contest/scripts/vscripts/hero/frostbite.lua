@@ -2,7 +2,7 @@
 		Based on Dota IMBA code
 		By: Firetoad, 11-13-2017    ]]
 
-custom_crystal_maiden_frostbite = class({})
+if custom_crystal_maiden_frostbite == nil then custom_crystal_maiden_frostbite = class({}) end
 
 function custom_crystal_maiden_frostbite:OnSpellStart()
 	if IsServer() then
