@@ -475,6 +475,58 @@
 	}
 
 	//=================================================================================================================
+	// Legion Commander: Overwhelming Odds
+	//=================================================================================================================
+	"legion_commander_overwhelming_odds"
+	{
+		"AbilitySpecial"
+		{			
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"40 60 80 100"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_unit"		"15 20 25 30"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_hero"		"20 40 60 80"
+				"LinkedSpecialBonus"	"special_bonus_unique_legion_commander_4"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"illusion_dmg_pct"				"25"
+				"CalculateSpellDamageTooltip"	"1"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_speed_creeps"	"4"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_speed_heroes"	"6"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"7.0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"375 400 425 450"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Lifestealer: Rage
 	//=================================================================================================================
 	"life_stealer_rage"
@@ -893,7 +945,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"hero_duration"			"0.5"
+				"hero_duration"			"0.25"
 			}
 			"02"
 			{
@@ -908,7 +960,7 @@
 			"04"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"bounce_range"			"600 700 800 900"
+				"bounce_range"			"900"
 			}
 			"05"
 			{
@@ -918,17 +970,81 @@
 			"06"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"speed"					"1000"
+				"speed"					"1250"
 			}
 			"07"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"bounce_delay"			"0.3"
+				"bounce_delay"			"0.1"
 			}
 			"08"
 			{
 				"var_type"				"FIELD_INTEGER"
 				"bounces_tooltip"		"8 12 16 20"
+				"LinkedSpecialBonus"	"special_bonus_unique_witch_doctor_3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Witch Doctor: Voodoo Restoration
+	//=================================================================================================================
+	"witch_doctor_voodoo_restoration"
+	{
+		"AbilityManaCost"				"8 12 16 20"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_per_second"		"8 12 16 20"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"600"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal"					"16 24 32 40"
+				"LinkedSpecialBonus"	"special_bonus_unique_witch_doctor_2"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"heal_interval"			"0.33"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Voodoo Restoration health-based healing
+	//=================================================================================================================
+	"special_bonus_unique_witch_doctor_2"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"value"					"1.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Paralyzing Cask bounces
+	//=================================================================================================================
+	"special_bonus_unique_witch_doctor_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"5"
 			}
 		}
 	}
@@ -1023,6 +1139,52 @@
 			{
 				"var_type"			"FIELD_INTEGER"
 				"value"				"35"
+			}
+		}
+	}
+
+
+	//=================================================================================================================
+	// bonus Moment of Courage damage bonus
+	//=================================================================================================================
+	"special_bonus_unique_legion_commander_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"50"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Death Ward attack range
+	//=================================================================================================================
+	"special_bonus_unique_witch_doctor_1"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"200"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Death Ward damage
+	//=================================================================================================================
+	"special_bonus_unique_witch_doctor_5"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"100"
 			}
 		}
 	}

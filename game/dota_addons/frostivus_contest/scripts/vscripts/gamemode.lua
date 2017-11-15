@@ -189,7 +189,7 @@ function GameMode:DamageFilter( keys )
 			return false
 		end
 
-		if victim:HasModifier("modifier_frostivus_boss") and not attacker:HasModifier("modifier_fighting_boss") and not attacker:HasModifier("modifier_frostivus_boss") then
+		if victim:HasModifier("modifier_frostivus_boss") and not (attacker:HasModifier("modifier_fighting_boss") or attacker:HasModifier("modifier_frostivus_boss") or attacker:GetUnitName() == "npc_dota_witch_doctor_death_ward") then
 			return false
 		end
 	end

@@ -500,6 +500,98 @@
 	}
 
 	//=================================================================================================================
+	// Axe's A Cut Above Culling Blade
+	//=================================================================================================================
+	"holdout_culling_blade"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityTextureName"			"axe_culling_blade"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"750"
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"20 16 12"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"100 75 50"		
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"leap_distance"			"750"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"leap_speed"			"1300"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"leap_acceleration"		"7000.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"leap_radius"			"275 300 325"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"kill_threshold"		"250 350 450"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"150 250 350"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed_bonus"			"30"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed_duration"		"6"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed_aoe"				"900"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown_scepter"		"20.0 16.0 12.0"
+			}
+			"11"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"kill_threshold_scepter"	"150 250 350"
+			}
+			"12"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"speed_duration_scepter"	"6.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Crystal Maiden's Frostbite
 	//=================================================================================================================
 	"custom_crystal_maiden_frostbite"
@@ -713,6 +805,183 @@
 			{
 				"var_type"					"FIELD_FLOAT"
 				"buff_duration"				"3.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Legion Commander's Moment of Courage
+	//=================================================================================================================
+	"custom_legion_commander_moment_of_courage"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"										"ability_lua"
+		"ScriptFile"									"hero/moment_of_courage.lua"
+		"AbilityBehavior"								"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetTeam"							"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"							"DOTA_UNIT_TARGET_HERO"
+		"AbilityTextureName"							"legion_commander_moment_of_courage"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"								"12 11 10 9"
+		"AbilityCastRange"								"700"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"									"particles/units/heroes/hero_legion_commander/legion_commander_courage_hit.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"bonus_damage"							"50 100 150 200"
+			}
+			"02"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"lifesteal_pct"							"100"
+				"LinkedSpecialBonus"					"special_bonus_unique_legion_commander_3"
+			}
+			"03"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"ally_radius"							"700"
+			}
+			"04"
+			{
+				"var_type"								"FIELD_FLOAT"
+				"duration"								"5.0"
+			}
+			"05"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"lifesteal_pct_talent"					"150"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Legion Commander's Gladiators Unite
+	//=================================================================================================================
+	"holdout_gladiators_unite"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityTextureName"			"legion_commander_duel"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"625"
+		"AbilityCastPoint"				"0.3"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"60"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"150 175 200"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"625"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_armor_per_hero"		"4 6 8"
+			}
+			"03"
+			{	
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage_per_hero"		"10 15 20"
+			}
+			"04"
+			{	
+				"var_type"					"FIELD_INTEGER"
+				"lifesteal_per_hero"		"8 10 12"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"duration"					"10 12 14"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Witch Doctor's Death Ward
+	//=================================================================================================================
+	"holdout_death_ward"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"witch_doctor_death_ward"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_CREEP"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.35"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"80.0"
+		"AbilityChannelTime"			"10.0"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_4"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"200"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounces"				"2 4 6"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"60 105 150"
+				"LinkedSpecialBonus"	"special_bonus_unique_witch_doctor_5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_scepter"		"60 105 150"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"scepter_bounces"		"2 4 6"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounce_radius"			"900"
 			}
 		}
 	}

@@ -98,7 +98,7 @@
 		"Ability3"				"axe_counter_helix"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		"Ability6"				"axe_culling_blade"
+		"Ability6"				"holdout_culling_blade"
 		"Ability10"				"special_bonus_strength_8"
 		"Ability11"				"special_bonus_attack_speed_40"
 		"Ability12"				"special_bonus_mp_regen_3"
@@ -191,30 +191,30 @@
 	}
 
 	//=================================================================================================================
-	// HERO: Dragon Knight
+	// HERO: Legion Commander
 	//=================================================================================================================
-	"npc_dota_hero_dragon_knight"
+	"npc_dota_hero_legion_commander"
 	{
-		"override_hero"			"npc_dota_hero_dragon_knight"
+		"override_hero"			"npc_dota_hero_legion_commander"
 
 		//Picking Screen
 		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
-		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
-		//"Ability1"				"custom_dragon_knight_breathe_fire"
-		//"Ability2"				"custom_dragon_knight_dragon_tail"
-		"Ability3"				"dragon_knight_dragon_blood"
+		"Ability1"				"legion_commander_overwhelming_odds"
+		"Ability2"				"legion_commander_press_the_attack"
+		"Ability3"				"custom_legion_commander_moment_of_courage"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		"Ability6"				"dragon_knight_elder_dragon_form"
-		"Ability10"				"special_bonus_mp_regen_2"
-		"Ability11"				"special_bonus_attack_speed_30"
-		"Ability12"				"special_bonus_attack_damage_35"
-		"Ability13"				"special_bonus_hp_300"
-		"Ability14"				"special_bonus_gold_income_25"
-		"Ability15"				"special_bonus_unique_dragon_knight"
-		"Ability16"				"special_bonus_strength_40"
-		"Ability17"				"special_bonus_unique_dragon_knight_2"
+		"Ability6"				"holdout_gladiators_unite"
+		"Ability10"				"special_bonus_strength_8"
+		"Ability11"				"special_bonus_exp_boost_25"
+		"Ability12"				"special_bonus_attack_speed_30"
+		"Ability13"				"special_bonus_unique_legion_commander_4"
+		"Ability14"				"special_bonus_movement_speed_60"
+		"Ability15"				"special_bonus_unique_legion_commander_3"
+		"Ability16"				"special_bonus_attack_damage_200"
+		"Ability17"				"special_bonus_unique_legion_commander_2"
 	}
 
 	//=================================================================================================================
@@ -269,33 +269,6 @@
 		"Ability15"				"special_bonus_unique_gyrocopter_4"
 		"Ability16"				"special_bonus_unique_gyrocopter_1"
 		"Ability17"				"special_bonus_unique_gyrocopter_5"
-	}
-
-	//=================================================================================================================
-	// HERO: Jakiro
-	//=================================================================================================================
-	"npc_dota_hero_jakiro"
-	{
-		"override_hero"			"npc_dota_hero_jakiro"
-
-		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
-		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
-
-		//"Ability1"				"custom_jakiro_dual_breath"
-		//"Ability2"				"custom_jakiro_ice_path"
-		//"Ability3"				"custom_jakiro_liquid_fire"
-		"Ability4"				"generic_hidden"
-		"Ability5"				"generic_hidden"
-		"Ability6"				"jakiro_macropyre"
-		"Ability10"				"special_bonus_exp_boost_25"
-		"Ability11"				"special_bonus_spell_amplify_8"
-		"Ability12"				"special_bonus_attack_range_250"
-		"Ability13"				"special_bonus_unique_jakiro_2"
-		"Ability14"				"special_bonus_unique_jakiro_4"
-		"Ability15"				"special_bonus_gold_income_25"
-		"Ability16"				"special_bonus_unique_jakiro_3"
-		"Ability17"				"special_bonus_unique_jakiro"
 	}
 
 	//=================================================================================================================
@@ -616,7 +589,7 @@
 		"Ability3"				"pugna_nether_ward"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_pugna_life_drain"
+		"Ability6"				"pugna_life_drain"
 		"Ability10"				"special_bonus_movement_speed_25"
 		"Ability11"				"special_bonus_hp_225"
 		"Ability12"				"special_bonus_unique_pugna_4"
@@ -625,6 +598,33 @@
 		"Ability15"				"special_bonus_unique_pugna_5"
 		"Ability16"				"special_bonus_unique_pugna_2"
 		"Ability17"				"special_bonus_unique_pugna_3"
+	}
+
+	//=================================================================================================================
+	// HERO: Queen of Pain
+	//=================================================================================================================
+	"npc_dota_hero_queenofpain"
+	{
+		"override_hero"			"npc_dota_hero_queenofpain"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
+
+		"Ability1"				"queenofpain_shadow_strike"
+		"Ability2"				"queenofpain_blink"
+		"Ability3"				"queenofpain_scream_of_pain"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"queenofpain_sonic_wave"
+		"Ability10"				"special_bonus_attack_damage_25"
+		"Ability11"				"special_bonus_strength_10"
+		"Ability12"				"special_bonus_cooldown_reduction_12"
+		"Ability13"				"special_bonus_attack_speed_40"
+		"Ability14"				"special_bonus_spell_lifesteal_30"
+		"Ability15"				"special_bonus_unique_queen_of_pain"
+		"Ability16"				"special_bonus_unique_queen_of_pain_2"
+		"Ability17"				"special_bonus_spell_block_20"
 	}
 
 	//=================================================================================================================
@@ -659,30 +659,30 @@
 	}
 
 	//=================================================================================================================
-	// HERO: Skywrath Mage
+	// HERO: Shadow Fiend
 	//=================================================================================================================
-	"npc_dota_hero_skywrath_mage"
+	"npc_dota_hero_nevermore"
 	{
-		"override_hero"			"npc_dota_hero_skywrath_mage"
+		"override_hero"			"npc_dota_hero_nevermore"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
-		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
-		"Ability1"				"skywrath_mage_arcane_bolt"
-		"Ability2"				"skywrath_mage_concussive_shot"
-		"Ability3"				"skywrath_mage_ancient_seal"
-		"Ability4"				"generic_hidden"
-		"Ability5"				"generic_hidden"
-		"Ability6"				"skywrath_mage_mystic_flare"
-		"Ability10"				"special_bonus_movement_speed_25"
-		"Ability11"				"special_bonus_intelligence_8"
-		"Ability12"				"special_bonus_unique_skywrath"
-		"Ability13"				"special_bonus_unique_skywrath_2"
-		"Ability14"				"special_bonus_unique_skywrath_4"
-		"Ability15"				"special_bonus_unique_skywrath_3"
-		"Ability16"				"special_bonus_gold_income_50"
-		"Ability17"				"special_bonus_unique_skywrath_5"
+		"Ability1"				"nevermore_shadowraze1"
+		"Ability2"				"nevermore_shadowraze2"
+		"Ability3"				"nevermore_shadowraze3"
+		"Ability4"				"nevermore_necromastery"
+		"Ability5"				"nevermore_dark_lord"
+		"Ability6"				"nevermore_requiem"
+		"Ability10"				"special_bonus_spell_amplify_10"
+		"Ability11"				"special_bonus_attack_speed_20"
+		"Ability12"				"special_bonus_unique_nevermore_3"
+		"Ability13"				"special_bonus_movement_speed_40"
+		"Ability14"				"special_bonus_evasion_20"
+		"Ability15"				"special_bonus_unique_nevermore_2"
+		"Ability16"				"special_bonus_unique_nevermore_1"
+		"Ability17"				"special_bonus_cooldown_reduction_40"
 	}
 
 	//=================================================================================================================
@@ -791,6 +791,33 @@
 		"Ability15"				"special_bonus_unique_templar_assassin_2"
 		"Ability16"				"special_bonus_unique_templar_assassin_5"
 		"Ability17"				"special_bonus_unique_templar_assassin"
+	}
+
+	//=================================================================================================================
+	// HERO: Tidehunter
+	//=================================================================================================================
+	"npc_dota_hero_tidehunter"
+	{
+		"override_hero"			"npc_dota_hero_tidehunter"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
+
+		"Ability1"				"tidehunter_gush"
+		"Ability2"				"tidehunter_kraken_shell"
+		"Ability3"				"tidehunter_anchor_smash"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"tidehunter_ravage"
+		"Ability10"				"special_bonus_movement_speed_25"
+		"Ability11"				"special_bonus_unique_tidehunter_2"
+		"Ability12"				"special_bonus_exp_boost_40"
+		"Ability13"				"special_bonus_unique_tidehunter_3"
+		"Ability14"				"special_bonus_unique_tidehunter_4"
+		"Ability15"				"special_bonus_unique_tidehunter"
+		"Ability16"				"special_bonus_cooldown_reduction_25"
+		"Ability17"				"special_bonus_attack_damage_250"
 	}
 
 	//=================================================================================================================
@@ -958,33 +985,6 @@
 	}
 
 	//=================================================================================================================
-	// HERO: Warlock
-	//=================================================================================================================
-	"npc_dota_hero_warlock"
-	{
-		"override_hero"			"npc_dota_hero_warlock"
-
-		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
-		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
-
-		"Ability1"				"warlock_fatal_bonds"
-		"Ability2"				"warlock_shadow_word"
-		"Ability3"				"warlock_upheaval"
-		"Ability4"				"generic_hidden"
-		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_warlock_rain_of_chaos"
-		"Ability10"				"special_bonus_unique_warlock_5"
-		"Ability11"				"special_bonus_cast_range_125"
-		"Ability12"				"special_bonus_exp_boost_40"
-		"Ability13"				"special_bonus_unique_warlock_3"
-		"Ability14"				"special_bonus_unique_warlock_4"
-		"Ability15"				"special_bonus_unique_warlock_6"
-		"Ability16"				"special_bonus_unique_warlock_2"
-		"Ability17"				"special_bonus_unique_warlock_1"
-	}
-
-	//=================================================================================================================
 	// HERO: Windrunner
 	//=================================================================================================================
 	"npc_dota_hero_windrunner"
@@ -1078,18 +1078,18 @@
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"witch_doctor_paralyzing_cask"
-		//"Ability2"				"custom_witch_doctor_voodoo_restoration"
+		"Ability2"				"witch_doctor_voodoo_restoration"
 		"Ability3"				"witch_doctor_maledict"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_witch_doctor_death_ward"
+		"Ability6"				"holdout_death_ward"
 		"Ability10"				"special_bonus_attack_damage_75"
-		"Ability11"				"special_bonus_armor_5"
+		"Ability11"				"special_bonus_unique_witch_doctor_2"
 		"Ability12"				"special_bonus_unique_witch_doctor_3"
-		"Ability13"				"special_bonus_gold_income_20"
+		"Ability13"				"special_bonus_magic_resistance_20"
 		"Ability14"				"special_bonus_unique_witch_doctor_1"
-		"Ability15"				"special_bonus_unique_witch_doctor_4"
-		"Ability16"				"special_bonus_unique_witch_doctor_2"
+		"Ability15"				"special_bonus_gold_income_40"
+		"Ability16"				"special_bonus_unique_witch_doctor_4"
 		"Ability17"				"special_bonus_unique_witch_doctor_5"
 	}
 
@@ -1112,7 +1112,7 @@
 	"npc_dota_hero_mirana"					{ "IsDisabled" "1" }
 	"npc_dota_hero_morphling"				{ "IsDisabled" "1" }
 	"npc_dota_hero_necrolyte"				{ "IsDisabled" "1" }
-	"npc_dota_hero_nevermore"				{ "IsDisabled" "1" }
+	"npc_dota_hero_jakiro"					{ "IsDisabled" "1" }
 	"npc_dota_hero_night_stalker"			{ "IsDisabled" "1" }
 	"npc_dota_hero_puck"					{ "IsDisabled" "1" }
 	"npc_dota_hero_pudge"					{ "IsDisabled" "1" }
@@ -1123,7 +1123,7 @@
 	"npc_dota_hero_shadow_shaman"			{ "IsDisabled" "1" }
 	"npc_dota_hero_slardar"					{ "IsDisabled" "1" }
 	"npc_dota_hero_storm_spirit"			{ "IsDisabled" "1" }
-	"npc_dota_hero_tidehunter"				{ "IsDisabled" "1" }
+	"npc_dota_hero_warlock"					{ "IsDisabled" "1" }
 	"npc_dota_hero_tinker"					{ "IsDisabled" "1" }
 	"npc_dota_hero_tiny"					{ "IsDisabled" "1" }
 	"npc_dota_hero_venomancer"				{ "IsDisabled" "1" }
@@ -1131,7 +1131,7 @@
 	"npc_dota_hero_weaver"					{ "IsDisabled" "1" }
 	"npc_dota_hero_zuus"					{ "IsDisabled" "1" }
 	"npc_dota_hero_broodmother"				{ "IsDisabled" "1" }
-	"npc_dota_hero_queenofpain"				{ "IsDisabled" "1" }
+	"npc_dota_hero_skywrath_mage"			{ "IsDisabled" "1" }
 	"npc_dota_hero_batrider"				{ "IsDisabled" "1" }
 	"npc_dota_hero_death_prophet"			{ "IsDisabled" "1" }
 	"npc_dota_hero_bounty_hunter"			{ "IsDisabled" "1" }
@@ -1160,7 +1160,7 @@
 	"npc_dota_hero_elder_titan"				{ "IsDisabled" "1" }
 	"npc_dota_hero_earth_spirit"			{ "IsDisabled" "1" }
 	"npc_dota_hero_ember_spirit"			{ "IsDisabled" "1" }
-	"npc_dota_hero_legion_commander"		{ "IsDisabled" "1" }
+	"npc_dota_hero_dragon_knight"			{ "IsDisabled" "1" }
 	"npc_dota_hero_phoenix"					{ "IsDisabled" "1" }
 	"npc_dota_hero_terrorblade"				{ "IsDisabled" "1" }
 	"npc_dota_hero_techies"					{ "IsDisabled" "1" }
