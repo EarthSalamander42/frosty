@@ -94,8 +94,8 @@ function GameMode:ModifierFilter( keys )
 		-------------------------------------------------------------------------------------------------
 		if modifier_owner:HasModifier("modifier_frostivus_boss") then
 			
-			-- Ignore stuns
-			if modifier_name == "modifier_stunned" then
+			-- Ignore stuns and knockbacks
+			if modifier_name == "modifier_stunned" or modifier_name == "modifier_knockback" or modifier_name == "modifier_rooted" then
 				return false
 			end
 		end
@@ -189,7 +189,7 @@ function GameMode:DamageFilter( keys )
 			return false
 		end
 
-		if victim:HasModifier("modifier_frostivus_boss") and not attacker:HasModifier("modifier_fighting_boss") and not attacker:HasModifier("modifier_frostivus_boss") then
+		if victim:HasModifier("modifier_frostivus_boss") and not (attacker:HasModifier("modifier_fighting_boss") or attacker:HasModifier("modifier_frostivus_boss") or attacker:GetUnitName() == "npc_dota_witch_doctor_death_ward") then
 			return false
 		end
 	end
@@ -271,6 +271,9 @@ end
 
 function GameMode:OnGameInProgress()
 
+	-- Apply the gold/experience thinker to the central altar
+	local central_altar = Entities:FindByName(nil, "altar_4")
+	central_altar:AddNewModifier(nil, nil, "modifier_passive_bounty", {})
 end
 
 function GameMode:InitGameMode()
@@ -331,8 +334,8 @@ function GameMode:InitGameMode()
 	initScoreBoardEvents()
 end
 
-function AltarRespawn(eventSourceIndex, args)	
-local hero = PlayerResource:GetPlayer(args["player"]):GetAssignedHero()
-local spawn_point = args["altar"]
+function AltarRespawn(eventSourceIndex, args)
+	local hero = PlayerResource:GetPlayer(args["player"]):GetAssignedHero()
+	local spawn_point = args["altar"]
 	hero.altar = spawn_point
 end

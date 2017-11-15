@@ -42,11 +42,11 @@ end
 -----------------------------------------------------------------------
 
 function capture_start_trigger:OnTakeDamage(keys)
-local attacker = keys.attacker
-local target = keys.unit
+	local attacker = keys.attacker
+	local target = keys.unit
 
 	if IsServer() then
-		if target == self:GetParent() and attacker:IsAlive() then
+		if target == self:GetParent() and attacker:IsAlive() and attacker:IsRealHero() then
 
 			-- Notify the console that a boss fight (capture attempt) was started
 			print(self.boss_name, "boss hit, altar handle is", self.altar_handle)

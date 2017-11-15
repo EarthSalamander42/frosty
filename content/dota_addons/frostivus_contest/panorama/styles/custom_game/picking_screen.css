@@ -266,8 +266,8 @@
 }
 
 .ClassNormalOption {
-	width: 84px;
-	height: 50px;
+	width: 140px;
+	height: 83px;
 	margin: 1px 0px 1px 0px;
 	horizontal-align: left;
 	wash-color: #7090B060;
@@ -282,7 +282,7 @@
 	background-color: #1852D9;
 	align: center bottom;
 	text-align: center;
-	font-size: 11px;
+	font-size: 16px;
 	font-family: "Bold";
 	text-transform: uppercase;
 	font-weight: bold;
@@ -298,8 +298,8 @@
 .AspectRatio16x10 .ClassNormalOption
 {
 	margin: 2px 0px 2px 1px;
-	width: 75px;
-	height: 46px;
+	width: 125px;
+	height: 77px;
 	horizontal-align: left;
 	background-position: center;
 	wash-color: #7090B060;
@@ -307,8 +307,8 @@
 
 .AspectRatio4x3 .ClassNormalOption, {
 	margin: 1px 0px 1px 1px;
-	width: 67px;
-	height: 48px;
+	width: 112px;
+	height: 80px;
 	horizontal-align: left;
 	background-position: center;
 	wash-color: #7090B060;

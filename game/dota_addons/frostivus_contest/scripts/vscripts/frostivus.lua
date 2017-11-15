@@ -22,7 +22,7 @@ function Frostivus()
 end
 
 function FrostivusPhase(PHASE)
-	print("Phase:", PHASE)
+	print("Phase: ", PHASE)
 	CustomGameEventManager:Send_ServerToAllClients("frostivus_phase", {Phase = tostring(PHASE)})
 end
 
@@ -76,7 +76,7 @@ function FrostivusHeroKilled(killer, hero)
 		local altar_name = altar_handle:GetName()
 		local fight_heroes = altar_handle:FindModifierByName("modifier_altar_active").fighting_heroes
 		for _, hero in pairs(fight_heroes) do
-			if hero:IsAlive() then
+			if hero and hero:IsAlive() then
 				return nil
 			end
 		end
@@ -93,10 +93,16 @@ function FrostivusHeroKilled(killer, hero)
 		for _,hero in pairs(fight_heroes) do
 			hero:RemoveModifierByName("modifier_frostivus_zeus_positive_charge")
 			hero:RemoveModifierByName("modifier_frostivus_zeus_negative_charge")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_sting_debuff")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_venomous_gale")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_nova")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_unwilling_host")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_virulent_plague")
+			hero:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
 		end
 
 		-- Unlock the arena
-		UnlockArena(altar_name, false, losing_team)
+		UnlockArena(altar_name, false, losing_team, nil)
 
 		-- Delete the boss AI thinker modifier and re-apply the capture attempt detection modifier
 		local nearby_bosses = FindUnitsInRadius(hero:GetTeam(), altar_handle:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)

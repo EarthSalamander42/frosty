@@ -10,14 +10,8 @@ BOSS_SPAWN_POINT_TABLE = {}
 
 BOSS_SPAWN_POINT_TABLE.zeus = "altar_2"
 BOSS_SPAWN_POINT_TABLE.venomancer = "altar_3"
-
--------------------------------------------------------------------------------------------------
--- Boss reward information
--------------------------------------------------------------------------------------------------
-
-BASE_BOSS_EXP_REWARD = 240
-BASE_BOSS_GOLD_REWARD = 400
-BONUS_BOUNTY_PER_MINUTE = 10
+BOSS_SPAWN_POINT_TABLE.lich = "altar_4"
+BOSS_SPAWN_POINT_TABLE.treant = "altar_5"
 
 -------------------------------------------------------------------------------------------------
 -- Barebones basics

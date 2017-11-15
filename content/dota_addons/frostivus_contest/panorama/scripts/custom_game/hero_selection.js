@@ -151,7 +151,7 @@ function CreateHeroPanel(hero_table, attribute, custom) {
 
 			i_count = i_count +1
 
-			if (i_count > 5) {
+			if (i_count > 3) {
 				class_option_count = class_option_count +1
 				var ClassOptionPanel_alt = $.CreatePanel("Panel", $("#HeroList" + attribute), "HeroLine" + attribute + "_" + class_option_count);
 				ClassOptionPanel_alt.AddClass("ClassOptionRow")
