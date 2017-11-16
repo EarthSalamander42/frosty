@@ -9,10 +9,10 @@
 	"addonContent_Campaign"			"0"
 	"addonDescription"				"Rylay's lore melted with Frostivus event."
 
-	"maps"							"frostivus_2017"
+	"maps"							"frostivus"
 	"IsPlayable"					"1"
 
-	"frostivus_2017"
+	"frostivus"
 	{
 		"MaxPlayers"				"10"
 	}

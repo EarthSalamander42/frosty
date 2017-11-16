@@ -54,13 +54,13 @@
 	//Altars
 	"frostivus_altar_button"		"Choose Spawn Point"
 
-	"frostivus_altar_1"				"Altar 1"
-	"frostivus_altar_2"				"Storm Altar"
-	"frostivus_altar_3"				"Altar 3"
+	"frostivus_altar_1"				"Radiant Altar"
+	"frostivus_altar_2"				"Altar of Lightning"
+	"frostivus_altar_3"				"Altar of Poison"
 	"frostivus_altar_4"				"Altar 4"
-	"frostivus_altar_5"				"Altar 5"
+	"frostivus_altar_5"				"Altar of Rock"
 	"frostivus_altar_6"				"Altar 6"
-	"frostivus_altar_7"				"Altar 7"
+	"frostivus_altar_7"				"Dire Altar"
 
 	//Bosses
 	"boss_level"					"Level: "

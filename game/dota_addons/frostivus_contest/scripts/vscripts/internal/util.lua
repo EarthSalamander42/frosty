@@ -345,6 +345,7 @@ function UpdateBossBar(boss)
 		HP = boss:GetHealth(),
 		HP_alt = boss:GetHealthPercent(),
 		maxHP = boss:GetMaxHealth(),
-		label = boss:GetUnitName()
+		label = boss:GetUnitName(),
+		short_label = string.gsub(boss:GetUnitName(), "npc_frostivus_boss_", "")
 	})
 end

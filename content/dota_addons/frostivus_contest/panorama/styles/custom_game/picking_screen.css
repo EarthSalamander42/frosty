@@ -266,8 +266,8 @@
 }
 
 .ClassNormalOption {
-	width: 140px;
-	height: 83px;
+	width: 108px;
+	height: 63px;
 	margin: 1px 0px 1px 0px;
 	horizontal-align: left;
 	wash-color: #7090B060;
@@ -282,7 +282,7 @@
 	background-color: #1852D9;
 	align: center bottom;
 	text-align: center;
-	font-size: 16px;
+	font-size: 12px;
 	font-family: "Bold";
 	text-transform: uppercase;
 	font-weight: bold;

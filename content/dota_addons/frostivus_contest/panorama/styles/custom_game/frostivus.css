@@ -18,50 +18,32 @@
 	height: 70px;
 }
 
-#FrostivusAltarButton
-{
-	width: 100%;
-	height: 100%;
-	background-color: #000000da;
-	border: 2px solid #4d5051;
-	border-radius: 5px;
-}
-
-#FrostivusAltarButton:hover
-{
-	border: 2px solid white;
-}
-
-#FrostivusAltarButton Label
-{
-	align: center center;
-	color: #6f6f6f;
-	text-transform: uppercase;
-	text-align: center center;
-	font-size: 16px;
-}
-
-#FrostivusAltarButton:hover Label
-{
-	color: white;
-}
-
 #FrostivusAltarMenu
 {
 	width: 245px; /* fit-children */
 	height: fit-children;
 	flow-children: down;
 	margin-bottom: 1%;
-	padding: 2% 3% 2% 1%;
+	padding: 2% 2% 2% 2%;
 	border-radius: 5px;
 	background-color: #000000da;
-	visibility: collapse;
+}
+
+.FrostivusAltarContent {
+	width: 100%;
+	height: 30px;
+	flow-children: right;
+}
+
+.AltarState {
+	width: 15%;
+	height: 100%;
+	background-image: url("file://{images}/custom_game/altar_attacked.png");
+	background-size: 100% 100%;
 }
 
 .AltarButton {
-	width: 100%;
-	margin-top: 4px;
-	margin-left: 5px;
+	width: 85%;
 }
 
 .AltarButton:hover {
@@ -239,14 +221,8 @@
 
 #BossProgressBar_Left
 {
-	background-color: gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) );
 	box-shadow: inset #000 1px 1px 3px 3px;	
 	border-radius: 2px;
-}
-
-#BossProgressBar_Left
-{
-	background-color: gradient( linear, 0% 0%, 0% 100%, from( #320000 ), color-stop( 0.3, #D71414 ), color-stop( .5, #D71414 ), to( #320000 ) );
 }
 
 #BossProgressBar_Right
@@ -267,7 +243,6 @@
 	width: 48px;
 	height: 48px;
 	margin-left: 5%;	
-	background-image: url("file://{images}/custom_game/game_info/Boss.png");
 	background-repeat: no-repeat;
 	background-position: 50% 0%;
 	background-size: 90% 90%;
@@ -316,40 +291,6 @@
 	text-align: center;
 	text-shadow: 1px 1px 2px 3.0 #000000;
 	font-size: 18px;
-}
-
-
-#Boss
-{
-	width: 100px;
-	height: 70px;
-	align: center center;
-	background-image: url("file://{images}/custom_game/game_info/Boss.png");
-	background-repeat: no-repeat;
-	background-position: 50% 0%;
-	background-size: 100% 100%;
-}
-
-#BossTarget
-{
-	width: 100%;
-	font-size: 17px;
-	font-weight: bolder;
-	color: #ffffff;
-	text-shadow: 2px 2px 2px #7b612b;
-	text-align: center;
-	text-overflow: clip;
-	visibility: collapse;
-}
-
-#BossTarget.visible
-{
-	opacity: 1;
-}
-
-#BossTarget.alert
-{
-	color: red;
 }
 
 #RadiantProgressBarPanel {

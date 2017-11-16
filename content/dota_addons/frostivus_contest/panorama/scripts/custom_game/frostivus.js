@@ -42,18 +42,6 @@ function FrostivusInfo()
 	$.DispatchEvent("UIShowTextTooltip", $("#PhaseLabel"), $.Localize("#frostivus_phase_" + JS_PHASE + "_desc"));
 }
 
-var toggle = false
-function FrostivusAltar() {
-	if (toggle == false) {
-		$("#FrostivusAltarMenu").style.visibility = "visible";
-		toggle = true
-	}
-	else {
-		$("#FrostivusAltarMenu").style.visibility = "collapse";
-		toggle = false
-	}
-}
-
 function ChooseAltar(number) {
 	var altar = $("#AltarButton" + number)
 	var playerInfo = Game.GetPlayerInfo(Players.GetLocalPlayer())
@@ -81,8 +69,7 @@ function ChooseAltar(number) {
 
 function OnPlayerReconnect( data ) {
 	$.Msg("Frostivus: Player has reconnected!")
-	var phase = data.Phase;
-	$.Msg("Phase: " + phase)
+	$.Msg("Phase: " + data.Phase)
 }
 
 function UpdateBossBar(args) {
@@ -94,14 +81,21 @@ function UpdateBossBar(args) {
 		var BossMaxHP = BossTable.maxHP;
 		var BossLvl = BossTable.level;
 		var BossLabel = BossTable.label;
+		var BossShortLabel = BossTable.short_label;
 
 		$("#BossProgressBar").value = BossHP_percent / 100;
 		$("#BossHealth").text = BossHP + "/" + BossMaxHP;
 
 		if (update_boss_level == false)
 		{
+			if (BossShortLabel == "venomancer") {
+				$("#BossProgressBar_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
+			} else if (BossShortLabel == "zuus") {
+				$("#BossProgressBar_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #326114 ) )';
+			}
 			$("#BossLevel").text = $.Localize("boss_level") + BossLvl
 			$("#BossLabel").text = $.Localize(BossLabel)
+			$("#BossIcon").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_'+ BossShortLabel +'.png")';
 			update_boss_level = true
 		}
 	}
@@ -123,11 +117,17 @@ function HideBossBar(args)
 function UpdateAltar(args)
 {
 	if (args.team == 2) {
+		if ($("#AltarButton" + args.altar).BHasClass("dire")) {
+			$("#AltarButton" + args.altar).RemoveClass("dire")
+		}
 		$("#AltarButton" + args.altar).AddClass("radiant");
 	} else {
+		if ($("#AltarButton" + args.altar).BHasClass("radiant")) {
+			$("#AltarButton" + args.altar).RemoveClass("radiant")
+		}
 		$("#AltarButton" + args.altar).AddClass("dire");
 	}
-	$.Msg("Adde a new altar: " + args.altar + "for team: " + args.team)
+	$.Msg("Added a new altar: " + args.altar + " for team: " + args.team)
 }
 
 (function()

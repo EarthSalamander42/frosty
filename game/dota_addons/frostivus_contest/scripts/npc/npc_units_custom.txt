@@ -100,7 +100,7 @@
 	//=================================================================================
 	// BOSS: Zeus
 	//=================================================================================
-	"npc_frostivus_boss_zeus"
+	"npc_frostivus_boss_zuus"
 	{
 		// General
 		//----------------------------------------------------------------
@@ -472,7 +472,7 @@
 		"SoundSet"					"0"
 //		"MinimapIcon"				"minimap_candybucket"
 //		"MinimapIconSize"			"500"
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
 		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
 		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
@@ -489,7 +489,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"15000"			// Base health.
+		"StatusHealth"				"100"			// Base health.
 		"StatusHealthRegen"			"0.0"			// Health regeneration rate.
 		"StatusMana"				"0.0"			// Base mana.
 		"StatusStartingMana"		"0.0"			// Base mana.
@@ -503,15 +503,15 @@
 	}
 
 	//=================================================================================
-	// Building: Main Altar
+	// Building: Minor Altar
 	//=================================================================================
 	"npc_dota_altar_minor"
 	{
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_building"	// Class of entity of link to.
-		"Model"						"models/props_gameplay/pumpkin_bucket.vmdl"// Model.
-		"ModelScale"				"0.8"
+//		"Model"						"models/props_gameplay/pumpkin_bucket.vmdl"// Model.
+//		"ModelScale"				"0.8"
 		"SoundSet"					"0"
 //		"MinimapIcon"				"minimap_candybucket"
 //		"MinimapIconSize"			"500"
@@ -530,13 +530,13 @@
 
 		// Bounds
 		//----------------------------------------------------------------
-		"ProjectileCollisionSize"	"50"
-		"RingRadius"				"120"
+		"ProjectileCollisionSize"	"150"
+		"RingRadius"				"150"
 		"HealthBarOffset"			"150"
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"150"			// Base health.
+		"StatusHealth"				"100"			// Base health.
 		"StatusHealthRegen"			"0.0"			// Health regeneration rate.
 		"StatusMana"				"0.0"			// Base mana.
 		"StatusStartingMana"		"0.0"			// Base mana.

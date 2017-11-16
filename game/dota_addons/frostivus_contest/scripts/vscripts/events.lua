@@ -87,27 +87,25 @@ end
 
 -- The overall game state has changed
 function GameMode:OnGameRulesStateChange(keys)
-local i = 10
-
-	-- This internal handling is used to set up main barebones functions
 	GameMode:_OnGameRulesStateChange(keys)
 
 	local new_state = GameRules:State_Get()
 	CustomNetTables:SetTableValue("game_options", "game_state", {state = new_state})
 
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Pick screen stuff
-	-------------------------------------------------------------------------------------------------
-
 	if new_state == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		HeroSelection:HeroListPreLoad()
 	end
 
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Start-of-pre-game stuff
-	-------------------------------------------------------------------------------------------------
-
 	if new_state == DOTA_GAMERULES_STATE_PRE_GAME then
+
+		for i = 1, 7 do
+			local altar = Entities:FindByName(nil, "altar_"..i)
+			if i == 5 then
+				altar:SetMaterialGroup("materialGroup_01")
+			end
+			altar:AddNewModifier(altar, nil, "modifier_altar", {})
+		end
+
 		Timers:CreateTimer(function() -- OnThink
 			if CHEAT_ENABLED == false then
 				if Convars:GetBool("sv_cheats") == true or GameRules:IsCheatMode() then
@@ -121,9 +119,6 @@ local i = 10
 		end)
 	end
 
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Game started (horn sounded)
-	-------------------------------------------------------------------------------------------------
 	if new_state == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		if GetMapName() == "frostivus" then
 			Frostivus()
@@ -148,6 +143,15 @@ local npc = EntIndexToHScript(keys.entindex)
 					if not npc.is_dev then
 						npc.is_dev = true
 					end
+				end
+			end
+
+			if not npc.first_spawn then
+				npc.first_spawn = true
+				print("Hero ply ID:", npc:GetPlayerOwnerID())
+				if npc:GetPlayerOwnerID() == -1 then
+					print("Boss detected:", npc:GetUnitName())
+					npc:SetRespawnsDisabled(true)
 				end
 			end
 			FrostivusAltarRespawn(npc)

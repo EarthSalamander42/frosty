@@ -10,40 +10,55 @@
 
 	<Panel class="Frostivus" hittest="false">
 		<Panel id="FrostivusAltarRespawn">
-			<Panel id="FrostivusAltar">
-				<Button id="FrostivusAltarButton" onactivate="FrostivusAltar();">
-					<Label text="#frostivus_altar_button" />
-				</Button>
-			</Panel>
-
 			<Panel id="FrostivusAltarMenu">
-				<Button id="AltarButton1" class="AltarButton" onactivate="ChooseAltar(1);">
-					<Label text="#frostivus_altar_1" />
-				</Button>
+				<Panel class="FrostivusAltarContent">
+					<Button id="AltarButton1" class="AltarButton" onactivate="ChooseAltar(1);">
+						<Label text="#frostivus_altar_1" />
+					</Button>
+					<Panel id="AltarState1" class="AltarState"/>
+				</Panel>
 
-				<Button id="AltarButton2" class="AltarButton" onactivate="ChooseAltar(2);">
-					<Label text="#frostivus_altar_2" />
-				</Button>
+				<Panel class="FrostivusAltarContent">
+					<Button id="AltarButton2" class="AltarButton" onactivate="ChooseAltar(2);">
+						<Label text="#frostivus_altar_2" />
+					</Button>
+					<Panel id="AltarState2" class="AltarState"/>
+				</Panel>
 
-				<Button id="AltarButton3" class="AltarButton" onactivate="ChooseAltar(3);">
-					<Label text="#frostivus_altar_3" />
-				</Button>
+				<Panel class="FrostivusAltarContent">
+					<Button id="AltarButton3" class="AltarButton" onactivate="ChooseAltar(3);">
+						<Label text="#frostivus_altar_3" />
+					</Button>
+					<Panel id="AltarState3" class="AltarState"/>
+				</Panel>
 
-				<Button id="AltarButton4" class="AltarButton" onactivate="ChooseAltar(4);">
-					<Label text="#frostivus_altar_4" />
-				</Button>
+				<Panel class="FrostivusAltarContent">
+					<Button id="AltarButton4" class="AltarButton" onactivate="ChooseAltar(4);">
+						<Label text="#frostivus_altar_4" />
+					</Button>
+					<Panel id="AltarState4" class="AltarState"/>
+				</Panel>
 
-				<Button id="AltarButton5" class="AltarButton" onactivate="ChooseAltar(5);">
-					<Label text="#frostivus_altar_5" />
-				</Button>
+				<Panel class="FrostivusAltarContent">
+					<Button id="AltarButton5" class="AltarButton" onactivate="ChooseAltar(5);">
+						<Label text="#frostivus_altar_5" />
+					</Button>
+					<Panel id="AltarState5" class="AltarState"/>
+				</Panel>
 
-				<Button id="AltarButton6" class="AltarButton" onactivate="ChooseAltar(6);">
-					<Label text="#frostivus_altar_6" />
-				</Button>
+				<Panel class="FrostivusAltarContent">
+					<Button id="AltarButton6" class="AltarButton" onactivate="ChooseAltar(6);">
+						<Label text="#frostivus_altar_6" />
+					</Button>
+					<Panel id="AltarState6" class="AltarState"/>
+				</Panel>
 
-				<Button id="AltarButton7" class="AltarButton" onactivate="ChooseAltar(7);">
-					<Label text="#frostivus_altar_7" />
-				</Button>
+				<Panel class="FrostivusAltarContent">
+					<Button id="AltarButton7" class="AltarButton" onactivate="ChooseAltar(7);">
+						<Label text="#frostivus_altar_7" />
+					</Button>
+					<Panel id="AltarState7" class="AltarState"/>
+				</Panel>
 			</Panel>
 		</Panel>
 
@@ -64,25 +79,7 @@
 		<Panel id="FrostivusScorePanel">
 			<Panel id="Frostivus">
 				<Label id="PhaseLabel" text="#diretide_phase_1" onmouseover="FrostivusInfo()" onmouseout="UIHideTextTooltip()"/>
-			</Panel>
-
-			<Panel id="Frostivus2">
-				<Panel hittest="false" id="RadiantScore">
-					<Panel id="RadiantProgressBarPanel">
-						<ProgressBar id="RadiantProgressBar" value="20" max="20"/>
-						<ProgressBar id="RadiantTakenProgressBar" value="20" max="20"/>
-					</Panel>
-				</Panel>
-				<Panel id="ScorePanel">
-					<Panel id="Boss"/>
-					<Label id="Timer" text="--:--"/>
-				</Panel>
-				<Panel hittest="false" id="DireScore">
-					<Panel id="DireProgressBarPanel">
-						<ProgressBar id="DireProgressBar" value="20" max="20"/>
-						<ProgressBar id="DireTakenProgressBar" value="20" max="20"/>
-					</Panel>
-				</Panel>
+				<Label id="Timer" text="--:--"/>
 			</Panel>
 		</Panel>
 	</Panel>

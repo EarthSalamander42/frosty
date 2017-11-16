@@ -260,7 +260,7 @@ end
 ---------------------
 function SpawnZeus(altar)
 	local altar_loc = Entities:FindByName(nil, altar):GetAbsOrigin()
-	local boss = CreateUnitByName("npc_frostivus_boss_zeus", altar_loc + Vector(0, 300, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
+	local boss = CreateUnitByName("npc_frostivus_boss_zuus", altar_loc + Vector(0, 300, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
 	boss:SetForwardVector(Vector(0, -1, 0))
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "zeus", altar_handle = altar})
 
