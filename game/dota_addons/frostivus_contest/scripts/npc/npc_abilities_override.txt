@@ -305,6 +305,105 @@
 	//=================================================================================================================
 
 	//=================================================================================================================
+	// Abaddon: Aphotic Shield
+	//=================================================================================================================
+	"abaddon_aphotic_shield"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"15"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_absorb"			"115 160 205 250"
+				"LinkedSpecialBonus"	"special_bonus_unique_abaddon"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"675"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Aphotic Shield health
+	//=================================================================================================================
+	"special_bonus_unique_abaddon"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"250"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Abaddon: Frostmourne
+	//=================================================================================================================
+	"abaddon_frostmourne"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"debuff_duration"				"2.5"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"buff_duration"					"4.5"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"slow_pct"						"8 12 16 20"
+				"LinkedSpecialBonus"			"special_bonus_unique_abaddon_3"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"attack_slow_tooltip"			"8 12 16 20"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"move_speed_pct"				"15"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"attack_speed"					"15 30 45 60"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Curse of Avernus slow
+	//=================================================================================================================
+	"special_bonus_unique_abaddon_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"20"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Abaddon: Borrowed Time
 	//=================================================================================================================
 	"abaddon_borrowed_time"
@@ -342,6 +441,469 @@
 			{
 				"var_type"							"FIELD_FLOAT"
 				"redirect_range_tooltip_scepter"	"900"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Alchemist: Acid Spray
+	//=================================================================================================================
+	"alchemist_acid_spray"
+	{
+		"AbilityManaCost"				"90 100 110 120"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"625"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"16"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"15 20 25 30"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"armor_reduction"		"4 5 6 7"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"tick_rate"				"1.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Alchemist: Unstable Concoction
+	//=================================================================================================================
+	"alchemist_unstable_concoction"
+	{
+		"AbilityManaCost"					"90"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"brew_time"					"5.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"brew_explosion"			"5.5"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"min_stun"					"0.25"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"max_stun"					"1.75 2.5 3.25 4.0"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"min_damage"				"0"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_damage"				"150 220 290 360"
+				"LinkedSpecialBonus"		"special_bonus_unique_alchemist_2"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"200"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Alchemist: Chemical Rage
+	//=================================================================================================================
+	"alchemist_chemical_rage"
+	{
+		"AbilityCooldown"				"55 45 35"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"25.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"transformation_time"	"0.35"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"base_attack_time"		"1.4 1.2 1.0"
+				"LinkedSpecialBonus"	"special_bonus_unique_alchemist_3"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_health"			"300 500 700"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_health_regen"	"40 48 56"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bonus_mana_regen"		"3.0 7.5 12.0"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_movespeed"		"40 50 60"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Axe: Berserker's Call
+	//=================================================================================================================
+	"axe_berserkers_call"
+	{
+		"AbilityManaCost"				"50 60 70 80"	
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"400"
+				"LinkedSpecialBonus"	"special_bonus_unique_axe_2"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_armor"			"100"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"2.0 2.4 2.8 3.2"
+			}	
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Axe Counter Helix
+	//=================================================================================================================
+	"axe_counter_helix"
+	{
+		"AbilityCooldown"				"0.0"
+
+		"AbilityDamage"					"80 120 160 200"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"275"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"trigger_chance"			"25"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"cooldown"					"0.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Bristleback: Viscous Nasal Goo
+	//=================================================================================================================
+	"bristleback_viscous_nasal_goo"
+	{
+		"AbilityCastRange"				"750"
+
+		"AbilityCastPoint"				"0.2"
+
+		"AbilityManaCost"				"20"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"goo_speed"				"1200"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"goo_duration"			"7.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"armor_per_stack"		"1 1.5 2.0 2.5"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"base_move_slow"		"20"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"move_slow_per_stack"	"2 4 6 8"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stack_limit"			"4"
+				"LinkedSpecialBonus"	"special_bonus_unique_bristleback"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"goo_duration_creep"	"10.0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius_scepter"		"900"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Bristleback: Quill Spray
+	//=================================================================================================================
+	"bristleback_quill_spray"
+	{
+		"AbilityCastRange"				"750"
+
+		"AbilityManaCost"				"25"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"750"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"quill_base_damage"		"20 40 60 80"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"quill_stack_damage"	"30 32 34 36"
+				"LinkedSpecialBonus"	"special_bonus_unique_bristleback_2"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"quill_stack_duration"	"14.0"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_damage"			"550"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"projectile_speed"		"2400"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Crystal Maiden: Crystal Nova
+	//=================================================================================================================
+	"crystal_maiden_crystal_nova"
+	{
+		"AbilityManaCost"			"70 80 90 100"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"425"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"movespeed_slow"	"-20 -30 -40 -50"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"attackspeed_slow"	"-20 -30 -40 -50"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"4.5"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"vision_duration"	"6.0"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"nova_damage"			"120 180 240 300"
+				"LinkedSpecialBonus"	"special_bonus_unique_crystal_maiden_2"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Crystal Maiden: Freezing Field
+	//=================================================================================================================
+	"crystal_maiden_freezing_field"
+	{
+		"AbilityCooldown"				"90"
+
+		"AbilityManaCost"				"150 275 400"
+
+		"HasScepterUpgrade"				"0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"835"
+			}		
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"explosion_radius"	"300"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"explosion_interval"	"0.1"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"movespeed_slow"	"-30"
+			}
+			"06"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"attack_slow"		"-30"
+			}
+			"07"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"slow_duration"		"1.0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"explosion_min_dist"	"195"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"explosion_max_dist"	"785"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"105 170 250"
+				"LinkedSpecialBonus"	"special_bonus_unique_crystal_maiden_3"
+			}
+			"11"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration_tooltip"		"10"
+			}
+			"12"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"scepter_delay"			"2.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Dazzle: Poison Touch
+	//=================================================================================================================
+	"dazzle_poison_touch"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"start_radius"				"200 225 250 275"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"end_radius"				"300 350 400 450"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"end_distance"				"500 550 600 650"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"targets"					"4 6 8 10"
+			}
+			"05"
+			{	
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"20 30 40 50"
+				"LinkedSpecialBonus"		"special_bonus_unique_dazzle_3"
+			}
+			"06"
+			{	
+				"var_type"					"FIELD_INTEGER"
+				"slow"						"-14 -16 -18 -20"
+			}
+			"07"
+			{	
+				"var_type"					"FIELD_INTEGER"
+				"projectile_speed"			"1300"
+			}
+			"08"
+			{	
+				"var_type"					"FIELD_INTEGER"
+				"duration"					"4 5 6 7"
+			}
+			"09"
+			{	
+				"var_type"					"FIELD_INTEGER"
+				"range_tooltip"				"600 700 800 900"
 			}
 		}
 	}
@@ -675,6 +1237,68 @@
 	}
 
 	//=================================================================================================================
+	// Rubick: Telekinesis
+	//=================================================================================================================
+	"rubick_telekinesis"
+	{
+		"AbilityUnitTargetTeam"				"DOTA_UNIT_TARGET_TEAM_BOTH"
+
+		"AbilityCastRange"					"900"
+
+		"CastFilterRejectCaster"			"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"lift_duration"				"1.5 1.75 2.0 2.25"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"stun_duration"				"1.0 1.25 1.5 1.75"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"325"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_land_distance"			"700"
+				"LinkedSpecialBonus"		"special_bonus_unique_rubick"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"fall_duration"				"0.3"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cast_range_tooltip"		"900"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Telekinesis land distance
+	//=================================================================================================================
+	"special_bonus_unique_rubick"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"500"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Rubick: Null Field
 	//=================================================================================================================
 	"rubick_null_field"
@@ -707,6 +1331,188 @@
 			{
 				"var_type"			"FIELD_INTEGER"
 				"value"				"4"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Spectre: Spectral Dagger
+	//=================================================================================================================
+	"spectre_spectral_dagger"
+	{
+		"AbilityCooldown"				"28 25 22 19"
+
+		"AbilityManaCost"				"120 100 80 60"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"75"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_movespeed"		"50"
+				"LinkedSpecialBonus"	"special_bonus_unique_spectre_3"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"dagger_path_duration"	"4.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"hero_path_duration"	"4.0"
+			}
+			"05"	
+			{
+				"var_type"				"FIELD_FLOAT"
+				"buff_persistence"		"2.0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dagger_radius"			"125"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"path_radius"			"175"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vision_radius"			"200"
+			}
+			"11"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"2000"
+			}
+			"12"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"dagger_grace_period"	"2.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Spectral Dagger movement speed
+	//=================================================================================================================
+	"special_bonus_unique_spectre_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"50"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Spectral Dagger cooldown reduction
+	//=================================================================================================================
+	"special_bonus_unique_spectre"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"11"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Spectre: Desolate
+	//=================================================================================================================
+	"spectre_desolate"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage"			"20 40 60 80"
+				"LinkedSpecialBonus"	"special_bonus_unique_spectre_2"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"325"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blind_pct"				"40 50 60 70"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"blind_duration"		"5.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Desolate damage
+	//=================================================================================================================
+	"special_bonus_unique_spectre_2"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"30"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Spectre: Dispersion
+	//=================================================================================================================
+	"spectre_dispersion"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_reflection_pct"	"16 19 22 25"
+				"LinkedSpecialBonus"	"special_bonus_unique_spectre_5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"min_radius"			"300"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_radius"			"1000"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Dispersion damage reduction
+	//=================================================================================================================
+	"special_bonus_unique_spectre_5"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"8"
 			}
 		}
 	}
@@ -1114,6 +1920,21 @@
 	}
 
 	//=================================================================================================================
+	// Crystal Maiden: bonus mana loss/mana cost reduction
+	//=================================================================================================================
+	"special_bonus_unique_crystal_maiden_4"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"20"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Dazzle: bonus Shadow Wave cooldown reduction
 	//=================================================================================================================
 	"special_bonus_unique_dazzle_1"
@@ -1129,7 +1950,7 @@
 	}
 
 	//=================================================================================================================
-	// Ability: bonus Shadow Wave base heal
+	// Dazzle: bonus Shadow Wave base heal
 	//=================================================================================================================
 	"special_bonus_unique_dazzle_2"
 	{
@@ -1143,9 +1964,38 @@
 		}
 	}
 
+	//=================================================================================================================
+	// Dazzle: bonus Poison Touch DPS
+	//=================================================================================================================
+	"special_bonus_unique_dazzle_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"50"
+			}
+		}
+	}
 
 	//=================================================================================================================
-	// bonus Moment of Courage damage bonus
+	// Drow Ranger: bonus Marksmanship agility
+	//=================================================================================================================
+	"special_bonus_unique_drow_ranger_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"30"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// LC: bonus Moment of Courage damage bonus
 	//=================================================================================================================
 	"special_bonus_unique_legion_commander_3"
 	{
@@ -1160,7 +2010,82 @@
 	}
 
 	//=================================================================================================================
-	// bonus Death Ward attack range
+	// Omniknight: bonus Purification healing
+	//=================================================================================================================
+	"special_bonus_unique_omniknight_1"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"200"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Omniknight: bonus Degen Aura radius
+	//=================================================================================================================
+	"special_bonus_unique_omniknight_2"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"300"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Omniknight: bonus Purification radius
+	//=================================================================================================================
+	"special_bonus_unique_omniknight_4"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"1"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Phantom Assassin's bonus Blur duration
+	//=================================================================================================================
+	"special_bonus_unique_phantom_assassin_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"value"				"1.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Spectre: bonus Haunt duration
+	//=================================================================================================================
+	"special_bonus_unique_spectre_4"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// WD: bonus Death Ward attack range
 	//=================================================================================================================
 	"special_bonus_unique_witch_doctor_1"
 	{
@@ -1175,7 +2100,7 @@
 	}
 
 	//=================================================================================================================
-	// bonus Death Ward damage
+	// WD: bonus Death Ward damage
 	//=================================================================================================================
 	"special_bonus_unique_witch_doctor_5"
 	{

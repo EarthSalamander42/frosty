@@ -124,8 +124,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-		"AttackDamageMin"			"250"
-		"AttackDamageMax"			"250"
+		"AttackDamageMin"			"200"
+		"AttackDamageMax"			"200"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackRate"				"1.5"
 		"AttackAnimationPoint"		"0.0"
@@ -198,8 +198,8 @@
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-		"AttackDamageMin"			"250"
-		"AttackDamageMax"			"250"
+		"AttackDamageMin"			"200"
+		"AttackDamageMax"			"200"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackRate"				"1.5"
 		"AttackAnimationPoint"		"0.0"

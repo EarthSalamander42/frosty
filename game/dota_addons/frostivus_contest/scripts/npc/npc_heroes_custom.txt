@@ -100,11 +100,11 @@
 		"Ability5"				"generic_hidden"
 		"Ability6"				"holdout_culling_blade"
 		"Ability10"				"special_bonus_strength_8"
-		"Ability11"				"special_bonus_attack_speed_40"
+		"Ability11"				"special_bonus_unique_axe_3"
 		"Ability12"				"special_bonus_mp_regen_3"
 		"Ability13"				"special_bonus_movement_speed_30"
 		"Ability14"				"special_bonus_hp_regen_20"
-		"Ability15"				"special_bonus_unique_axe_3"
+		"Ability15"				"special_bonus_attack_speed_100"
 		"Ability16"				"special_bonus_unique_axe_2"
 		"Ability17"				"special_bonus_unique_axe"
 	}
@@ -155,10 +155,10 @@
 		"Ability6"				"crystal_maiden_freezing_field"
 		"Ability10"				"special_bonus_hp_200"
 		"Ability11"				"special_bonus_cast_range_100"
-		"Ability12"				"special_bonus_unique_crystal_maiden_4"
+		"Ability12"				"special_bonus_unique_crystal_maiden_3"
 		"Ability13"				"special_bonus_gold_income_15"
 		"Ability14"				"special_bonus_attack_speed_250"
-		"Ability15"				"special_bonus_unique_crystal_maiden_3"
+		"Ability15"				"special_bonus_unique_crystal_maiden_4"
 		"Ability16"				"special_bonus_unique_crystal_maiden_1"
 		"Ability17"				"special_bonus_unique_crystal_maiden_2"
 	}
@@ -185,36 +185,9 @@
 		"Ability12"				"special_bonus_cast_range_125"
 		"Ability13"				"special_bonus_unique_dazzle_2"
 		"Ability14"				"special_bonus_movement_speed_50"
-		"Ability15"				"special_bonus_unique_dazzle_3"
+		"Ability15"				"special_bonus_unique_dazzle_4"
 		"Ability16"				"special_bonus_unique_dazzle_1"
-		"Ability17"				"special_bonus_unique_dazzle_4"
-	}
-
-	//=================================================================================================================
-	// HERO: Legion Commander
-	//=================================================================================================================
-	"npc_dota_hero_legion_commander"
-	{
-		"override_hero"			"npc_dota_hero_legion_commander"
-
-		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
-		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
-
-		"Ability1"				"legion_commander_overwhelming_odds"
-		"Ability2"				"legion_commander_press_the_attack"
-		"Ability3"				"custom_legion_commander_moment_of_courage"
-		"Ability4"				"generic_hidden"
-		"Ability5"				"generic_hidden"
-		"Ability6"				"holdout_gladiators_unite"
-		"Ability10"				"special_bonus_strength_8"
-		"Ability11"				"special_bonus_exp_boost_25"
-		"Ability12"				"special_bonus_attack_speed_30"
-		"Ability13"				"special_bonus_unique_legion_commander_4"
-		"Ability14"				"special_bonus_movement_speed_60"
-		"Ability15"				"special_bonus_unique_legion_commander_3"
-		"Ability16"				"special_bonus_attack_damage_200"
-		"Ability17"				"special_bonus_unique_legion_commander_2"
+		"Ability17"				"special_bonus_unique_dazzle_3"
 	}
 
 	//=================================================================================================================
@@ -299,6 +272,33 @@
 	}
 
 	//=================================================================================================================
+	// HERO: Legion Commander
+	//=================================================================================================================
+	"npc_dota_hero_legion_commander"
+	{
+		"override_hero"			"npc_dota_hero_legion_commander"
+
+		//Picking Screen
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
+
+		"Ability1"				"legion_commander_overwhelming_odds"
+		"Ability2"				"legion_commander_press_the_attack"
+		"Ability3"				"custom_legion_commander_moment_of_courage"
+		"Ability4"				"generic_hidden"
+		"Ability5"				"generic_hidden"
+		"Ability6"				"holdout_gladiators_unite"
+		"Ability10"				"special_bonus_strength_8"
+		"Ability11"				"special_bonus_exp_boost_25"
+		"Ability12"				"special_bonus_attack_speed_30"
+		"Ability13"				"special_bonus_unique_legion_commander_4"
+		"Ability14"				"special_bonus_movement_speed_60"
+		"Ability15"				"special_bonus_unique_legion_commander_3"
+		"Ability16"				"special_bonus_attack_damage_200"
+		"Ability17"				"special_bonus_unique_legion_commander_2"
+	}
+
+	//=================================================================================================================
 	// HERO: Leshrac
 	//=================================================================================================================
 	"npc_dota_hero_leshrac"
@@ -311,7 +311,7 @@
 
 		"Ability1"				"leshrac_split_earth"
 		"Ability2"				"leshrac_diabolic_edict"
-		//"Ability3"				"custom_leshrac_lightning_storm"
+		"Ability3"				"leshrac_lightning_storm"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
 		"Ability6"				"leshrac_pulse_nova"
@@ -371,7 +371,7 @@
 		"Ability3"				"lina_fiery_soul"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_lina_laguna_blade"
+		"Ability6"				"lina_laguna_blade"
 		"Ability10"				"special_bonus_attack_damage_25"
 		"Ability11"				"special_bonus_cast_range_100"
 		"Ability12"				"special_bonus_hp_300"
@@ -394,7 +394,7 @@
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"luna_lucent_beam"
-		//"Ability2"				"custom_luna_moon_glaive"
+		"Ability2"				"luna_moon_glaive"
 		"Ability3"				"luna_lunar_blessing"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
@@ -477,7 +477,7 @@
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"ogre_magi_fireblast"
-		"Ability2"				"custom_ogre_magi_ignite"
+		"Ability2"				"ogre_magi_ignite"
 		"Ability3"				"ogre_magi_bloodlust"
 		"Ability4"				"ogre_magi_unrefined_fireblast"
 		"Ability5"				"generic_hidden"
@@ -503,20 +503,20 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
-		//"Ability1"				"custom_omniknight_purification"
+		"Ability1"				"custom_omniknight_purification"
 		"Ability2"				"omniknight_repel"
-		//"Ability3"				"custom_omniknight_degen_aura"
+		"Ability3"				"custom_omniknight_degen_aura"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
 		"Ability6"				"omniknight_guardian_angel"
-		"Ability10"				"special_bonus_gold_income_15"
-		"Ability11"				"special_bonus_unique_omniknight_4"
-		"Ability12"				"special_bonus_exp_boost_35"
-		"Ability13"				"special_bonus_attack_damage_90"
-		"Ability14"				"special_bonus_unique_omniknight_2"
+		"Ability10"				"special_bonus_exp_boost_35"
+		"Ability11"				"special_bonus_unique_omniknight_2"
+		"Ability12"				"special_bonus_gold_income_20"
+		"Ability13"				"special_bonus_unique_omniknight_3"
+		"Ability14"				"special_bonus_attack_damage_90"
 		"Ability15"				"special_bonus_mp_regen_6"
 		"Ability16"				"special_bonus_unique_omniknight_1"
-		"Ability17"				"special_bonus_unique_omniknight_3"
+		"Ability17"				"special_bonus_unique_omniknight_4"
 	}
 
 	//=================================================================================================================
@@ -559,7 +559,7 @@
 
 		"Ability1"				"phantom_assassin_stifling_dagger"
 		"Ability2"				"phantom_assassin_phantom_strike"
-		//"Ability3"				"custom_phantom_assassin_blur"
+		"Ability3"				"custom_phantom_assassin_blur"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
 		"Ability6"				"phantom_assassin_coup_de_grace"
@@ -638,7 +638,7 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
-		//"Ability1"				"custom_rubick_telekinesis"
+		"Ability1"				"rubick_telekinesis"
 		"Ability2"				"rubick_fade_bolt"
 		"Ability3"				"rubick_null_field"
 		"Ability4"				"rubick_empty1"
@@ -723,18 +723,18 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
-		//"Ability1"				"custom_spectre_spectral_dagger"
+		"Ability1"				"spectre_spectral_dagger"
 		"Ability2"				"spectre_desolate"
 		"Ability3"				"spectre_dispersion"
-		"Ability4"				"spectre_reality"
+		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_spectre_haunt"
+		"Ability6"				"custom_spectre_haunt"
 		"Ability10"				"special_bonus_hp_regen_5"
-		"Ability11"				"special_bonus_unique_spectre_2"
+		"Ability11"				"special_bonus_unique_spectre_3"
 		"Ability12"				"special_bonus_all_stats_8"
-		"Ability13"				"special_bonus_unique_spectre"
+		"Ability13"				"special_bonus_unique_spectre_2"
 		"Ability14"				"special_bonus_hp_500"
-		"Ability15"				"special_bonus_unique_spectre_3"
+		"Ability15"				"special_bonus_unique_spectre"
 		"Ability16"				"special_bonus_unique_spectre_4"
 		"Ability17"				"special_bonus_unique_spectre_5"
 	}
@@ -751,7 +751,7 @@
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"sven_storm_bolt"
-		//"Ability2"				"custom_sven_great_cleave"
+		"Ability2"				"custom_sven_great_cleave"
 		"Ability3"				"sven_warcry"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
@@ -805,7 +805,7 @@
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"tidehunter_gush"
-		"Ability2"				"tidehunter_kraken_shell"
+		"Ability2"				"custom_tidehunter_kraken_shell"
 		"Ability3"				"tidehunter_anchor_smash"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
@@ -814,7 +814,7 @@
 		"Ability11"				"special_bonus_unique_tidehunter_2"
 		"Ability12"				"special_bonus_exp_boost_40"
 		"Ability13"				"special_bonus_unique_tidehunter_3"
-		"Ability14"				"special_bonus_unique_tidehunter_4"
+		"Ability14"				"special_bonus_hp_600"
 		"Ability15"				"special_bonus_unique_tidehunter"
 		"Ability16"				"special_bonus_cooldown_reduction_25"
 		"Ability17"				"special_bonus_attack_damage_250"
@@ -831,7 +831,7 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
-		//"Ability1"				"custom_shredder_whirling_death"
+		"Ability1"				"shredder_whirling_death"
 		"Ability2"				"shredder_timber_chain"
 		"Ability3"				"shredder_reactive_armor"
 		"Ability4"				"shredder_chakram_2"
@@ -887,7 +887,7 @@
 		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
-		//"Ability1"				"custom_undying_decay"
+		"Ability1"				"undying_decay"
 		"Ability2"				"undying_soul_rip"
 		"Ability3"				"undying_tombstone"
 		"Ability4"				"generic_hidden"
@@ -946,7 +946,7 @@
 		"Ability3"				"vengefulspirit_command_aura"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		//"Ability6"				"vengefulspirit_nether_swap"
+		"Ability6"				"vengefulspirit_nether_swap"
 		"Ability10"				"special_bonus_magic_resistance_15"
 		"Ability11"				"special_bonus_unique_vengeful_spirit_4"
 		"Ability12"				"special_bonus_agility_15"
@@ -1027,7 +1027,7 @@
 		"Ability3"				"winter_wyvern_cold_embrace"
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
-		//"Ability6"				"custom_winter_wyvern_winters_curse"
+		"Ability6"				"winter_wyvern_winters_curse"
 		"Ability10"				"special_bonus_gold_income_15"
 		"Ability11"				"special_bonus_attack_damage_50"
 		"Ability12"				"special_bonus_hp_350"

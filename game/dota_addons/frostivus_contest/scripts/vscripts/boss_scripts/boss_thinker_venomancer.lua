@@ -132,173 +132,173 @@ function boss_thinker_venomancer:OnIntervalThink()
 
 		-- Boss move script
 		if self.boss_timer > 0 and not self.events[1] then
-			self:VenomousGale(altar_loc, altar_entity, 3.0, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 3.0, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[1] = true
 		end
 
 		if self.boss_timer > 5 and not self.events[2] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[2] = true
 		end
 
 		if self.boss_timer > 8 and not self.events[3] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[3] = true
 		end
 
 		if self.boss_timer > 11 and not self.events[4] then
-			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 9, 15, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 9, 15, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[4] = true
 		end
 
 		if self.boss_timer > 13 and not self.events[5] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[5] = true
 		end
 
 		if self.boss_timer > 16 and not self.events[6] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[6] = true
 		end
 
 		if self.boss_timer > 21 and not self.events[7] then
-			self:GreenDeath(altar_loc, altar_entity, 3.5, 15, 4.0, RandomInt(1, 360), 80, 4.0, 2000, 125, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:GreenDeath(altar_loc, altar_entity, 3.5, 15, 4.0, RandomInt(1, 360), 80, 4.0, 2000, 125, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[7] = true
 		end
 
 		if self.boss_timer > 30 and not self.events[8] then
-			self:PoisonNova(altar_loc, altar_entity, 3.0, 1, 300, 16, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:PoisonNova(altar_loc, altar_entity, 3.0, 1, 300, 16, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[8] = true
 		end
 
 		if self.boss_timer > 34 and not self.events[9] then
-			self:SpawnScourgeWard(altar_loc, altar_entity, 1.0, RandomInt(1, 360), 800, math.min(5 + 0.4 * power_stacks, 10), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:SpawnScourgeWard(altar_loc, altar_entity, 1.0, RandomInt(1, 360), 800, math.min(4 + 0.4 * power_stacks, 8), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
 			self.events[9] = true
 		end
 
 		if self.boss_timer > 36 and not self.events[10] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[10] = true
 		end
 
 		if self.boss_timer > 39 and not self.events[11] then
-			self:Parasite(altar_loc, altar_entity, 2.0, 1, 3.0, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:Parasite(altar_loc, altar_entity, 2.0, 1, 3.0, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[11] = true
 		end
 
 		if self.boss_timer > 42 and not self.events[12] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[12] = true
 		end
 
 		if self.boss_timer > 45 and not self.events[13] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[13] = true
 		end
 
 		if self.boss_timer > 50 and not self.events[14] then
-			self:SpawnScourgeWard(altar_loc, altar_entity, 0.8, self.random_constants[1], 800, math.min(5 + 0.4 * power_stacks, 10), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:SpawnScourgeWard(altar_loc, altar_entity, 0.8, self.random_constants[1], 800, math.min(4 + 0.4 * power_stacks, 8), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
 			self.events[14] = true
 		end
 
 		if self.boss_timer > 51 and not self.events[15] then
-			self:SpawnScourgeWard(altar_loc, altar_entity, 0.8, self.random_constants[1] + 120, 800, math.min(5 + 0.4 * power_stacks, 10), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:SpawnScourgeWard(altar_loc, altar_entity, 0.8, self.random_constants[1] + 120, 800, math.min(4 + 0.4 * power_stacks, 8), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
 			self.events[15] = true
 		end
 
 		if self.boss_timer > 52 and not self.events[16] then
-			self:SpawnScourgeWard(altar_loc, altar_entity, 0.8, self.random_constants[1] + 240, 800, math.min(5 + 0.4 * power_stacks, 10), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:SpawnScourgeWard(altar_loc, altar_entity, 0.8, self.random_constants[1] + 240, 800, math.min(4 + 0.4 * power_stacks, 8), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 3, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
 			self.events[16] = true
 		end
 
 		if self.boss_timer > 53 and not self.events[17] then
-			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 15, 15, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 15, 15, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[17] = true
 		end
 
 		if self.boss_timer > 55 and not self.events[18] then
-			self:Parasite(altar_loc, altar_entity, 2.0, 2, 3.0, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:Parasite(altar_loc, altar_entity, 2.0, 2, 3.0, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[18] = true
 		end
 
 		if self.boss_timer > 58 and not self.events[19] then
-			self:PoisonNova(altar_loc, altar_entity, 2.5, 1, 300, 9, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:PoisonNova(altar_loc, altar_entity, 2.5, 1, 300, 9, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[19] = true
 		end
 
 		if self.boss_timer > 62 and not self.events[20] then
-			self:GreenDeath(altar_loc, altar_entity, 3.5, 15, 4.0, RandomInt(1, 360), 80, 4.0, 2000, 125, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:GreenDeath(altar_loc, altar_entity, 3.5, 15, 4.0, RandomInt(1, 360), 80, 4.0, 2000, 125, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[20] = true
 		end
 
 		if self.boss_timer > 71 and not self.events[21] then
-			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 10, 40, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 10, 40, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[21] = true
 		end
 
 		if self.boss_timer > 73 and not self.events[22] then
-			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 10, 38, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:UnwillingHost(altar_loc, altar_entity, 1.5, 400, 10, 38, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[22] = true
 		end
 
 		if self.boss_timer > 75 and not self.events[23] then
-			self:SpawnVileWard(altar_loc, altar_entity, 1.0, RandomInt(1, 360), 450, math.min(8 + 0.5 * power_stacks, 15), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 8, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:SpawnVileWard(altar_loc, altar_entity, 1.0, RandomInt(1, 360), 450, math.min(6 + 0.5 * power_stacks, 12), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 8, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
 			self.events[23] = true
 		end
 
 		if self.boss_timer > 80 and not self.events[24] then
-			self:Parasite(altar_loc, altar_entity, 1.5, 2, 3.0, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:Parasite(altar_loc, altar_entity, 1.5, 2, 3.0, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[24] = true
 		end
 
 		if self.boss_timer > 82 and not self.events[25] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[25] = true
 		end
 
 		if self.boss_timer > 85 and not self.events[26] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[26] = true
 		end
 
 		if self.boss_timer > 91 and not self.events[27] then
-			self:PoisonNova(altar_loc, altar_entity, 2.5, 1, 300, 19, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:PoisonNova(altar_loc, altar_entity, 2.5, 1, 300, 19, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[27] = true
 		end
 
 		if self.boss_timer > 94 and not self.events[28] then
-			self:SpawnVileWard(altar_loc, altar_entity, 0.8, self.random_constants[2], 450, math.min(8 + 0.5 * power_stacks, 15), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 8, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:SpawnVileWard(altar_loc, altar_entity, 0.8, self.random_constants[2], 450, math.min(6 + 0.5 * power_stacks, 12), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 8, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
 			self.events[28] = true
 		end
 
 		if self.boss_timer > 95 and not self.events[29] then
-			self:SpawnVileWard(altar_loc, altar_entity, 0.8, self.random_constants[2] + 180, 450, math.min(8 + 0.5 * power_stacks, 15), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 8, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:SpawnVileWard(altar_loc, altar_entity, 0.8, self.random_constants[2] + 180, 450, math.min(6 + 0.5 * power_stacks, 12), 150, math.min(20 + power_stacks * 5, 80), 10, 10, 4, 8, 250, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
 			self.events[29] = true
 		end
 
 		if self.boss_timer > 96 and not self.events[30] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[30] = true
 		end
 
 		if self.boss_timer > 99 and not self.events[31] then
-			self:Parasite(altar_loc, altar_entity, 1.5, 2, 3.0, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:Parasite(altar_loc, altar_entity, 1.5, 2, 3.0, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[31] = true
 		end
 
 		if self.boss_timer > 101 and not self.events[32] then
-			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:VenomousGale(altar_loc, altar_entity, 2.5, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[32] = true
 		end
 
 		if self.boss_timer > 104 and not self.events[33] then
-			self:GreenDeath(altar_loc, altar_entity, 3.5, 15, 5.0, RandomInt(1, 360), 80, 4.0, 2000, 125, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:GreenDeath(altar_loc, altar_entity, 3.5, 15, 5.0, RandomInt(1, 360), 80, 4.0, 2000, 125, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[33] = true
 		end
 
 		-- Enrage
 		if self.boss_timer > 113 and not self.events[34] then
-			self:PoisonNova(altar_loc, altar_entity, 7.0, 10, 900, 100, 225, 800, math.min(2 + 0.25 * power_stacks, 5), 6, math.max(1.75 - 0.05 * power_stacks, 1.0), 4)
+			self:PoisonNova(altar_loc, altar_entity, 7.0, 10, 900, 100, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
 			self.events[34] = true
 		end
 	end

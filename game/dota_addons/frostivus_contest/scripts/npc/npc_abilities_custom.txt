@@ -500,7 +500,7 @@
 	}
 
 	//=================================================================================================================
-	// Axe's A Cut Above Culling Blade
+	// Axe's A Cut Above
 	//=================================================================================================================
 	"holdout_culling_blade"
 	{
@@ -619,7 +619,7 @@
 
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityManaCost"								"140 145 150 155"
+		"AbilityManaCost"								"100 110 120 130"
 
 		// Pre Cache
 		//-------------------------------------------------------------------------------------------------------------
@@ -921,6 +921,324 @@
 			{
 				"var_type"					"FIELD_INTEGER"
 				"duration"					"10 12 14"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Omniknight's Purification
+	//=================================================================================================================
+	"custom_omniknight_purification"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AOE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ALLIES_YES"
+		"FightRecapLevel"				"1"
+		"AbilityTextureName"			"omniknight_purification"
+		"ScriptFile"					"hero/purification.lua"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"750"
+		"AbilityCastPoint"				"0.2"
+		"AoERadius"						"300"
+
+		// Time
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"11 10 9 8"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"85 100 115 130"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"					"soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts"
+			"soundfile"					"soundevents/voscripts/game_sounds_vo_omniknight.vsndevts"
+			"particle"					"particles/units/heroes/hero_omniknight/omniknight_purification.vpcf"
+			"particle"					"particles/units/heroes/hero_omniknight/omniknight_purification_hit.vpcf"
+			"particle"					"particles/units/heroes/hero_omniknight/omniknight_purification_cast.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"base_heal"				"90 160 230 300"
+				"LinkedSpecialBonus"	"special_bonus_unique_omniknight_1"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_heal"			"14 16 18 20"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"300"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"talent_search_radius"	"750"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"talent_extra_heal"		"200"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Omniknight's Degen Aura
+	//=================================================================================================================
+	"custom_omniknight_degen_aura"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"ScriptFile"					"hero/degen_aura.lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityTextureName"			"omniknight_degen_aura"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"					"particles/units/heroes/hero_omniknight/omniknight_degen_aura_debuff.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dmg_reduction"			"-7 -10 -13 -16"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dmg_amp"				"7 10 13 16"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"move_slow"				"-7 -10 -13 -16"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"600"
+				"LinkedSpecialBonus"	"special_bonus_unique_omniknight_2"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"talent_increase"		"300"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Phantom Assassin's Blur
+	//=================================================================================================================
+	"custom_phantom_assassin_blur"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"phantom_assassin_blur"
+		"ScriptFile"					"hero/blur.lua"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"35 30 25 20"
+		"AbilityCastPoint"				"0.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"25"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"					"particles/heroes/phantom_assassin_blur.vpcf"
+			"particle"					"particles/heroes/blur_status_fx.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"passive_evasion"		"25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"active_duration"		"2.5"
+				"LinkedSpecialBonus"	"special_bonus_unique_phantom_assassin_3"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"talent_extra_duration"	"1.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Spectre's Haunt
+	//=================================================================================================================
+	"custom_spectre_haunt"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"BaseClass"						"ability_lua"
+		"AbilityTextureName"			"spectre_haunt"
+		"ScriptFile"					"hero/haunt.lua"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"120 100 80"
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.0"
+		"AbilityCastAnimation"			"ACT_DOTA_ATTACK"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"125"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"					"particles/heroes/haunt.vpcf"
+			"particle"					"particles/units/heroes/hero_spectre/spectre_desolate.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"haunt_duration"		"5 6 7"
+				"LinkedSpecialBonus"	"special_bonus_unique_spectre_4"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"talent_duration"		"5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Sven's Great Cleave
+	//=================================================================================================================
+	"custom_sven_great_cleave"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"							"ability_lua"
+		"ScriptFile"						"hero/great_cleave"
+		"AbilityBehavior"					"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitTargetFlags"			"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"SpellImmunityType"					"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityUnitDamageType"				"DAMAGE_TYPE_PHYSICAL"
+		"SpellDispellableType"				"SPELL_DISPELLABLE_NO"
+		"AbilityTextureName"				"sven_great_cleave"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"						"soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
+			"soundfile"						"soundevents/imba_soundevents.vsndevts"
+			"particle"						"particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
+			"particle"						"particles/hero/sven/great_cleave_glow_base.vpcf"
+		}
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cleave_starting_width"		"150"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cleave_ending_width"		"300"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cleave_distance"			"570"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"great_cleave_damage"		"30 42 54 66"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Tidehunter's Kraken Shell
+	//=================================================================================================================
+	"custom_tidehunter_kraken_shell"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"										"ability_lua"
+		"ScriptFile"									"hero/kraken_shell.lua"
+		"AbilityBehavior"								"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"							"tidehunter_kraken_shell"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"max_block"								"10 15 20 25"
+			}
+			"02"
+			{
+				"var_type"								"FIELD_FLOAT"
+				"recovery_time"							"5.0"
 			}
 		}
 	}
