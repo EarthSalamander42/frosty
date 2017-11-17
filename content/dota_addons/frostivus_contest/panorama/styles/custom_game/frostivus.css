@@ -7,7 +7,8 @@
 
 #FrostivusAltarRespawn
 {
-	margin-bottom: 23%;
+	margin-left: 16.5%;
+	margin-bottom: 1%;
 	vertical-align: bottom;
 	flow-children: up;
 }
@@ -200,14 +201,16 @@
 	width: 95px;
 }
 
-#BossHP
+#BossHP2,
+#BossHP3
 {
 	width: 750px;
 	height: 64px;
 	visibility: collapse;
 }
 
-#BossProgressBar
+#BossProgressBar2,
+#BossProgressBar3
 {
 	width: 90%;
 	height: 24px;
@@ -219,18 +222,21 @@
 	box-shadow: fill #000 -3px -3px 6px 6px;	
 }
 
-#BossProgressBar_Left
+#BossProgressBar2_Left,
+#BossProgressBar3_Left
 {
 	box-shadow: inset #000 1px 1px 3px 3px;	
 	border-radius: 2px;
 }
 
-#BossProgressBar_Right
+#BossProgressBar2_Right,
+#BossProgressBar3_Right
 {
 	background-color: gradient( linear, 0% 0%, 100% 0%, from( #222222FF ), to( black ) );
 }
 
-#BossProgressBarContainer
+#BossProgressBarContainer2,
+#BossProgressBarContainer3
 {
 	width: 100%;
 	height: 40px;
@@ -238,7 +244,8 @@
 	vertical-align: bottom;
 }
 
-#BossIcon
+#BossIcon2,
+#BossIcon3
 {
 	width: 48px;
 	height: 48px;
@@ -249,12 +256,14 @@
 	z-index: 10;
 }
 
-#BossHealth
+#BossHealth2,
+#BossHealth3
 {
 	margin-left: 6%;
 }
 
-#BossLevel
+#BossLevel2,
+#BossLevel3
 {
 	margin-left: 6%;
 	horizontal-align: left;
@@ -273,7 +282,8 @@
 	font-size: 18px;
 }
 
-#BossLevel_alt
+#BossLevel2_alt,
+#BossLevel3_alt
 {
 	margin-top: 5%;
 	margin-left: 2%;

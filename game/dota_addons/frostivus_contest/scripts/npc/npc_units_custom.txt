@@ -469,11 +469,19 @@
 		"BaseClass"					"npc_dota_building"	// Class of entity of link to.
 //		"Model"						"models/props_gameplay/pumpkin_bucket.vmdl"// Model.
 //		"ModelScale"				"0.8"
-		"SoundSet"					"0"
+		"SoundSet"					"dota_fountain"
 //		"MinimapIcon"				"minimap_candybucket"
 //		"MinimapIconSize"			"500"
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_NONE"
-		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackDamageMin"			"220"		// Damage range min.
+		"AttackDamageMax"			"240"		// Damage range max.
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"0.15"		// Speed of attack.
+		"AttackAnimationPoint"		"0.0"		// Normalized time in animation cycle to attack.
+		"AttackAcquisitionRange"	"1200"		// Range within a target can be acquired.
+		"AttackRange"				"1200"		// Range within a target can be attacked. (was 690)
+		"ProjectileModel"			"particles/base_attacks/fountain_attack.vpcf" // Particle system model 
 		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
 		"VisionDaytimeRange"		"1800"		// Range of vision during day light.

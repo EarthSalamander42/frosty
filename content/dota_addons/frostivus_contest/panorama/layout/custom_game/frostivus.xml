@@ -64,13 +64,22 @@
 
 		<Panel class="Diretide" hittest="false">
 			<Panel id="DiretidePanel">
-				<Panel id="BossHP" hittest="false">
-					<Label id="BossLabel" class="HoldoutLabelSmall" hittest="false" text=""/>
-					<Label id="BossLevel" class="HoldoutLabelSmall_alt" hittest="false" text="Level: "/>
-					<Panel id="BossProgressBarContainer" hittest="false">
-						<DOTAHeroImage id="BossIcon" hittest="false"/>
-						<ProgressBar id="BossProgressBar" hittest="false" value="1.0"/>
-						<Label id="BossHealth" class="HoldoutLabelSmall" hittest="false" text=""/>
+				<Panel id="BossHP2" hittest="false">
+					<Label id="BossLabel2" class="HoldoutLabelSmall" hittest="false" text=""/>
+					<Label id="BossLevel2" class="HoldoutLabelSmall_alt" hittest="false" text="Level: "/>
+					<Panel id="BossProgressBarContainer2" hittest="false">
+						<DOTAHeroImage id="BossIcon2" hittest="false"/>
+						<ProgressBar id="BossProgressBar2" hittest="false" value="1.0"/>
+						<Label id="BossHealth2" class="HoldoutLabelSmall" hittest="false" text=""/>
+					</Panel>
+				</Panel>
+				<Panel id="BossHP3" hittest="false">
+					<Label id="BossLabel3" class="HoldoutLabelSmall" hittest="false" text=""/>
+					<Label id="BossLevel3" class="HoldoutLabelSmall_alt" hittest="false" text="Level: "/>
+					<Panel id="BossProgressBarContainer3" hittest="false">
+						<DOTAHeroImage id="BossIcon3" hittest="false"/>
+						<ProgressBar id="BossProgressBar3" hittest="false" value="1.0"/>
+						<Label id="BossHealth3" class="HoldoutLabelSmall" hittest="false" text=""/>
 					</Panel>
 				</Panel>
 			</Panel>

@@ -41,7 +41,7 @@ function LockArena(altar, team, attacker)
 	end
 
 	altar_handle.victory = false
-	CustomGameEventManager:Send_ServerToTeam(team, "show_boss_hp", {})
+	CustomGameEventManager:Send_ServerToTeam(team, "show_boss_hp", {TeamContest = team})
 end
 
 function UnlockArena(altar, victory, team, aura_ability)
@@ -49,7 +49,7 @@ function UnlockArena(altar, victory, team, aura_ability)
 	ParticleManager:DestroyParticle(altar_handle.arena_fence_pfx, true)
 	ParticleManager:ReleaseParticleIndex(altar_handle.arena_fence_pfx)
 
-	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {})
+	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {TeamContest = team})
 
 	-- Cleanse nearby hero debuffs
 	local nearby_heroes = FindUnitsInRadius(team, altar_handle:GetAbsOrigin(), nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
