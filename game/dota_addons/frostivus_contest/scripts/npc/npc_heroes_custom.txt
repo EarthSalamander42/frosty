@@ -294,7 +294,7 @@
 		"Ability13"				"special_bonus_unique_legion_commander_4"
 		"Ability14"				"special_bonus_movement_speed_60"
 		"Ability15"				"special_bonus_unique_legion_commander_3"
-		"Ability16"				"special_bonus_attack_damage_200"
+		"Ability16"				"special_bonus_attack_damage_150"
 		"Ability17"				"special_bonus_unique_legion_commander_2"
 	}
 
@@ -400,8 +400,8 @@
 		"Ability5"				"generic_hidden"
 		"Ability6"				"luna_eclipse"
 		"Ability10"				"special_bonus_attack_speed_20"
-		"Ability11"				"special_bonus_cast_range_150"
-		"Ability12"				"special_bonus_unique_luna_2"
+		"Ability11"				"special_bonus_unique_luna_2"
+		"Ability12"				"special_bonus_cast_range_200"
 		"Ability13"				"special_bonus_unique_luna_3"
 		"Ability14"				"special_bonus_all_stats_10"
 		"Ability15"				"special_bonus_unique_luna_1"
@@ -426,13 +426,13 @@
 		"Ability4"				"generic_hidden"
 		"Ability5"				"generic_hidden"
 		"Ability6"				"medusa_stone_gaze"
-		"Ability10"				"special_bonus_attack_damage_25"
+		"Ability10"				"special_bonus_unique_medusa_2"
 		"Ability11"				"special_bonus_evasion_12"
 		"Ability12"				"special_bonus_attack_speed_30"
 		"Ability13"				"special_bonus_unique_medusa_3"
 		"Ability14"				"special_bonus_mp_800"
 		"Ability15"				"special_bonus_unique_medusa"
-		"Ability16"				"special_bonus_unique_medusa_2"
+		"Ability16"				"special_bonus_attack_damage_120"
 		"Ability17"				"special_bonus_unique_medusa_4"
 	}
 

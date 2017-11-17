@@ -87,17 +87,6 @@ local target = keys.unit
 				boss:FindModifierByName("modifier_frostivus_boss"):SetStackCount(current_power + next_power)
 			end)
 
-			-- Clear any ongoing modifiers
-			local nearby_enemies = FindUnitsInRadius(target:GetTeam(), target_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
-			for _,enemy in pairs(nearby_enemies) do
-				enemy:RemoveModifierByName("modifier_frostivus_venomancer_poison_sting_debuff")
-				enemy:RemoveModifierByName("modifier_frostivus_venomancer_venomous_gale")
-				enemy:RemoveModifierByName("modifier_frostivus_venomancer_poison_nova")
-				enemy:RemoveModifierByName("modifier_frostivus_venomancer_unwilling_host")
-				enemy:RemoveModifierByName("modifier_frostivus_venomancer_virulent_plague")
-				enemy:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
-			end
-
 			-- Destroy any existing adds
 			local nearby_summons = FindUnitsInRadius(target:GetTeam(), target:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 			for _,summon in pairs(nearby_summons) do

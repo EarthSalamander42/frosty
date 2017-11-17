@@ -152,6 +152,11 @@ function GameMode:OrderFilter(keys)
 		return nil
 	end
 
+	-- Prevent Monkey King from jumping outside boss arenas
+	if keys.order_type == DOTA_UNIT_ORDER_CAST_TARGET_TREE and EntIndexToHScript(keys.entindex_ability):GetAbilityName() == "monkey_king_tree_dance" and unit:HasModifier("modifier_fighting_boss") then
+		return false
+	end
+
 	-- Do special handlings if shift-casted only here! The event gets fired another time if the caster
 	-- is actually doing this order
 	if keys.queue == 1 then
@@ -202,10 +207,10 @@ end
 ]]
 function GameMode:OnAllPlayersLoaded()
 	-------------------------------------------------------------------------------------------------
-	-- IMBA: Game filters setup
+	-- Game filters setup
 	-------------------------------------------------------------------------------------------------
 
-	GameRules:GetGameModeEntity():SetBountyRunePickupFilter( Dynamic_Wrap(GameMode, "BountyRuneFilter"), self )
+--	GameRules:GetGameModeEntity():SetBountyRunePickupFilter( Dynamic_Wrap(GameMode, "BountyRuneFilter"), self )
 	GameRules:GetGameModeEntity():SetExecuteOrderFilter( Dynamic_Wrap(GameMode, "OrderFilter"), self )
 	GameRules:GetGameModeEntity():SetDamageFilter( Dynamic_Wrap(GameMode, "DamageFilter"), self )
 --	GameRules:GetGameModeEntity():SetModifyGoldFilter( Dynamic_Wrap(GameMode, "GoldFilter"), self )
@@ -284,17 +289,21 @@ function GameMode:InitGameMode()
 	GameRules.HeroKV = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
 	GameRules.UnitKV = LoadKeyValues("scripts/npc/npc_units_custom.txt")
 
+	-------------------------------------------------------------------------------------------------
+	-- Game rules setup
+	-------------------------------------------------------------------------------------------------
+
 	HERO_SELECTION_TIME = 45.0 + 10.0 -- Add 10 additional seconds because there's a delay between entering game and hero applied
 	if IsInToolsMode() then HERO_SELECTION_TIME = 5.0 end
 	GameRules:SetUseUniversalShopMode(true)
 	GameRules:SetHeroSelectionTime(0.0)
-	GameRules:SetPreGameTime(90.0 + HERO_SELECTION_TIME)
+	GameRules:SetPreGameTime(40.0 + HERO_SELECTION_TIME)
 	GameRules:SetPostGameTime(60.0)
 	GameRules:SetShowcaseTime(0.0)
 	GameRules:SetStrategyTime(0.0)
 	GameRules:SetCustomGameSetupAutoLaunchDelay(10.0)
 --	GameRules:SetTreeRegrowTime( 180.0 )
---	GameRules:SetGoldPerTick(1.0)
+	GameRules:SetGoldPerTick(0)
 --	GameRules:SetGoldTickTime(0.6)
 --	GameRules:SetRuneSpawnTime(120.0)
 --	GameRules:SetHeroMinimapIconScale(1.0)
@@ -303,6 +312,7 @@ function GameMode:InitGameMode()
 --	GameRules:EnableCustomGameSetupAutoLaunch(true)
 --	GameRules:SetFirstBloodActive(true)
 --	GameRules:SetHideKillMessageHeaders(false)
+	GameRules:SetCustomVictoryMessage("Frostivus is saved!")
 
 	if mode == nil then
 		mode = GameRules:GetGameModeEntity()
@@ -312,6 +322,8 @@ function GameMode:InitGameMode()
 		mode:SetLoseGoldOnDeath(true)
 		mode:SetMaximumAttackSpeed(600.0)
 		mode:SetMinimumAttackSpeed(20.0)
+		mode:SetCustomAttributeDerivedStatValue(DOTA_ATTRIBUTE_STRENGTH_STATUS_RESISTANCE_PERCENT, 0)
+		mode:SetFixedRespawnTime(26.0)
 
 --		mode:SetTowerBackdoorProtectionEnabled( false )
 --		mode:SetFountainConstantManaRegen(10.0)
