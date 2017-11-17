@@ -51,6 +51,19 @@ function UnlockArena(altar, victory, team, aura_ability)
 
 	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {})
 
+	-- Cleanse nearby hero debuffs
+	local nearby_heroes = FindUnitsInRadius(team, altar_handle:GetAbsOrigin(), nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+	for _,hero in pairs(nearby_heroes) do
+		hero:RemoveModifierByName("modifier_frostivus_zeus_positive_charge")
+		hero:RemoveModifierByName("modifier_frostivus_zeus_negative_charge")
+		hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_sting_debuff")
+		hero:RemoveModifierByName("modifier_frostivus_venomancer_venomous_gale")
+		hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_nova")
+		hero:RemoveModifierByName("modifier_frostivus_venomancer_unwilling_host")
+		hero:RemoveModifierByName("modifier_frostivus_venomancer_virulent_plague")
+		hero:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
+	end
+
 	-- Adjust altar aura if necessary
 	if victory then
 		altar_handle.victory = true
@@ -61,6 +74,12 @@ function UnlockArena(altar, victory, team, aura_ability)
 		else
 			altar_handle:AddAbility(aura_ability)
 			altar_handle:FindAbilityByName(aura_ability):SetLevel(1)
+		end
+
+		-- Heal winning team
+		for _,hero in pairs(nearby_heroes) do
+			hero:Heal(hero:GetMaxHealth(), hero)
+			hero:GiveMana(hero:GetMaxMana())
 		end
 
 		-- Update altar scoreboard

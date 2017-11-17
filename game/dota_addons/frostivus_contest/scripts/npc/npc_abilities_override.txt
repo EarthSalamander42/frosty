@@ -117,12 +117,12 @@
 	//"item_dagon_3"						"REMOVE"
 	//"item_dagon_4"						"REMOVE"
 	//"item_dagon_5"						"REMOVE"
-	//"item_recipe_necronomicon"			"REMOVE"
-	//"item_recipe_necronomicon_2"			"REMOVE"
-	//"item_recipe_necronomicon_3"			"REMOVE"
-	//"item_necronomicon"					"REMOVE"
-	//"item_necronomicon_2"					"REMOVE"
-	//"item_necronomicon_3"					"REMOVE"
+	"item_recipe_necronomicon"				"REMOVE"
+	"item_recipe_necronomicon_2"			"REMOVE"
+	"item_recipe_necronomicon_3"			"REMOVE"
+	"item_necronomicon"						"REMOVE"
+	"item_necronomicon_2"					"REMOVE"
+	"item_necronomicon_3"					"REMOVE"
 	//"item_recipe_ultimate_scepter"		"REMOVE"
 	//"item_ultimate_scepter"				"REMOVE"
 	//"item_recipe_refresher"				"REMOVE"
@@ -272,6 +272,14 @@
 	//=================================================================================================================
 	// 								ITEM OVERRIDES
 	//=================================================================================================================
+
+	//=================================================================================================================
+	// Observer Wards
+	//=================================================================================================================
+	"item_ward_observer"
+	{
+		"ItemCost"						"0"
+	}
 
 	//=================================================================================================================
 	// Roshan: Bash
@@ -940,6 +948,108 @@
 	}
 
 	//=================================================================================================================
+	// Gyrocopter: Rocket Barrage
+	//=================================================================================================================
+	"gyrocopter_rocket_barrage"
+	{
+		"AbilityCooldown"				"5.5"
+
+		"AbilityManaCost"				"80 70 60 50"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"400"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"rockets_per_second"		"10"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"rocket_damage"				"7 12 17 22"
+				"LinkedSpecialBonus"		"special_bonus_unique_gyrocopter_3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Gyrocopter: Homing Missile
+	//=================================================================================================================
+	"gyrocopter_homing_missile"
+	{
+		"AbilityManaCost"					"90 100 110 120"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hits_to_kill_tooltip"		"3 3 4 4"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"tower_hits_to_kill_tooltip"		"6 6 8 10"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"stun_duration"				"2.25 2.5 2.75 3.0"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"attack_speed_bonus_pct"	"400"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"min_damage"				"100 175 250 325"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_distance"				"1500"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"pre_flight_time"			"3"
+			}
+			"08"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hero_damage"				"34 34 26 21"
+			}
+			"09"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"speed"						"500"
+			}
+			"10"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"acceleration"				"20"
+			}
+			"11"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"enemy_vision_time"			"4"
+			}	
+			"12"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"charge_restore_time"	"20 17 14 11"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Juggernaut: Blade Fury
 	//=================================================================================================================
 	"juggernaut_blade_fury"
@@ -1009,6 +1119,7 @@
 	"juggernaut_healing_ward"
 	{
 		"AbilityCooldown"				"45.0"
+
 		"AbilityDuration"				"10.0"
 
 		"AbilitySpecial"
@@ -1021,7 +1132,7 @@
 			"02"
 			{
 				"var_type"							"FIELD_INTEGER"
-				"healing_ward_aura_radius"			"500"
+				"healing_ward_aura_radius"			"600"
 			}
 			"03"
 			{
@@ -1037,6 +1148,67 @@
 	}
 
 	//=================================================================================================================
+	// Ability: Juggernaut Omni Slash
+	//=================================================================================================================
+	"juggernaut_omni_slash"
+	{
+		"AbilityCooldown"				"100"
+
+		"AbilityManaCost"				"125 150 175"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"omni_slash_damage"			"90 110"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"omni_slash_jumps"			"7 14 21"
+				"LinkedSpecialBonus"		"special_bonus_unique_juggernaut_2"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"omni_slash_radius"			"300"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"omni_slash_bounce_tick"	"0.2"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"omni_slash_jumps_scepter"		"14 21 28"
+				"LinkedSpecialBonus"			"special_bonus_unique_juggernaut_2"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"omni_slash_cooldown_scepter"	"70"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Special Bonus
+	//=================================================================================================================
+	"special_bonus_unique_juggernaut_2"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"7"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Legion Commander: Overwhelming Odds
 	//=================================================================================================================
 	"legion_commander_overwhelming_odds"
@@ -1046,17 +1218,17 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage"				"40 60 80 100"
+				"damage"				"20 30 40 50"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage_per_unit"		"15 20 25 30"
+				"damage_per_unit"		"20 30 40 50"
 			}
 			"03"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage_per_hero"		"20 40 60 80"
+				"damage_per_hero"		"30 60 90 120"
 				"LinkedSpecialBonus"	"special_bonus_unique_legion_commander_4"
 			}
 			"04"
@@ -1089,25 +1261,183 @@
 	}
 
 	//=================================================================================================================
-	// Lifestealer: Rage
+	// Leshrac: Split Earth
 	//=================================================================================================================
-	"life_stealer_rage"
+	"leshrac_split_earth"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityManaCost"				"90 100 110 120"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"delay"				"0.35"
+			}
+			
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"120 200 280 360"
+			}
+			
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"duration"			"2"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Leshrac: Diabolic Edict
+	//=================================================================================================================
+	"leshrac_diabolic_edict"
 	{
 		"AbilityCooldown"				"20"
 
-		"AbilityDuration"				"2.5"
+		"AbilityManaCost"				"90 100 110 120"
+
+		"AbilityDamage"					"16 32 48 64"
 
 		"AbilitySpecial"
 		{
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"attack_speed_bonus"	"80 120 160 200"
+				"num_explosions"		"60"
+				"LinkedSpecialBonus"	"special_bonus_unique_leshrac_1"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tower_bonus"			"40"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration_tooltip"		"10"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Leshrac: Lightning Storm
+	//=================================================================================================================
+	"leshrac_lightning_storm"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityCooldown"				"4"
+
+		"AbilityManaCost"				"60 70 80 90"
+
+		"AbilityDamage"					"75 150 225 300"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"jump_count"			"6 10 14 18"
+			}			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"900"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"jump_delay"			"0.15"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_movement_speed"	"-75"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"0.7 0.8 0.9 1.0"
+				"LinkedSpecialBonus"	"special_bonus_unique_leshrac_2"
+			}	
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"interval_scepter"		"1.5"
+			}		
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius_scepter"		"900"
+			}	
+		}
+	}
+	
+	//=================================================================================================================
+	// Leshrac: Pulse Nova
+	//=================================================================================================================
+	"leshrac_pulse_nova"
+	{
+		"AbilityManaCost"				"50 70 90"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_cost_per_second"	"20 35 50"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"650"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"120 160 200"
+				"LinkedSpecialBonus"	"special_bonus_unique_leshrac_3"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_scepter"		"160 220 280"
+				"LinkedSpecialBonus"	"special_bonus_unique_leshrac_3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Lifestealer: Rage
+	//=================================================================================================================
+	"life_stealer_rage"
+	{
+		"AbilityCooldown"				"21"
+
+		"AbilityDuration"				"3.0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_speed_bonus"	"100 150 200 250"
 			}
 			"02"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"duration"				"2.5"
+				"duration"				"3.0"
 				"LinkedSpecialBonus"	"special_bonus_unique_lifestealer"
 			}
 		}
@@ -1138,7 +1468,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"hp_leech_percent"		"0.75 1.0 1.25 1.5"
+				"hp_leech_percent"		"0.8 1.2 1.6 2.0"
 				"LinkedSpecialBonus"	"special_bonus_unique_lifestealer_3"
 			}
 		}
@@ -1153,8 +1483,50 @@
 		{
 			"01"
 			{
-				"var_type"			"FIELD_FLOAT"
-				"value"				"0.5"
+				"var_type"				"FIELD_FLOAT"
+				"value"					"1.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Lifestealer: Open Wounds
+	//=================================================================================================================
+	"life_stealer_open_wounds"
+	{
+		"AbilityCastRange"				"400 500 600 700"
+
+		"AbilityCooldown"				"26 24 22 20"
+
+		"AbilityManaCost"				"90 80 70 60"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_steps"			"-70 -70 -60 -50 -30 -10 -10 -10"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal_percent"			"50"
+				"LinkedSpecialBonus"	"special_bonus_unique_lifestealer_2"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_tooltip"			"70"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"8"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tooltip_range"			"400 500 600 700"
 			}
 		}
 	}
@@ -1197,6 +1569,690 @@
 			{
 				"var_type"					"FIELD_INTEGER"
 				"cooldown_scepter"			"25"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Lina: Dragon Slave
+	//=================================================================================================================
+	"lina_dragon_slave"
+	{
+		"AbilityCooldown"				"7.0"
+
+		"AbilityCastPoint"				"0.15"
+
+		"AbilityDamage"					"100 175 250 325"
+
+		"AbilityManaCost"				"70 80 90 100"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"dragon_slave_speed"			"1200"
+			}
+			
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"dragon_slave_width_initial"	"275"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"dragon_slave_width_end"		"200"
+			}
+			
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"dragon_slave_distance"			"1075"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Lina: Light Strike Array
+	//=================================================================================================================
+	"lina_light_strike_array"
+	{
+		"AbilityManaCost"				"100"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"light_strike_array_aoe"		"225 250 275 300"
+			}
+			
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"light_strike_array_delay_time"	"0.5"
+			}
+						
+			"03"
+			{
+				"var_type"							"FIELD_FLOAT"
+				"light_strike_array_stun_duration"	"1.4 1.6 1.8 2.0"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"light_strike_array_damage"		"100 175 250 325"
+				"LinkedSpecialBonus"			"special_bonus_unique_lina_3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Light Strike Array damage
+	//=================================================================================================================
+	"special_bonus_unique_lina_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"175"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Lina: Laguna Blade
+	//=================================================================================================================
+	"lina_laguna_blade"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityCooldown"				"70 50 30"
+
+		"AbilityManaCost"				"200 300 400"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"450 650 850"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"cast_range_scepter"		"900"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"damage_delay"				"0.25"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Luna: Lucent Beam
+	//=================================================================================================================
+	"luna_lucent_beam"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityCastPoint"				"0.3"
+
+		"AbilityManaCost"				"60 70 80 90"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"0.8"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"beam_damage"			"75 150 225 300"
+				"LinkedSpecialBonus"	"special_bonus_unique_luna_1"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Luna: Moon Glaives
+	//=================================================================================================================
+	"luna_moon_glaive"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"range"						"700"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bounces"					"2 3 4 6"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_reduction_percent"	"30"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Moon Blessing damage
+	//=================================================================================================================
+	"special_bonus_unique_luna_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"32"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Medusa: Split Shot
+	//=================================================================================================================
+	"medusa_split_shot"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage_modifier"				"-50 -40 -30 -20"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage_modifier_tooltip"		"50 60 70 80"
+			}
+			"03"
+			{	
+				"var_type"						"FIELD_INTEGER"
+				"arrow_count"					"3"
+				"LinkedSpecialBonus"			"special_bonus_unique_medusa_2"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"split_shot_bonus_range"		"100"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Medusa: Mystic Snake
+	//=================================================================================================================
+	"medusa_mystic_snake"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityCooldown"				"11"
+
+		"AbilityManaCost"				"80 90 100 110"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"700"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"snake_jumps"			"3 4 5 6"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"jump_delay"			"0.25"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"snake_damage"			"80 120 160 200"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"snake_mana_steal"		"11 14 17 20"
+				"LinkedSpecialBonus"	"special_bonus_unique_medusa_3"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"snake_scale"			"35"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"initial_speed"			"800"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"return_speed"			"800"
+			}
+			"09"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"stone_form_scepter_base"		"1.0"
+			}
+			"10"
+			{
+				"var_type"							"FIELD_FLOAT"
+				"stone_form_scepter_increment"		"0.3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Medusa: Stone Gaze
+	//=================================================================================================================
+	"medusa_stone_gaze"
+	{
+		"AbilityCooldown"				"90 75 60"
+
+		"AbilityManaCost"				"100"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"1000 1000 1000"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"5 6 7"
+				"LinkedSpecialBonus"		"special_bonus_unique_medusa"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"slow"						"35"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"stone_duration"			"3.0"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"face_duration"				"2.0"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"vision_cone"				"0.08715"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_physical_damage"		"50 75 100"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Monkey King: Boundless Strike
+	//=================================================================================================================
+	"monkey_king_boundless_strike"
+	{
+		"AbilityCooldown"				"24 21 18 15"
+
+		"AbilityManaCost"				"50"		
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"stun_duration"				"0.4 0.8 1.2 1.6"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"strike_crit_mult"			"180 200 220 240"
+				"LinkedSpecialBonus"		"special_bonus_unique_monkey_king"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"strike_radius"				"150"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"strike_cast_range"			"1200"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Monkey King: Tree Dance
+	//=================================================================================================================
+	"monkey_king_tree_dance"
+	{
+		"AbilityCastRange"				"1200"
+	}
+
+	//=================================================================================================================
+	// Ability: Primal Spring
+	//=================================================================================================================
+	"monkey_king_primal_spring"
+	{
+		"AbilityCooldown"				"12"
+
+		"AbilityManaCost"				"100"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"impact_damage"			"140 210 280 350"
+				"LinkedSpecialBonus"	"special_bonus_unique_monkey_king_3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"impact_movement_slow"	"20 40 60 80"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"impact_slow_duration"	"4.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_distance"			"1200"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"impact_radius"			"375"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Monkey King: Wukong's Command
+	//=================================================================================================================
+	"monkey_king_wukongs_command"
+	{
+		"AbilityCooldown"				"100 90 80"
+	}
+	
+	//=================================================================================================================
+	// Monkey King: Jingu Mastery
+	//=================================================================================================================
+	"monkey_king_jingu_mastery"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"required_hits"				"4"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"counter_duration"			"10"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"charges"					"4"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage"				"60 90 120 150"
+				"LinkedSpecialBonus"		"special_bonus_unique_monkey_king_2"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"lifesteal"					"30 40 50 60"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_duration"				"35"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ogre Magi: Fireblast
+	//=================================================================================================================
+	"ogre_magi_fireblast"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCastPoint"				"0.3"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"1.5"
+			}
+
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"multicast_delay"		"0.5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"fireblast_damage"		"110 165 220 275"
+				"LinkedSpecialBonus"	"special_bonus_unique_ogre_magi_2"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ogre Magi: Unrefined Fireblast ( scepter ability )
+	//=================================================================================================================
+	"ogre_magi_unrefined_fireblast"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCastPoint"				"0.3"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"1.5"
+			}
+
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"multicast_delay"		"0.5"
+			}
+
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"scepter_mana"			"0.6"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"fireblast_damage"		"275"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ogre Magi: Ignite
+	//=================================================================================================================
+	"ogre_magi_ignite"
+	{
+		"AbilityCastPoint"				"0.3"
+
+		"AbilityManaCost"				"60"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"5 6 7 8"
+			}
+
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"burn_damage"			"26 34 42 50"
+			}		
+
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"slow_movement_speed_pct"	"-20 -22 -24 -26"
+			}
+
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"projectile_speed"		"1000"
+			}	
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"multicast_delay"		"0.5"
+			}	
+		}
+	}
+
+	//=================================================================================================================
+	// Ogre Magi: Bloodlust
+	//=================================================================================================================
+	"ogre_magi_bloodlust"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityCastPoint"				"0.3"
+
+		"AbilityManaCost"				"35"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"modelscale"			"25"
+			}	
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_movement_speed"		"10 12 14 16"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"30 40 50 60"
+				"LinkedSpecialBonus"	"special_bonus_unique_ogre_magi"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"30"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ogre Magi: Multicast
+	//=================================================================================================================
+	"ogre_magi_multicast"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"multicast_2_times"		"0.4 0.5 0.6"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"multicast_3_times"		"0 0.2 0.25"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"multicast_4_times"		"0 0 0.125"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"fireblast_mana_cost"	"5 10 15"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"fireblast_cooldown"	"2 4 6"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ignite_aoe"			"200 350 500"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"ignite_cast_range"		"150 300 450"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bloodlust_aoe"			"900"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bloodlust_cooldown"	"8 12 16"
+			}
+			"10"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"multicast_2_times_tooltip"		"40 50 60"
+			}
+			"11"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"multicast_3_times_tooltip"		"0 20 25"
+			}
+			"12"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"multicast_4_times_tooltip"		"0 0 12.5"
 			}
 		}
 	}
@@ -1292,11 +2348,66 @@
 		{
 			"01"
 			{
-				"var_type"			"FIELD_INTEGER"
-				"value"				"500"
+				"var_type"				"FIELD_INTEGER"
+				"value"					"500"
 			}
 		}
 	}
+
+	//=================================================================================================================
+	// Rubick: Fade Bolt
+	//=================================================================================================================
+	"rubick_fade_bolt"
+	{
+		"AbilityCooldown"				"14 12 10 8"
+
+		"AbilityManaCost"				"70 80 90 100"
+
+		"AbilityCastRange"				"900"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"100 175 250 325"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"jump_damage_reduction_pct"		"0"
+				"CalculateSpellDamageTooltip"	"0"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"hero_attack_damage_reduction"	"20 25 30 35"
+				"LinkedSpecialBonus"			"special_bonus_unique_rubick_2"
+				"CalculateSpellDamageTooltip"	"0"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"creep_attack_damage_reduction"	"10 15 20 25"
+				"CalculateSpellDamageTooltip"	"0"
+			}			
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"duration"					"10"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"900"
+			}			
+			"07"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"jump_delay"				"0.25"
+			}
+		}
+	}	
 
 	//=================================================================================================================
 	// Rubick: Null Field
