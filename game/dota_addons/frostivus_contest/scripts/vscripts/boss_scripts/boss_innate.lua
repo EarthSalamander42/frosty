@@ -103,3 +103,12 @@ end
 function modifier_frostivus_boss:GetModifierMoveSpeed_Max()
 	return 1000
 end
+
+-- Boss summon (add) modifier
+LinkLuaModifier("modifier_frostivus_boss_add", "boss_scripts/boss_innate", LUA_MODIFIER_MOTION_NONE)
+
+modifier_frostivus_boss_add = modifier_frostivus_boss_add or class({})
+
+function modifier_frostivus_boss_add:IsHidden() return true end
+function modifier_frostivus_boss_add:IsPurgable() return false end
+function modifier_frostivus_boss_add:IsDebuff() return false end

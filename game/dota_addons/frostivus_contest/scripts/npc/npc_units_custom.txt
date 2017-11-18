@@ -178,7 +178,7 @@
 				"Wearable4"	{	"ItemDef"	"10081"	}	// lvl 1 tail
 				"Wearable5"	{	"ItemDef"	"10084"	}	// lvl 1 teeth
 				"Wearable6"	{	"ItemDef"	"10087"	}	// lvl 1 wings
-				"Wearable6"	{	"ItemDef"	"10090"	}	// eyes
+				"Wearable7"	{	"ItemDef"	"10090"	}	// eyes
 			}
 		}
 	}
@@ -259,13 +259,13 @@
          	"AttachWearables"
 			{
 				"Wearable1"	{	"ItemDef"	"10072"	}	// lvl 2 ears
-				"Wearable1"	{	"ItemDef"	"10073"	}	// lvl 1 hair
-				"Wearable2"	{	"ItemDef"	"10076"	}	// lvl 2 horns
-				"Wearable3"	{	"ItemDef"	"10079"	}	// lvl 2 nose
-				"Wearable4"	{	"ItemDef"	"10082"	}	// lvl 2 tail
-				"Wearable5"	{	"ItemDef"	"10085"	}	// lvl 2 teeth
-				"Wearable6"	{	"ItemDef"	"10088"	}	// lvl 2 wings
-				"Wearable6"	{	"ItemDef"	"10090"	}	// eyes
+				"Wearable2"	{	"ItemDef"	"10073"	}	// lvl 1 hair
+				"Wearable3"	{	"ItemDef"	"10076"	}	// lvl 2 horns
+				"Wearable4"	{	"ItemDef"	"10079"	}	// lvl 2 nose
+				"Wearable5"	{	"ItemDef"	"10082"	}	// lvl 2 tail
+				"Wearable6"	{	"ItemDef"	"10085"	}	// lvl 2 teeth
+				"Wearable7"	{	"ItemDef"	"10088"	}	// lvl 2 wings
+				"Wearable8"	{	"ItemDef"	"10090"	}	// eyes
 			}
 		}
 	}
@@ -346,13 +346,13 @@
          	"AttachWearables"
 			{
 				"Wearable1"	{	"ItemDef"	"10072"	}	// lvl 2 ears
-				"Wearable1"	{	"ItemDef"	"10074"	}	// lvl 2 hair
-				"Wearable2"	{	"ItemDef"	"10077"	}	// lvl 3 horns
-				"Wearable3"	{	"ItemDef"	"10080"	}	// lvl 3 nose
-				"Wearable4"	{	"ItemDef"	"10083"	}	// lvl 3 tail
-				"Wearable5"	{	"ItemDef"	"10086"	}	// lvl 3 teeth
-				"Wearable6"	{	"ItemDef"	"10089"	}	// lvl 3 wings
-				"Wearable6"	{	"ItemDef"	"10090"	}	// eyes
+				"Wearable2"	{	"ItemDef"	"10074"	}	// lvl 2 hair
+				"Wearable3"	{	"ItemDef"	"10077"	}	// lvl 3 horns
+				"Wearable4"	{	"ItemDef"	"10080"	}	// lvl 3 nose
+				"Wearable5"	{	"ItemDef"	"10083"	}	// lvl 3 tail
+				"Wearable6"	{	"ItemDef"	"10086"	}	// lvl 3 teeth
+				"Wearable7"	{	"ItemDef"	"10089"	}	// lvl 3 wings
+				"Wearable8"	{	"ItemDef"	"10090"	}	// eyes
 			}
 		}
 	}
@@ -427,6 +427,16 @@
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"2000"
 		"VisionNighttimeRange"		"2000"
+
+		"Creature"
+		{
+         	"AttachWearables"
+			{
+				"Wearable1"	{	"ItemDef"	"6914"	}	// Arcana Helmet
+				"Wearable2"	{	"ItemDef"	"589"	}	// Default Bracers
+				"Wearable3"	{	"ItemDef"	"606"	}	// Default Belt
+			}
+		}
 	}
 
 	//=================================================================================
@@ -501,6 +511,17 @@
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"2000"
 		"VisionNighttimeRange"		"2000"
+
+		"Creature"
+		{
+         	"AttachWearables"
+			{
+				"Wearable1"	{	"ItemDef"	"8690"	}	// Head - Crest of the fatal bloom
+				"Wearable2"	{	"ItemDef"	"8700"	}	// Shoulders - Wings of the fatal bloom
+				"Wearable3"	{	"ItemDef"	"9334"	}	// Arms - Spitters of the virulent krait
+				"Wearable4"	{	"ItemDef"	"8691"	}	// Tail - tail of the fatal bloom
+			}
+		}
 	}
 
 	//=================================================================================
