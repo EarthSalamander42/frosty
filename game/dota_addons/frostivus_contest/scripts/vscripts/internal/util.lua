@@ -255,7 +255,7 @@ function Chat:OnSay(args)
 
 	local arguments = {
 		hero = player,
-		color = TEAM_COLORS[player:GetPlayerID()],
+--		color = TEAM_COLORS[player:GetPlayerID()],
 		player = id,
 		message = args.message,
 		team = args.team,

@@ -8,7 +8,7 @@
 		<include src="file://{resources}/scripts/custom_game/Modular.js" />
 	</scripts>
 
-	<Panel class="Frostivus" hittest="false">
+	<Panel class="FrostivusHUD" hittest="false">
 		<Panel id="FrostivusAltarRespawn">
 			<Panel id="FrostivusAltarMenu">
 				<Panel class="FrostivusAltarContent">
@@ -62,33 +62,42 @@
 			</Panel>
 		</Panel>
 
-		<Panel class="Diretide" hittest="false">
-			<Panel id="DiretidePanel">
+		<Panel id="FrostivusHUD_alt" hittest="false">
+			<Panel id="FrostivusPanel">
+				<Panel id="FrostivusPanelTimer">
+					<Label id="PhaseLabel" text="#frostivus_phase_1" onmouseover="FrostivusInfo()" onmouseout="UIHideTextTooltip()"/>
+
+					<Label id="Timer" text="--:--"/>
+				</Panel>
+
 				<Panel id="BossHP2" hittest="false">
-					<Label id="BossLabel2" class="HoldoutLabelSmall" hittest="false" text=""/>
-					<Label id="BossLevel2" class="HoldoutLabelSmall_alt" hittest="false" text="Level: "/>
+					<Panel id="BossInfo2" hittest="false">
+						<Label id="BossLevel2" class="HoldoutLabelSmall_alt" hittest="false" text="Level: "/>
+						<Label id="BossLabel2" class="HoldoutLabelSmall" hittest="false" text=""/>
+					</Panel>
+
 					<Panel id="BossProgressBarContainer2" hittest="false">
 						<DOTAHeroImage id="BossIcon2" hittest="false"/>
 						<ProgressBar id="BossProgressBar2" hittest="false" value="1.0"/>
 						<Label id="BossHealth2" class="HoldoutLabelSmall" hittest="false" text=""/>
 					</Panel>
+
+					<Panel id="BossCastBar2" hittest="false">
+
+					</Panel>
 				</Panel>
 				<Panel id="BossHP3" hittest="false">
-					<Label id="BossLabel3" class="HoldoutLabelSmall" hittest="false" text=""/>
-					<Label id="BossLevel3" class="HoldoutLabelSmall_alt" hittest="false" text="Level: "/>
+					<Panel id="BossInfo3" hittest="false">
+						<Label id="BossLevel3" class="HoldoutLabelSmall_alt" hittest="false" text="Level: "/>
+						<Label id="BossLabel3" class="HoldoutLabelSmall" hittest="false" text=""/>
+					</Panel>
+
 					<Panel id="BossProgressBarContainer3" hittest="false">
 						<DOTAHeroImage id="BossIcon3" hittest="false"/>
 						<ProgressBar id="BossProgressBar3" hittest="false" value="1.0"/>
 						<Label id="BossHealth3" class="HoldoutLabelSmall" hittest="false" text=""/>
 					</Panel>
 				</Panel>
-			</Panel>
-		</Panel>
-
-		<Panel id="FrostivusScorePanel">
-			<Panel id="Frostivus">
-				<Label id="PhaseLabel" text="#diretide_phase_1" onmouseover="FrostivusInfo()" onmouseout="UIHideTextTooltip()"/>
-				<Label id="Timer" text="--:--"/>
 			</Panel>
 		</Panel>
 	</Panel>

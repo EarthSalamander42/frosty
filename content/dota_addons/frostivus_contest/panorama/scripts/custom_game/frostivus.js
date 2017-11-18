@@ -23,7 +23,7 @@ function Phase(args)
 
 	if (args.Phase == 1)
 	{
-		$("#Frostivus").style.visibility = "visible";
+		$("#FrostivusHUD_alt").style.visibility = "visible";
 	}
 	if (args.Phase == 2)
 	{
@@ -68,6 +68,7 @@ function ChooseAltar(number) {
 function OnPlayerReconnect( data ) {
 	$.Msg("Frostivus: Player has reconnected!")
 	$.Msg("Phase: " + data.Phase)
+	$("#FrostivusHUD_alt").style.visibility = "visible";
 }
 
 function UpdateBossBar(args) {
@@ -126,6 +127,7 @@ function UpdateAltar(args)
 		}
 		$("#AltarButton" + args.altar).AddClass("dire");
 	}
+	$("#AltarState" + args.altar).style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_' + args.team + '.png")';
 	$.Msg("Added a new altar: " + args.altar + " for team: " + args.team)
 
 	var localTeam = Players.GetTeam(Players.GetLocalPlayer())
@@ -150,14 +152,23 @@ function UpdateAltar(args)
 	}
 }
 
+function CastBar(args)
+{
+	//TODO: Finish this, add the caller in lua, create .CastBarAbility class in css
+	var Ability = $.CreatePanel("Panel", $("#BossCastBar" + args.TeamContest + "_" + args.ability), $("#BossCastBar" + args.TeamContest));
+	Hero_Panel.AddClass("CastBarAbility")
+}
+
 (function()
 {
 	$("#AltarButton1").AddClass("radiant");
+	$("#AltarState1").style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_2.png")';
 	$("#AltarButton7").AddClass("dire");
+	$("#AltarState7").style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_3.png")';
 
 	GameEvents.Subscribe("countdown", UpdateTimer);
 	GameEvents.Subscribe("frostivus_phase", Phase);
-	GameEvents.Subscribe("diretide_player_reconnected", OnPlayerReconnect);
+	GameEvents.Subscribe("frostivus_player_reconnected", OnPlayerReconnect);
 	GameEvents.Subscribe("show_boss_hp", ShowBossBar);
 	GameEvents.Subscribe("hide_boss_hp", HideBossBar);
 	GameEvents.Subscribe("update_altar", UpdateAltar);

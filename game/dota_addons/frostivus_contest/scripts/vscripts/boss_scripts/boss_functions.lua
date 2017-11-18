@@ -85,8 +85,8 @@ function UnlockArena(altar, victory, team, aura_ability)
 
 		-- Heal winning team
 		for _,hero in pairs(nearby_heroes) do
-			hero:Heal(hero:GetMaxHealth(), hero)
-			hero:GiveMana(hero:GetMaxMana())
+			hero:Purge(false, true, false, false, false)
+			hero:AddNewModifier(hero, nil, "modifier_aegis_regen", {duration = 3.0})
 		end
 
 		-- Update altar scoreboard
