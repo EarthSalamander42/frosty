@@ -13,7 +13,7 @@
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
 			m_bAdditive = true
 			m_bDisableZBuffering = true
-			m_hTexture = resource:"materials/particle/particle_flares/aircraft_blue2.vtex"
+			m_hTexture = resource:"materials/particle/particle_flares/aircraft_green.vtex"
 		},
 		{
 			_class = "C_OP_RenderDeferredLight"
@@ -86,16 +86,16 @@
 	m_Children = 
 	[
 		{
-			m_ChildRef = resource:"particles/generic_particles/drow_swift_arrow_trail.vpcf"
+			m_ChildRef = resource:"particles/heroes/drow_swift_arrow_trail.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/generic_particles/drow_swift_arrow_model.vpcf"
+			m_ChildRef = resource:"particles/heroes/drow_swift_arrow_model.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/generic_particles/drow_swift_arrow_launch.vpcf"
+			m_ChildRef = resource:"particles/heroes/drow_swift_arrow_launch.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/generic_particles/drow_swift_arrow_explosion.vpcf"
+			m_ChildRef = resource:"particles/heroes/drow_swift_arrow_explosion.vpcf"
 		},
 	]
 	m_controlPointConfigurations = 

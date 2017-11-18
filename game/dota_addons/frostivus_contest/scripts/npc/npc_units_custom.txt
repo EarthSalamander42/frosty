@@ -98,6 +98,266 @@
 	}
 
 	//=================================================================================
+	// Basic Greevil
+	//=================================================================================
+	"npc_frostivus_greevil_basic"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models\courier\greevil\greevil.vmdl"
+		"SoundSet"					"Creep_Good_Melee"
+		"Level"						"1"
+		"ModelScale"				"1.0"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"frostivus_greevil_innate"
+		"Ability2"					""
+		"Ability3"					""
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"10"
+		"AttackDamageMax"			"10"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"
+		"AttackAnimationPoint"		"0.0"
+		"AttackAcquisitionRange"	"0"
+		"AttackRange"				"0"
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"HealthBarOffset"			"130"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"
+		"BountyGoldMin"				"0"
+		"BountyGoldMax"				"0"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"1.0"
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"100"
+		"StatusHealthRegen"			"1.0"
+		"StatusMana"				"50"
+		"StatusManaRegen"			"1.0"
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1200"
+
+		"Creature"
+		{
+         	"AttachWearables"
+			{
+				"Wearable1"	{	"ItemDef"	"10071"	}	// lvl 1 ears
+				"Wearable2"	{	"ItemDef"	"10075"	}	// lvl 1 horns
+				"Wearable3"	{	"ItemDef"	"10078"	}	// lvl 1 nose
+				"Wearable4"	{	"ItemDef"	"10081"	}	// lvl 1 tail
+				"Wearable5"	{	"ItemDef"	"10084"	}	// lvl 1 teeth
+				"Wearable6"	{	"ItemDef"	"10087"	}	// lvl 1 wings
+				"Wearable6"	{	"ItemDef"	"10090"	}	// eyes
+			}
+		}
+	}
+
+	//=================================================================================
+	// Advanced Greevil
+	//=================================================================================
+	"npc_frostivus_greevil_advanced"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models\courier\greevil\greevil.vmdl"
+		"SoundSet"					"Creep_Good_Melee"
+		"Level"						"1"
+		"ModelScale"				"1.2"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"frostivus_greevil_innate"
+		"Ability2"					""
+		"Ability3"					""
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"50"
+		"AttackDamageMax"			"50"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"
+		"AttackAnimationPoint"		"0.0"
+		"AttackAcquisitionRange"	"0"
+		"AttackRange"				"0"
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"HealthBarOffset"			"130"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"
+		"BountyGoldMin"				"0"
+		"BountyGoldMax"				"0"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"1.0"
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"500"
+		"StatusHealthRegen"			"1.0"
+		"StatusMana"				"100"
+		"StatusManaRegen"			"1.0"
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1200"
+
+		"Creature"
+		{
+         	"AttachWearables"
+			{
+				"Wearable1"	{	"ItemDef"	"10072"	}	// lvl 2 ears
+				"Wearable1"	{	"ItemDef"	"10073"	}	// lvl 1 hair
+				"Wearable2"	{	"ItemDef"	"10076"	}	// lvl 2 horns
+				"Wearable3"	{	"ItemDef"	"10079"	}	// lvl 2 nose
+				"Wearable4"	{	"ItemDef"	"10082"	}	// lvl 2 tail
+				"Wearable5"	{	"ItemDef"	"10085"	}	// lvl 2 teeth
+				"Wearable6"	{	"ItemDef"	"10088"	}	// lvl 2 wings
+				"Wearable6"	{	"ItemDef"	"10090"	}	// eyes
+			}
+		}
+	}
+
+	//=================================================================================
+	// Super Greevil
+	//=================================================================================
+	"npc_frostivus_greevil_super"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models\courier\greevil\greevil.vmdl"
+		"SoundSet"					"Creep_Good_Melee"
+		"Level"						"1"
+		"ModelScale"				"1.4"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"frostivus_greevil_innate"
+		"Ability2"					""
+		"Ability3"					""
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"100"
+		"AttackDamageMax"			"100"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"
+		"AttackAnimationPoint"		"0.0"
+		"AttackAcquisitionRange"	"0"
+		"AttackRange"				"0"
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"HealthBarOffset"			"130"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"
+		"BountyGoldMin"				"0"
+		"BountyGoldMax"				"0"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"300"
+		"MovementTurnRate"			"1.0"
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1000"
+		"StatusHealthRegen"			"1.0"
+		"StatusMana"				"200"
+		"StatusManaRegen"			"1.0"
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1200"
+
+		"Creature"
+		{
+         	"AttachWearables"
+			{
+				"Wearable1"	{	"ItemDef"	"10072"	}	// lvl 2 ears
+				"Wearable1"	{	"ItemDef"	"10074"	}	// lvl 2 hair
+				"Wearable2"	{	"ItemDef"	"10077"	}	// lvl 3 horns
+				"Wearable3"	{	"ItemDef"	"10080"	}	// lvl 3 nose
+				"Wearable4"	{	"ItemDef"	"10083"	}	// lvl 3 tail
+				"Wearable5"	{	"ItemDef"	"10086"	}	// lvl 3 teeth
+				"Wearable6"	{	"ItemDef"	"10089"	}	// lvl 3 wings
+				"Wearable6"	{	"ItemDef"	"10090"	}	// eyes
+			}
+		}
+	}
+
+	//=================================================================================
 	// BOSS: Zeus
 	//=================================================================================
 	"npc_frostivus_boss_zuus"

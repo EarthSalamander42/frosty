@@ -66,23 +66,43 @@ local target = keys.unit
 			-- Send the boss death event to all clients
 			CustomGameEventManager:Send_ServerToTeam(self.team, "AltarContestEnd", {win = true})
 
-			-- Play the capture particle to the winning team
+			-- Play the capture particle & sound to the winning team
 			local target_loc = target:GetAbsOrigin()
 			for player_id = 0, 20 do
 				if PlayerResource:GetPlayer(player_id) and PlayerResource:GetTeam(player_id) == self.team then
 					local win_pfx = ParticleManager:CreateParticleForPlayer("particles/boss_veno/screen_veno_win.vpcf", PATTACH_EYES_FOLLOW, PlayerResource:GetSelectedHeroEntity(player_id), PlayerResource:GetPlayer(player_id))
 					self:AddParticle(win_pfx, false, false, -1, false, false)
 					ParticleManager:ReleaseParticleIndex(win_pfx)
+					EmitSoundOnClient("greevil_eventend_Stinger", PlayerResource:GetPlayer(player_id))
 				end
 			end
 
+			-- Drop presents according to boss difficulty
+			local current_power = target:FindModifierByName("modifier_frostivus_boss"):GetStackCount()
+			local altar_loc = Entities:FindByName(nil, self.altar_handle):GetAbsOrigin()
+			local present_amount = 2 + current_power
+			for i = 1, present_amount do
+				local item = CreateItem("item_frostivus_present", nil, nil)
+				CreateItemOnPositionForLaunch(target_loc, item)
+				item:LaunchLootInitialHeight(true, 150, 300, 1.0, altar_loc + RandomVector(100):Normalized() * RandomInt(100, 200))
+			end
+
+			-- Spawn a greevil that runs away
+			local greevil = SpawnGreevil(target_loc, 2, false, 200, 255, 150)
+			Timers:CreateTimer(3, function()
+				StartAnimation(greevil, {duration = 2.5, activity=ACT_DOTA_FLAIL, rate=1.5})
+				greevil:MoveToPosition(altar_loc + RandomVector(10):Normalized() * 900)
+				Timers:CreateTimer(2.5, function()
+					greevil:Kill(nil, greevil)
+				end)
+			end)
+
 			-- Respawn the boss and grant it its new capture detection modifier
 			local boss
-			Timers:CreateTimer(5, function()
+			Timers:CreateTimer(15, function()
 				boss = SpawnVenomancer(self.altar_handle)
 
 				-- Increase the new boss' power
-				local current_power = target:FindModifierByName("modifier_frostivus_boss"):GetStackCount()
 				local next_power = math.ceil(current_power * 0.25) + 1
 				boss:FindModifierByName("modifier_frostivus_boss"):SetStackCount(current_power + next_power)
 			end)
@@ -90,7 +110,9 @@ local target = keys.unit
 			-- Destroy any existing adds
 			local nearby_summons = FindUnitsInRadius(target:GetTeam(), target:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 			for _,summon in pairs(nearby_summons) do
-				summon:Kill(nil, summon)
+				if not summon:HasModifier("modifier_frostivus_greevil") then
+					summon:Kill(nil, summon)
+				end
 			end
 
 			-- Unlock the arena

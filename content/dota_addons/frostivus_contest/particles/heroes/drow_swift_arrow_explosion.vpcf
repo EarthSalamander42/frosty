@@ -82,16 +82,16 @@
 	m_Children = 
 	[
 		{
-			m_ChildRef = resource:"particles/generic_particles/drow_swift_arrow_explosion_b.vpcf"
+			m_ChildRef = resource:"particles/heroes/drow_swift_arrow_explosion_b.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/generic_particles/drow_swift_arrow_explosion_c.vpcf"
+			m_ChildRef = resource:"particles/heroes/drow_swift_arrow_explosion_c.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/generic_particles/drow_swift_arrow_explosion_d.vpcf"
+			m_ChildRef = resource:"particles/heroes/drow_swift_arrow_explosion_d.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/generic_particles/drow_swift_arrow_explosion_e.vpcf"
+			m_ChildRef = resource:"particles/heroes/drow_swift_arrow_explosion_e.vpcf"
 		},
 	]
 	m_ConstantColor = [ 124, 252, 0, 255 ]

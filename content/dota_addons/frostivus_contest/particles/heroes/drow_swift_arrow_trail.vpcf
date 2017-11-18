@@ -108,10 +108,10 @@
 	m_Children = 
 	[
 		{
-			m_ChildRef = resource:"particles/generic_particles/drow_swift_arrow_trail_b.vpcf"
+			m_ChildRef = resource:"particles/heroes/drow_swift_arrow_trail_b.vpcf"
 		},
 		{
-			m_ChildRef = resource:"particles/generic_particles/drow_swift_arrow_trail_c.vpcf"
+			m_ChildRef = resource:"particles/heroes/drow_swift_arrow_trail_c.vpcf"
 		},
 	]
 	m_controlPointConfigurations = 

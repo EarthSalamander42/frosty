@@ -16,7 +16,7 @@
 	//"item_mithril_hammer"					"REMOVE"
 	//"item_platemail"						"REMOVE"
 	//"item_quarterstaff"					"REMOVE"
-	//"item_quelling_blade"					"REMOVE"
+	"item_quelling_blade"					"REMOVE"
 	//"item_ring_of_protection"				"REMOVE"
 	//"item_stout_shield"					"REMOVE"
 	//"item_gauntlets"						"REMOVE"
@@ -282,30 +282,11 @@
 	}
 
 	//=================================================================================================================
-	// Roshan: Bash
+	// Mekansm
 	//=================================================================================================================
-	"roshan_bash"
+	"item_mekansm"
 	{
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"bash_chance"		"15"
-			}
-			"02"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"bonus_damage"		"50"
-			}
-			"03"
-			{
-				"var_type"			"FIELD_FLOAT"
-				"stun_duration"		"1.2"
-			}
-		}
+		"AbilityManaCost"				"75"
 	}
 
 	//=================================================================================================================
@@ -572,6 +553,7 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"bonus_health_regen"	"40 48 56"
+				"LinkedSpecialBonus"	"special_bonus_unique_alchemist_4"
 			}
 			"06"
 			{
@@ -582,6 +564,21 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"bonus_movespeed"		"40 50 60"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Chemical Rage health regeneration
+	//=================================================================================================================
+	"special_bonus_unique_alchemist_4"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"34"
 			}
 		}
 	}
@@ -639,6 +636,31 @@
 			{
 				"var_type"					"FIELD_FLOAT"
 				"cooldown"					"0.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Antimage: Blink
+	//=================================================================================================================
+	"antimage_blink"
+	{
+		"AbilityCooldown"				"20 16 12 8"
+
+		"AbilityManaCost"				"30"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blink_range"			"925 1000 1075 1150"
+				"LinkedSpecialBonus"	"special_bonus_unique_antimage_3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"min_blink_range"		"200"
 			}
 		}
 	}
@@ -943,6 +965,284 @@
 			{	
 				"var_type"			"FIELD_INTEGER"
 				"scepter_radius"	"900"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Drow Ranger's Trueshot Aura
+	//=================================================================================================================
+	"drow_ranger_trueshot"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"trueshot_ranged_damage"	"12 20 28 36"
+				"LinkedSpecialBonus"		"special_bonus_unique_drow_ranger_1"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Precision Aura damage
+	//=================================================================================================================
+	"special_bonus_unique_drow_ranger_1"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"24"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Drow Ranger's Marksmanship
+	//=================================================================================================================
+	"drow_ranger_marksmanship"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"marksmanship_agility_bonus"	"40 60 80"
+				"LinkedSpecialBonus"			"special_bonus_unique_drow_ranger_3"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"300"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"split_count_scepter"			"2"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"scepter_range"					"700"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage_reduction_scepter"		"50"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ember Spirit: Searing Chains
+	//=================================================================================================================
+	"ember_spirit_searing_chains"
+	{
+		"AbilityCastRange"						"500"
+
+		"AbilityManaCost"						"75"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"1.5 2.0 2.5 3.0"
+				"LinkedSpecialBonus"			"special_bonus_unique_ember_spirit_2"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"500"
+			}	
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"chains_damage"					"50"
+			}				
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"total_damage_tooltip"			"150 200 250 300"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"tick_interval"					"0.5"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"unit_count"					"3 4 5 6"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ember Spirit: Sleight of Fist
+	//=================================================================================================================
+	"ember_spirit_sleight_of_fist"
+	{
+		"AbilityCastRange"						"900"
+
+		"AbilityCooldown"						"15 12 9 6"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"475 525 575 625"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_hero_damage"				"40 60 80 100"
+				"CalculateSpellDamageTooltip"	"0"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"attack_interval"				"0.2"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"creep_damage_penalty"			"0"
+				"CalculateSpellDamageTooltip"	"0"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"charge_restore_time"			"15 12 9 6"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ember Spirit: Flame Guard
+	//=================================================================================================================
+	"ember_spirit_flame_guard"
+	{
+		"AbilityCastRange"					"500"
+
+		"AbilityCooldown"					"36 32 28 24"
+
+		"AbilityManaCost"					"75"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"duration"					"10 12 14 16"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"500"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"absorb_amount"				"50 200 350 500"
+				"LinkedSpecialBonus"		"special_bonus_unique_ember_spirit_1"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"tick_interval"				"0.2"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_per_second"			"30 40 50 60"
+				"LinkedSpecialBonus"		"special_bonus_unique_ember_spirit_3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ember Spirit: Fire Remnant
+	//=================================================================================================================
+	"ember_spirit_fire_remnant"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed_multiplier"		"400"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_charges"			"3 4 5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"charge_restore_time"	"35.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"100 200 300"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"450"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"45.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ember Spirit: Activate Fire Remnant
+	//=================================================================================================================
+	"ember_spirit_activate_fire_remnant"
+	{
+		"AbilityManaCost"				"50"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed_multiplier"		"400"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_charges"			"3 4 5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"charge_restore_time"	"35.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"100 200 300"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"450"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1300"
 			}
 		}
 	}
@@ -2293,6 +2593,574 @@
 	}
 
 	//=================================================================================================================
+	// Oracle: Fortune's End
+	//=================================================================================================================
+	"oracle_fortunes_end"
+	{
+		"AbilityChannelTime"				"1.5"
+
+		"AbilityManaCost"					"70"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"90 160 230 300"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bolt_speed"				"1000"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"minimum_purge_duration"	"0.5"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"maximum_purge_duration"	"2.0"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"400"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"max_channel_time_tooltip"	"1.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Oracle: Fate's Edict
+	//=================================================================================================================
+	"oracle_fates_edict"
+	{
+		"AbilityCastRange"				"850"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"3.0 3.5 4.0 4.5"
+			}
+			"02"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"magic_damage_resistance_pct_tooltip"	"100"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range_tooltip"			"850"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Oracle: Purifying Flames
+	//=================================================================================================================
+	"oracle_purifying_flames"
+	{
+		"AbilityManaCost"				"50"
+
+		"AbilityCooldown"				"2.0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"50 100 150 200"
+			}			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal_per_second"		"30 60 90 120"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"total_heal_tooltip"	"90 180 270 360"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"3.0"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"tick_rate"				"1.0"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown_scepter"		"1.0"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"castpoint_scepter"		"0.1"
+			}
+		}
+	} 
+
+	//=================================================================================================================
+	// Oracle: False Promise
+	//=================================================================================================================
+	"oracle_false_promise"
+	{
+		"AbilityCooldown"				"60 45 30"
+
+		"AbilityManaCost"				"75"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"5 6 7"
+				"LinkedSpecialBonus"	"special_bonus_unique_oracle"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"400"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Phantom Assassin: Stifling Dagger
+	//=================================================================================================================
+	"phantom_assassin_stifling_dagger"
+	{
+		"AbilityCastRange"				"900 1000 1100 1200"
+
+		"AbilityCooldown"				"7 5 6 4"
+
+		"AbilityManaCost"				"15"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"move_slow"				"-50"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dagger_speed"			"1200"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"1 2 3 4"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"base_damage"			"65"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_factor"			"-60 -40 -20 -0"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_factor_tooltip"	"40 60 80 100"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Phantom Assassin: Phantom Strike
+	//=================================================================================================================
+	"phantom_assassin_phantom_strike"
+	{
+		"AbilityCooldown"					"18 14 10 6"
+
+		"AbilityManaCost"					"40"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_attack_speed"		"125 150 175 200"
+			}
+			
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_max_attack_count"	"4"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"tooltip_range"				"1000"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Phantom Assassin: Coup de Grace
+	//=================================================================================================================
+	"phantom_assassin_coup_de_grace"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"crit_bonus"				"230 340 450"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"crit_chance"				"15"
+				"LinkedSpecialBonus"		"special_bonus_unique_phantom_assassin_2"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Special Bonus
+	//=================================================================================================================
+	"special_bonus_unique_phantom_assassin_2"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"value"						"9"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Pugna: Nether Blast
+	//=================================================================================================================
+	"pugna_nether_blast"
+	{
+		"AbilityCastRange"					"700"
+
+		"AbilityManaCost"					"75 90 105 120"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"structure_damage_mod"		"0.5"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"delay"						"0.9"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"400"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"blast_damage"				"100 175 250 325"
+				"LinkedSpecialBonus"		"special_bonus_unique_pugna_2"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Pugna: Decrepify
+	//=================================================================================================================
+	"pugna_decrepify"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityManaCost"				"50"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_spell_damage_pct_allies"	"-25"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_movement_speed_allies"	"0"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_spell_damage_pct"		"-30 -40 -50 -60"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_movement_speed"			"-30 -40 -50 -60"
+			}			
+			"05"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"tooltip_duration"				"3.5"
+				"LinkedSpecialBonus"			"special_bonus_unique_pugna_5"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Pugna: Nether Ward
+	//=================================================================================================================
+	"pugna_nether_ward"
+	{
+		"AbilityCastRange"				"300"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"1600"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"mana_multiplier"			"1.2 1.5 1.8 2.1"
+				"LinkedSpecialBonus"		"special_bonus_unique_pugna_3"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"mana_regen"				"-0.5 -0.8 -1.1 -1.4"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"attacks_to_destroy_tooltip"	"4"
+				"LinkedSpecialBonus"			"special_bonus_unique_pugna_6"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"ward_duration_tooltip"			"30"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Pugna: Life Drain
+	//=================================================================================================================
+	"pugna_life_drain"
+	{
+		"AbilityCooldown"						"20 16 12"
+
+		"AbilityManaCost"						"125 150 175"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"health_drain"					"150 200 250"
+				"CalculateSpellDamageTooltip"	"1"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"cast_range_tooltip"			"700"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"duration_tooltip"				"10"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"health_drain_scepter"			"180 240 300"
+				"CalculateSpellDamageTooltip"	"1"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"scepter_cooldown"				"0.0"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"tick_rate"						"0.25"
+			}
+			"07"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"drain_buffer"					"200"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Queen of Pain: Shadow Strike
+	//=================================================================================================================
+	"queenofpain_shadow_strike"
+	{
+		"AbilityCastRange"				"500 600 700 800"
+
+		"AbilityManaCost"				"70"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"strike_damage"			"50 75 100 125"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration_damage"		"30 45 60 75"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movement_slow"			"-20 -30 -40 -50"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"projectile_speed"		"900"
+			}			
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cast_range_tooltip"	"500 600 700 800"
+			}	
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration_tooltip"		"15"
+			}			
+		}
+	}
+	
+	//=================================================================================================================
+	// Queen of Pain: Blink
+	//=================================================================================================================
+	"queenofpain_blink"
+	{
+		"AbilityCooldown"				"20 16 12 8"
+
+		"AbilityManaCost"				"30"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blink_range"			"1300"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"min_blink_range"		"200"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Queen of Pain: Scream of Pain
+	//=================================================================================================================
+	"queenofpain_scream_of_pain"
+	{
+		"AbilityCooldown"				"6"
+
+		"AbilityDamage"					"75 150 225 300"
+
+		"AbilityManaCost"				"70 80 90 100"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"area_of_effect"		"475"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"projectile_speed"		"900"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Queen of Pain: Sonic Wave
+	//=================================================================================================================
+	"queenofpain_sonic_wave"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityCooldown"				"100 80 60"
+
+		"AbilityManaCost"				"200 275 350"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"starting_aoe"			"100"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"distance"				"900"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"final_aoe"				"450"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"900"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"290 380 470"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cooldown_scepter"		"30"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_scepter"		"325 440 555"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Rubick: Telekinesis
 	//=================================================================================================================
 	"rubick_telekinesis"
@@ -2447,6 +3315,331 @@
 	}
 
 	//=================================================================================================================
+	// Nevermore: Shadowraze #1
+	//=================================================================================================================
+	"nevermore_shadowraze1"
+	{
+		"AbilityCastPoint"				"0.4"
+
+		"AbilityCooldown"				"9 8 7 6"
+
+		"AbilityManaCost"				"75 70 65 60"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_damage"		"90 160 230 300"	
+				"LinkedSpecialBonus"	"special_bonus_unique_nevermore_2"	
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_radius"		"300"		
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_range"		"250"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_cooldown"	"3"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stack_bonus_damage" 	"80"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Nevermore: Shadowraze #2
+	//=================================================================================================================
+	"nevermore_shadowraze2"
+	{
+		"AbilityCastPoint"				"0.4"
+
+		"AbilityCooldown"				"9 8 7 6"
+
+		"AbilityManaCost"				"75 70 65 60"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_damage"		"90 160 230 300"
+				"LinkedSpecialBonus" 	"special_bonus_unique_nevermore_2"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_radius"		"325"		
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_range"		"450"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_cooldown"	"3"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stack_bonus_damage" 	"80"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Nevermore: Shadowraze #3
+	//=================================================================================================================
+	"nevermore_shadowraze3"
+	{
+		"AbilityCastPoint"				"0.4"
+
+		"AbilityCooldown"				"9 8 7 6"
+
+		"AbilityManaCost"				"75 70 65 60"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_damage"		"90 160 230 300"
+				"LinkedSpecialBonus"	"special_bonus_unique_nevermore_2"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_radius"		"350"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_range"		"700"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shadowraze_cooldown"	"3"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"stack_bonus_damage"	"80"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Nevermore: Necromastery
+	//=================================================================================================================
+	"nevermore_necromastery"
+	{
+		"MaxLevel"								"1"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"necromastery_damage_per_soul"	"2"
+				"LinkedSpecialBonus"			"special_bonus_unique_nevermore_1"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"necromastery_max_souls"		"36"
+				"LinkedSpecialBonus"			"special_bonus_unique_nevermore_4"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"necromastery_soul_release"		"0.5"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"necromastery_souls_hero_bonus"	"65"
+			}
+			"05"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"necromastery_max_souls_scepter"	"46"
+				"LinkedSpecialBonus"				"special_bonus_unique_nevermore_4"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Nevermore: Presence of the Dark Lord
+	//=================================================================================================================
+	"nevermore_dark_lord"
+	{
+		"MaxLevel"								"7"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"presence_armor_reduction"		"-3 -4 -5 -6 -7 -8 -9"
+				"LinkedSpecialBonus"			"special_bonus_unique_nevermore_5"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"presence_radius"				"900"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Presence of the Dark Lord armor reduction
+	//=================================================================================================================
+	"special_bonus_unique_nevermore_5"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"-3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Sniper: Shrapnel
+	//=================================================================================================================
+	"sniper_shrapnel"
+	{
+		"AbilityManaCost"				"35"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_movement_speed"	"-15 -20 -25 -30"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"300 350 400 450"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shrapnel_damage"		"20 40 60 80"
+				"LinkedSpecialBonus"	"special_bonus_unique_sniper_1"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"10.0"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_delay"			"1.2"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"2.0"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_charges"			"3"
+				"LinkedSpecialBonus"	"special_bonus_unique_sniper_2"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"charge_restore_time"	"20"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Shrapnel damage
+	//=================================================================================================================
+	"special_bonus_unique_sniper_1"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"30"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Sniper: Assassinate
+	//=================================================================================================================
+	"sniper_assassinate"
+	{
+		"AbilityManaCost"					"175 225 275"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"projectile_speed"			"2500"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"tooltip_range"				"2000 2500 3000"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"total_cast_time_tooltip"	"2"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"scepter_radius"			"600"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"scepter_crit_bonus"		"280"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Spectre: Spectral Dagger
 	//=================================================================================================================
 	"spectre_spectral_dagger"
@@ -2551,7 +3744,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"bonus_damage"			"20 40 60 80"
+				"bonus_damage"			"25 40 55 70"
 				"LinkedSpecialBonus"	"special_bonus_unique_spectre_2"
 			}
 			"02"
@@ -2629,6 +3822,109 @@
 	}
 
 	//=================================================================================================================
+	// Ability: Storm Bolt
+	//=================================================================================================================
+	"sven_storm_bolt"
+	{
+		"AbilityCastRange"				"750"
+
+		"AbilityManaCost"				"125"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bolt_speed"			"1000"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bolt_stun_duration"	"1.7 1.8 1.9 2.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bolt_aoe"				"325"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vision_radius"			"325"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ability: Warcry
+	//=================================================================================================================
+	"sven_warcry"
+	{
+		"AbilityCooldown"			"32 28 24 20"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"warcry_armor"		"8 12 16 20"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"warcry_movespeed"	"12 14 16 18"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"warcry_radius"		"900"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"duration_tooltip"	"8"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Ability: God's Strength
+	//=================================================================================================================
+	"sven_gods_strength"
+	{
+		"AbilityCooldown"					"80 75 70"
+
+		"AbilityDuration"					"30"
+
+		"AbilityManaCost"					"100 125 150"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"gods_strength_damage"		"80 120 160"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"gods_strength_bonus_str"	"10 25 40"
+				"LinkedSpecialBonus"		"special_bonus_unique_sven_2"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius_scepter"			"900"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"gods_strength_damage_scepter"	"75 100 125"
+			}
+		}
+	}
+
+	//=================================================================================================================
 	// Templar Assassin: Refraction
 	//=================================================================================================================
 	"templar_assassin_refraction"
@@ -2672,6 +3968,1104 @@
 			{
 				"var_type"			"FIELD_INTEGER"
 				"value"				"1"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Templar Assassin: Meld
+	//=================================================================================================================
+	"templar_assassin_meld"
+	{
+		"AbilityCooldown"				"7 6 5 4"
+
+		"AbilityManaCost"				"25"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage"				"50 100 150 200"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_armor"				"-2 -4 -6 -8"
+				"LinkedSpecialBonus"		"special_bonus_unique_templar_assassin_2"
+			}
+			"03"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"armor_reduction_duration_tooltip"	"10"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Meld armor reduction
+	//=================================================================================================================
+	"special_bonus_unique_templar_assassin_2"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"-8"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Templar Assassin: Psi Blades
+	//=================================================================================================================
+	"templar_assassin_psi_blades"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_attack_range"		"100 175 250 325"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"attack_spill_range"		"720"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"attack_spill_width"		"75"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Tidehunter: Gush
+	//=================================================================================================================
+	"tidehunter_gush"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityManaCost"				"65 70 75 80"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"gush_damage"			"120 180 240 300"
+				"LinkedSpecialBonus"	"special_bonus_unique_tidehunter_2"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"projectile_speed"		"2500"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movement_speed"		"-40"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"negative_armor"		"3 4 5 6"
+				"LinkedSpecialBonus"	"special_bonus_unique_tidehunter"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed_scepter"			"1500"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"aoe_scepter"			"350"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cooldown_scepter"		"7"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cast_range_scepter"	"1800"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Gush damage
+	//=================================================================================================================
+	"special_bonus_unique_tidehunter_2"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"120"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Tidehunter: Anchor Smash
+	//=================================================================================================================
+	"tidehunter_anchor_smash"
+	{
+		"AbilityCastRange"				"500"
+
+		"AbilityCooldown"				"7 6 5 4"
+
+		"AbilityDamage"					"80 140 200 260"
+
+		"AbilityManaCost"				"30 35 40 45"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_reduction"		"-45 -50 -55 -60"
+				"LinkedSpecialBonus"	"special_bonus_unique_tidehunter_3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"reduction_duration"	"6.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Anchor Smash damage reduction
+	//=================================================================================================================
+	"special_bonus_unique_tidehunter_3"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"-20"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Tidehunter: Ravage
+	//=================================================================================================================
+	"tidehunter_ravage"
+	{
+		"AbilityCooldown"				"140 120 100"
+
+		"AbilityManaCost"				"150 200 250"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"1250"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"725"
+			}
+			"03"
+			{	
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"2.0 2.4 2.8"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Shredder: Whirling Death
+	//=================================================================================================================
+	"shredder_whirling_death"
+	{
+		"AbilityCastRange"				"350"
+
+		"AbilityManaCost"				"50"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"whirling_radius"			"350"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"whirling_damage"			"100 160 220 280"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"whirling_tick"				"0.3"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"stat_loss_pct"				"15"
+				"LinkedSpecialBonus"		"special_bonus_unique_timbersaw"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"14.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Shredder: Timber Chain
+	//=================================================================================================================
+	"shredder_timber_chain"
+	{
+		"AbilityManaCost"				"60"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"chain_radius"			"90 90 90 90"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"range"					"850 1050 1250 1450"
+				"LinkedSpecialBonus"	"special_bonus_unique_timbersaw_3"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"275"
+			}
+			"04"
+			{	
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"1600 2000 2400 2800"
+			}
+			"05"
+			{	
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"100 150 200 250"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Shredder: Chakram
+	//=================================================================================================================
+	"shredder_chakram"
+	{
+		"AbilityManaCost"				"75 100 125"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"speed"					"900.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"radius"				"200.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"pass_damage"			"100 150 200"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"50 75 100"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow"					"5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"break_distance"		"2000.0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_per_second"		"12 16 20"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"pass_slow_duration"	"0.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Shredder: Chakram 2
+	//=================================================================================================================
+	"shredder_chakram_2"
+	{
+		"AbilityManaCost"				"75 100 125"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"speed"					"900.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"radius"				"200.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"pass_damage"			"100 150 200"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"50 75 100"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow"					"5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_interval"		"0.5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"break_distance"		"2000.0"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_per_second"		"12 16 20"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"pass_slow_duration"	"0.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	//	Troll Warlord: Fervor
+	//=================================================================================================================
+	"troll_warlord_fervor"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_stacks"			"7"
+				"LinkedSpecialBonus"	"special_bonus_unique_troll_warlord_2"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_speed"			"15 20 25 30"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	//	Troll Warlord: Battle Trance
+	//=================================================================================================================
+	"troll_warlord_battle_trance"
+	{
+		"AbilityCooldown"				"35 30 25"
+
+		"AbilityManaCost"				"50"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"trance_duration"		"5.0 6.0 7.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_speed"			"60 120 180"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ursa: Earthshock
+	//=================================================================================================================
+	"ursa_earthshock"
+	{
+		"AbilityDamage"					"100 160 220 280"
+
+		"AbilityManaCost"				"50"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shock_radius"			"425"
+				"LinkedSpecialBonus"	"special_bonus_unique_ursa_5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"movement_slow"			"-25 -35 -45 -55"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Earthshock radius
+	//=================================================================================================================
+	"special_bonus_unique_ursa_5"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"475"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ursa: Overpower
+	//=================================================================================================================
+	"ursa_overpower"
+	{
+		"AbilityManaCost"				"40"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_attacks"				"3 4 5 6"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"attack_speed_bonus_pct"	"500"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"duration_tooltip"			"15"
+			}
+		}
+	}
+	
+	//=================================================================================================================
+	// Ursa: Fury Swipes
+	//=================================================================================================================
+	"ursa_fury_swipes"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"bonus_reset_time"				"20"
+				"LinkedSpecialBonus"			"special_bonus_unique_ursa_4"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"bonus_reset_time_roshan"		"6"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage_per_stack"				"15 20 25 30"
+				"LinkedSpecialBonus"			"special_bonus_unique_ursa"
+			}
+		}
+	}	
+
+	//=================================================================================================================
+	// Ability: Special Bonus
+	//=================================================================================================================
+	"special_bonus_unique_ursa"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"20"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Ursa: Enrage
+	//=================================================================================================================
+	"ursa_enrage"
+	{
+		"AbilityCooldown"				"50 45 40"
+
+		"AbilitySpecial"
+		{			
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"enrage_multiplier"			"1.5 1.75 2.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_reduction"			"80"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"4.0"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"cooldown_scepter"			"35 30 25"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Vengeful Spirit: Magic Missle
+	//=================================================================================================================
+	"vengefulspirit_magic_missile"
+	{
+		"AbilityCastRange"				"700"
+
+		"AbilityCooldown"				"13 12 11 10"
+
+		"AbilityManaCost"				"95 100 105 110"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"magic_missile_speed"	"1250"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"magic_missile_stun"	"1.2 1.4 1.6 1.8"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"magic_missile_damage"	"100 175 250 325"
+				"LinkedSpecialBonus"	"special_bonus_unique_vengeful_spirit_1"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Magic Missile damage
+	//=================================================================================================================
+	"special_bonus_unique_vengeful_spirit_1"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"275"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Vengeful Spirit: Command Aura
+	//=================================================================================================================
+	"vengefulspirit_command_aura"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage_pct"			"12 20 28 36"
+				"LinkedSpecialBonus"		"special_bonus_unique_vengeful_spirit_2"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"aura_radius"				"1200"
+			}			
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"images_do_damage_percent"	"0"
+			}
+			"04"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"images_do_damage_percent_tooltip"		"100"
+			}	
+			"05"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"images_take_damage_percent"			"100"
+			}
+			"06"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"images_take_damage_percent_tooltip"	"200"
+			}		
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"illusion_duration"			"6"
+			}		
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Vengeance Aura damage
+	//=================================================================================================================
+	"special_bonus_unique_vengeful_spirit_2"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"14"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Vengeful Spirit: Wave of Terror
+	//=================================================================================================================
+	"vengefulspirit_wave_of_terror"
+	{
+		"AbilityCastRange"				"1400"
+
+		"AbilityCooldown"				"10"
+
+		"AbilityDuration"				"8"
+
+		"AbilityDamage"					"50 75 100 125"
+
+		"AbilityManaCost"				"25"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"wave_speed"			"2000.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"wave_width"			"300"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"armor_reduction"		"-3 -4 -5 -6"
+				"LinkedSpecialBonus"	"special_bonus_unique_vengeful_spirit_4"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"tooltip_duration"		"8"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vision_aoe"			"300"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"vision_duration"		"3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Wave of Terror armor reduction
+	//=================================================================================================================
+	"special_bonus_unique_vengeful_spirit_4"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"-3"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Vengeful Spirit: Nether Swap
+	//=================================================================================================================
+	"vengefulspirit_nether_swap"
+	{
+		"AbilityCastRange"				"1000 1100 1200"
+
+		"AbilityCooldown"				"40 35 30"
+
+		"AbilityManaCost"				"75"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"tooltip_range"						"1000 1100 1200"
+			}
+			"02"
+			{
+				"var_type"							"FIELD_FLOAT"
+				"nether_swap_cooldown_scepter"		"10"
+			}
+			"03"
+			{
+				"var_type"							"FIELD_FLOAT"
+				"illusion_damage_out_pct_scepter"	"100"
+			}
+			"04"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"illusion_damage_in_pct_scepter"	"150"
+			}			
+		}
+	}
+
+	//=================================================================================================================
+	// Viper: Poison Attack
+	//=================================================================================================================
+	"viper_poison_attack"
+	{
+		"AbilityCooldown"						"3 2 1 0"
+
+		"AbilityManaCost"						"20"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"3.0"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"damage"						"0.4 0.6 0.8 1.0"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_movement_speed"			"-25 -30 -35 -40"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_attack_speed"			"-25 -30 -35 -40"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Viper: Nethertoxin
+	//=================================================================================================================
+	"viper_nethertoxin"
+	{
+		"AbilityManaCost"				"50"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"20 30 40 50"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"400"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"magic_resistance"		"-10 -14 -18 -22"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"8"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"projectile_speed"		"2000"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Viper: Corrosive Skin
+	//=================================================================================================================
+	"viper_corrosive_skin"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"4.0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_attack_speed"		"8 16 24 32"
+				"LinkedSpecialBonus"		"special_bonus_unique_viper_1"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_magic_resistance"	"10 15 20 25"
+				"LinkedSpecialBonus"		"special_bonus_unique_viper_1"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"16 24 32 40"
+				"LinkedSpecialBonus"		"special_bonus_unique_viper_1"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_range_tooltip"			"1400"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// bonus Corrosive Skin stats
+	//=================================================================================================================
+	"special_bonus_unique_viper_1"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"8"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Viper: Viper Strike
+	//=================================================================================================================
+	"viper_viper_strike"
+	{
+		"AbilityManaCost"				"125 150 175"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"60 100 150"
+				"LinkedSpecialBonus"	"special_bonus_unique_viper_2"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_movement_speed"	"-40 -60 -80"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"-40 -60 -80"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_cost_scepter"		"110"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown_scepter"		"10"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cast_range_scepter"	"900"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"projectile_speed"		"1200"
+			}	
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_charges"			"2"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"charge_restore_time"	"30.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Windrunner: Shackleshot
+	//=================================================================================================================
+	"windrunner_shackleshot"
+	{
+		"AbilityManaCost"				"90"
+	}
+
+	//=================================================================================================================
+	// Windrunner: Powershot
+	//=================================================================================================================
+	"windrunner_powershot"
+	{
+		"AbilityCooldown"				"10 9 8 7"
+
+		"AbilityManaCost"				"90"
+	}
+
+	//=================================================================================================================
+	// Windrunner: Windrun
+	//=================================================================================================================
+	"windrunner_windrun"
+	{
+		"AbilityCooldown"				"14"
+
+		"AbilityManaCost"				"50"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"movespeed_bonus_pct"		"60 70 80 90"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"evasion_pct_tooltip"		"100"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"enemy_movespeed_bonus_pct"	"-15 -20 -25 -30"
+				"LinkedSpecialBonus"		"special_bonus_unique_windranger_2"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"325"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"3 4 5 6"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Windrunner: Focus Fire
+	//=================================================================================================================
+	"windrunner_focusfire"
+	{
+		"AbilityCastRange"				"900"
+
+		"AbilityCooldown"				"60"
+
+		"AbilityDuration"				"5.0 7.0 9.0"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_attack_speed"			"500"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"focusfire_damage_reduction"	"0"
+			}						
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"focusfire_duration_tooltip"	"5 7 9"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"cooldown_scepter"				"40.0"
+			}
+			"05"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"focusfire_damage_reduction_scepter"	"0"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"focusfire_fire_on_the_move"	"1"
 			}
 		}
 	}
@@ -2781,57 +5175,154 @@
 	}
 
 	//=================================================================================================================
-	// Windrunner: Focus Fire
+	// Winter Wyvern: Winter's Curse
 	//=================================================================================================================
-	"windrunner_focusfire"
+	"winter_wyvern_winters_curse"
 	{
-		"AbilityCastRange"				"900"
+		"AbilityCastRange"				"800"
 
-		"AbilityCooldown"				"60"
+		"AbilityCooldown"				"80"
 
-		"AbilityDuration"				"5.0 7.0 9.0"
+		"AbilityManaCost"				"200"
+
+		"AbilitySpecial"
+		{
+			"01"
+			{	
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"500"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_reduction"		"0"
+			}
+			"03"
+			{	
+				"var_type"				"FIELD_FLOAT"
+				"damage_amplification"	"0"
+			}
+			"04"
+			{	
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"60 90 120"
+			}
+			"05"
+			{	
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"3.0 3.75 4.5"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Wisp: Tether
+	//=================================================================================================================
+	"wisp_tether"
+	{
+		"AbilityCooldown"					"3.0"
+
+		"AbilityManaCost"					"25"
 
 		"AbilitySpecial"
 		{
 			"01"
 			{
-				"var_type"						"FIELD_INTEGER"
-				"bonus_attack_speed"			"500"
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"1200"
 			}
 			"02"
 			{
-				"var_type"						"FIELD_INTEGER"
-				"focusfire_damage_reduction"	"0"
-			}						
+				"var_type"					"FIELD_INTEGER"
+				"movespeed"					"10 12 14 16"
+			}
 			"03"
 			{
-				"var_type"						"FIELD_INTEGER"
-				"focusfire_duration_tooltip"	"5 7 9"
+				"var_type"					"FIELD_INTEGER"
+				"latch_distance"			"300"
 			}
 			"04"
 			{
-				"var_type"						"FIELD_FLOAT"
-				"cooldown_scepter"				"40.0"
+				"var_type"					"FIELD_INTEGER"
+				"latch_speed"				"1000"
 			}
 			"05"
 			{
-				"var_type"								"FIELD_INTEGER"
-				"focusfire_damage_reduction_scepter"	"0"
+				"var_type"					"FIELD_INTEGER"
+				"tether_duration"			"12"
 			}
 			"06"
 			{
-				"var_type"						"FIELD_INTEGER"
-				"focusfire_fire_on_the_move"	"1"
+				"var_type"					"FIELD_FLOAT"
+				"tether_heal_amp"			"1.5"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"slow"						"-100"
+			}
+			"08"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"attackslow_tooltip"		"-100"
+			}
+			"09"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"stun_duration"				"0.75 1.25 1.75 2.25"
 			}
 		}
 	}
+
+	//=================================================================================================================
+	// Wisp: Spirits
+	//=================================================================================================================
+	"wisp_spirits"
+	{
+		"AbilityManaCost"				"120"
+	}	
+
+	//=================================================================================================================
+	// Wisp: Overcharge
+	//=================================================================================================================
+	"wisp_overcharge"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_attack_speed"		"45 60 75 90"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage_pct"			"-14 -16 -18 -20"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"drain_interval"			"0.2"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"drain_pct"					"0.06"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"drain_pct_tooltip"			"6.0"
+			}
+		}
+	}	
 
 	//=================================================================================================================
 	// Wisp: Relocate
 	//=================================================================================================================
 	"wisp_relocate"
 	{
-		"AbilityCooldown"				"30 25 20"
+		"AbilityCooldown"					"30 25 20"
 
 		"AbilitySpecial"
 		{
@@ -2856,6 +5347,8 @@
 		"AbilityCastRange"				"900"
 
 		"AbilityDamage"					"150"
+
+		"AbilityManaCost"				"75 80 85 90"
 
 		"AbilitySpecial"
 		{
@@ -3175,7 +5668,22 @@
 			"01"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"value"				"1.5"
+				"value"				"1.0"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Timbersaw: Reactive Armor regen duration reduction
+	//=================================================================================================================
+	"special_bonus_unique_timbersaw_2"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"value"				"4"
 			}
 		}
 	}
@@ -3221,6 +5729,21 @@
 			{
 				"var_type"				"FIELD_INTEGER"
 				"value"					"100"
+			}
+		}
+	}
+
+	//=================================================================================================================
+	// Wisp: bonus vision range
+	//=================================================================================================================
+	"special_bonus_vision_200"
+	{
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"value"					"600"
 			}
 		}
 	}
