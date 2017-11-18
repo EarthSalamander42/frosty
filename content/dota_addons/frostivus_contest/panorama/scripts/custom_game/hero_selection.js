@@ -22,53 +22,26 @@ var abilityPanels = [
 ]
 
 var hiddenAbilities = [ 
-	"imba_alchemist_mammonite",
-	"imba_phoenix_icarus_dive_stop",
-	"nyx_assassin_burrow",
-	"nyx_assassin_unburrow",
-	"imba_dazzle_ressurection",
-	"imba_jakiro_ice_breath",
-	"imba_empress_ambient_effects",
 	"generic_hidden",
-	"imba_troll_warlord_whirling_axes_melee",
-	"abyssal_underlord_cancel_dark_rift",
-	"earth_spirit_petrify",
-	"elder_titan_return_spirit",
+	"alchemist_unstable_concoction_throw",
 	"life_stealer_assimilate",
 	"life_stealer_control",
 	"life_stealer_consume",
 	"life_stealer_assimilate_eject",
-	"imba_phoenix_sun_ray_toggle_move",
-	"imba_phoenix_launch_fire_spirit",
-	"imba_phoenix_sun_ray_stop",
 	"shredder_chakram_2",
 	"shredder_return_chakram",
 	"shredder_return_chakram_2",
-	"imba_slardar_rain_cloud",
-	"treant_eyes_in_the_forest",
-	"tusk_walrus_kick",
-	"tusk_launch_snowball",
 	"wisp_tether_break",
-	"lone_druid_true_form_battle_cry",
-	"lone_druid_true_form_druid",
 	"monkey_king_primal_spring_early",
 	"monkey_king_untransform",
 	"morphling_morph_replicate",
 	"morphling_morph",
-	"naga_siren_song_of_the_siren_cancel",
-	"pangolier_gyroshell_stop",
-	"ancient_apparition_ice_blast_release",
-	"invoker_cold_snap",
-	"invoker_tornado",
-	"invoker_ghost_walk",
-	"keeper_of_the_light_illuminate_end",
-	"keeper_of_the_light_spirit_form_illuminate",
-	"keeper_of_the_light_spirit_form_illuminate_end",
+	"troll_warlord_whirling_axes_melee",
 	"ogre_magi_unrefined_fireblast",
+	"rubick_hidden_1",
 	"rubick_telekinesis_land",
 	"rubick_hidden1",
 	"rubick_hidden2",
-	"zuus_cloud",
 ]
 
 /* Event Handlers
@@ -440,10 +413,6 @@ function RepickHero() {
 /* Random a hero, called when a player clicks the random hero button */
 function SelectRandomHero() {
 	GameEvents.SendCustomGameEventToServer("hero_randomed", {});
-}
-
-function SelectRandomImbaHero() {
-	GameEvents.SendCustomGameEventToServer("hero_imba_randomed", {});
 }
 
 /* Enter the game by removing the picking screen, called when the player

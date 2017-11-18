@@ -255,7 +255,7 @@ function Chat:OnSay(args)
 
 	local arguments = {
 		hero = player,
-		color = TEAM_COLORS[player:GetPlayerID()],
+--		color = TEAM_COLORS[player:GetPlayerID()],
 		player = id,
 		message = args.message,
 		team = args.team,
@@ -339,13 +339,14 @@ function ReconnectPlayer(player_id)
 	end
 end
 
-function UpdateBossBar(boss)
+function UpdateBossBar(boss, team)
 	CustomNetTables:SetTableValue("game_options", "boss", {
 		level = boss:GetLevel(),
 		HP = boss:GetHealth(),
 		HP_alt = boss:GetHealthPercent(),
 		maxHP = boss:GetMaxHealth(),
 		label = boss:GetUnitName(),
-		short_label = string.gsub(boss:GetUnitName(), "npc_frostivus_boss_", "")
+		short_label = string.gsub(boss:GetUnitName(), "npc_frostivus_boss_", ""),
+		team_contest = team
 	})
 end

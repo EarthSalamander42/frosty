@@ -23,8 +23,7 @@ function Phase(args)
 
 	if (args.Phase == 1)
 	{
-		$("#Frostivus").style.visibility = "visible";
-		$("#Frostivus2").style.visibility = "visible";
+		$("#FrostivusHUD_alt").style.visibility = "visible";
 	}
 	if (args.Phase == 2)
 	{
@@ -32,7 +31,6 @@ function Phase(args)
 	}
 	else if (args.Phase == 3)
 	{
-		$("#Frostivus2").style.visibility = "collapse";
 		$("#BossHP").style.visibility = "visible";
 	}
 }
@@ -70,6 +68,7 @@ function ChooseAltar(number) {
 function OnPlayerReconnect( data ) {
 	$.Msg("Frostivus: Player has reconnected!")
 	$.Msg("Phase: " + data.Phase)
+	$("#FrostivusHUD_alt").style.visibility = "visible";
 }
 
 function UpdateBossBar(args) {
@@ -82,20 +81,21 @@ function UpdateBossBar(args) {
 		var BossLvl = BossTable.level;
 		var BossLabel = BossTable.label;
 		var BossShortLabel = BossTable.short_label;
+		var TeamContest = BossTable.team_contest;
 
-		$("#BossProgressBar").value = BossHP_percent / 100;
-		$("#BossHealth").text = BossHP + "/" + BossMaxHP;
+		$("#BossProgressBar" + TeamContest).value = BossHP_percent / 100;
+		$("#BossHealth" + TeamContest).text = BossHP + "/" + BossMaxHP;
 
 		if (update_boss_level == false)
 		{
 			if (BossShortLabel == "venomancer") {
-				$("#BossProgressBar_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
+				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
 			} else if (BossShortLabel == "zuus") {
-				$("#BossProgressBar_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #326114 ) )';
+				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #326114 ) )';
 			}
-			$("#BossLevel").text = $.Localize("boss_level") + BossLvl
-			$("#BossLabel").text = $.Localize(BossLabel)
-			$("#BossIcon").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_'+ BossShortLabel +'.png")';
+			$("#BossLevel" + TeamContest).text = $.Localize("boss_level") + BossLvl
+			$("#BossLabel" + TeamContest).text = $.Localize(BossLabel)
+			$("#BossIcon" + TeamContest).style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_'+ BossShortLabel +'.png")';
 			update_boss_level = true
 		}
 	}
@@ -104,13 +104,13 @@ CustomNetTables.SubscribeNetTableListener("game_options", UpdateBossBar)
 
 function ShowBossBar(args)
 {
-	$("#BossHP").style.visibility = "visible";
+	$("#BossHP" + args.TeamContest).style.visibility = "visible";
 }
 
 function HideBossBar(args)
 {
-	$("#BossHP").style.visibility = "collapse";
-	$("#BossLevel").text = "";
+	$("#BossHP" + args.TeamContest).style.visibility = "collapse";
+	$("#BossLevel" + args.TeamContest).text = "";
 	update_boss_level = false
 }
 
@@ -127,17 +127,48 @@ function UpdateAltar(args)
 		}
 		$("#AltarButton" + args.altar).AddClass("dire");
 	}
+	$("#AltarState" + args.altar).style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_' + args.team + '.png")';
 	$.Msg("Added a new altar: " + args.altar + " for team: " + args.team)
+
+	var localTeam = Players.GetTeam(Players.GetLocalPlayer())
+	if (localTeam == 2) {
+		var radiantPlayers = Game.GetPlayerIDsOnTeam( DOTATeam_t.DOTA_TEAM_GOODGUYS );
+		$.Each( radiantPlayers, function( player ) {
+			if ($("#AltarButton" + args.altar).BHasClass("selected") && $("#AltarButton" + args.altar).BHasClass("dire")) {
+				$("#AltarButton" + args.altar).RemoveClass("selected")
+				$("#AltarButton1").AddClass("selected");
+			}
+			GameEvents.SendCustomGameEventToServer("spawn_point", {"player": Players.GetLocalPlayer(), "altar": 1});
+		});
+	} else if (localTeam == 3) {
+		var direPlayers = Game.GetPlayerIDsOnTeam( DOTATeam_t.DOTA_TEAM_BADGUYS );
+		$.Each( direPlayers, function( player ) {
+			if ($("#AltarButton" + args.altar).BHasClass("selected") && $("#AltarButton" + args.altar).BHasClass("radiant")) {
+				$("#AltarButton" + args.altar).RemoveClass("selected")
+				$("#AltarButton7").AddClass("selected");
+			}
+			GameEvents.SendCustomGameEventToServer("spawn_point", {"player": Players.GetLocalPlayer(), "altar": 7});
+		});
+	}
+}
+
+function CastBar(args)
+{
+	//TODO: Finish this, add the caller in lua, create .CastBarAbility class in css
+	var Ability = $.CreatePanel("Panel", $("#BossCastBar" + args.TeamContest + "_" + args.ability), $("#BossCastBar" + args.TeamContest));
+	Hero_Panel.AddClass("CastBarAbility")
 }
 
 (function()
 {
 	$("#AltarButton1").AddClass("radiant");
+	$("#AltarState1").style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_2.png")';
 	$("#AltarButton7").AddClass("dire");
+	$("#AltarState7").style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_3.png")';
 
 	GameEvents.Subscribe("countdown", UpdateTimer);
 	GameEvents.Subscribe("frostivus_phase", Phase);
-	GameEvents.Subscribe("diretide_player_reconnected", OnPlayerReconnect);
+	GameEvents.Subscribe("frostivus_player_reconnected", OnPlayerReconnect);
 	GameEvents.Subscribe("show_boss_hp", ShowBossBar);
 	GameEvents.Subscribe("hide_boss_hp", HideBossBar);
 	GameEvents.Subscribe("update_altar", UpdateAltar);

@@ -136,7 +136,7 @@ function boss_thinker_venomancer:OnIntervalThink()
 		local power_stacks = boss:FindModifierByName("modifier_frostivus_boss"):GetStackCount()
 
 		-- Sends boss health information to fighting team's clients
-		UpdateBossBar(boss)
+		UpdateBossBar(boss, self.team)
 		CustomGameEventManager:Send_ServerToTeam(self.team, "OnAltarContestThink", {boss_name = self.boss_name, health = boss:GetHealth(), max_health = boss:GetMaxHealth()})
 
 		-- Think

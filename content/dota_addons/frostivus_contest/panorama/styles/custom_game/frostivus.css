@@ -1,13 +1,30 @@
-.Frostivus
+.FrostivusHUD
 {
 	width: 100%;
 	height: 100%;
 	z-index: -10;
 }
 
+#FrostivusHUD_alt
+{
+	margin-top: 8%;
+	width: fit-children;
+	height: fit-children;
+	horizontal-align: center;
+	visibility: collapse;
+}
+
+#FrostivusPanel {
+}
+
+#FrostivusPanelTimer {
+	align: center top;
+}
+
 #FrostivusAltarRespawn
 {
-	margin-bottom: 23%;
+	margin-left: 16.5%;
+	margin-bottom: 1%;
 	vertical-align: bottom;
 	flow-children: up;
 }
@@ -78,56 +95,16 @@
 	background-color: red;
 }
 
-/* SCORE PANEL */
-
-#FrostivusScorePanel
-{
-	margin-top: 67%;
-	horizontal-align: center;
-	flow-children: down;
-}
-
-#Frostivus
-{
-	width: fit-children;
-	height: fit-children;
-	flow-children: down;
-	horizontal-align: center;
-	visibility: collapse;
-}
-
-#Frostivus2
-{
-	width: fit-children;
-	height: fit-children;
-	flow-children: right;
-	horizontal-align: center;
-	visibility: collapse;
-}
-
-#ScorePanel
-{
-	flow-children: down;
-	width: fit-children;
-	height: fit-children;
-}
-
 #Timer,
-#Timer_alt
 {
+	width: 100%;
+	margin-top: 15%;
+
 	font-size: 20px;
 	font-weight: bolder;
 	color: #ffffff;
 	text-shadow: 2px 2px 2px #7b612b;
 	text-align: center;
-	width: 100%;
-	text-overflow: clip;
-}
-
-#Timer_alt
-{
-	margin-right: 6%;
-	text-align: right;
 	text-overflow: clip;
 }
 
@@ -200,63 +177,70 @@
 	width: 95px;
 }
 
-#BossHP
+#BossHP2,
+#BossHP3
 {
 	width: 750px;
-	height: 64px;
+	margin-top: 15%;
+	height: fit-children;
 	visibility: collapse;
 }
 
-#BossProgressBar
+#BossProgressBar2,
+#BossProgressBar3
 {
 	width: 90%;
 	height: 24px;
 	border-radius: 1px;
 	border: 0px;
 	background-color: black;
-	vertical-align: middle;
 	horizontal-align: right;
 	box-shadow: fill #000 -3px -3px 6px 6px;	
 }
 
-#BossProgressBar_Left
+#BossProgressBar2_Left,
+#BossProgressBar3_Left
 {
 	box-shadow: inset #000 1px 1px 3px 3px;	
 	border-radius: 2px;
 }
 
-#BossProgressBar_Right
+#BossProgressBar2_Right,
+#BossProgressBar3_Right
 {
 	background-color: gradient( linear, 0% 0%, 100% 0%, from( #222222FF ), to( black ) );
 }
 
-#BossProgressBarContainer
+#BossProgressBarContainer2,
+#BossProgressBarContainer3
 {
 	width: 100%;
 	height: 40px;
+	margin-top: 20%;
 	margin-right: 6%;
-	vertical-align: bottom;
 }
 
-#BossIcon
+#BossIcon2,
+#BossIcon3
 {
 	width: 48px;
 	height: 48px;
-	margin-left: 5%;	
+	margin-left: 5%;
 	background-repeat: no-repeat;
 	background-position: 50% 0%;
 	background-size: 90% 90%;
 	z-index: 10;
 }
 
-#BossHealth
+#BossHealth2,
+#BossHealth3
 {
 	margin-left: 6%;
 }
 
-#BossLevel
+#BossLevel2,
+#BossLevel3
 {
-	margin-left: 6%;
 	horizontal-align: left;
 	color: white;
 	font-weight: bold;
@@ -268,209 +252,24 @@
 	letter-spacing: 2px;
 	text-overflow: clip;
 
-	text-align: center;
 	text-shadow: 1px 1px 2px 3.0 #000000;
 	font-size: 18px;
 }
 
-#BossLevel_alt
+#BossLabel2,
+#BossLabel3
 {
-	margin-top: 5%;
-	margin-left: 2%;
 	horizontal-align: left;
-	color: white;
-	font-weight: bold;
-	text-align: center;
-	text-shadow: 1px 1px 2px 2.0 #00000011;
-
-	font-family: Radiance,FZKai-Z03,TH Sarabun New,YDYGO 540;
-	font-size: 14px;
-	letter-spacing: 2px;
-	text-overflow: clip;
-
-	text-align: center;
-	text-shadow: 1px 1px 2px 3.0 #000000;
-	font-size: 18px;
+	margin-left: -3%;
 }
 
-#RadiantProgressBarPanel {
-	width: 200px;
-	height: 46px;
-	color: #00FF00;
-	horizontal-align: center;
-	vertical-align: center;
-	border: 2px solid #000000;
-	border-radius: 10px;
-}
-
-#RadiantProgressBarPanel ProgressBar
+#BossInfo2,
+#BossInfo3
 {
 	width: 100%;
-	height: 100%;
-	background-color: black;
 }
 
-#RadiantProgressBar {
-	visibility: visible;
-}
-
-#RadiantTakenProgressBar {
-	visibility: collapse;
-}
-
-#RadiantProgressBarPanel ProgressBar#RadiantProgressBar .ProgressBarLeft
-{
-	background-color: gradient(linear, 0% 0%, 70% 0%, from(#006000), to(#00E000));
-}
-
-#RadiantProgressBarPanel ProgressBar#RadiantTakenProgressBar .ProgressBarLeft
-{
-	background-color: gradient(linear, 0% 0%, 70% 0%, from(#600000), to(#E00000));
-}
-
-#DireProgressBarPanel {
-	width: 200px;
-	height: 46px;
-	color: #00FF00;
-	horizontal-align: center;
-	vertical-align: center;
-	border: 2px solid #000000;
-	border-radius: 10px;
-}
-
-#DireProgressBarPanel ProgressBar
-{
-	width: 100%;
-	height: 100%;
-	background-color: black;
-}
-
-#DireProgressBar {
-	visibility: visible;
-}
-
-#DireTakenProgressBar {
-	visibility: collapse;
-}
-
-#DireProgressBarPanel ProgressBar#DireProgressBar .ProgressBarLeft
-{
-	background-color: gradient(linear, 0% 0%, 70% 0%, from(#600000), to(#E00000));
-}
-
-#DireProgressBarPanel ProgressBar#DireTakenProgressBar .ProgressBarLeft
-{
-	background-color: gradient(linear, 0% 0%, 70% 0%, from(#006000), to(#00E000));
-}
-
-/* HALL OF FAME */
-
-#HallOfFame
-{
-	width: 800px;
-	height: fit-children;
-	border-radius: 25px;
-	background-color: #000000da;
-	align: center center;
-	flow-children: down;
-	visibility: collapse;
-}
-
-#InfoContent
-{
-	width: 100%;
-	height: 200px;
-}
-
-#PlayerContent
-{
+#BossCastBar2 {
 	width: 100%;
 	height: fit-children;
-	flow-children: right;
-}
-
-#RadiantPlayers
-{
-	width: 50%;
-	height: fit-children;
-	background-color: green;
-	flow-children: down;
-}
-
-#DirePlayers
-{
-	width: 50%;
-	height: fit-children;
-	background-color: red;
-	flow-children: down;
-}
-
-.TeamTitle {
-	width: 100%;
-	height: 40px;
-	text-align: center;
-	font-size: 24px;
-	font-weight: bolder;
-	color:#fff;
-}
-
-#ButtonContent
-{
-	flow-children: right;
-	width: 800px;
-	height: 90px;
-	horizontal-align: center;
-}
-
-#FeedButton,
-#CloseButton
-{
-	width: 40%;
-	margin-top: 60%;
-	margin-left: 5%;
-	margin-right: 5%;
-	background-color: #000000da;
-	border: 2px solid #4d5051;
-	border-radius: 5px;
-}
-
-#FeedButton:hover
-{
-	border: 2px solid orange;
-}
-
-#CloseButton:hover
-{
-	border: 2px solid white;
-}
-
-#FeedButton Label,
-#CloseButton Label
-{
-	align: center center;
-	color: #6f6f6f;
-	text-transform: uppercase;
-	text-align: center center;
-	font-size: 16px;
-}
-
-#FeedButton:hover Label,
-#CloseButton:hover Label
-{
-	color: white;
-}
-
-.Diretide
-{
-	width: 100%;
-	height: 100%;
-	z-index: -10;
-}
-
-#DiretidePanel
-{
-	margin-top: 8%;
-	horizontal-align: center;
-	flow-children: down;
-	z-index: -1000;
 }

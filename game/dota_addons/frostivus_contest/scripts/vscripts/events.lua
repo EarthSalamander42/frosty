@@ -148,12 +148,12 @@ local npc = EntIndexToHScript(keys.entindex)
 
 			if not npc.first_spawn then
 				npc.first_spawn = true
-				print("Hero ply ID:", npc:GetPlayerOwnerID())
+				-- Disabled boss respawning since they are tagged as heroes
 				if npc:GetPlayerOwnerID() == -1 then
-					print("Boss detected:", npc:GetUnitName())
 					npc:SetRespawnsDisabled(true)
 				end
 			end
+			npc:AddNewModifier(npc, nil, "modifier_river", {})
 			FrostivusAltarRespawn(npc)
 		end
 	end

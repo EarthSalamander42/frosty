@@ -56,7 +56,8 @@ function modifier_frostivus_boss:CheckState()
 	{
 		[MODIFIER_STATE_NO_HEALTH_BAR] = true,
 		[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
-		[MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true
+		[MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
+		[MODIFIER_STATE_NOT_ON_MINIMAP] = true
 	}
 	return state
 end
