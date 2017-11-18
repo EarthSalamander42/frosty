@@ -6,8 +6,27 @@ PHASE_TIME = 481 -- 481
 if IsInToolsMode() then PHASE_TIME = 481 end -- 481
 
 function Frostivus()
-	EmitGlobalSound("announcer_diretide_2012_announcer_welcome_05")
-	EmitGlobalSound("DireTideGameStart.DireSide")
+	for player_id = 0, 20 do
+		if PlayerResource:GetPlayer(player_id) then
+			if PlayerResource:GetTeam(player_id) == DOTA_TEAM_GOODGUYS then
+				--sounds[1] = "greevil_eventstart_Stinger" -- Sound when grabbing a greeviling
+				--sounds[1] = "greevil_receive_present_Stinger" -- high-pitch alert
+				--sounds[2] = "greevil_loot_spawn_Stinger" -- Final boss start
+				--sounds[5] = "greevil_loot_death_Stinger" -- Game end
+				--sounds[2] = "Frostivus.PointScored.Team" -- team score
+				--sounds[3] = "Frostivus.PointScored.Enemy" -- enemy score
+				--sounds[6] = "Conquest.Stinger.GameBegin" -- Lich fight start music
+				--sounds[1] = "Conquest.Stinger.HulkCreep.Generic" -- " oooOOOOOOhhhh"
+				--sounds[1] = "DOTAMusic_Stinger.003" -- item unboxing
+				--sounds[2] = "DOTAMusic_Stinger.004" -- mystery music
+				--sounds[3] = "DOTAMusic_Stinger.005" -- fight decision
+				--"Tutorial.Quest.complete_01" -- quest complete
+				EmitSoundOnClient("FrostivusGameStart.RadiantSide", PlayerResource:GetPlayer(player_id))
+			elseif PlayerResource:GetTeam(player_id) == DOTA_TEAM_BADGUYS then
+				EmitSoundOnClient("FrostivusGameStart.DireSide", PlayerResource:GetPlayer(player_id))
+			end
+		end
+	end
 	PHASE = 1
 	nCOUNTDOWNTIMER = PHASE_TIME -- 481 / 8 Min
 	CustomNetTables:SetTableValue("game_options", "radiant", {score = 50, cp_score = 20})
@@ -24,6 +43,15 @@ end
 function FrostivusPhase(PHASE)
 	print("Phase: ", PHASE)
 	CustomGameEventManager:Send_ServerToAllClients("frostivus_phase", {Phase = tostring(PHASE)})
+
+	-- Play phase change stinger
+	if PHASE > 1 then
+		for player_id = 0, 20 do
+			if PlayerResource:GetPlayer(player_id) then
+				EmitSoundOnClient("greevil_mega_spawn_Stinger", PlayerResource:GetPlayer(player_id))
+			end
+		end
+	end
 end
 
 function FrostivusCountdown(tick)

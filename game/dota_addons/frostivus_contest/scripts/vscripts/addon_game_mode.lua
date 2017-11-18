@@ -5,6 +5,7 @@ require('gamemode')
 require('frostivus')
 require('hero_selection')
 require('boss_scripts/boss_functions')
+require('boss_scripts/greevil_functions')
 
 function Precache(context)
 
@@ -29,6 +30,7 @@ function Precache(context)
 	PrecacheResource("particle_folder", "particles/arena_wall", context)
 	PrecacheResource("particle_folder", "particles/generic_particles", context)
 	PrecacheResource("soundfile", "soundevents/frostivus_soundevents.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/soundevents_conquest.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_rattletrap.vsndevts", context)
 
 	-- Zeus boss

@@ -21,6 +21,13 @@ function LockArena(altar, team, attacker)
 	altar_handle.arena_fence_pfx = ParticleManager:CreateParticle("particles/arena_wall/arena_lock.vpcf", PATTACH_WORLDORIGIN, nil)
 	ParticleManager:SetParticleControl(altar_handle.arena_fence_pfx, 0, altar_loc)
 
+	-- Team-exclusive sound
+	for player_id = 0, 20 do
+		if PlayerResource:GetPlayer(player_id) and PlayerResource:GetTeam(player_id) == team then
+			EmitSoundOnClient("greevil_camp_respawn_Stinger", PlayerResource:GetPlayer(player_id))
+		end
+	end
+
 	-- Apply altar controller modifier to altar entity
 	local bounties = GetAltarBountyValue(altar_handle, altar)
 	altar_handle:AddNewModifier(nil, nil, "modifier_altar_active", {team = team, gold_bounty = bounties[1], exp_bounty = bounties[2]})
@@ -88,6 +95,14 @@ function UnlockArena(altar, victory, team, aura_ability)
 				CustomGameEventManager:Send_ServerToAllClients("update_altar", {altar = i, team = team})
 				altar_handle:SetTeam(team)
 			end
+		end
+
+		-- Paint relevant altar tower with the team's color
+		local tower_handle = Entities:FindByName(nil, altar.."_tower")
+		if team == DOTA_TEAM_GOODGUYS then
+			tower_handle:SetRenderColor(0, 255, 60)
+		elseif team == DOTA_TEAM_BADGUYS then
+			tower_handle:SetRenderColor(255, 0, 60)
 		end
 	end
 
