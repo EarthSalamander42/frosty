@@ -145,7 +145,7 @@ function boss_thinker_zeus:OnIntervalThink()
 		end
 
 		if self.boss_timer > 4 and not self.events[2] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 425, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
 			self.events[2] = true
 		end
 
@@ -171,7 +171,7 @@ function boss_thinker_zeus:OnIntervalThink()
 		end
 
 		if self.boss_timer > 13 and not self.events[5] then
-			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(100 + 10 * power_stacks, 200), 80)
+			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80)
 			self.events[5] = true
 		end
 
@@ -199,7 +199,7 @@ function boss_thinker_zeus:OnIntervalThink()
 
 		-- Arc + Thor
 		if self.boss_timer > 24 and not self.events[8] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 425, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
 			self.events[8] = true
 		end
 
@@ -252,13 +252,13 @@ function boss_thinker_zeus:OnIntervalThink()
 		end
 
 		if self.boss_timer > 37 and not self.events[14] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 425, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
 			self.events[14] = true
 		end
 
 		-- Wrath to clear static
 		if self.boss_timer > 40 and not self.events[15] then
-			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(100 + 10 * power_stacks, 200), 80)
+			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80)
 			self.events[15] = true
 		end
 
@@ -291,7 +291,7 @@ function boss_thinker_zeus:OnIntervalThink()
 
 		-- Arc + Thor
 		if self.boss_timer > 52 and not self.events[19] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 425, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
 			self.events[19] = true
 		end
 
@@ -345,7 +345,7 @@ function boss_thinker_zeus:OnIntervalThink()
 		end
 
 		if self.boss_timer > 64 and not self.events[25] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 425, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
 			self.events[25] = true
 		end
 
@@ -366,12 +366,12 @@ function boss_thinker_zeus:OnIntervalThink()
 		end
 
 		if self.boss_timer > 69 and not self.events[27] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 425, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
 			self.events[27] = true
 		end
 
 		if self.boss_timer > 72 and not self.events[28] then
-			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(100 + 10 * power_stacks, 200), 80)
+			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80)
 			self.events[28] = true
 		end
 
@@ -385,7 +385,7 @@ function boss_thinker_zeus:OnIntervalThink()
 		end
 
 		if self.boss_timer > 78 and not self.events[30] then
-			self:ArcLightning(altar_loc, altar_entity, 2.5, math.max(1.1 - power_stacks * 0.05, 0.6), 425, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 2.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
 			self.events[30] = true
 		end
 
@@ -697,9 +697,13 @@ end
 LinkLuaModifier("modifier_frostivus_zeus_positive_charge", "boss_scripts/boss_thinker_zeus.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_zeus_positive_charge = modifier_frostivus_zeus_positive_charge or class({})
 
-function modifier_frostivus_zeus_positive_charge:IsHidden() return true end
+function modifier_frostivus_zeus_positive_charge:IsHidden() return false end
 function modifier_frostivus_zeus_positive_charge:IsPurgable() return false end
 function modifier_frostivus_zeus_positive_charge:IsDebuff() return false end
+
+function modifier_frostivus_zeus_positive_charge:GetTexture()
+	return "custom/positive_charge"
+end
 
 function modifier_frostivus_zeus_positive_charge:OnCreated(keys)
 	if IsServer() then
@@ -804,9 +808,13 @@ end
 LinkLuaModifier("modifier_frostivus_zeus_negative_charge", "boss_scripts/boss_thinker_zeus.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_zeus_negative_charge = modifier_frostivus_zeus_negative_charge or class({})
 
-function modifier_frostivus_zeus_negative_charge:IsHidden() return true end
+function modifier_frostivus_zeus_negative_charge:IsHidden() return false end
 function modifier_frostivus_zeus_negative_charge:IsPurgable() return false end
 function modifier_frostivus_zeus_negative_charge:IsDebuff() return false end
+
+function modifier_frostivus_zeus_negative_charge:GetTexture()
+	return "custom/negative_charge"
+end
 
 function modifier_frostivus_zeus_negative_charge:OnCreated(keys)
 	if IsServer() then

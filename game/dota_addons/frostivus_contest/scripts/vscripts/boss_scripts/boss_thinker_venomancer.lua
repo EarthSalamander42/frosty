@@ -516,6 +516,7 @@ function boss_thinker_venomancer:SpawnScourgeWard(center_point, altar_handle, de
 
 			-- Spawn ward
 			local scourge_ward = CreateUnitByName("npc_frostivus_scourge_ward", ward_position, true, boss, boss, DOTA_TEAM_NEUTRALS)
+			scourge_ward:AddNewModifier(nil, nil, "modifier_frostivus_boss_add", {})
 
 			-- Adjust ward health
 			scourge_ward:SetBaseMaxHealth(ward_health)
@@ -659,6 +660,7 @@ function boss_thinker_venomancer:SpawnVileWard(center_point, altar_handle, delay
 
 			-- Spawn ward
 			local vile_ward = CreateUnitByName("npc_frostivus_vile_ward", ward_position, true, boss, boss, DOTA_TEAM_NEUTRALS)
+			vile_ward:AddNewModifier(nil, nil, "modifier_frostivus_boss_add", {})
 
 			-- Adjust ward health
 			vile_ward:SetBaseMaxHealth(ward_health)
@@ -1253,6 +1255,7 @@ function boss_thinker_venomancer:SpawnPlagueWard(center_point, altar_handle, inn
 
 		-- Spawn ward
 		local plague_ward = CreateUnitByName("npc_frostivus_plague_ward", ward_position, true, boss, boss, DOTA_TEAM_NEUTRALS)
+		plague_ward:AddNewModifier(nil, nil, "modifier_frostivus_boss_add", {})
 
 		-- Adjust ward health
 		plague_ward:SetBaseMaxHealth(ward_health)

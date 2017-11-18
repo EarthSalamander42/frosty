@@ -298,14 +298,8 @@ function SpawnZeus(altar)
 	boss:SetForwardVector(Vector(0, -1, 0))
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "zeus", altar_handle = altar})
 
-	-- Cosmetics
+	-- Abilities
 	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
-	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/zeus/zeus_hair_arcana.vmdl"})
-	boss.head:FollowEntity(boss, true)
-	boss.hands = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/zeus/zeus_bracers.vmdl"})
-	boss.hands:FollowEntity(boss, true)
-	boss.pants = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/zeus/zeus_belt.vmdl"})
-	boss.pants:FollowEntity(boss, true)
 
 	return boss
 end
@@ -316,20 +310,12 @@ function SpawnVenomancer(altar)
 	boss:SetForwardVector(Vector(0, -1, 0))
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "venomancer", altar_handle = altar})
 
-	-- Cosmetics
+	-- Abilities
 	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_venomous_gale"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_poison_nova"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_unwilling_host"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_green_death"):SetLevel(1)
-	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_head/poison_touch_head.vmdl"})
-	boss.head:FollowEntity(boss, true)
-	boss.shoulder = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_shoulder/poison_touch_shoulder.vmdl"})
-	boss.shoulder:FollowEntity(boss, true)
-	boss.arms = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/venomancer_hydra_switch_color_arms/venomancer_hydra_switch_color_arms.vmdl"})
-	boss.arms:FollowEntity(boss, true)
-	boss.tail = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_tail/poison_touch_tail.vmdl"})
-	boss.tail:FollowEntity(boss, true)
 
 	return boss
 end
