@@ -24,14 +24,8 @@ function Phase(args)
 	if (args.Phase == 1)
 	{
 		$("#FrostivusHUD_alt").style.visibility = "visible";
-	}
-	if (args.Phase == 2)
-	{
-		$('#ScorePanel').MoveChildBefore($('#Timer'), $('#Boss'));
-	}
-	else if (args.Phase == 3)
-	{
-		$("#BossHP").style.visibility = "visible";
+//	} else if (args.Phase == 2) {
+//		$('#ScorePanel').MoveChildBefore($('#Timer'), $('#Boss'));
 	}
 }
 
@@ -90,8 +84,10 @@ function UpdateBossBar(args) {
 		{
 			if (BossShortLabel == "venomancer") {
 				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
+			} else if (BossShortLabel == "treant") {
+				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
 			} else if (BossShortLabel == "zuus") {
-				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #326114 ) )';
+				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #66a3ff ) )';
 			}
 			$("#BossLevel" + TeamContest).text = $.Localize("boss_level") + BossLvl
 			$("#BossLabel" + TeamContest).text = $.Localize(BossLabel)

@@ -272,7 +272,7 @@ end
 function Chat:PlayerRandomed(id, hero, teamLocal, name)
 	local hero = PlayerResource:GetPlayer(id)
 	local shared = {
-		color = TEAM_COLORS[hero:GetPlayerID()],
+--		color = TEAM_COLORS[hero:GetPlayerID()],
 		player = id,
 --		IsFiretoad = player:IsFireToad()
 	}
