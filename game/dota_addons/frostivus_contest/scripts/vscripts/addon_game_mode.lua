@@ -48,7 +48,14 @@ function Precache(context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_viper.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_venomancer.vsndevts", context)
 
+	-- Treant boss
+	PrecacheResource("particle_folder", "particles/boss_treant/", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_treant/", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_furion.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_treant.vsndevts", context)
+
 	-- Models can also be precached by folder or individually
+	PrecacheResource("model", "models/props_winter/present.vmdl", context)
 	PrecacheResource("model_folder", "models/development", context)
 	PrecacheResource("model_folder", "models/creeps", context)
 	PrecacheResource("model_folder", "models/props_gameplay", context)

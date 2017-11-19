@@ -12,6 +12,7 @@ BOSS_SPAWN_POINT_TABLE.zeus = "altar_2"
 BOSS_SPAWN_POINT_TABLE.venomancer = "altar_3"
 BOSS_SPAWN_POINT_TABLE.lich = "altar_4"
 BOSS_SPAWN_POINT_TABLE.treant = "altar_5"
+BOSS_SPAWN_POINT_TABLE.nevermore = "altar_5"
 
 -------------------------------------------------------------------------------------------------
 -- Barebones basics
