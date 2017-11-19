@@ -43,6 +43,30 @@ function GameMode:OnFirstPlayerLoaded()
 		BadCamera = Entities:FindByName(nil, "altar_7")
 	end
 
+	-- Altar particle attach points
+	local nature_particle_points = Entities:FindAllByName("nature_rock_particle")
+	local fire_particle_points = Entities:FindAllByName("fire_rock_particle")
+	local lightning_particle_points = Entities:FindAllByName("lightning_rock_particle")
+
+	-- Draw altar particles
+	for _, particle_point in pairs(nature_particle_points) do
+		local nature_pfx = ParticleManager:CreateParticle("particles/generic_particles/ambient_nature_altar.vpcf", PATTACH_WORLDORIGIN, nil)
+		ParticleManager:SetParticleControl(nature_pfx, 0, particle_point:GetAbsOrigin())
+		ParticleManager:ReleaseParticleIndex(nature_pfx)
+	end
+
+	for _, particle_point in pairs(fire_particle_points) do
+		local fire_pfx = ParticleManager:CreateParticle("particles/generic_particles/ambient_fire_altar.vpcf", PATTACH_WORLDORIGIN, nil)
+		ParticleManager:SetParticleControl(fire_pfx, 0, particle_point:GetAbsOrigin())
+		ParticleManager:ReleaseParticleIndex(fire_pfx)
+	end
+
+	for _, particle_point in pairs(lightning_particle_points) do
+		local lightning_pfx = ParticleManager:CreateParticle("particles/generic_particles/ambient_lightning_altar.vpcf", PATTACH_WORLDORIGIN, nil)
+		ParticleManager:SetParticleControl(lightning_pfx, 0, particle_point:GetAbsOrigin())
+		ParticleManager:ReleaseParticleIndex(lightning_pfx)
+	end
+
 --	local developer_statues = {
 --		"npc_dota_developer_cookies",
 --		"npc_dota_developer_firetoad",

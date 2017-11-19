@@ -38,6 +38,7 @@ function Frostivus()
 	-- Spawn bosses
 	SpawnZeus(BOSS_SPAWN_POINT_TABLE.zeus)
 	SpawnVenomancer(BOSS_SPAWN_POINT_TABLE.venomancer)
+	SpawnTreant(BOSS_SPAWN_POINT_TABLE.treant)
 end
 
 function FrostivusPhase(PHASE)
@@ -169,8 +170,16 @@ function FrostivusAltarRespawn(hero)
 		end
 	end
 
-	local altar = Entities:FindByName(nil, "altar_"..hero.altar)
+	-- Base spawn
+	if hero.altar == "1" or hero.altar == "7" then
+		local altar = Entities:FindByName(nil, "altar_"..hero.altar)
+		local respawn_position = altar:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
+		FindClearSpaceForUnit(hero, respawn_position, true)
 
-	local respawn_position = altar:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
-	FindClearSpaceForUnit(hero, respawn_position, true)
+	-- Altar (obelisk) spawn
+	else
+		local altar = Entities:FindByName(nil, "altar_"..hero.altar.."_tower")
+		local respawn_position = altar:GetAbsOrigin() + Vector(1, 1, 0):Normalized() * 200
+		FindClearSpaceForUnit(hero, respawn_position, true)
+	end
 end

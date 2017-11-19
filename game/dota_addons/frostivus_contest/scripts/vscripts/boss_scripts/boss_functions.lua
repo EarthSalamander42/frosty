@@ -7,6 +7,7 @@
 LinkLuaModifier("capture_start_trigger", "boss_scripts/capture_start_trigger.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("boss_thinker_zeus", "boss_scripts/boss_thinker_zeus.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("boss_thinker_venomancer", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("boss_thinker_treant", "boss_scripts/boss_thinker_treant.lua", LUA_MODIFIER_MOTION_NONE )
 
 ---------------------
 -- Arena lockdown
@@ -301,6 +302,14 @@ function SpawnZeus(altar)
 	-- Abilities
 	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 
+	-- Cosmetics
+	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/zeus/zeus_hair_arcana.vmdl"})
+	boss.head:FollowEntity(boss, true)
+	boss.hands = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/zeus/zeus_bracers.vmdl"})
+	boss.hands:FollowEntity(boss, true)
+	boss.pants = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/zeus/zeus_belt.vmdl"})
+	boss.pants:FollowEntity(boss, true)
+
 	return boss
 end
 
@@ -316,6 +325,42 @@ function SpawnVenomancer(altar)
 	boss:FindAbilityByName("frostivus_boss_poison_nova"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_unwilling_host"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_green_death"):SetLevel(1)
+
+	-- Cosmetics
+	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_head/poison_touch_head.vmdl"})
+	boss.head:FollowEntity(boss, true)
+	boss.shoulder = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_shoulder/poison_touch_shoulder.vmdl"})
+	boss.shoulder:FollowEntity(boss, true)
+	boss.arms = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/venomancer_hydra_switch_color_arms/venomancer_hydra_switch_color_arms.vmdl"})
+	boss.arms:FollowEntity(boss, true)
+	boss.tail = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_tail/poison_touch_tail.vmdl"})
+	boss.tail:FollowEntity(boss, true)
+
+	return boss
+end
+
+function SpawnTreant(altar)
+	local altar_loc = Entities:FindByName(nil, altar):GetAbsOrigin()
+	local boss = CreateUnitByName("npc_frostivus_boss_treant", altar_loc, true, nil, nil, DOTA_TEAM_NEUTRALS)
+	boss:SetForwardVector(Vector(0, -1, 0))
+	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "treant", altar_handle = altar})
+
+	-- Abilities
+	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
+	--boss:FindAbilityByName(""):SetLevel(1)
+	--boss:FindAbilityByName(""):SetLevel(1)
+	--boss:FindAbilityByName(""):SetLevel(1)
+	--boss:FindAbilityByName(""):SetLevel(1)
+
+	-- Cosmetics
+	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/treant/ancient_seal_protector_set_head/ancient_seal_protector_set_head.vmdl"})
+	boss.head:FollowEntity(boss, true)
+	boss.shoulders = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/treant/lord_of_ancient_treant_shoulder/lord_of_ancient_treant_shoulder.vmdl"})
+	boss.shoulders:FollowEntity(boss, true)
+	boss.arms = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/treant/ancient_seal_protector_set_arms/ancient_seal_protector_set_arms.vmdl"})
+	boss.arms:FollowEntity(boss, true)
+	boss.feet = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/treant/ancient_seal_protector_set_legs/ancient_seal_protector_set_legs.vmdl"})
+	boss.feet:FollowEntity(boss, true)
 
 	return boss
 end

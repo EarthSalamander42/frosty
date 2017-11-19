@@ -808,7 +808,7 @@
 			"03"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"agi_bonus"					"10 14 18 22"
+				"agi_bonus"					"8 12 16 20"
 			}
 			"04"
 			{

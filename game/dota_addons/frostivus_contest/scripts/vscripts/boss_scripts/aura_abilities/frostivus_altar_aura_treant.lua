@@ -58,13 +58,13 @@ function modifier_frostivus_altar_aura_treant_buff:DeclareFunctions()
 end
 
 function modifier_frostivus_altar_aura_treant_buff:GetModifierPhysicalArmorBonus()
-	return 4 + 1 * self:GetStackCount()
+	return 3 + 1 * self:GetStackCount()
 end
 
 function modifier_frostivus_altar_aura_treant_buff:GetModifierMagicalResistanceBonus()
-	return 16 + 4 * self:GetStackCount()
+	return 10 + 3 * self:GetStackCount()
 end
 
 function modifier_frostivus_altar_aura_treant_buff:GetModifierExtraHealthPercentage()
-	return 10 + 2 * self:GetStackCount()
+	return 0.1
 end
