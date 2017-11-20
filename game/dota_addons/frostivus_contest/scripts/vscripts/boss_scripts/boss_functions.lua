@@ -369,7 +369,7 @@ end
 function BossPhaseAbilityCast(team, ability_image, ability_name, delay)
 	local ability_cast_timer = 0.0
 	Timers:CreateTimer(function()
-		CustomGameEventManager:Send_ServerToTeam(team, "BossStartedCast", {ability_image = "zuus_lightning_bolt", ability_name = "boss_zeus_lightning_bolt", current_cast_time = ability_cast_timer, cast_time = delay})
+		CustomGameEventManager:Send_ServerToTeam(team, "BossStartedCast", {ability_image = ability_image, ability_name = ability_name, current_cast_time = ability_cast_timer, cast_time = delay})
 		if ability_cast_timer < delay then
 			ability_cast_timer = ability_cast_timer + 0.1
 			print(ability_cast_timer)
