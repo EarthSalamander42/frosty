@@ -735,9 +735,9 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"frostivus_boss_innate"
-		"Ability2"					""
-		"Ability3"					""
-		"Ability4"					""
+		"Ability2"					"frostivus_boss_leech_seed"
+		"Ability3"					"frostivus_boss_living_armor"
+		"Ability4"					"frostivus_boss_overgrowth"
 		"Ability5"					""
 
 		// Armor

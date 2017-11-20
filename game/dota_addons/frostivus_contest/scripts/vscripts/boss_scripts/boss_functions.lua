@@ -70,6 +70,7 @@ function UnlockArena(altar, victory, team, aura_ability)
 		hero:RemoveModifierByName("modifier_frostivus_venomancer_unwilling_host")
 		hero:RemoveModifierByName("modifier_frostivus_venomancer_virulent_plague")
 		hero:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
+		hero:RemoveModifierByName("modifier_frostivus_leech_seed_debuff")
 	end
 
 	-- Adjust altar aura if necessary
@@ -347,9 +348,9 @@ function SpawnTreant(altar)
 
 	-- Abilities
 	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
-	--boss:FindAbilityByName(""):SetLevel(1)
-	--boss:FindAbilityByName(""):SetLevel(1)
-	--boss:FindAbilityByName(""):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_leech_seed"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_living_armor"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_overgrowth"):SetLevel(1)
 	--boss:FindAbilityByName(""):SetLevel(1)
 
 	-- Cosmetics

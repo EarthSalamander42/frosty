@@ -251,6 +251,48 @@
 	}
 
 	//=================================================================================================================
+	// Treant: Leech Seed
+	//=================================================================================================================
+	"frostivus_boss_leech_seed"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"treant_leech_seed"
+		"ScriptFile"					"boss_scripts/boss_abilities/leech_seed.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Treant: Living Armor
+	//=================================================================================================================
+	"frostivus_boss_living_armor"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"treant_living_armor"
+		"ScriptFile"					"boss_scripts/boss_abilities/living_armor.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Treant: Overgrowth
+	//=================================================================================================================
+	"frostivus_boss_overgrowth"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"treant_overgrowth"
+		"ScriptFile"					"boss_scripts/boss_abilities/overgrowth.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
 	// Abaddon's Mist Coil
 	//=================================================================================================================
 	"custom_abaddon_death_coil"

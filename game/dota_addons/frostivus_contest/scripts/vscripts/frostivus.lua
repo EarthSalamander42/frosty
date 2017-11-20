@@ -139,6 +139,7 @@ function FrostivusHeroKilled(killer, hero)
 				end
 
 				-- Reset boss status & position
+				boss:Purge(true, true, false, true, true)
 				boss:Heal(999999, nil)
 				boss:SetAbsOrigin(altar_handle:GetAbsOrigin() + Vector(0, 300, 0))
 				boss:SetForwardVector(Vector(0, 1, 0))

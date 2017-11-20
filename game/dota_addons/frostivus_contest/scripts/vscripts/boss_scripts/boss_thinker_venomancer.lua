@@ -346,6 +346,9 @@ function boss_thinker_venomancer:VenomousGale(center_point, altar_handle, delay,
 		local warning_pfx = ParticleManager:CreateParticle("particles/boss_veno/veno_gale_warning.vpcf", PATTACH_OVERHEAD_FOLLOW, target)
 		ParticleManager:SetParticleControl(warning_pfx, 0, target:GetAbsOrigin())
 
+		-- Play warning sound
+		target:EmitSound("Frostivus.AbilityWarning")
+
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(move_position)
 		local target_loc
@@ -1076,13 +1079,15 @@ function boss_thinker_venomancer:Parasite(center_point, altar_handle, delay, amo
 		-- Send cast bar event
 		BossPhaseAbilityCast(self.team, "windrunner_windrun", "boss_veno_parasite", delay)
 
-		-- Draw warning particles
+		-- Play warning particles and sounds
 		local warning_pfx = ParticleManager:CreateParticle("particles/boss_veno/veno_parasite_warning.vpcf", PATTACH_OVERHEAD_FOLLOW, targets[1])
 		ParticleManager:SetParticleControl(warning_pfx, 0, targets[1]:GetAbsOrigin())
+		targets[1]:EmitSound("Frostivus.AbilityWarning")
 		local warning_pfx_2 = false
 		if targets[2] then
 			warning_pfx_2 = ParticleManager:CreateParticle("particles/boss_veno/veno_parasite_warning_b.vpcf", PATTACH_OVERHEAD_FOLLOW, targets[2])
 			ParticleManager:SetParticleControl(warning_pfx_2, 0, targets[2]:GetAbsOrigin())
+			targets[2]:EmitSound("Frostivus.AbilityWarning")
 		end
 
 		-- Animate cast
