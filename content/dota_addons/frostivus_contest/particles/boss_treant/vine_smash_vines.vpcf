@@ -58,7 +58,7 @@
 			m_flParticlesPerOrbit = 8.0
 			m_bEvenDistribution = true
 			m_flThickness = 15.0
-			m_flInitialRadius = 85.0
+			m_flInitialRadius = 75.0
 		},
 		{
 			_class = "C_INIT_RandomRadius"
@@ -111,7 +111,7 @@
 	m_Children = 
 	[
 		{
-			m_ChildRef = resource:"particles/units/heroes/hero_treant/treant_overgrowth_vines_child.vpcf"
+			m_ChildRef = resource:"particles/boss_treant/vine_smash_vines_child.vpcf"
 		},
 		{
 			m_ChildRef = resource:"particles/units/heroes/hero_treant/treant_overgrowth_vine_glows_corerope.vpcf"

@@ -503,7 +503,7 @@ function boss_thinker_zeus:ArcLightning(center_point, altar_handle, cast_delay, 
 	local chain_target = false
 
 	-- Send cast bar event
-	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_zeus_arc_lightning", cast_time = delay})
+	CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_zeus_arc_lightning", cast_time = cast_delay})
 
 	-- Find nearest target hero to attack
 	local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), boss_position, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)

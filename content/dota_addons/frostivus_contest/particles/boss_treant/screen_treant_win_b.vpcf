@@ -6,8 +6,8 @@
 	m_BoundingBoxMin = [ -16384.0, -16384.0, -16384.0 ]
 	m_BoundingBoxMax = [ 16384.0, 16384.0, 16384.0 ]
 	m_flCullRadius = -1.0
-	m_flConstantRadius = 25.0
-	m_ConstantColor = [ 139, 69, 19, 150 ]
+	m_flConstantRadius = 35.0
+	m_ConstantColor = [ 139, 69, 19, 255 ]
 	m_bShouldSort = false
 	m_bScreenSpaceEffect = true
 	m_Renderers = 
@@ -72,8 +72,8 @@
 		},
 		{
 			_class = "C_OP_ColorInterpolateRandom"
-			m_ColorFadeMin = [ 160, 82, 45, 85 ]
-			m_ColorFadeMax = [ 0, 100, 0, 85 ]
+			m_ColorFadeMin = [ 160, 82, 45, 255 ]
+			m_ColorFadeMax = [ 0, 100, 0, 255 ]
 		},
 	]
 	m_Initializers = 
