@@ -12,35 +12,22 @@ end
 
 function HeroSelection:HeroListPreLoad()
 	-- Retrieve heroes info
-	NPC_HEROES = LoadKeyValues("scripts/npc/npc_heroes.txt")
 	NPC_HEROES_CUSTOM = LoadKeyValues("scripts/npc/npc_heroes_custom.txt")
 
-	HeroSelection.strength_heroes = {}
-	HeroSelection.agility_heroes = {}
-	HeroSelection.intellect_heroes = {}
+	HeroSelection.tank_heroes = {}
+	HeroSelection.dps_heroes = {}
+	HeroSelection.support_heroes = {}
 
 	HeroSelection.vanilla_heroes = {}
 --	HeroSelection.new_heroes = {}
 	HeroSelection.random_heroes = {}
-	HeroSelection.disabled_heroes = {}
-	HeroSelection.heroes_custom = {}
 	HeroSelection.picked_heroes = {}
 
-	for hero, attributes in pairs(NPC_HEROES) do
-		if hero == "Version" or hero == "npc_dota_hero_base" or hero == "npc_dota_hero_target_dummy" then
-		else
-			table.insert(HeroSelection.vanilla_heroes, hero)
-			HeroSelection:AddVanillaHeroToList(hero)
-		end
-	end
-
 	for hero, attributes in pairs(NPC_HEROES_CUSTOM) do
-		hero = string.gsub(hero, "imba", "dota")
 		if string.find(hero, "npc_dota_hero_") then
 
-			if GetKeyValueByHeroName(hero, "IsDisabled") == 2 then
-				table.insert(HeroSelection.disabled_heroes, hero)
-			end
+			table.insert(HeroSelection.vanilla_heroes, hero)
+			HeroSelection:AddVanillaHeroToList(hero)
 
 			-- Add a specific label (not using it right now)
 --			if GetKeyValueByHeroName(hero, "IsNew") == 1 then
@@ -53,53 +40,52 @@ function HeroSelection:HeroListPreLoad()
 end
 
 function HeroSelection:AddVanillaHeroToList(hero_name)
-	if GetKeyValueByHeroName(hero_name, "AttributePrimary") == "DOTA_ATTRIBUTE_STRENGTH" then
-		table.insert(HeroSelection.strength_heroes, hero_name)
-	elseif GetKeyValueByHeroName(hero_name, "AttributePrimary") == "DOTA_ATTRIBUTE_AGILITY" then
-		table.insert(HeroSelection.agility_heroes, hero_name)
-	elseif GetKeyValueByHeroName(hero_name, "AttributePrimary") == "DOTA_ATTRIBUTE_INTELLECT" then
-		table.insert(HeroSelection.intellect_heroes, hero_name)
+	if GetKeyValueByHeroName(hero_name, "FrostivusType") == "DOTA_ATTRIBUTE_TANK" then
+		table.insert(HeroSelection.tank_heroes, hero_name)
+	elseif GetKeyValueByHeroName(hero_name, "FrostivusType") == "DOTA_ATTRIBUTE_DPS" then
+		table.insert(HeroSelection.dps_heroes, hero_name)
+	elseif GetKeyValueByHeroName(hero_name, "FrostivusType") == "DOTA_ATTRIBUTE_SUPPORT" then
+		table.insert(HeroSelection.support_heroes, hero_name)
 	end
 
 	a = {}
-	for k, n in pairs(HeroSelection.strength_heroes) do
+	for k, n in pairs(HeroSelection.tank_heroes) do
 		table.insert(a, n)
-		HeroSelection.strength_heroes = {}
+		HeroSelection.tank_heroes = {}
 	end
 	table.sort(a)
 	for i,n in ipairs(a) do
-		table.insert(HeroSelection.strength_heroes, n)
+		table.insert(HeroSelection.tank_heroes, n)
 	end
 
 	a = {}
-	for k, n in pairs(HeroSelection.agility_heroes) do
+	for k, n in pairs(HeroSelection.dps_heroes) do
 		table.insert(a, n)
-		HeroSelection.agility_heroes = {}
+		HeroSelection.dps_heroes = {}
 	end
 	table.sort(a)
 	for i,n in ipairs(a) do
-		table.insert(HeroSelection.agility_heroes, n)
+		table.insert(HeroSelection.dps_heroes, n)
 	end
 
 	a = {}
-	for k, n in pairs(HeroSelection.intellect_heroes) do
+	for k, n in pairs(HeroSelection.support_heroes) do
 		table.insert(a, n)
-		HeroSelection.intellect_heroes = {}
+		HeroSelection.support_heroes = {}
 	end
 	table.sort(a)
 	for i,n in ipairs(a) do
-		table.insert(HeroSelection.intellect_heroes, n)
+		table.insert(HeroSelection.support_heroes, n)
 	end
 end
 
 local only_once_alt = false
 function HeroSelection:HeroList()
 	CustomNetTables:SetTableValue("game_options", "hero_list", {
-		Strength = HeroSelection.strength_heroes,
-		Agility = HeroSelection.agility_heroes,
-		Intellect = HeroSelection.intellect_heroes,
+		Tank = HeroSelection.tank_heroes,
+		Dps = HeroSelection.dps_heroes,
+		Support = HeroSelection.support_heroes,
 --		New = HeroSelection.new_heroes,
-		Disabled = HeroSelection.disabled_heroes,
 		Picked = HeroSelection.picked_heroes
 	})
 
@@ -154,13 +140,7 @@ function HeroSelection:Start()
 	HeroSelection.listener_abilities_requested = CustomGameEventManager:RegisterListener("pick_abilities_requested", HeroSelection.PickAbilitiesRequested )
 
 	-- Play relevant pick lines
-	if IMBA_PICK_MODE_ALL_RANDOM or IMBA_PICK_MODE_ALL_RANDOM_SAME_HERO then
-		EmitGlobalSound("announcer_announcer_type_all_random")	
-	elseif IMBA_PICK_MODE_ARENA_MODE then
-		EmitGlobalSound("announcer_announcer_type_death_match")
-	else
-		EmitGlobalSound("announcer_announcer_type_all_pick")
-	end
+	EmitGlobalSound("announcer_announcer_type_all_pick")
 end
 
 -- Horribly implemented reconnection detection
@@ -206,17 +186,9 @@ end
 	-- Roll a random hero
 	local random_hero = HeroSelection.random_heroes[RandomInt(1, #HeroSelection.random_heroes)]
 
-	for _, picked_hero in pairs(HeroSelection.disabled_heroes) do
-		if random_hero == picked_hero then
-			print("Hero disabled, random again...")
-			HeroSelection:RandomHero({PlayerID = id})
-			break
-		end
-	end
-
 	for _, picked_hero in pairs(HeroSelection.picked_heroes) do
 		if random_hero == picked_hero then
-			print("Hero disabled, random again...")
+			print("Hero picked, random again...")
 			HeroSelection:RandomHero({PlayerID = id})
 			break
 		end

@@ -153,6 +153,14 @@ local npc = EntIndexToHScript(keys.entindex)
 					npc:SetRespawnsDisabled(true)
 				end
 			end
+
+			if not npc.altar then
+				if npc:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+					npc.altar = 1
+				else
+					npc.altar = 7
+				end
+			end
 			npc:AddNewModifier(npc, nil, "modifier_river", {})
 			FrostivusAltarRespawn(npc)
 		end

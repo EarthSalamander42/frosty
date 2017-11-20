@@ -98,10 +98,7 @@ function OnReceiveAbilities( data ) {
 
 /*  Create a hero panel based on the attribute 
 	also handles 3 additional panels for custom heroes */
-function CreateHeroPanel(hero_table, attribute, custom) {
-	if (custom == true) {
-		attribute = attribute + "_Custom"
-	}
+function CreateHeroPanel(hero_table, attribute) {
 	var i = 1;
 	var i_count = 1;
 	var class_option_count = 1;
@@ -158,18 +155,6 @@ function MakeNewHero(new_heroes) {
 	}
 }
 */
-function MakeDisabledHeroes(disabled_all) {
-	var h = 1;
-	for (h in disabled_all) {
-		if (disabled_all[h] != null) {
-			var hero_panel = $("#PickList").FindChildTraverse(disabled_all[h])
-			hero_panel.AddClass("taken")
-			var HeroLabel = $.CreatePanel("Label", $("#PickList").FindChildTraverse(disabled_all[h]), disabled_all[h] + "_label");
-			HeroLabel.AddClass("ClassCustomOptionLabel")
-			HeroLabel.text = $.Localize("disabled_hero");
-		}
-	}
-}
 
 function LoadPlayers() {
 	var radiantPlayers = Game.GetPlayerIDsOnTeam( DOTATeam_t.DOTA_TEAM_GOODGUYS );
@@ -201,18 +186,16 @@ function LoadPlayers() {
 
 function CreateHeroPick() {
 	var hero_list = CustomNetTables.GetTableValue("game_options", "hero_list");
-	var disabled_heroes = hero_list.Disabled
 //	var new_heroes = hero_list.New
-	var strength_heroes = hero_list.Strength;
-	var agility_heroes = hero_list.Agility;
-	var intellect_heroes = hero_list.Intellect;
+	var tank_heroes = hero_list.Tank;
+	var dps_heroes = hero_list.Dps;
+	var support_heroes = hero_list.Support;
 
-	CreateHeroPanel(strength_heroes, "STR", false)
-	CreateHeroPanel(agility_heroes, "AGI", false)
-	CreateHeroPanel(intellect_heroes, "INT", false)
+	CreateHeroPanel(tank_heroes, "TNK", false)
+	CreateHeroPanel(dps_heroes, "DPS", false)
+	CreateHeroPanel(support_heroes, "SUP", false)
 
 //	MakeNewHero(new_heroes)
-	MakeDisabledHeroes(disabled_heroes)
 }
 
 /* A player on the same team has picked a hero, tell the player's panel a hero was picked,

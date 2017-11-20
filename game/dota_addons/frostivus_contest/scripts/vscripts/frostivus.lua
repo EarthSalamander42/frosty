@@ -115,9 +115,6 @@ function FrostivusHeroKilled(killer, hero)
 		local losing_team = hero:GetTeam()
 		print("boss on altar "..altar_name.." defeated team "..losing_team)
 
-		-- Send the failure event to the relevant team
-		CustomGameEventManager:Send_ServerToTeam(losing_team, "AltarContestEnd", {win = false})
-
 		-- Unlock the arena
 		UnlockArena(altar_name, false, losing_team, nil)
 
@@ -161,26 +158,16 @@ function FrostivusHeroKilled(killer, hero)
 --	end
 end
 
--- TODO: make a panorama panel to choose at which altar to respawn
 function FrostivusAltarRespawn(hero)
-	if not hero.altar then
-		if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
-			hero.altar = "1"
-		else
-			hero.altar = "7"
-		end
-	end
-
 	-- Base spawn
-	if hero.altar == "1" or hero.altar == "7" then
-		local altar = Entities:FindByName(nil, "altar_"..hero.altar)
-		local respawn_position = altar:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
+	if hero.altar == 1 or hero.altar == 7 then
+		local building = Entities:FindByName(nil, "altar_"..hero.altar)
+		local respawn_position = building:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
 		FindClearSpaceForUnit(hero, respawn_position, true)
-
 	-- Altar (obelisk) spawn
 	else
-		local altar = Entities:FindByName(nil, "altar_"..hero.altar.."_tower")
-		local respawn_position = altar:GetAbsOrigin() + Vector(1, 1, 0):Normalized() * 200
+		local building = Entities:FindByName(nil, "altar_"..hero.altar.."_tower")
+		local respawn_position = building:GetAbsOrigin() + Vector(1, 1, 0):Normalized() * 200
 		FindClearSpaceForUnit(hero, respawn_position, true)
 	end
 end

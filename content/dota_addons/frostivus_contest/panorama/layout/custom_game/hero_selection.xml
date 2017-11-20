@@ -48,7 +48,7 @@
 
 				<Panel id="PickList">
 					<!-- Strength Heroes -->
-					<Panel id="HeroListSTR" class="PickTypePanel">
+					<Panel id="HeroListTNK" class="PickTypePanel">
 						<Panel class="PickListTitlePanel">
 <!--							<Image id="SeparatorImage" src="file://{images}/hud/pip_str.png"/> -->
 							<Label id="PickListTextSTR" class="PickListText" text="#hero_list_title_strength" />
@@ -58,7 +58,7 @@
 					</Panel>
 
 					<!-- Agi Heroes -->
-					<Panel id="HeroListAGI" class="PickTypePanel">
+					<Panel id="HeroListDPS" class="PickTypePanel">
 						<Panel class="PickListTitlePanel">
 <!--							<Image id="SeparatorImage" src="file://{images}/hud/pip_agi.png"/> -->>
 							<Label id="PickListTextAGI" class="PickListText" text="#hero_list_title_agility" />
@@ -68,7 +68,7 @@
 					</Panel>
 
 					<!-- Int Heroes -->
-					<Panel id="HeroListINT" class="PickTypePanel">
+					<Panel id="HeroListSUP" class="PickTypePanel">
 						<Panel class="PickListTitlePanel">
 <!--							<Image id="SeparatorImage" src="file://{images}/hud/pip_int.png"/> -->
 							<Label id="PickListTextINT" class="PickListText" text="#hero_list_title_intellect" />

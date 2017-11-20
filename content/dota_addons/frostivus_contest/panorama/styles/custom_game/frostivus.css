@@ -8,16 +8,20 @@
 #FrostivusHUD_alt
 {
 	margin-top: 8%;
-	width: fit-children;
-	height: fit-children;
+	width: 40%;
+	height: 25%;
 	horizontal-align: center;
 	visibility: collapse;
 }
 
 #FrostivusPanel {
+	width: 100%;
+	height: 100%;
 }
 
 #FrostivusPanelTimer {
+	width: 100%;
+	height: 20%;
 	align: center top;
 }
 
@@ -181,6 +185,7 @@
 #BossHP3
 {
 	width: 750px;
+	height: 40%;
 	margin-top: 15%;
 	height: fit-children;
 	visibility: collapse;
@@ -259,8 +264,7 @@
 #BossLabel2,
 #BossLabel3
 {
-	horizontal-align: left;
-	margin-left: -3%;
+	margin-left: 3%;
 }
 
 #BossInfo2,
@@ -271,5 +275,53 @@
 
 #BossCastBar2 {
 	width: 100%;
-	height: fit-children;
+	height: 40%;
+	margin-top: 70%;
+	margin-left: 10%;
+}
+
+#BossCastAbility2 {
+	width: 50px;
+	height: 50px;
+	z-index: 20;
+}
+
+#BossCastTimeLabel2 {
+	z-index: 20;
+	horizontal-align: center;
+}
+
+#BossCastAbilityName2 {
+	margin-left: 10%;
+	horizontal-align: left;
+	z-index: 20;
+}
+
+#BossCastProgressBar2 {
+	width: 50%;
+	height: 50px;
+	margin-left: 7%;
+	horizontal-align: left;
+}
+
+#BossCastProgressBar2_Left,
+#BossCastProgressBar3_Left
+{
+	box-shadow: inset #000 1px 1px 3px 3px;	
+	border-radius: 2px;
+}
+
+#BossCastProgressBar2_Right,
+#BossCastProgressBar3_Right
+{
+	background-color: gradient( linear, 0% 0%, 100% 0%, from( #222222FF ), to( black ) );
+}
+
+#BossCastProgressBarContainer2,
+#BossCastProgressBarContainer3
+{
+	width: 100%;
+	height: 40px;
+	margin-top: 20%;
+	margin-right: 6%;
 }

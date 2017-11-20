@@ -266,14 +266,33 @@
 }
 
 .ClassNormalOption {
-	width: 108px;
-	height: 63px;
+	width: 105px;
+	height: 58px;
 	margin: 1px 0px 1px 0px;
 	horizontal-align: left;
 	wash-color: #7090B060;
 	background-size: 100% 100%;
-	pre-transform-scale2d: 0.95;
-	border-radius: 10px;
+	pre-transform-scale2d: 0.9;
+	border: 1px solid #656565;
+}
+
+.AspectRatio16x10 .ClassNormalOption
+{
+	margin: 2px 0px 2px 1px;
+	width: 94px;
+	height: 57px;
+	horizontal-align: left;
+	background-position: center;
+	wash-color: #7090B060;
+}
+
+.AspectRatio4x3 .ClassNormalOption, {
+	margin: 1px 0px 1px 1px;
+	width: 82px;
+	height: 48px;
+	horizontal-align: left;
+	background-position: center;
+	wash-color: #7090B060;
 }
 
 .ClassNormalOptionLabel
@@ -293,29 +312,6 @@
 	animation-direction: alternate;
 	animation-iteration-count: infinite;
 	background-color: dodgerblue;
-}
-
-.AspectRatio16x10 .ClassNormalOption
-{
-	margin: 2px 0px 2px 1px;
-	width: 125px;
-	height: 77px;
-	horizontal-align: left;
-	background-position: center;
-	wash-color: #7090B060;
-}
-
-.AspectRatio4x3 .ClassNormalOption, {
-	margin: 1px 0px 1px 1px;
-	width: 112px;
-	height: 80px;
-	horizontal-align: left;
-	background-position: center;
-	wash-color: #7090B060;
-}
-
-.ClassNormalOption {
-	border: 1px solid #656565;
 }
 
 .selected {
@@ -611,6 +607,10 @@
 	flow-children: right;
 }
 
+.AspectRatio4x3 #PickedHeroPanel {
+	height: 25%;
+}
+
 #PickedHeroAbilitiesPanel {
 	width: 80%;
 	height: 35%;
@@ -676,10 +676,9 @@
 	}
 }
 
-#RandomButtonContainer,
-#RandomImbaButtonContainer
+#RandomButtonContainer
 {
-	width: 50%;
+	width: 100%;
 	height: fit-children;
 	flow-children: down;
 	align: center center;
@@ -693,23 +692,13 @@
 	saturation: 1.0;
 }
 
-#RandomImbaButtonContainer:hover {
-	saturation: 1.0;
-}
-
-#RandomPickBtn,
-#RandomImbaPickBtn
+#RandomPickBtn
 {
 	width: 100%;
 	height: 72px;
 	horizontal-align: center;
 	vertical-align: middle;
 	background-image: url("s2r://panorama/images/custom_game/random_button_png.vtex");
-}
-
-#RandomImbaPickBtn
-{
-	background-image: url("s2r://panorama/images/custom_game/random_button_imba_png.vtex");
 }
 
 #RandomPickBtn:hover,
@@ -821,67 +810,6 @@
 	color: white;
 }
 
-#HeroListSTR {
+#HeroListTNK {
 	margin-left: 10%;
-}
-
-#VanillaToCustom {
-	width: 10%;
-	height: 100%;
-}
-
-#PickingScreenSwap {
-	width: 200px; /* replace with 100% once there is enough custom heroes */
-	height: 500px; /* replace with 100% once there is enough custom heroes */
-
-	opacity: .5;
-	vertical-align: top;
-	flow-children: right;
-	transition-property: background-color;
-	transition-duration: .2s;
-
-	background-image: url("s2r://panorama/images/control_icons/icon_hero_next_arrow_png.vtex");
-	background-repeat: no-repeat;
-	background-size: 50px 46px;
-}
-
-#PickingScreenSwapLabel {
-	width: 100%;
-	height: 10%;
-	font-size: 20px;
-	font-family: "Radiance";
-	text-align: center;
-
-/*	text-overflow: shrink; */
-	text-transform: uppercase;
-	transition-property: position, opacity;
-	transition-duration: 0.2s;
-
-	vertical-align: middle;
-	white-space: normal;
-	width: 180px;
-	font-size: 18px;
-	color: #aabfbf;
-/*	tranform: scaleX(-1); */
-}
-
-#PickingScreenSwap:hover
-{
-	color: white;
-	opacity: .5;
-	//border: 1px solid #333333;
-	background-color: #111111;
-}
-
-#PickingScreenSwap:active
-{
-	//border: 1px solid #555555;
-	background-color: #666666;
-	sound: "ui_hero_select_slide";
-}
-
-#HeroListSTR_Custom,
-#HeroListAGI_Custom,
-#HeroListINT_Custom {
-	visibility: collapse;
 }

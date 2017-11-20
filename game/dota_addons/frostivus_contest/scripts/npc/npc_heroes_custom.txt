@@ -8,7 +8,6 @@
 		"override_hero"			"npc_dota_hero_abaddon"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"custom_abaddon_death_coil"
@@ -35,7 +34,6 @@
 		"override_hero"			"npc_dota_hero_alchemist"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"alchemist_acid_spray"
@@ -63,7 +61,6 @@
 		"override_hero"			"npc_dota_hero_antimage"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"antimage_mana_break"
@@ -90,7 +87,6 @@
 		"override_hero"			"npc_dota_hero_axe"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"axe_berserkers_call"
@@ -117,7 +113,6 @@
 		"override_hero"			"npc_dota_hero_bristleback"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"bristleback_viscous_nasal_goo"
@@ -144,7 +139,6 @@
 		"override_hero"			"npc_dota_hero_crystal_maiden"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"crystal_maiden_crystal_nova"
@@ -171,7 +165,6 @@
 		"override_hero"			"npc_dota_hero_dazzle"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"dazzle_poison_touch"
@@ -198,7 +191,6 @@
 		"override_hero"			"npc_dota_hero_drow_ranger"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"custom_drow_ranger_frost_arrows"
@@ -225,7 +217,6 @@
 		"override_hero"			"npc_dota_hero_ember_spirit"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"ember_spirit_searing_chains"
@@ -252,7 +243,6 @@
 		"override_hero"			"npc_dota_hero_gyrocopter"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"gyrocopter_rocket_barrage"
@@ -279,7 +269,6 @@
 		"override_hero"			"npc_dota_hero_juggernaut"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"juggernaut_blade_fury"
@@ -306,7 +295,6 @@
 		"override_hero"			"npc_dota_hero_legion_commander"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"legion_commander_overwhelming_odds"
@@ -333,7 +321,6 @@
 		"override_hero"			"npc_dota_hero_leshrac"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"leshrac_split_earth"
@@ -360,7 +347,6 @@
 		"override_hero"			"npc_dota_hero_life_stealer"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"life_stealer_rage"
@@ -390,7 +376,6 @@
 		"override_hero"			"npc_dota_hero_lina"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"lina_dragon_slave"
@@ -417,7 +402,6 @@
 		"override_hero"			"npc_dota_hero_luna"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"luna_lucent_beam"
@@ -444,7 +428,6 @@
 		"override_hero"			"npc_dota_hero_medusa"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"medusa_split_shot"
@@ -471,7 +454,6 @@
 		"override_hero"			"npc_dota_hero_monkey_king"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"monkey_king_boundless_strike"
@@ -500,7 +482,6 @@
 		"override_hero"			"npc_dota_hero_ogre_magi"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"ogre_magi_fireblast"
@@ -527,7 +508,6 @@
 		"override_hero"			"npc_dota_hero_omniknight"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"custom_omniknight_purification"
@@ -554,7 +534,6 @@
 		"override_hero"			"npc_dota_hero_oracle"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"oracle_fortunes_end"
@@ -581,7 +560,6 @@
 		"override_hero"			"npc_dota_hero_phantom_assassin"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"phantom_assassin_stifling_dagger"
@@ -608,7 +586,6 @@
 		"override_hero"			"npc_dota_hero_pugna"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"pugna_nether_blast"
@@ -635,7 +612,6 @@
 		"override_hero"			"npc_dota_hero_queenofpain"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"queenofpain_shadow_strike"
@@ -662,7 +638,6 @@
 		"override_hero"			"npc_dota_hero_rubick"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"rubick_telekinesis"
@@ -693,7 +668,6 @@
 		"override_hero"			"npc_dota_hero_nevermore"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"nevermore_shadowraze1"
@@ -720,7 +694,6 @@
 		"override_hero"			"npc_dota_hero_sniper"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"sniper_shrapnel"
@@ -747,7 +720,6 @@
 		"override_hero"			"npc_dota_hero_spectre"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"spectre_spectral_dagger"
@@ -774,7 +746,6 @@
 		"override_hero"			"npc_dota_hero_sven"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"sven_storm_bolt"
@@ -801,7 +772,6 @@
 		"override_hero"			"npc_dota_hero_templar_assassin"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"templar_assassin_refraction"
@@ -828,7 +798,6 @@
 		"override_hero"			"npc_dota_hero_tidehunter"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"tidehunter_gush"
@@ -855,7 +824,6 @@
 		"override_hero"			"npc_dota_hero_shredder"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_TANK"
 
 		"Ability1"				"shredder_whirling_death"
@@ -884,7 +852,6 @@
 		"override_hero"			"npc_dota_hero_troll_warlord"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"troll_warlord_berserkers_rage"
@@ -911,7 +878,6 @@
 		"override_hero"			"npc_dota_hero_ursa"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"ursa_earthshock"
@@ -938,7 +904,6 @@
 		"override_hero"			"npc_dota_hero_vengefulspirit"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"vengefulspirit_magic_missile"
@@ -965,7 +930,6 @@
 		"override_hero"			"npc_dota_hero_viper"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"viper_poison_attack"
@@ -992,7 +956,6 @@
 		"override_hero"			"npc_dota_hero_windrunner"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_DPS"
 
 		"Ability1"				"windrunner_shackleshot"
@@ -1019,7 +982,6 @@
 		"override_hero"			"npc_dota_hero_winter_wyvern"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"winter_wyvern_arctic_burn"
@@ -1046,7 +1008,6 @@
 		"override_hero"			"npc_dota_hero_wisp"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"wisp_tether"
@@ -1074,7 +1035,6 @@
 		"override_hero"			"npc_dota_hero_witch_doctor"
 
 		//Picking Screen
-		"AttributePrimary"		"DOTA_ATTRIBUTE_INTELLECT"
 		"FrostivusType"			"DOTA_ATTRIBUTE_SUPPORT"
 
 		"Ability1"				"witch_doctor_paralyzing_cask"

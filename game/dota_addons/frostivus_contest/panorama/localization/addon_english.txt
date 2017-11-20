@@ -18,9 +18,9 @@
 
 	//Picking Screen
 	"loading_pre_game"				"Loading heroes, please wait..."
-	"hero_list_title_strength"		"Strength"
-	"hero_list_title_agility"		"Agility"
-	"hero_list_title_intellect"		"Intelligence"
+	"hero_list_title_strength"		"Tank"
+	"hero_list_title_agility"		"DPS"
+	"hero_list_title_intellect"		"Support"
 	"hero_name_filler"				"Lock In"
 	"team_title_radiant"			"The Radiant"
 	"team_title_dire"				"The Dire"
@@ -42,7 +42,7 @@
 	"frostivus_altar_2"				"Lightning Altar"
 	"frostivus_altar_3"				"Venomous Altar"
 	"frostivus_altar_4"				"Frost Altar (boss soon)"
-	"frostivus_altar_5"				"Nature Altar (boss soon)"
+	"frostivus_altar_5"				"Nature Altar"
 	"frostivus_altar_6"				"Fire Altar (boss soon)"
 	"frostivus_altar_7"				"Dire Altar"
 
