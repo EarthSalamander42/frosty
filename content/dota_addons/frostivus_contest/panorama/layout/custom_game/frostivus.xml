@@ -83,7 +83,10 @@
 					</Panel>
 
 					<Panel id="BossCastBar2" hittest="false">
-
+						<DOTAAbilityImage id="BossCastAbility2" onmouseover="ShowAbilityTooltip(1)" onmouseout="HideAbilityTooltip()" abilityname="" />
+						<Label id="BossCastAbilityName2" class="HoldoutLabelSmall" hittest="false" text="Lightning Bolt"/>
+						<Label id="BossCastTimeLabel2" class="HoldoutLabelSmall" hittest="false" text="0.0/1.0"/>
+						<ProgressBar id="BossCastProgressBar2" hittest="false" value="1.0"/>
 					</Panel>
 				</Panel>
 				<Panel id="BossHP3" hittest="false">
@@ -96,6 +99,13 @@
 						<DOTAHeroImage id="BossIcon3" hittest="false"/>
 						<ProgressBar id="BossProgressBar3" hittest="false" value="1.0"/>
 						<Label id="BossHealth3" class="HoldoutLabelSmall" hittest="false" text=""/>
+					</Panel>
+
+					<Panel id="BossCastBar3" hittest="false">
+						<DOTAAbilityImage id="BossCastAbility3" onmouseover="ShowAbilityTooltip(1)" onmouseout="HideAbilityTooltip()" abilityname="" />
+						<Label id="BossCastAbilityName3" class="HoldoutLabelSmall" hittest="false" text="Lightning Bolt"/>
+						<Label id="BossCastTimeLabel3" class="HoldoutLabelSmall" hittest="false" text="0.0/1.0"/>
+						<ProgressBar id="BossCastProgressBar3" hittest="false" value="1.0"/>
 					</Panel>
 				</Panel>
 			</Panel>

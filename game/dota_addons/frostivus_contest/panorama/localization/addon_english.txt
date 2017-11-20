@@ -18,9 +18,9 @@
 
 	//Picking Screen
 	"loading_pre_game"				"Loading heroes, please wait..."
-	"hero_list_title_strength"		"Strength"
-	"hero_list_title_agility"		"Agility"
-	"hero_list_title_intellect"		"Intelligence"
+	"hero_list_title_strength"		"Tank"
+	"hero_list_title_agility"		"DPS"
+	"hero_list_title_intellect"		"Support"
 	"hero_name_filler"				"Lock In"
 	"team_title_radiant"			"The Radiant"
 	"team_title_dire"				"The Dire"

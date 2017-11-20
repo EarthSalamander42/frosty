@@ -63,9 +63,6 @@ local target = keys.unit
 			-- Notify the console that a boss fight (capture attempt) has ended with a successful kill
 			print(self.boss_name.." boss is dead, winning team is "..self.team)
 
-			-- Send the boss death event to all clients
-			CustomGameEventManager:Send_ServerToTeam(self.team, "AltarContestEnd", {win = true})
-
 			-- Play the capture particle & sound to the winning team
 			local target_loc = target:GetAbsOrigin()
 			for player_id = 0, 20 do
@@ -137,7 +134,6 @@ function boss_thinker_venomancer:OnIntervalThink()
 
 		-- Sends boss health information to fighting team's clients
 		UpdateBossBar(boss, self.team)
-		CustomGameEventManager:Send_ServerToTeam(self.team, "OnAltarContestThink", {boss_name = self.boss_name, health = boss:GetHealth(), max_health = boss:GetMaxHealth()})
 
 		-- Think
 		self.boss_timer = self.boss_timer + 0.1
@@ -344,7 +340,7 @@ function boss_thinker_venomancer:VenomousGale(center_point, altar_handle, delay,
 		end
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_venomous_gale", cast_time = delay})
+		BossPhaseAbilityCast(self.team, "venomancer_venomous_gale", "boss_veno_venomous_gale", delay)
 
 		-- Draw warning particle over the target's head
 		local warning_pfx = ParticleManager:CreateParticle("particles/boss_veno/veno_gale_warning.vpcf", PATTACH_OVERHEAD_FOLLOW, target)
@@ -499,7 +495,7 @@ function boss_thinker_venomancer:SpawnScourgeWard(center_point, altar_handle, de
 		local dot_damage = boss:GetAttackDamage() * damage * 0.01
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_scourge_ward", cast_time = delay})
+		BossPhaseAbilityCast(self.team, "venomancer_plague_ward", "boss_veno_scourge_ward", delay)
 
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(center_point + Vector(0, 300, 0))
@@ -643,7 +639,7 @@ function boss_thinker_venomancer:SpawnVileWard(center_point, altar_handle, delay
 		local dot_damage = boss:GetAttackDamage() * damage * 0.01
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_vile_ward", cast_time = delay})
+		BossPhaseAbilityCast(self.team, "greevil_miniboss_green_living_armor", "boss_veno_vile_ward", delay)
 
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(center_point + Vector(0, 300, 0))
@@ -773,7 +769,7 @@ function boss_thinker_venomancer:PoisonNova(center_point, altar_handle, delay, d
 		local dot_damage = boss:GetAttackDamage() * damage * 0.01
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_poison_nova", cast_time = delay})
+		BossPhaseAbilityCast(self.team, "venomancer_poison_nova", "boss_veno_poison_nova", delay)
 
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(center_point + Vector(0, 300, 0))
@@ -898,7 +894,7 @@ function boss_thinker_venomancer:UnwillingHost(center_point, altar_handle, delay
 		end
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_unwilling_host", cast_time = delay})
+		BossPhaseAbilityCast(self.team, "treant_eyes_in_the_forest", "boss_veno_unwilling_host", delay)
 
 		-- Animate cast
 		Timers:CreateTimer(delay - 0.3, function()
@@ -1078,7 +1074,7 @@ function boss_thinker_venomancer:Parasite(center_point, altar_handle, delay, amo
 		end
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_parasite", cast_time = delay})
+		BossPhaseAbilityCast(self.team, "windrunner_windrun", "boss_veno_parasite", delay)
 
 		-- Draw warning particles
 		local warning_pfx = ParticleManager:CreateParticle("particles/boss_veno/veno_parasite_warning.vpcf", PATTACH_OVERHEAD_FOLLOW, targets[1])
@@ -1145,8 +1141,6 @@ function modifier_frostivus_venomancer_parasite:CheckState()
 	return state
 end
 
-
-
 -- Green Death
 function boss_thinker_venomancer:GreenDeath(center_point, altar_handle, delay, damage, duration, angle, spawn_angle, spawn_frequency, projectile_speed, projectile_radius, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
@@ -1156,7 +1150,7 @@ function boss_thinker_venomancer:GreenDeath(center_point, altar_handle, delay, d
 		local impact_damage = boss:GetAttackDamage() * damage * 0.01
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_veno_green_death", cast_time = delay})
+		BossPhaseAbilityCast(self.team, "windrunner_focusfire", "boss_veno_green_death", delay)
 
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(center_point)

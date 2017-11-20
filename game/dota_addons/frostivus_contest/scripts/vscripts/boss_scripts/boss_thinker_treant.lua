@@ -63,9 +63,6 @@ local target = keys.unit
 			-- Notify the console that a boss fight (capture attempt) has ended with a successful kill
 			print(self.boss_name.." boss is dead, winning team is "..self.team)
 
-			-- Send the boss death event to all clients
-			CustomGameEventManager:Send_ServerToTeam(self.team, "AltarContestEnd", {win = true})
-
 			-- Play the capture particle & sound to the winning team
 			local target_loc = target:GetAbsOrigin()
 			for player_id = 0, 20 do
@@ -137,7 +134,6 @@ function boss_thinker_treant:OnIntervalThink()
 
 		-- Sends boss health information to fighting team's clients
 		UpdateBossBar(boss, self.team)
-		CustomGameEventManager:Send_ServerToTeam(self.team, "OnAltarContestThink", {boss_name = self.boss_name, health = boss:GetHealth(), max_health = boss:GetMaxHealth()})
 
 		-- Think
 		self.boss_timer = self.boss_timer + 0.1
@@ -321,9 +317,7 @@ function boss_thinker_treant:VineSmash(center_point, altar_handle, delay, target
 		end
 
 		-- Send cast bar event
-		if send_cast_bar then
-			CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_treant_vine_smash", cast_time = delay})
-		end
+		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_treant_vine_smash", cast_time = delay})
 
 		-- Draw warning particle on the targets' position
 		for _, target in pairs(targets) do

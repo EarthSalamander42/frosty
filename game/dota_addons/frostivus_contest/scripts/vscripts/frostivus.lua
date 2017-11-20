@@ -115,9 +115,6 @@ function FrostivusHeroKilled(killer, hero)
 		local losing_team = hero:GetTeam()
 		print("boss on altar "..altar_name.." defeated team "..losing_team)
 
-		-- Send the failure event to the relevant team
-		CustomGameEventManager:Send_ServerToTeam(losing_team, "AltarContestEnd", {win = false})
-
 		-- Unlock the arena
 		UnlockArena(altar_name, false, losing_team, nil)
 

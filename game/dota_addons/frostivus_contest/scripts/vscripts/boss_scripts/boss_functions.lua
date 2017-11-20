@@ -49,7 +49,7 @@ function LockArena(altar, team, attacker)
 	end
 
 	altar_handle.victory = false
-	CustomGameEventManager:Send_ServerToTeam(team, "show_boss_hp", {TeamContest = team})
+	CustomGameEventManager:Send_ServerToTeam(team, "show_boss_hp", {})
 end
 
 function UnlockArena(altar, victory, team, aura_ability)
@@ -57,7 +57,7 @@ function UnlockArena(altar, victory, team, aura_ability)
 	ParticleManager:DestroyParticle(altar_handle.arena_fence_pfx, true)
 	ParticleManager:ReleaseParticleIndex(altar_handle.arena_fence_pfx)
 
-	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {TeamContest = team})
+	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {})
 
 	-- Cleanse nearby hero debuffs
 	local nearby_heroes = FindUnitsInRadius(team, altar_handle:GetAbsOrigin(), nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
@@ -363,4 +363,19 @@ function SpawnTreant(altar)
 	boss.feet:FollowEntity(boss, true)
 
 	return boss
+end
+
+function BossPhaseAbilityCast(team, ability_image, ability_name, delay)
+	local ability_cast_timer = 0.0
+	Timers:CreateTimer(function()
+		CustomGameEventManager:Send_ServerToTeam(team, "BossStartedCast", {ability_image = "zuus_lightning_bolt", ability_name = "boss_zeus_lightning_bolt", current_cast_time = ability_cast_timer, cast_time = delay})
+		if ability_cast_timer < delay then
+			ability_cast_timer = ability_cast_timer + 0.1
+			print(ability_cast_timer)
+			return 0.1
+		elseif ability_cast_timer >= delay then
+			ability_cast_timer = 0.0
+			print("STOP THINKING FOR BOSS PHASE ABILITY")
+		end
+	end)
 end

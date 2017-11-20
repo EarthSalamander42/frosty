@@ -84,10 +84,13 @@ function UpdateBossBar(args) {
 		{
 			if (BossShortLabel == "venomancer") {
 				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
+				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
 			} else if (BossShortLabel == "treant") {
 				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
+				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
 			} else if (BossShortLabel == "zuus") {
 				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #66a3ff ) )';
+				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #66a3ff ) )';
 			}
 			$("#BossLevel" + TeamContest).text = $.Localize("boss_level") + BossLvl
 			$("#BossLabel" + TeamContest).text = $.Localize(BossLabel)
@@ -100,13 +103,15 @@ CustomNetTables.SubscribeNetTableListener("game_options", UpdateBossBar)
 
 function ShowBossBar(args)
 {
-	$("#BossHP" + args.TeamContest).style.visibility = "visible";
+	var playerInfo = Game.GetPlayerInfo(Players.GetLocalPlayer())
+	$("#BossHP" + playerInfo.player_team_id).style.visibility = "visible";
 }
 
 function HideBossBar(args)
 {
-	$("#BossHP" + args.TeamContest).style.visibility = "collapse";
-	$("#BossLevel" + args.TeamContest).text = "";
+	var playerInfo = Game.GetPlayerInfo(Players.GetLocalPlayer())
+	$("#BossHP" + playerInfo.player_team_id).style.visibility = "collapse";
+	$("#BossLevel" + playerInfo.player_team_id).text = "";
 	update_boss_level = false
 }
 
@@ -150,9 +155,13 @@ function UpdateAltar(args)
 
 function CastBar(args)
 {
-	//TODO: Finish this, add the caller in lua, create .CastBarAbility class in css
-	var Ability = $.CreatePanel("Panel", $("#BossCastBar" + args.TeamContest + "_" + args.ability), $("#BossCastBar" + args.TeamContest));
-	Hero_Panel.AddClass("CastBarAbility")
+	var playerInfo = Game.GetPlayerInfo(Players.GetLocalPlayer())
+	$("#BossCastAbility" + playerInfo.player_team_id).abilityname = args.ability_image;
+	$("#BossCastAbilityName" + playerInfo.player_team_id).text = $.Localize(args.ability_name);
+	$("#BossCastTimeLabel" + playerInfo.player_team_id).text = args.current_cast_time.toFixed(1) + "/" + args.cast_time.toFixed(1);
+	$("#BossCastProgressBar" + playerInfo.player_team_id).value = args.current_cast_time / args.cast_time;
+
+	$.Msg(args.ability_image)
 }
 
 (function()
@@ -168,4 +177,5 @@ function CastBar(args)
 	GameEvents.Subscribe("show_boss_hp", ShowBossBar);
 	GameEvents.Subscribe("hide_boss_hp", HideBossBar);
 	GameEvents.Subscribe("update_altar", UpdateAltar);
+	GameEvents.Subscribe("BossStartedCast", CastBar);
 })();
