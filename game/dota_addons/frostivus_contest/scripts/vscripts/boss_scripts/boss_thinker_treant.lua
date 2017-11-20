@@ -374,7 +374,9 @@ function boss_thinker_treant:VineSmash(center_point, altar_handle, delay, fixate
 		end
 
 		-- Send cast bar event
-		CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_treant_vine_smash", cast_time = delay})
+		if send_cast_bar then
+			BossPhaseAbilityCast(self.team, "treant_overgrowth", "boss_treant_vine_smash", delay)
+		end
 
 		-- Draw warning particle on the targets' position
 		for _, target in pairs(targets) do
@@ -502,7 +504,7 @@ function boss_thinker_treant:RingOfThorns(center_point, altar_handle, delay, rad
 
 		-- Send cast bar event
 		if send_cast_bar then
-			CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_treant_ring_of_thorns", cast_time = delay})
+			BossPhaseAbilityCast(self.team, "treant_overgrowth", "boss_treant_ring_of_thorns", delay)
 		end
 
 		-- Animate boss cast
@@ -612,7 +614,7 @@ function boss_thinker_treant:LeechSeed(center_point, altar_handle, delay, damage
 
 		-- Send cast bar event
 		if send_cast_bar then
-			CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_treant_leech_seed", cast_time = delay})
+			BossPhaseAbilityCast(self.team, "treant_leech_seed", "boss_treant_leech_seed", delay)
 		end
 
 		-- Animate boss cast
@@ -696,7 +698,7 @@ function boss_thinker_treant:RapidGrowth(center_point, altar_handle, delay, posi
 
 		-- Send cast bar event
 		if send_cast_bar then
-			CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_treant_rapid_growth", cast_time = delay})
+			BossPhaseAbilityCast(self.team, "treant_leech_seed", "boss_treant_rapid_growth", delay)
 		end
 
 		-- Animate boss cast
@@ -726,7 +728,7 @@ function boss_thinker_treant:EyesInTheForest(center_point, altar_handle, delay, 
 
 		-- Send cast bar event
 		if send_cast_bar then
-			CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_treant_eyes_in_the_forest", cast_time = delay})
+			BossPhaseAbilityCast(self.team, "treant_eyes_in_the_forest", "boss_treant_eyes_in_the_forest", delay)
 		end
 
 		-- Animate boss cast
@@ -768,7 +770,7 @@ function boss_thinker_treant:LivingArmor(center_point, altar_handle, delay, targ
 
 		-- Send cast bar event
 		if send_cast_bar then
-			CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_treant_living_armor", cast_time = delay})
+			BossPhaseAbilityCast(self.team, "treant_living_armor", "boss_treant_living_armor", delay)
 		end
 
 		-- If there's no valid target, do nothing
@@ -867,7 +869,7 @@ function boss_thinker_treant:Overgrowth(center_point, altar_handle, delay, radiu
 
 		-- Send cast bar event
 		if send_cast_bar then
-			CustomGameEventManager:Send_ServerToTeam(self.team, "BossStartedCast", {boss_name = self.boss_name, ability_name = "boss_treant_overgrowth", cast_time = delay})
+			BossPhaseAbilityCast(self.team, "treant_overgrowth", "boss_treant_overgrowth", delay)
 		end
 
 		-- Play warning sound
