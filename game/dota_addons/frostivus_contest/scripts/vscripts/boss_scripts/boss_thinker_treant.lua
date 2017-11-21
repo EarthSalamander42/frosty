@@ -28,8 +28,19 @@ function boss_thinker_treant:OnCreated( params )
 			self.altar_handle = params.altar_handle
 		end
 
+		-- Spawn Treant's little helper
+		self.tiny_entities = {}
+		self.tiny_entities = SpawnTiny()
+
 		-- Boss script constants
+		local altar_loc = Entities:FindByName(nil, self.altar_handle):GetAbsOrigin()
 		self.random_constants = {}
+		self.random_constants[1] = altar_loc + RandomVector(1):Normalized() * 850
+		self.random_constants[2] = altar_loc + RandomVector(1):Normalized() * 850
+		self.random_constants[3] = altar_loc + RandomVector(1):Normalized() * 850
+		self.random_constants[4] = altar_loc + RandomVector(1):Normalized() * 450
+		self.random_constants[5] = altar_loc + RandomVector(1):Normalized() * 850
+		self.random_constants[6] = altar_loc + RandomVector(1):Normalized() * 450
 
 		-- Start thinking
 		self.boss_timer = 0
@@ -92,6 +103,16 @@ local target = keys.unit
 				end)
 			end)
 
+			-- Spawn an extra greevil on Tiny's position
+			local tiny_greevil = SpawnGreevil(self.tiny_entities[1]:GetAbsOrigin(), 1, false, 50, 255, 50)
+			Timers:CreateTimer(3, function()
+				StartAnimation(tiny_greevil, {duration = 2.5, activity=ACT_DOTA_FLAIL, rate=1.5})
+				tiny_greevil:MoveToPosition(altar_loc + RandomVector(10):Normalized() * 900)
+				Timers:CreateTimer(2.5, function()
+					tiny_greevil:Kill(nil, tiny_greevil)
+				end)
+			end)
+
 			-- Respawn the boss and grant it its new capture detection modifier
 			local boss
 			Timers:CreateTimer(15, function()
@@ -103,7 +124,7 @@ local target = keys.unit
 			end)
 
 			-- Destroy any existing adds
-			local nearby_summons = FindUnitsInRadius(target:GetTeam(), target:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+			local nearby_summons = FindUnitsInRadius(target:GetTeam(), target:GetAbsOrigin(), nil, 2200, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 			for _,summon in pairs(nearby_summons) do
 				if not summon:HasModifier("modifier_frostivus_greevil") then
 					summon:Kill(nil, summon)
@@ -136,70 +157,275 @@ function boss_thinker_treant:OnIntervalThink()
 		-- Think
 		self.boss_timer = self.boss_timer + 0.1
 
-		-- Boss move script
+		-- Boss script
+		-- Skill demonstration
 		if self.boss_timer > 1 and not self.events[1] then
-			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:EyesInTheForest(altar_loc, altar_entity, 0.5, {altar_loc + RandomVector(10):Normalized() * 600}, math.min(4 + power_stacks * 0.2, 6), true)
+			boss:MoveToPosition(self.random_constants[1])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 1, 150, 125, true)
 			self.events[1] = true
 		end
 
-		if self.boss_timer > 2 and not self.events[2] then
-			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:EyesInTheForest(altar_loc, altar_entity, 0.5, {altar_loc + RandomVector(10):Normalized() * 600}, math.min(4 + power_stacks * 0.2, 6), true)
+		if self.boss_timer > 6 and not self.events[2] then
+			boss:MoveToPosition(self.random_constants[1])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, true)
 			self.events[2] = true
 		end
 
-		if self.boss_timer > 3 and not self.events[3] then
-			boss:MoveToPosition(altar_loc + RandomVector(10):Normalized() * 600)
-			self:Overgrowth(altar_loc, altar_entity, 2.5, 400, 50, 4.0, true)
+		if self.boss_timer > 11 and not self.events[3] then
+			boss:MoveToPosition(self.random_constants[1])
+			self:RockSmash(altar_loc, altar_entity, nil, 1, 2.5, 400, 175, true)
 			self.events[3] = true
 		end
 
-		-- Repeat cycle above
-		if self.boss_timer > 10 then
-			self.events[1] = false
-			self.events[2] = false
-			self.events[3] = false
-			self.events[4] = false
-			self.boss_timer = self.boss_timer - 10
-		end
-
-		-------------------------------------
-
-		if self.boss_timer > 80 and not self.events[1] then
-			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:RapidGrowth(altar_loc, altar_entity, 1.5, {altar_loc + RandomVector(10):Normalized() * RandomInt(300, 850)}, math.min(4 + power_stacks * 0.2, 6), true)
-			self.events[1] = true
-		end
-
-		if self.boss_timer > 80 and not self.events[1] then
-			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:EyesInTheForest(altar_loc, altar_entity, 1.5, {altar_loc + RandomVector(10):Normalized() * RandomInt(300, 400)}, math.min(5 + power_stacks * 0.2, 8), true)
-			self.events[1] = true
-		end
-
-		if self.boss_timer > 80 and not self.events[1] then
-			boss:MoveToPosition(altar_loc + RandomVector(1):Normalized() * 800)
-			self:VineSmash(altar_loc, altar_entity, 3.0, 1.5, 2, 150, 120, true)
-			self.events[1] = true
-		end
-
-		if self.boss_timer > 80 and not self.events[1] then
+		if self.boss_timer > 15 and not self.events[4] then
 			boss:MoveToPosition(altar_loc + RandomVector(1):Normalized() * 400)
-			self:RingOfThorns(altar_loc, altar_entity, 2.5, 450, 120, true)
-			self.events[1] = true
+			self:RingOfThorns(altar_loc, altar_entity, 3.0, 450, 125, true)
+			self.events[4] = true
 		end
 
-		if self.boss_timer > 80 and not self.events[1] then
+		-- Double tree hidden vine smash + ring of thorns
+		if self.boss_timer > 19 and not self.events[5] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:RapidGrowth(altar_loc, altar_entity, 2.0, {self.random_constants[2], RotatePosition(altar_loc, QAngle(0, 180, 0), self.random_constants[2])}, math.min(4 + power_stacks * 0.2, 6), true)
+			self.events[5] = true
+		end
+
+		if self.boss_timer > 22 and not self.events[6] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 1.5, true)
+			self.events[6] = true
+		end
+
+		if self.boss_timer > 25 and not self.events[7] then
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, true)
+			self.events[7] = true
+		end
+
+		if self.boss_timer > 29 and not self.events[8] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 1.5, true)
+			self.events[8] = true
+		end
+
+		if self.boss_timer > 32 and not self.events[9] then
+			self:RingOfThorns(altar_loc, altar_entity, 2.5, math.max(450 - 10 * power_stacks, 300), 125, true)
+			self.events[9] = true
+		end
+
+		if self.boss_timer > 35 and not self.events[10] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
 			self:LeechSeed(altar_loc, altar_entity, 1.5, 25, math.min(1 + power_stacks * 0.1, 2), true)
-			self.events[1] = true
+			self.events[10] = true
 		end
 
-		if self.boss_timer > 80 and not self.events[1] then
+		-- Overgrowth + Rock Smash
+		if self.boss_timer > 37 and not self.events[11] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:LivingArmor(altar_loc, altar_entity, 1.5, 1, math.min(5 + power_stacks, 15), true)
-			self.events[1] = true
+			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 4.0, true)
+			self.events[11] = true
+		end
+
+		if self.boss_timer > 41 and not self.events[12] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:RockSmash(altar_loc, altar_entity, nil, 2, 2.5, 450, 175, true)
+			self.events[12] = true
+		end
+
+		-- Double living armor tree hidden ring of thorns + overgrowth + double Vine Smash
+		if self.boss_timer > 45 and not self.events[13] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:RapidGrowth(altar_loc, altar_entity, 1.5, {RotatePosition(altar_loc, QAngle(0, 90, 0), self.random_constants[2]), RotatePosition(altar_loc, QAngle(0, 270, 0), self.random_constants[2])}, math.min(4 + power_stacks * 0.2, 6), true)
+			self.events[13] = true
+		end
+
+		if self.boss_timer > 47 and not self.events[14] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:LivingArmor(altar_loc, altar_entity, 2.0, 2, math.min(5 + power_stacks, 15), true)
+			self.events[14] = true
+		end
+
+		if self.boss_timer > 50 and not self.events[15] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 1.5, true)
+			self.events[15] = true
+		end
+
+		if self.boss_timer > 52 and not self.events[16] then
+			self:RingOfThorns(altar_loc, altar_entity, 2.5, math.max(450 - 10 * power_stacks, 300), 125, true)
+			self.events[16] = true
+		end
+
+		if self.boss_timer > 55 and not self.events[17] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 1.5, true)
+			self.events[17] = true
+		end
+
+		if self.boss_timer > 57 and not self.events[18] then
+			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 5.0, true)
+			self.events[18] = true
+		end
+
+		if self.boss_timer > 61 and not self.events[19] then
+			boss:MoveToPosition(self.random_constants[3])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, true)
+			self.events[19] = true
+		end
+
+		if self.boss_timer > 66 and not self.events[20] then
+			boss:MoveToPosition(self.random_constants[3])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 3, 150, 125, true)
+			self.events[20] = true
+		end
+
+		if self.boss_timer > 70 and not self.events[21] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:LeechSeed(altar_loc, altar_entity, 1.5, 25, math.min(1 + power_stacks * 0.1, 2), true)
+			self.events[21] = true
+		end
+
+		-- Treantling demonstration
+		if self.boss_timer > 72 and not self.events[22] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:EyesInTheForest(altar_loc, altar_entity, 2.0, {RotatePosition(altar_loc, QAngle(0, 180, 0), self.random_constants[4])}, math.min(6 + power_stacks * 0.2, 8), true)
+			self.events[22] = true
+		end
+
+		if self.boss_timer > 75 and not self.events[23] then
+			boss:MoveToPosition(self.random_constants[4])
+			self:RingOfThorns(altar_loc, altar_entity, 2.5, math.max(450 - 10 * power_stacks, 300), 125, true)
+			self.events[23] = true
+		end
+
+		if self.boss_timer > 78 and not self.events[24] then
+			boss:MoveToPosition(self.random_constants[4])
+			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 4.0, true)
+			self.events[24] = true
+		end
+
+		if self.boss_timer > 81 and not self.events[25] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:RockSmash(altar_loc, altar_entity, self.random_constants[4], 3, 2.5, 450, 175, true)
+			self.events[25] = true
+		end
+
+		-- Tree + Treantling hell
+		if self.boss_timer > 85 and not self.events[26] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:RapidGrowth(altar_loc, altar_entity, 1.5, {self.random_constants[5], RotatePosition(altar_loc, QAngle(0, 72, 0), self.random_constants[5]), RotatePosition(altar_loc, QAngle(0, 144, 0), self.random_constants[5]), RotatePosition(altar_loc, QAngle(0, 216, 0), self.random_constants[5])}, math.min(5 + power_stacks * 0.2, 7), true)
+			self.events[26] = true
+		end
+
+		if self.boss_timer > 86 and not self.events[27] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:LivingArmor(altar_loc, altar_entity, 1.5, 2, math.min(5 + power_stacks, 15), true)
+			self.events[27] = true
+		end
+
+		if self.boss_timer > 87 and not self.events[28] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:EyesInTheForest(altar_loc, altar_entity, 1.5, {RotatePosition(altar_loc, QAngle(0, 288, 0), self.random_constants[5])}, math.min(6 + power_stacks * 0.2, 8), true)
+			self.events[28] = true
+		end
+
+		if self.boss_timer > 88 and not self.events[29] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 1.0, true)
+			self.events[29] = true
+		end
+
+		if self.boss_timer > 89.5 and not self.events[30] then
+			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 5.5, true)
+			self.events[30] = true
+		end
+
+		if self.boss_timer > 92.5 and not self.events[31] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 1.0, true)
+			self.events[31] = true
+		end
+
+		if self.boss_timer > 94 and not self.events[32] then
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, true)
+			self.events[32] = true
+		end
+
+		if self.boss_timer > 98 and not self.events[33] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 1.0, true)
+			self.events[33] = true
+		end
+
+		if self.boss_timer > 99.5 and not self.events[34] then
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 3, 150, 125, true)
+			self.events[34] = true
+		end
+
+		if self.boss_timer > 103.5 and not self.events[35] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 1.0, true)
+			self.events[35] = true
+		end
+
+		if self.boss_timer > 105 and not self.events[36] then
+			self:RingOfThorns(altar_loc, altar_entity, 2.5, math.max(450 - 10 * power_stacks, 300), 125, true)
+			self.events[36] = true
+		end
+
+		if self.boss_timer > 108 and not self.events[37] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:LeechSeed(altar_loc, altar_entity, 1.5, 25, math.min(1 + power_stacks * 0.1, 2), true)
+			self.events[37] = true
+		end
+
+		-- Double treantling shenanigans
+		if self.boss_timer > 110 and not self.events[38] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:EyesInTheForest(altar_loc, altar_entity, 1.5, {RotatePosition(altar_loc, QAngle(0, 120, 0), self.random_constants[6]), RotatePosition(altar_loc, QAngle(0, 240, 0), self.random_constants[6])}, math.min(6 + power_stacks * 0.2, 8), true)
+			self.events[38] = true
+		end
+
+		if self.boss_timer > 111 and not self.events[39] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:LivingArmor(altar_loc, altar_entity, 1.5, 2, math.min(5 + power_stacks, 15), true)
+			self.events[39] = true
+		end
+
+		if self.boss_timer > 113 and not self.events[40] then
+			boss:MoveToPosition(self.random_constants[6])
+			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 4.0, true)
+			self.events[40] = true
+		end
+
+		if self.boss_timer > 116 and not self.events[41] then
+			boss:MoveToPosition(self.random_constants[6])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, true)
+			self.events[41] = true
+		end
+
+		if self.boss_timer > 120 and not self.events[42] then
+			boss:MoveToPosition(self.random_constants[6])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 3, 150, 125, true)
+			self.events[42] = true
+		end
+
+		if self.boss_timer > 124 and not self.events[43] then
+			boss:MoveToPosition(self.random_constants[6])
+			self:RockSmash(altar_loc, altar_entity, nil, 4, 4.5, 500, 175, true)
+			self.events[43] = true
+		end
+
+		if self.boss_timer > 125 and not self.events[44] then
+			boss:MoveToPosition(self.random_constants[6])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 3, 150, 125, true)
+			self.events[44] = true
+		end
+
+		-- Enrage
+		if self.boss_timer > 130 then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:Overgrowth(altar_loc, altar_entity, 2.0, 950, 500, 2.0, true)
+			self.boss_timer = self.boss_timer - 2.1
 		end
 	end
 end
@@ -303,10 +529,44 @@ function modifier_frostivus_treantling_passive:IsDebuff() return true end
 
 -- Make Treant invisible
 function boss_thinker_treant:TreantInvisStart(boss)
+
+	-- Play invis sound
+	boss:EmitSound("Hero_Treant.NaturesGuise.On")
+
+	-- Add invis/invul modifiers
+	boss:AddNewModifier(nil, nil, "modifier_invisible", {})
+	boss:AddNewModifier(nil, nil, "modifier_invulnerable", {})
+
+	-- Remove Treant's model after fade animation
+	Timers:CreateTimer(0.5, function()
+		boss:AddNoDraw()
+
+		-- Destroy cosmetics
+		boss.head:AddEffects(EF_NODRAW)
+		boss.shoulders:AddEffects(EF_NODRAW)
+		boss.arms:AddEffects(EF_NODRAW)
+		boss.feet:AddEffects(EF_NODRAW)
+	end)
 end
 
 -- Make Treant visible again
 function boss_thinker_treant:TreantInvisEnd(boss)
+
+	-- Remove invis modifier
+	boss:RemoveModifierByName("modifier_invisible")
+	boss:RemoveModifierByName("modifier_invulnerable")
+
+	-- Re-add Treant's model
+	boss:RemoveNoDraw()
+
+	-- Cosmetics
+	boss.head:RemoveEffects(EF_NODRAW)
+	boss.shoulders:RemoveEffects(EF_NODRAW)
+	boss.arms:RemoveEffects(EF_NODRAW)
+	boss.feet:RemoveEffects(EF_NODRAW)
+
+	-- Play de-invis sound
+	boss:EmitSound("Hero_Treant.NaturesGuise.Off")
 end
 
 -- Stack Leech Seed up
@@ -366,6 +626,11 @@ function boss_thinker_treant:VineSmash(center_point, altar_handle, delay, fixate
 			return nil
 		end
 
+		-- If there are fake trees available, make the boss invisible
+		if self:PickRandomFakeTree(center_point) ~= boss then
+			self:TreantInvisStart(boss)
+		end
+
 		-- Calculate medium cast location (to look at)
 		local cast_position = center_point
 		for _, target in pairs(targets) do
@@ -375,7 +640,7 @@ function boss_thinker_treant:VineSmash(center_point, altar_handle, delay, fixate
 
 		-- Send cast bar event
 		if send_cast_bar then
-			BossPhaseAbilityCast(self.team, "treant_overgrowth", "boss_treant_vine_smash", delay)
+			BossPhaseAbilityCast(self.team, "frostivus_boss_vine_smash", "boss_treant_vine_smash", delay)
 		end
 
 		-- Draw warning particle on the targets' position
@@ -496,6 +761,125 @@ function modifier_vine_smash_damage_dummy:IsHidden() return true end
 function modifier_vine_smash_damage_dummy:IsPurgable() return false end
 function modifier_vine_smash_damage_dummy:IsDebuff() return false end
 
+-- Rock Smash
+function boss_thinker_treant:RockSmash(center_point, altar_handle, optional_target, rock_number, delay, radius, damage, send_cast_bar)
+	if IsServer() then
+		local boss = self:GetParent()
+		local tiny = self.tiny_entities[1]
+		local rock = self.tiny_entities[1 + rock_number]
+		local hit_damage = boss:GetAttackDamage() * damage * 0.01
+
+		-- Pick a target position, if necessary
+		local target_loc = center_point + RandomVector(10):Normalized() * (900 - radius) * 0.5
+		if optional_target then
+			target_loc = optional_target
+		end
+
+		-- Move Tiny to the rock's side
+		tiny:MoveToPosition(rock:GetAbsOrigin() + Vector(50, 0, 0))
+
+		-- Send cast bar event
+		if send_cast_bar then
+			BossPhaseAbilityCast(self.team, "tiny_toss", "boss_treant_rock_smash", delay)
+		end
+
+		-- Draw warning particle on the target position
+		local warning_pfx = ParticleManager:CreateParticle("particles/boss_treant/rock_smash_warning.vpcf", PATTACH_WORLDORIGIN, nil)
+		ParticleManager:SetParticleControl(warning_pfx, 0, target_loc)
+		ParticleManager:SetParticleControl(warning_pfx, 1, Vector(radius, 0, 0))
+
+		-- Play warning sound
+		altar_handle:EmitSound("Frostivus.AbilityWarning")
+
+		-- Animate tiny cast
+		Timers:CreateTimer(delay - 1.5, function()
+			rock:EmitSound("Hero_Tiny.Toss.Target")
+			tiny:EmitSound("Ability.TossThrow")
+			tiny:FaceTowards(target_loc)
+			StartAnimation(tiny, {duration = 0.53, activity=ACT_TINY_TOSS, rate=1.0})
+			self:ThrowRock(rock, target_loc)
+		end)
+
+		-- Wait [delay] seconds
+		Timers:CreateTimer(delay, function()
+
+			-- Play impact sound
+			altar_handle:EmitSound("Ability.TossImpact")
+
+			-- Destroy the warning particle
+			ParticleManager:DestroyParticle(warning_pfx, true)
+			ParticleManager:ReleaseParticleIndex(warning_pfx)
+
+			-- Play impact particle
+			local impact_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf", PATTACH_WORLDORIGIN, nil)
+			ParticleManager:SetParticleControl(impact_pfx, 0, target_loc)
+			ParticleManager:ReleaseParticleIndex(impact_pfx)
+
+			-- Destroy the rock
+			rock:Kill(nil, rock)
+
+			-- Damage players in the AOE
+			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), target_loc, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+			for _, enemy in pairs(nearby_enemies) do
+
+				-- Add Leech Seed stacks
+				self:LeechSeedStackUp(boss, enemy)
+
+				-- Show damage dealt
+				local damage_dealt = ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = hit_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_PHYSICAL})
+				SendOverheadEventMessage(enemy, OVERHEAD_ALERT_DAMAGE, enemy, damage_dealt, nil)
+
+				-- Play hit particle
+				local hit_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf", PATTACH_WORLDORIGIN, enemy)
+				ParticleManager:SetParticleControl(hit_pfx, 0, enemy:GetAbsOrigin())
+				ParticleManager:ReleaseParticleIndex(hit_pfx)
+			end
+		end)
+	end
+end
+
+-- Throws a Rock
+function boss_thinker_treant:ThrowRock(rock, target_loc)
+	if IsServer() then
+		local source_loc = rock:GetAbsOrigin()
+		rock:AddNewModifier(nil, nil, "modifier_phased", {})
+
+		-- Calculate trajectory
+		local direction = (target_loc - source_loc):Normalized()
+		local length = (target_loc - source_loc):Length2D()
+		local tick_length = length * 0.03 / 1.5
+		local horizontal_tick = direction * tick_length
+
+		-- Calculate height during trajectory
+		local height = {}
+		local missing_height = 750
+		local current_height = 0
+		local dummy_var = 0
+		for i = 1, 25 do
+			height[i] = current_height + missing_height * (0.075 + 0.005 * i)
+			current_height = height[i]
+			missing_height = 750 - current_height
+		end
+		for i = 26, 50 do
+			height[i]= height[51 - i]
+		end
+
+		-- Move the rock
+		local current_spot = source_loc
+		local traveled_distance = 0
+		local height_tick = 1
+		Timers:CreateTimer(0.03, function()
+			rock:SetAbsOrigin(current_spot + horizontal_tick + Vector(0, 0, height[height_tick]))
+			current_spot = current_spot + horizontal_tick
+			traveled_distance = traveled_distance + tick_length
+			if traveled_distance < length then
+				height_tick = height_tick + 1
+				return 0.03
+			end
+		end)
+	end
+end
+
 -- Ring of Thorns
 function boss_thinker_treant:RingOfThorns(center_point, altar_handle, delay, radius, damage, send_cast_bar)
 	if IsServer() then
@@ -504,7 +888,12 @@ function boss_thinker_treant:RingOfThorns(center_point, altar_handle, delay, rad
 
 		-- Send cast bar event
 		if send_cast_bar then
-			BossPhaseAbilityCast(self.team, "treant_overgrowth", "boss_treant_ring_of_thorns", delay)
+			BossPhaseAbilityCast(self.team, "frostivus_boss_ring_of_thorns", "boss_treant_ring_of_thorns", delay)
+		end
+
+		-- If there are fake trees available, make the boss invisible
+		if self:PickRandomFakeTree(center_point) ~= boss then
+			self:TreantInvisStart(boss)
 		end
 
 		-- Animate boss cast
@@ -698,7 +1087,7 @@ function boss_thinker_treant:RapidGrowth(center_point, altar_handle, delay, posi
 
 		-- Send cast bar event
 		if send_cast_bar then
-			BossPhaseAbilityCast(self.team, "treant_leech_seed", "boss_treant_rapid_growth", delay)
+			BossPhaseAbilityCast(self.team, "treant_eyes_in_the_forest", "boss_treant_rapid_growth", delay)
 		end
 
 		-- Animate boss cast
@@ -728,7 +1117,7 @@ function boss_thinker_treant:EyesInTheForest(center_point, altar_handle, delay, 
 
 		-- Send cast bar event
 		if send_cast_bar then
-			BossPhaseAbilityCast(self.team, "treant_eyes_in_the_forest", "boss_treant_eyes_in_the_forest", delay)
+			BossPhaseAbilityCast(self.team, "frostivus_boss_eyes_in_the_forest", "boss_treant_eyes_in_the_forest", delay)
 		end
 
 		-- Animate boss cast
@@ -875,6 +1264,11 @@ function boss_thinker_treant:Overgrowth(center_point, altar_handle, delay, radiu
 		-- Play warning sound
 		altar_handle:EmitSound("Hero_Treant.Overgrowth.CastAnim")
 
+		-- If there are fake trees available, make the boss invisible
+		if self:PickRandomFakeTree(center_point) ~= boss then
+			self:TreantInvisStart(boss)
+		end
+
 		-- Animate boss cast
 		Timers:CreateTimer(delay - 0.5, function()
 
@@ -965,4 +1359,36 @@ function modifier_frostivus_overgrowth_root:CheckState()
 		[MODIFIER_STATE_DISARMED] = true
 	}
 	return state
+end
+
+-- Nature's Guise
+function boss_thinker_treant:NaturesGuise(center_point, altar_handle, delay, send_cast_bar)
+	if IsServer() then
+		local boss = self:GetParent()
+
+		-- Send cast bar event
+		if send_cast_bar then
+			BossPhaseAbilityCast(self.team, "treant_natures_guise", "boss_treant_natures_guise", delay)
+		end
+
+		-- Play warning sound
+		boss:EmitSound("Hero_Treant.Eyes.Cast")
+
+		-- Animate boss cast
+		Timers:CreateTimer(delay - 0.5, function()
+
+			-- Boss animation
+			boss:FaceTowards(center_point)
+			StartAnimation(boss, {duration = 0.9, activity=ACT_DOTA_CAST_ABILITY_1, rate=1.0})
+		end)
+
+		-- Wait [delay] seconds
+		Timers:CreateTimer(delay, function()
+
+			-- Go invis if there is at least one tree to hide in
+			if self:PickRandomFakeTree(center_point) ~= boss then
+				self:TreantInvisStart(boss)
+			end
+		end)
+	end
 end

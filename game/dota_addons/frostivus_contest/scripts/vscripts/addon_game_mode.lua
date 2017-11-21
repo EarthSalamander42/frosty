@@ -51,8 +51,16 @@ function Precache(context)
 	-- Treant boss
 	PrecacheResource("particle_folder", "particles/boss_treant/", context)
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_treant/", context)
+	PrecacheResource("particle", "particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_furion.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_tiny.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_treant.vsndevts", context)
+
+	-- Nevermore boss
+	PrecacheResource("particle_folder", "particles/boss_nevermore/", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf", context)
+	PrecacheResource("particle", "particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient.vpcf", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts", context)
 
 	-- Models can also be precached by folder or individually
 	PrecacheResource("model", "models/props_winter/present.vmdl", context)

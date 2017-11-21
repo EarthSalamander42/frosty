@@ -209,6 +209,45 @@
 	}
 
 	//=================================================================================================================
+	// Venomancer: Scourge Ward
+	//=================================================================================================================
+	"frostivus_boss_scourge_ward"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"custom/scourge_ward"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Venomancer: Vile Ward
+	//=================================================================================================================
+	"frostivus_boss_vile_ward"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"custom/vile_ward"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Venomancer: Parasite
+	//=================================================================================================================
+	"frostivus_boss_parasite"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"custom/parasite"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
 	// Venomancer: Poison Nova
 	//=================================================================================================================
 	"frostivus_boss_poison_nova"
@@ -245,8 +284,75 @@
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"venomancer_poison_nova"
+		"AbilityTextureName"			"custom/green_death"
 		"ScriptFile"					"boss_scripts/boss_abilities/green_death.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Nevermore: Necromastery
+	//=================================================================================================================
+	"frostivus_boss_necromastery"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"nevermore_necromastery"
+		"ScriptFile"					"boss_scripts/boss_abilities/necromastery.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Nevermore: Requiem of Souls
+	//=================================================================================================================
+	"frostivus_boss_requiem_of_souls"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"nevermore_requiem_of_souls"
+		"ScriptFile"					"boss_scripts/boss_abilities/requiem_of_souls.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Treant: Vine Smash
+	//=================================================================================================================
+	"frostivus_boss_vine_smash"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"custom/vine_smash"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Treant: Ring of Thorns
+	//=================================================================================================================
+	"frostivus_boss_ring_of_thorns"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"custom/ring_of_thorns"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Treant: Eyes in the Forest (summon Treantling)
+	//=================================================================================================================
+	"frostivus_boss_eyes_in_the_forest"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"custom/eyes_in_the_forest"
 		"MaxLevel"						"1"
 	}
 

@@ -160,8 +160,6 @@ function CastBar(args)
 	$("#BossCastAbilityName" + playerInfo.player_team_id).text = $.Localize(args.ability_name);
 	$("#BossCastTimeLabel" + playerInfo.player_team_id).text = args.current_cast_time.toFixed(1) + "/" + args.cast_time.toFixed(1);
 	$("#BossCastProgressBar" + playerInfo.player_team_id).value = args.current_cast_time / args.cast_time;
-
-	$.Msg(args.ability_image)
 }
 
 (function()
