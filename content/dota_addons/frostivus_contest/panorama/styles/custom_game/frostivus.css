@@ -90,7 +90,7 @@
 }
 
 .AltarButton {
-	width: 90%;
+	width: 87%;
 }
 
 .AltarButton:hover {
@@ -240,7 +240,8 @@
 	margin-left: 70px;
 }
 
-.BossLevel
+.BossLevel,
+.BossLabel
 {
 	horizontal-align: left;
 	color: white;
@@ -260,6 +261,7 @@
 .BossLabel
 {
 	margin-left: 3%;
+	horizontal-align: center;
 }
 
 .BossInfo
@@ -269,23 +271,23 @@
 }
 
 .BossCastBar {
-	width: 100%;
-	height: 40%;
-	margin-top: 65px;
+	width: 50%;
+	height: 100%;
 	margin-left: 10%;
 }
 
 .BossCastAbility {
 	width: 50px;
 	height: 50px;
+	margin-top: 16px;
 	z-index: 20;
 }
 
 .BossCastTimeLabel,
 .BossCastAbilityName
 {
-	margin-top: 18px;
-	margin-left: 8%;
+	margin-top: 31px;
+	margin-left: 18%;
 	color: white;
 	font-weight: bold;
 	text-align: center;
@@ -303,11 +305,11 @@
 }
 
 .BossCastTimeLabel {
-	margin-left: 37%;
+	margin-left: 65%;
 }
 
 .BossCastProgressBar {
-	width: 40%;
+	width: 80%;
 	height: 35px;
 	margin-left: 7%;
 	align: left center;
@@ -332,4 +334,18 @@
 	height: 40px;
 	margin-top: 20%;
 	margin-right: 6%;
+}
+
+#BossCastBar2 {
+	width: 45%;
+}
+
+#BossCastBar2_2 {
+	width: 45%;
+	margin-left: 50%;
+}
+
+.CastBars {
+	width: 100%;
+	margin-top: 65px;
 }

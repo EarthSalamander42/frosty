@@ -88,11 +88,21 @@
 					<Label id="BossHealth2" class="HoldoutLabelSmall" hittest="false" text=""/>
 				</Panel>
 
-				<Panel id="BossCastBar2" class="BossCastBar" hittest="false">
-					<DOTAAbilityImage id="BossCastAbility2" class="BossCastAbility" onmouseover="ShowAbilityTooltip(1)" onmouseout="HideAbilityTooltip()" abilityname="" />
-					<Label id="BossCastAbilityName2" class="BossCastAbilityName" hittest="false" text="Lightning Bolt"/>
-					<Label id="BossCastTimeLabel2" class="BossCastTimeLabel" hittest="false" text="0.0/1.0"/>
-					<ProgressBar id="BossCastProgressBar2" class="BossCastProgressBar" hittest="false" value="1.0"/>
+
+				<Panel id="CastBars2" class="CastBars" hittest="false">
+					<Panel id="BossCastBar2" class="BossCastBar" hittest="false">
+						<DOTAAbilityImage id="BossCastAbility2" class="BossCastAbility" onmouseover="ShowAbilityTooltip(1)" onmouseout="HideAbilityTooltip()" abilityname="" />
+						<Label id="BossCastAbilityName2" class="BossCastAbilityName" hittest="false" text="Lightning Bolt"/>
+						<Label id="BossCastTimeLabel2" class="BossCastTimeLabel" hittest="false" text="0.0/1.0"/>
+						<ProgressBar id="BossCastProgressBar2" class="BossCastProgressBar" hittest="false" value="1.0"/>
+					</Panel>
+
+					<Panel id="BossCastBar2_2" class="BossCastBar" hittest="false">
+						<DOTAAbilityImage id="BossCastAbility2_2" class="BossCastAbility" onmouseover="ShowAbilityTooltip(1)" onmouseout="HideAbilityTooltip()" abilityname="" />
+						<Label id="BossCastAbilityName2_2" class="BossCastAbilityName" hittest="false" text="Lightning Bolt"/>
+						<Label id="BossCastTimeLabel2_2" class="BossCastTimeLabel" hittest="false" text="0.0/1.0"/>
+						<ProgressBar id="BossCastProgressBar2_2" class="BossCastProgressBar" hittest="false" value="1.0"/>
+					</Panel>
 				</Panel>
 			</Panel>
 			<Panel id="BossHP3" class="BossHP" hittest="false">
