@@ -140,8 +140,9 @@ function UpdateAltar(args)
 		}
 		$("#AltarButton" + args.altar).AddClass("dire");
 	}
-	$("#AltarState" + args.altar).style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_' + args.team + '.png")';
-	$.Msg("Added a new altar: " + args.altar + " for team: " + args.team)
+
+//	$("#AltarState" + args.altar).style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_' + args.team + '.png")';
+//	$.Msg("Added a new altar: " + args.altar + " for team: " + args.team)
 
 	var localTeam = Players.GetTeam(Players.GetLocalPlayer())
 	if (localTeam == 2) {
@@ -181,10 +182,31 @@ function CastBar(args)
 	}
 }
 
+function CastBarAlt(args)
+{
+	var playerInfo = Game.GetPlayerInfo(Players.GetLocalPlayer())
+	$("#BossCastAbility" + playerInfo.player_team_id + "_2").abilityname = args.ability_image;
+	$("#BossCastAbilityName" + playerInfo.player_team_id + "_2").text = $.Localize(args.ability_name);
+	$("#BossCastTimeLabel" + playerInfo.player_team_id + "_2").text = args.current_cast_time.toFixed(1) + "/" + args.cast_time.toFixed(1);
+	$("#BossCastProgressBar" + playerInfo.player_team_id + "_2").value = args.current_cast_time / args.cast_time;
+
+//	$.Msg(args.current_cast_time)
+	if (args.current_cast_time != 0) {
+		$("#BossCastBar" + playerInfo.player_team_id + "_2").style.visibility = "visible";
+	} else {
+		$("#BossCastBar" + playerInfo.player_team_id + "_2").style.visibility = "collapse";
+	}
+}
+
 (function()
 {
 	$("#AltarButton1").AddClass("radiant");
 	$("#AltarState1").style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_2.png")';
+	$("#AltarState2").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_zuus.png")';
+	$("#AltarState3").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_venomancer.png")';
+	$("#AltarState4").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_lich.png")';
+	$("#AltarState5").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_treant.png")';
+	$("#AltarState6").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_nevermore.png")';
 	$("#AltarButton7").AddClass("dire");
 	$("#AltarState7").style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_3.png")';
 
@@ -195,4 +217,5 @@ function CastBar(args)
 	GameEvents.Subscribe("hide_boss_hp", HideBossBar);
 	GameEvents.Subscribe("update_altar", UpdateAltar);
 	GameEvents.Subscribe("BossStartedCast", CastBar);
+	GameEvents.Subscribe("BossStartedCastAlt", CastBarAlt);
 })();
