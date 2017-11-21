@@ -39,6 +39,7 @@ function Frostivus()
 	SpawnZeus(BOSS_SPAWN_POINT_TABLE.zeus)
 	SpawnVenomancer(BOSS_SPAWN_POINT_TABLE.venomancer)
 	SpawnTreant(BOSS_SPAWN_POINT_TABLE.treant)
+	SpawnNevermore(BOSS_SPAWN_POINT_TABLE.nevermore)
 end
 
 function FrostivusPhase(PHASE)
@@ -125,13 +126,23 @@ function FrostivusHeroKilled(killer, hero)
 				if boss:HasModifier("boss_thinker_zeus") then
 					boss:RemoveModifierByName("boss_thinker_zeus")
 					boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "zeus", altar_handle = altar_name})
+					boss:SetAbsOrigin(altar_handle:GetAbsOrigin() + Vector(0, 300, 0))
 				elseif boss:HasModifier("boss_thinker_venomancer") then
 					boss:RemoveModifierByName("boss_thinker_venomancer")
 					boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "venomancer", altar_handle = altar_name})
+					boss:SetAbsOrigin(altar_handle:GetAbsOrigin() + Vector(0, 300, 0))
+				elseif boss:HasModifier("boss_thinker_treant") then
+					boss:RemoveModifierByName("boss_thinker_treant")
+					boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "treant", altar_handle = altar_name})
+					boss:SetAbsOrigin(altar_handle:GetAbsOrigin() + Vector(0, 50, 0))
+				elseif boss:HasModifier("boss_thinker_nevermore") then
+					boss:RemoveModifierByName("boss_thinker_nevermore")
+					boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "nevermore", altar_handle = altar_name})
+					boss:SetAbsOrigin(altar_handle:GetAbsOrigin() + Vector(0, 300, 0))
 				end
 
 				-- Destroy adds
-				local nearby_summons = FindUnitsInRadius(boss:GetTeam(), altar_handle:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+				local nearby_summons = FindUnitsInRadius(boss:GetTeam(), altar_handle:GetAbsOrigin(), nil, 2200, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 				for _,summon in pairs(nearby_summons) do
 					if not summon:HasModifier("modifier_frostivus_boss") then
 						summon:Kill(nil, summon)
@@ -141,8 +152,7 @@ function FrostivusHeroKilled(killer, hero)
 				-- Reset boss status & position
 				boss:Purge(true, true, false, true, true)
 				boss:Heal(999999, nil)
-				boss:SetAbsOrigin(altar_handle:GetAbsOrigin() + Vector(0, 300, 0))
-				boss:SetForwardVector(Vector(0, 1, 0))
+				boss:FaceTowards(altar_handle:GetAbsOrigin())
 			end
 		end
 	end

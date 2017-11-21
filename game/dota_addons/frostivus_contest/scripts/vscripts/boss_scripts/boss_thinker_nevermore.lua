@@ -1,24 +1,24 @@
--- Venomancer AI thinker
+-- Nevermore AI thinker
 
-boss_thinker_venomancer = class({})
+boss_thinker_nevermore = class({})
 
 -----------------------------------------------------------------------
 
-function boss_thinker_venomancer:IsHidden()
+function boss_thinker_nevermore:IsHidden()
 	return true
 end
 
 -----------------------------------------------------------------------
 
-function boss_thinker_venomancer:IsPurgable()
+function boss_thinker_nevermore:IsPurgable()
 	return false
 end
 
 -----------------------------------------------------------------------
 
-function boss_thinker_venomancer:OnCreated( params )
+function boss_thinker_nevermore:OnCreated( params )
 	if IsServer() then
-		self.boss_name = "venomancer"
+		self.boss_name = "nevermore"
 		self.team = "no team passed"
 		self.altar_handle = "no altar handle passed"
 		if params.team then
@@ -26,6 +26,31 @@ function boss_thinker_venomancer:OnCreated( params )
 		end
 		if params.altar_handle then
 			self.altar_handle = params.altar_handle
+		end
+
+		-- Draw boss ambient articles
+		if not self.fire_pfx then
+			local boss = self:GetParent()
+			local boss_loc = boss:GetAbsOrigin()
+			self.fire_pfx = ParticleManager:CreateParticle("particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient.vpcf", PATTACH_POINT_FOLLOW, boss)
+			ParticleManager:SetParticleControlEnt(self.fire_pfx, 0, boss, PATTACH_POINT_FOLLOW, "attach_hitloc", boss_loc, true)
+			ParticleManager:SetParticleControlEnt(self.fire_pfx, 1, boss, PATTACH_POINT_FOLLOW, "attach_arm_L", boss_loc, true)
+			ParticleManager:SetParticleControlEnt(self.fire_pfx, 2, boss, PATTACH_POINT_FOLLOW, "attach_arm_L", boss_loc, true)
+			ParticleManager:SetParticleControlEnt(self.fire_pfx, 3, boss, PATTACH_POINT_FOLLOW, "attach_arm_L", boss_loc, true)
+			ParticleManager:SetParticleControlEnt(self.fire_pfx, 4, boss, PATTACH_POINT_FOLLOW, "attach_arm_R", boss_loc, true)
+			ParticleManager:SetParticleControlEnt(self.fire_pfx, 5, boss, PATTACH_POINT_FOLLOW, "attach_arm_R", boss_loc, true)
+			ParticleManager:SetParticleControlEnt(self.fire_pfx, 6, boss, PATTACH_POINT_FOLLOW, "attach_arm_R", boss_loc, true)
+			ParticleManager:SetParticleControlEnt(self.fire_pfx, 7, boss, PATTACH_POINT_FOLLOW, "attach_head", boss_loc, true)
+			ParticleManager:SetParticleControlEnt(self.fire_pfx, 8, boss, PATTACH_POINT_FOLLOW, "attach_hitloc", boss_loc, true)
+
+			self.shoulders_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/nevermore_shoulder_ambient.vpcf", PATTACH_POINT_FOLLOW, boss)
+			ParticleManager:SetParticleControlEnt(self.shoulders_pfx, 0, boss, PATTACH_POINT_FOLLOW, "attach_shoulder_l", boss_loc, true)
+			ParticleManager:SetParticleControlEnt(self.shoulders_pfx, 4, boss, PATTACH_POINT_FOLLOW, "attach_hitloc", boss_loc, true)
+			ParticleManager:ReleaseParticleIndex(self.shoulders_pfx)
+
+			self.shadow_trail_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_nevermore/nevermore_trail.vpcf", PATTACH_ABSORIGIN_FOLLOW, boss)
+			ParticleManager:SetParticleControl(self.shadow_trail_pfx, 0, boss_loc)
+			ParticleManager:ReleaseParticleIndex(self.shadow_trail_pfx)
 		end
 
 		-- Boss script constants
@@ -42,7 +67,7 @@ end
 
 -----------------------------------------------------------------------
 
-function boss_thinker_venomancer:DeclareFunctions()
+function boss_thinker_nevermore:DeclareFunctions()
 	local funcs = 
 	{
 		MODIFIER_EVENT_ON_DEATH,
@@ -52,7 +77,7 @@ end
 
 -----------------------------------------------------------------------
 
-function boss_thinker_venomancer:OnDeath(keys)
+function boss_thinker_nevermore:OnDeath(keys)
 local target = keys.unit
 
 	if IsServer() then
@@ -116,14 +141,14 @@ local target = keys.unit
 			UnlockArena(self.altar_handle, true, self.team, "frostivus_altar_aura_veno")
 
 			-- Delete the boss AI thinker modifier
-			target:RemoveModifierByName("boss_thinker_venomancer")
+			target:RemoveModifierByName("boss_thinker_nevermore")
 		end
 	end
 end
 
 -----------------------------------------------------------------------
 
-function boss_thinker_venomancer:OnIntervalThink()
+function boss_thinker_nevermore:OnIntervalThink()
 	if IsServer() then
 
 		-- Parameters
@@ -317,7 +342,7 @@ end
 ---------------------------
 
 -- Venomous Gale
-function boss_thinker_venomancer:VenomousGale(center_point, altar_handle, delay, angle, radius, slow, damage, duration, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+function boss_thinker_nevermore:VenomousGale(center_point, altar_handle, delay, angle, radius, slow, damage, duration, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
 		local boss = self:GetParent()
 		local ability = boss:FindAbilityByName("frostivus_boss_venomous_gale")
@@ -391,7 +416,7 @@ function boss_thinker_venomancer:VenomousGale(center_point, altar_handle, delay,
 	end
 end
 
-function boss_thinker_venomancer:VenomousGaleShoot(boss, caster, ability, source, target, radius, slow, damage, duration)
+function boss_thinker_nevermore:VenomousGaleShoot(boss, caster, ability, source, target, radius, slow, damage, duration)
 	if IsServer() then
 
 		-- Draw mouth particle
@@ -435,7 +460,7 @@ function boss_thinker_venomancer:VenomousGaleShoot(boss, caster, ability, source
 end
 
 -- Venomous Gale debuff modifier
-LinkLuaModifier("modifier_frostivus_venomancer_venomous_gale", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_venomancer_venomous_gale", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_venomancer_venomous_gale = modifier_frostivus_venomancer_venomous_gale or class({})
 
 function modifier_frostivus_venomancer_venomous_gale:IsHidden() return false end
@@ -490,7 +515,7 @@ end
 
 
 -- Spawn Scourge Ward
-function boss_thinker_venomancer:SpawnScourgeWard(center_point, altar_handle, delay, angle, center_distance, health, radius, slow, damage, duration, attack_delay, attack_count, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+function boss_thinker_nevermore:SpawnScourgeWard(center_point, altar_handle, delay, angle, center_distance, health, radius, slow, damage, duration, attack_delay, attack_count, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
 		local boss = self:GetParent()
 		local ward_position = RotatePosition(center_point, QAngle(0, angle, 0), center_point + Vector(0, 1, 0) * center_distance)
@@ -498,7 +523,7 @@ function boss_thinker_venomancer:SpawnScourgeWard(center_point, altar_handle, de
 		local dot_damage = boss:GetAttackDamage() * damage * 0.01
 
 		-- Send cast bar event
-		BossPhaseAbilityCast(self.team, "frostivus_boss_scourge_ward", "boss_veno_scourge_ward", delay)
+		BossPhaseAbilityCast(self.team, "venomancer_plague_ward", "boss_veno_scourge_ward", delay)
 
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(center_point + Vector(0, 300, 0))
@@ -536,7 +561,7 @@ function boss_thinker_venomancer:SpawnScourgeWard(center_point, altar_handle, de
 end
 
 -- Scourge Ward Thinker
-LinkLuaModifier("modifier_frostivus_venomancer_scourge_ward_thinker", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_venomancer_scourge_ward_thinker", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_venomancer_scourge_ward_thinker = modifier_frostivus_venomancer_scourge_ward_thinker or class({})
 
 function modifier_frostivus_venomancer_scourge_ward_thinker:IsHidden() return true end
@@ -592,7 +617,7 @@ function modifier_frostivus_venomancer_scourge_ward_thinker:OnIntervalThink()
 		local boss = owner:GetOwner()
 		local ability = boss:FindAbilityByName("frostivus_boss_venomous_gale")
 		local source_loc = owner:GetAbsOrigin()
-		local modifier_gale = boss:FindModifierByName("boss_thinker_venomancer")
+		local modifier_gale = boss:FindModifierByName("boss_thinker_nevermore")
 
 		-- Calculate launch geometry
 		local main_direction = RotatePosition(source_loc, QAngle(0, self.angle + 180, 0), source_loc + Vector(0, 1, 0) * 100)
@@ -634,7 +659,7 @@ end
 
 
 -- Spawn Vile Ward
-function boss_thinker_venomancer:SpawnVileWard(center_point, altar_handle, delay, angle, center_distance, health, radius, slow, damage, duration, attack_delay, attack_count, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+function boss_thinker_nevermore:SpawnVileWard(center_point, altar_handle, delay, angle, center_distance, health, radius, slow, damage, duration, attack_delay, attack_count, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
 		local boss = self:GetParent()
 		local ward_position = RotatePosition(center_point, QAngle(0, angle, 0), center_point + Vector(0, 1, 0) * center_distance)
@@ -642,7 +667,7 @@ function boss_thinker_venomancer:SpawnVileWard(center_point, altar_handle, delay
 		local dot_damage = boss:GetAttackDamage() * damage * 0.01
 
 		-- Send cast bar event
-		BossPhaseAbilityCast(self.team, "frostivus_boss_vile_ward", "boss_veno_vile_ward", delay)
+		BossPhaseAbilityCast(self.team, "greevil_miniboss_green_living_armor", "boss_veno_vile_ward", delay)
 
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(center_point + Vector(0, 300, 0))
@@ -676,7 +701,7 @@ function boss_thinker_venomancer:SpawnVileWard(center_point, altar_handle, delay
 end
 
 -- Vile Ward Thinker
-LinkLuaModifier("modifier_frostivus_venomancer_vile_ward_thinker", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_venomancer_vile_ward_thinker", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_venomancer_vile_ward_thinker = modifier_frostivus_venomancer_vile_ward_thinker or class({})
 
 function modifier_frostivus_venomancer_vile_ward_thinker:IsHidden() return true end
@@ -728,7 +753,7 @@ function modifier_frostivus_venomancer_vile_ward_thinker:OnIntervalThink()
 		local boss = owner:GetOwner()
 		local ability = boss:FindAbilityByName("frostivus_boss_venomous_gale")
 		local source_loc = owner:GetAbsOrigin()
-		local modifier_gale = boss:FindModifierByName("boss_thinker_venomancer")
+		local modifier_gale = boss:FindModifierByName("boss_thinker_nevermore")
 
 		-- Calculate launch geometry
 		local directions = {}
@@ -765,7 +790,7 @@ end
 
 
 -- Poison Nova
-function boss_thinker_venomancer:PoisonNova(center_point, altar_handle, delay, damage, damage_amp, duration, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+function boss_thinker_nevermore:PoisonNova(center_point, altar_handle, delay, damage, damage_amp, duration, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
 		local boss = self:GetParent()
 		local ability = boss:FindAbilityByName("frostivus_boss_poison_nova")
@@ -812,7 +837,7 @@ function boss_thinker_venomancer:PoisonNova(center_point, altar_handle, delay, d
 end
 
 -- Poison Nova debuff modifier
-LinkLuaModifier("modifier_frostivus_venomancer_poison_nova", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_venomancer_poison_nova", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_venomancer_poison_nova = modifier_frostivus_venomancer_poison_nova or class({})
 
 function modifier_frostivus_venomancer_poison_nova:IsHidden() return false end
@@ -875,7 +900,7 @@ end
 
 
 -- Unwilling Host
-function boss_thinker_venomancer:UnwillingHost(center_point, altar_handle, delay, radius, duration, damage, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+function boss_thinker_nevermore:UnwillingHost(center_point, altar_handle, delay, radius, duration, damage, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
 		local boss = self:GetParent()
 		local ability = boss:FindAbilityByName("frostivus_boss_unwilling_host")
@@ -897,7 +922,7 @@ function boss_thinker_venomancer:UnwillingHost(center_point, altar_handle, delay
 		end
 
 		-- Send cast bar event
-		BossPhaseAbilityCast(self.team, "frostivus_boss_unwilling_host", "boss_veno_unwilling_host", delay)
+		BossPhaseAbilityCast(self.team, "treant_eyes_in_the_forest", "boss_veno_unwilling_host", delay)
 
 		-- Animate cast
 		Timers:CreateTimer(delay - 0.3, function()
@@ -930,7 +955,7 @@ function boss_thinker_venomancer:UnwillingHost(center_point, altar_handle, delay
 end
 
 -- Unwilling Host debuff
-LinkLuaModifier("modifier_frostivus_venomancer_unwilling_host", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_venomancer_unwilling_host", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_venomancer_unwilling_host = modifier_frostivus_venomancer_unwilling_host or class({})
 
 function modifier_frostivus_venomancer_unwilling_host:IsHidden() return false end
@@ -984,7 +1009,7 @@ function modifier_frostivus_venomancer_unwilling_host:OnIntervalThink()
 end
 
 -- Virulent Plague debuff
-LinkLuaModifier("modifier_frostivus_venomancer_virulent_plague", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_venomancer_virulent_plague", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_venomancer_virulent_plague = modifier_frostivus_venomancer_virulent_plague or class({})
 
 function modifier_frostivus_venomancer_virulent_plague:IsHidden() return false end
@@ -1053,7 +1078,7 @@ end
 
 
 -- Parasite
-function boss_thinker_venomancer:Parasite(center_point, altar_handle, delay, amount, duration, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+function boss_thinker_nevermore:Parasite(center_point, altar_handle, delay, amount, duration, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
 		local boss = self:GetParent()
 
@@ -1077,7 +1102,7 @@ function boss_thinker_venomancer:Parasite(center_point, altar_handle, delay, amo
 		end
 
 		-- Send cast bar event
-		BossPhaseAbilityCast(self.team, "frostivus_boss_parasite", "boss_veno_parasite", delay)
+		BossPhaseAbilityCast(self.team, "windrunner_windrun", "boss_veno_parasite", delay)
 
 		-- Play warning particles and sounds
 		local warning_pfx = ParticleManager:CreateParticle("particles/boss_veno/veno_parasite_warning.vpcf", PATTACH_OVERHEAD_FOLLOW, targets[1])
@@ -1132,7 +1157,7 @@ function boss_thinker_venomancer:Parasite(center_point, altar_handle, delay, amo
 end
 
 -- Parasite debuff
-LinkLuaModifier("modifier_frostivus_venomancer_parasite", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_venomancer_parasite", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_venomancer_parasite = modifier_frostivus_venomancer_parasite or class({})
 
 function modifier_frostivus_venomancer_parasite:IsHidden() return true end
@@ -1147,7 +1172,7 @@ function modifier_frostivus_venomancer_parasite:CheckState()
 end
 
 -- Green Death
-function boss_thinker_venomancer:GreenDeath(center_point, altar_handle, delay, damage, duration, angle, spawn_angle, spawn_frequency, projectile_speed, projectile_radius, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
+function boss_thinker_nevermore:GreenDeath(center_point, altar_handle, delay, damage, duration, angle, spawn_angle, spawn_frequency, projectile_speed, projectile_radius, plague_inner_radius, plague_outer_radius, plague_health, plague_damage, plague_attack_delay, plague_duration)
 	if IsServer() then
 		local boss = self:GetParent()
 		local ability = boss:FindAbilityByName("frostivus_boss_green_death")
@@ -1155,7 +1180,7 @@ function boss_thinker_venomancer:GreenDeath(center_point, altar_handle, delay, d
 		local impact_damage = boss:GetAttackDamage() * damage * 0.01
 
 		-- Send cast bar event
-		BossPhaseAbilityCast(self.team, "frostivus_boss_green_death", "boss_veno_green_death", delay)
+		BossPhaseAbilityCast(self.team, "windrunner_focusfire", "boss_veno_green_death", delay)
 
 		-- Move boss to cast position and animate cast
 		boss:MoveToPosition(center_point)
@@ -1245,7 +1270,7 @@ end
 
 
 -- Spawn Plague Ward passive
-function boss_thinker_venomancer:SpawnPlagueWard(center_point, altar_handle, inner_radius, outer_radius, health, damage, attack_delay, duration)
+function boss_thinker_nevermore:SpawnPlagueWard(center_point, altar_handle, inner_radius, outer_radius, health, damage, attack_delay, duration)
 	if IsServer() then
 		local boss = self:GetParent()
 		local sting_damage = boss:GetAttackDamage() * damage * 0.01
@@ -1270,7 +1295,7 @@ function boss_thinker_venomancer:SpawnPlagueWard(center_point, altar_handle, inn
 end
 
 -- Poison Sting cast modifier
-LinkLuaModifier("modifier_frostivus_venomancer_ward_poison_sting", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_venomancer_ward_poison_sting", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_venomancer_ward_poison_sting = modifier_frostivus_venomancer_ward_poison_sting or class({})
 
 function modifier_frostivus_venomancer_ward_poison_sting:IsHidden() return true end
@@ -1351,7 +1376,7 @@ function modifier_frostivus_venomancer_ward_poison_sting:OnIntervalThink()
 end
 
 -- Poison Sting debuff modifier
-LinkLuaModifier("modifier_frostivus_venomancer_poison_sting_debuff", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_venomancer_poison_sting_debuff", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_venomancer_poison_sting_debuff = modifier_frostivus_venomancer_poison_sting_debuff or class({})
 
 function modifier_frostivus_venomancer_poison_sting_debuff:IsHidden() return false end

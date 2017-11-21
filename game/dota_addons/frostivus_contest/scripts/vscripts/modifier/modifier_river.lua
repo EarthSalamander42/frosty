@@ -25,7 +25,7 @@ if IsServer() then
 		local parent = self:GetParent()
 		local origin = parent:GetAbsOrigin()
 
-		if origin.z < 100.0 then
+		if origin.z < 100.0 and not parent:HasModifier("modifier_fighting_boss") then
 			return true
 		end
 

@@ -401,8 +401,9 @@ function boss_thinker_zeus:OnIntervalThink()
 
 		-- Enrage
 		if self.boss_timer > 88 then
-			self:GodsWrath(altar_loc, altar_entity, 10.0, 900, 300)
-			self.boss_timer = self.boss_timer - 2
+			boss:MoveToPosition(altar_loc + Vector(0, 300, 0))
+			self:GodsWrath(altar_loc, altar_entity, 2.0, 900, 300)
+			self.boss_timer = self.boss_timer - 2.1
 		end
 	end
 end

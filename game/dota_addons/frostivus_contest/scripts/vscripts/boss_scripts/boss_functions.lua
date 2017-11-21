@@ -8,6 +8,7 @@ LinkLuaModifier("capture_start_trigger", "boss_scripts/capture_start_trigger.lua
 LinkLuaModifier("boss_thinker_zeus", "boss_scripts/boss_thinker_zeus.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("boss_thinker_venomancer", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("boss_thinker_treant", "boss_scripts/boss_thinker_treant.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("boss_thinker_nevermore", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
 
 ---------------------
 -- Arena lockdown
@@ -71,6 +72,7 @@ function UnlockArena(altar, victory, team, aura_ability)
 		hero:RemoveModifierByName("modifier_frostivus_venomancer_virulent_plague")
 		hero:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
 		hero:RemoveModifierByName("modifier_frostivus_leech_seed_debuff")
+		hero:RemoveModifierByName("modifier_frostivus_overgrowth_root")
 	end
 
 	-- Adjust altar aura if necessary
@@ -297,7 +299,7 @@ end
 function SpawnZeus(altar)
 	local altar_loc = Entities:FindByName(nil, altar):GetAbsOrigin()
 	local boss = CreateUnitByName("npc_frostivus_boss_zuus", altar_loc + Vector(0, 300, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
-	boss:SetForwardVector(Vector(0, -1, 0))
+	boss:FaceTowards(altar_loc)
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "zeus", altar_handle = altar})
 
 	-- Abilities
@@ -317,7 +319,7 @@ end
 function SpawnVenomancer(altar)
 	local altar_loc = Entities:FindByName(nil, altar):GetAbsOrigin()
 	local boss = CreateUnitByName("npc_frostivus_boss_venomancer", altar_loc + Vector(0, 300, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
-	boss:SetForwardVector(Vector(0, -1, 0))
+	boss:FaceTowards(altar_loc)
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "venomancer", altar_handle = altar})
 
 	-- Abilities
@@ -342,8 +344,8 @@ end
 
 function SpawnTreant(altar)
 	local altar_loc = Entities:FindByName(nil, altar):GetAbsOrigin()
-	local boss = CreateUnitByName("npc_frostivus_boss_treant", altar_loc, true, nil, nil, DOTA_TEAM_NEUTRALS)
-	boss:SetForwardVector(Vector(0, -1, 0))
+	local boss = CreateUnitByName("npc_frostivus_boss_treant", altar_loc + Vector(0, 50, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
+	boss:FaceTowards(altar_loc)
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "treant", altar_handle = altar})
 
 	-- Abilities
@@ -351,7 +353,6 @@ function SpawnTreant(altar)
 	boss:FindAbilityByName("frostivus_boss_leech_seed"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_living_armor"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_overgrowth"):SetLevel(1)
-	--boss:FindAbilityByName(""):SetLevel(1)
 
 	-- Cosmetics
 	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/treant/ancient_seal_protector_set_head/ancient_seal_protector_set_head.vmdl"})
@@ -366,17 +367,78 @@ function SpawnTreant(altar)
 	return boss
 end
 
+function SpawnTiny()
+	local tiny_loc = Vector(1222, 4033, 128)
+	local rock_01_loc = Vector(1043, 4159, 128)
+	local rock_02_loc = Vector(1100, 3896, 128)
+	local rock_03_loc = Vector(1193, 3763, 128)
+	local rock_04_loc = Vector(971, 4013, 128)
+
+	-- Spawn Tiny
+	local tiny = CreateUnitByName("npc_frostivus_tiny", tiny_loc, true, nil, nil, DOTA_TEAM_NEUTRALS)
+	tiny:AddNewModifier(nil, nil, "modifier_frostivus_boss_add", {})
+	tiny:AddNewModifier(nil, nil, "modifier_invulnerable", {})
+
+	-- Spawn Rocks
+	local rock_01 = CreateUnitByName("npc_frostivus_tiny_rock_01", rock_01_loc, true, nil, nil, DOTA_TEAM_NEUTRALS)
+	rock_01:AddNewModifier(nil, nil, "modifier_frostivus_boss_add", {})
+	rock_01:AddNewModifier(nil, nil, "modifier_invulnerable", {})
+
+	local rock_02 = CreateUnitByName("npc_frostivus_tiny_rock_02", rock_02_loc, true, nil, nil, DOTA_TEAM_NEUTRALS)
+	rock_02:AddNewModifier(nil, nil, "modifier_frostivus_boss_add", {})
+	rock_02:AddNewModifier(nil, nil, "modifier_invulnerable", {})
+
+	local rock_03 = CreateUnitByName("npc_frostivus_tiny_rock_03", rock_03_loc, true, nil, nil, DOTA_TEAM_NEUTRALS)
+	rock_03:AddNewModifier(nil, nil, "modifier_frostivus_boss_add", {})
+	rock_03:AddNewModifier(nil, nil, "modifier_invulnerable", {})
+
+	local rock_04 = CreateUnitByName("npc_frostivus_tiny_rock_04", rock_04_loc, true, nil, nil, DOTA_TEAM_NEUTRALS)
+	rock_04:AddNewModifier(nil, nil, "modifier_frostivus_boss_add", {})
+	rock_04:AddNewModifier(nil, nil, "modifier_invulnerable", {})
+
+	return {tiny, rock_01, rock_02, rock_03, rock_04}
+end
+
+function SpawnNevermore(altar)
+	local altar_loc = Entities:FindByName(nil, altar):GetAbsOrigin()
+	local boss = CreateUnitByName("npc_frostivus_boss_nevermore", altar_loc + Vector(0, 300, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
+	boss:FaceTowards(altar_loc)
+	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "nevermore", altar_handle = altar})
+
+	-- Abilities
+	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_necromastery"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_requiem_of_souls"):SetLevel(1)
+
+	-- Cosmetics
+	boss:SetRenderColor(0, 0, 0)
+	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/nevermore/diabolical_fiend_head/diabolical_fiend_head.vmdl"})
+	boss.head:FollowEntity(boss, true)
+	boss.wings = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/shadow_fiend/arcana_wings.vmdl"})
+	boss.wings:FollowEntity(boss, true)
+	boss.wings:SetRenderColor(0, 0, 0)
+	boss.shoulders = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/nevermore/ferrum_chiroptera_shoulder/ferrum_chiroptera_shoulder.vmdl"})
+	boss.shoulders:FollowEntity(boss, true)
+	boss.shoulders:SetRenderColor(0, 0, 0)
+	boss.arms = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/nevermore/diabolical_fiend_arms/diabolical_fiend_arms.vmdl"})
+	boss.arms:FollowEntity(boss, true)
+	boss.arms:SetRenderColor(0, 0, 0)
+	boss.hand = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/heroes/shadow_fiend/fx_shadow_fiend_arcana_hand.vmdl"})
+	boss.hand:FollowEntity(boss, true)
+	boss.hand:SetRenderColor(0, 0, 0)
+
+	return boss
+end
+
 function BossPhaseAbilityCast(team, ability_image, ability_name, delay)
-	local ability_cast_timer = 0.0
+	local ability_cast_timer = delay
 	Timers:CreateTimer(function()
 		CustomGameEventManager:Send_ServerToTeam(team, "BossStartedCast", {ability_image = ability_image, ability_name = ability_name, current_cast_time = ability_cast_timer, cast_time = delay})
-		if ability_cast_timer < delay then
-			ability_cast_timer = ability_cast_timer + 0.1
-			print(ability_cast_timer)
-			return 0.1
-		elseif ability_cast_timer >= delay then
+		if ability_cast_timer > 0 then
+			ability_cast_timer = ability_cast_timer - 0.03
+			return 0.03
+		elseif ability_cast_timer <= 0 then
 			ability_cast_timer = 0.0
-			print("STOP THINKING FOR BOSS PHASE ABILITY")
 		end
 	end)
 end
