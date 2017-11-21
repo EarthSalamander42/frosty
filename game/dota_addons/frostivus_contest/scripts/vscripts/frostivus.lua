@@ -3,6 +3,8 @@ PHASE = 0
 FROSTIVUS_WINNER = 2
 COUNT_DOWN = 1
 PHASE_TIME = 481 -- 481
+PRESENT_SCORE_2 = 0
+PRESENT_SCORE_3 = 0
 if IsInToolsMode() then PHASE_TIME = 481 end -- 481
 
 function Frostivus()

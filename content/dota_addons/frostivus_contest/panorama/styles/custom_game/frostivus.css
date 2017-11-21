@@ -20,51 +20,77 @@
 }
 
 #FrostivusPanelTimer {
-	width: 100%;
 	height: 20%;
 	align: center top;
-}
-
-#FrostivusAltarRespawn
-{
-	margin-left: 16.5%;
-	margin-bottom: 1%;
-	vertical-align: bottom;
-	flow-children: up;
+	flow-children: right;
 }
 
 #FrostivusAltar
 {
 	width: 245px;
-	height: 70px;
+	height: 40px;
+}
+
+#FrostivusAltarButton
+{
+	width: 100%;
+	height: 100%;
+	background-color: #000000fa;
+	border: 2px solid #4d5051;
+	border-radius: 5px;
+}
+
+#FrostivusAltarButton:hover
+{
+	border: 2px solid white;
+}
+
+#FrostivusAltarButton Label
+{
+	align: center center;
+	color: #6f6f6f;
+	text-transform: uppercase;
+	text-align: center center;
+	font-size: 16px;
+}
+
+#FrostivusAltarButton:hover Label
+{
+	color: white;
+}
+
+#FrostivusAltarRespawn
+{
+	margin-bottom: 23%;
+	align: left bottom;
+	flow-children: up;
 }
 
 #FrostivusAltarMenu
 {
-	width: 245px; /* fit-children */
+	width: 245px;
 	height: fit-children;
 	flow-children: down;
-	margin-bottom: 1%;
 	padding: 2% 2% 2% 2%;
 	border-radius: 5px;
-	background-color: #000000da;
+	background-color: #000000ea;
 }
 
 .FrostivusAltarContent {
 	width: 100%;
-	height: 30px;
+	height: 25px;
 	flow-children: right;
 }
 
 .AltarState {
-	width: 15%;
-	height: 100%;
+	width: 32px;
+	height: 32px;
 	background-image: url("file://{images}/custom_game/altar_attacked.png");
 	background-size: 100% 100%;
 }
 
 .AltarButton {
-	width: 85%;
+	width: 90%;
 }
 
 .AltarButton:hover {
@@ -101,9 +127,6 @@
 
 #Timer,
 {
-	width: 100%;
-	margin-top: 15%;
-
 	font-size: 20px;
 	font-weight: bolder;
 	color: #ffffff;
@@ -152,47 +175,21 @@
 
 	horizontal-align: center;
 	text-align: center;	
-	margin-top: 12px;
+	margin-top: 4px;
 	text-shadow: 1px 1px 2px 3.0 #000000;
 	font-size: 16px;
 }
 
-.HoldoutLabelSmall_alt
-{
-	color: white;
-	font-weight: bold;
-	text-align: center;
-	text-shadow: 1px 1px 2px 2.0 #00000011;
-
-	font-family: Radiance,FZKai-Z03,TH Sarabun New,YDYGO 540;
-	font-size: 14px;
-	letter-spacing: 2px;
-	text-overflow: clip;
-
-	horizontal-align: center;
-	text-align: center;	
-	margin-bottom: 12px;
-	text-shadow: 1px 1px 2px 3.0 #000000;
-	font-size: 16px;
-}
-
-.HoldoutLabelSmall.Header
-{
-	width: 95px;
-}
-
-#BossHP2,
-#BossHP3
+.BossHP
 {
 	width: 750px;
 	height: 40%;
-	margin-top: 15%;
-	height: fit-children;
+	margin-top: 50px;
+	height: 150px;
 	visibility: collapse;
 }
 
-#BossProgressBar2,
-#BossProgressBar3
+.BossProgressBar
 {
 	width: 90%;
 	height: 24px;
@@ -203,48 +200,47 @@
 	box-shadow: fill #000 -3px -3px 6px 6px;	
 }
 
-#BossProgressBar2_Left,
-#BossProgressBar3_Left
+.BossProgressBar_Left
 {
 	box-shadow: inset #000 1px 1px 3px 3px;	
 	border-radius: 2px;
 }
 
-#BossProgressBar2_Right,
-#BossProgressBar3_Right
+.BossProgressBar_Right
 {
 	background-color: gradient( linear, 0% 0%, 100% 0%, from( #222222FF ), to( black ) );
 }
 
-#BossProgressBarContainer2,
-#BossProgressBarContainer3
+.BossProgressBarContainer
 {
 	width: 100%;
 	height: 40px;
-	margin-top: 20%;
+	margin-top: 30px;
 	margin-right: 6%;
 }
 
-#BossIcon2,
-#BossIcon3
+.BossIcon
 {
-	width: 48px;
-	height: 48px;
-	margin-left: 5%;
+	width: 30px;
+	height: 30px;
+	margin-left: 8%;
 	background-repeat: no-repeat;
 	background-position: 50% 0%;
 	background-size: 90% 90%;
 	z-index: 10;
 }
 
-#BossHealth2,
-#BossHealth3
+.BossHealth
 {
 	margin-left: 6%;
 }
 
-#BossLevel2,
-#BossLevel3
+#BossHealth2,
+#BossHealth3 {
+	margin-left: 70px;
+}
+
+.BossLevel
 {
 	horizontal-align: left;
 	color: white;
@@ -261,51 +257,63 @@
 	font-size: 18px;
 }
 
-#BossLabel2,
-#BossLabel3
+.BossLabel
 {
 	margin-left: 3%;
 }
 
-#BossInfo2,
-#BossInfo3
+.BossInfo
 {
-	width: 100%;
+	width: 80%;
+	horizontal-align: center;
 }
 
-#BossCastBar2 {
+.BossCastBar {
 	width: 100%;
 	height: 40%;
-	margin-top: 70%;
+	margin-top: 65px;
 	margin-left: 10%;
 }
 
-#BossCastAbility2 {
+.BossCastAbility {
 	width: 50px;
 	height: 50px;
 	z-index: 20;
 }
 
-#BossCastTimeLabel2 {
-	z-index: 20;
-	horizontal-align: center;
-}
+.BossCastTimeLabel,
+.BossCastAbilityName
+{
+	margin-top: 18px;
+	margin-left: 8%;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 1px 1px 2px 2.0 #00000011;
 
-#BossCastAbilityName2 {
-	margin-left: 10%;
+	font-family: Radiance,FZKai-Z03,TH Sarabun New,YDYGO 540;
+	font-size: 15px;
+	letter-spacing: 2px;
+	text-overflow: clip;
+
 	horizontal-align: left;
+	text-align: center;	
+	text-shadow: 1px 1px 2px 3.0 #000000;
 	z-index: 20;
 }
 
-#BossCastProgressBar2 {
-	width: 50%;
-	height: 50px;
+.BossCastTimeLabel {
+	margin-left: 37%;
+}
+
+.BossCastProgressBar {
+	width: 40%;
+	height: 35px;
 	margin-left: 7%;
-	horizontal-align: left;
+	align: left center;
 }
 
-#BossCastProgressBar2_Left,
-#BossCastProgressBar3_Left
+.BossCastProgressBar_Left,
 {
 	box-shadow: inset #000 1px 1px 3px 3px;	
 	border-radius: 2px;

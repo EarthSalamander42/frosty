@@ -13,12 +13,12 @@ function UpdateTimer( data )
 	timerText += data.timer_second_10;
 	timerText += data.timer_second_01;
 
-	$( "#Timer" ).text = timerText;
+	$( "#Timer" ).text = timerText + " left";
 }
 
 function Phase(args)
 {
-	$("#PhaseLabel").text = $.Localize("#frostivus_phase_" + args.Phase);
+	$("#PhaseLabel").text = $.Localize("#frostivus_phase_" + args.Phase) + ": ";
 	JS_PHASE = args.Phase
 
 	if (args.Phase == 1)
@@ -26,6 +26,18 @@ function Phase(args)
 		$("#FrostivusHUD_alt").style.visibility = "visible";
 //	} else if (args.Phase == 2) {
 //		$('#ScorePanel').MoveChildBefore($('#Timer'), $('#Boss'));
+	}
+}
+
+var toggle = true
+function FrostivusAltar() {
+	if (toggle == false) {
+		$("#FrostivusAltarMenu").style.visibility = "visible";
+		toggle = true
+	}
+	else {
+		$("#FrostivusAltarMenu").style.visibility = "collapse";
+		toggle = false
 	}
 }
 
@@ -89,8 +101,8 @@ function UpdateBossBar(args) {
 				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
 				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
 			} else if (BossShortLabel == "zuus") {
-				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #66a3ff ) )';
-				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #66a3ff ) )';
+				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #66a3ff ), color-stop( .5, #66a3ff ), to( #1A75FF ) )';
+				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #66a3ff ), color-stop( .5, #66a3ff ), to( #1A75FF ) )';
 			}
 			$("#BossLevel" + TeamContest).text = $.Localize("boss_level") + BossLvl
 			$("#BossLabel" + TeamContest).text = $.Localize(BossLabel)

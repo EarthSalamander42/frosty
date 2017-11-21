@@ -76,6 +76,12 @@ function modifier_custom_blur_active:DeclareFunctions()
 	return funcs 
 end
 
+function modifier_custom_blur_active:CheckState()
+	local state = {}
+		state[MODIFIER_STATE_NO_HEALTH_BAR] = true
+	return state
+end
+
 function modifier_custom_blur_active:GetAbsoluteNoDamagePhysical()  
 	return 1
 end
