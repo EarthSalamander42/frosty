@@ -172,31 +172,36 @@ function FrostivusHeroKilled(killer, hero)
 end
 
 function FrostivusAltarRespawn(hero)
-	-- Base spawn
-	local respawn_position
-	if hero.altar == 1 or hero.altar == 7 then
-		local building = Entities:FindByName(nil, "altar_"..hero.altar)
-		respawn_position = building:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
-	-- Zeus
-	elseif hero.altar == 2 then
-		respawn_position = Vector(-3214, 4789, 128)
-	-- Veno
-	elseif hero.altar == 3 then
-		respawn_position = Vector(-3108, -3725, 128)
-	-- Lich
-	elseif hero.altar == 4 then
-		respawn_position = Vector(1127, 905, 128)
-	-- Treant
-	elseif hero.altar == 5 then
-		respawn_position = Vector(2490, 3253, 128)
-	-- SF
-	elseif hero.altar == 6 then
-		respawn_position = Vector(2594, -3759, 128)
-	end
-	FindClearSpaceForUnit(hero, respawn_position, true)
-	if hero:GetLevel() <= 10 then
-		hero:SetTimeUntilRespawn(10)
-	else
-		hero:SetTimeUntilRespawn(hero:GetLevel())
+	-- fix boss respawning at dire fountain
+	if hero:GetPlayerID() ~= -1 then
+		-- Base spawn
+		local respawn_position
+		if hero.altar == 1 or hero.altar == 7 then
+			local building = Entities:FindByName(nil, "altar_"..hero.altar)
+			respawn_position = building:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
+		-- Zeus
+		elseif hero.altar == 2 then
+			respawn_position = Vector(-3214, 4789, 128)
+		-- Veno
+		elseif hero.altar == 3 then
+			respawn_position = Vector(-3108, -3725, 128)
+		-- Lich
+		elseif hero.altar == 4 then
+			respawn_position = Vector(1127, 905, 128)
+		-- Treant
+		elseif hero.altar == 5 then
+			respawn_position = Vector(2490, 3253, 128)
+		-- SF
+		elseif hero.altar == 6 then
+			respawn_position = Vector(2594, -3759, 128)
+		end
+
+		if hero:GetLevel() <= 10 then
+			hero:SetTimeUntilRespawn(10)
+		else
+			hero:SetTimeUntilRespawn(hero:GetLevel())
+		end
+
+		FindClearSpaceForUnit(hero, respawn_position, true)
 	end
 end

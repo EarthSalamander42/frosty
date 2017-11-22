@@ -163,8 +163,9 @@ local npc = EntIndexToHScript(keys.entindex)
 					npc.altar = 7
 				end
 			end
-			npc:AddNewModifier(npc, nil, "modifier_river", {})
+
 			FrostivusAltarRespawn(npc)
+			npc:AddNewModifier(npc, nil, "modifier_river", {})
 		end
 	end
 end

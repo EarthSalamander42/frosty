@@ -447,7 +447,6 @@ function BossPhaseAbilityCast(team, ability_image, ability_name, delay)
 	end)
 end
 
-<<<<<<< HEAD
 function PlaySoundForTeam(team, sound)
 	for player_id = 0, 20 do
 		if PlayerResource:GetPlayer(player_id) then
@@ -544,7 +543,7 @@ function StartPhaseThree()
 		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_death_Stinger")
 	end
 end
-=======
+
 function BossPhaseAbilityCastAlt(team, ability_image, ability_name, delay)
 	local ability_cast_timer = 0.0
 	Timers:CreateTimer(function()
@@ -558,4 +557,3 @@ function BossPhaseAbilityCastAlt(team, ability_image, ability_name, delay)
 		end
 	end)
 end
->>>>>>> 03628679ef7eeb18e61eef865eab7cf895c41fe7
