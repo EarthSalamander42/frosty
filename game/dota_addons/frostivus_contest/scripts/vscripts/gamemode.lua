@@ -119,7 +119,7 @@ function GameMode:ModifierFilter( keys )
 		if modifier_owner:HasModifier("modifier_frostivus_boss") then
 			
 			-- Ignore stuns and knockbacks
-			if modifier_name == "modifier_stunned" or modifier_name == "modifier_knockback" or modifier_name == "modifier_rooted" then
+			if modifier_name == "modifier_stunned" or modifier_name == "modifier_knockback" or modifier_name == "modifier_rooted" or modifier_name == "modifier_item_forcestaff_active" or modifier_name == "modifier_item_hurricane_pike_active_alternate" then
 				return false
 			end
 		end
@@ -177,7 +177,12 @@ function GameMode:OrderFilter(keys)
 	end
 
 	-- Prevent Monkey King from jumping outside boss arenas
-	if keys.order_type == DOTA_UNIT_ORDER_CAST_TARGET_TREE and EntIndexToHScript(keys.entindex_ability):GetAbilityName() == "monkey_king_tree_dance" and unit:HasModifier("modifier_fighting_boss") then
+	if keys.order_type == DOTA_UNIT_ORDER_CAST_TARGET_TREE and unit:HasModifier("modifier_fighting_boss") and EntIndexToHScript(keys.entindex_ability):GetAbilityName() == "monkey_king_tree_dance" then
+		return false
+	end
+
+	-- Prevent Vengeful Spirit using Nether Swap on bosses
+	if keys.order_type == DOTA_UNIT_ORDER_CAST_TARGET and (not unit:HasModifier("modifier_fighting_boss")) and EntIndexToHScript(keys.entindex_ability):GetAbilityName() == "vengefulspirit_nether_swap" then
 		return false
 	end
 
@@ -348,6 +353,7 @@ function GameMode:InitGameMode()
 		mode:SetMinimumAttackSpeed(20.0)
 		mode:SetCustomAttributeDerivedStatValue(DOTA_ATTRIBUTE_STRENGTH_STATUS_RESISTANCE_PERCENT, 0)
 		mode:SetFixedRespawnTime(26.0)
+		mode:SetTopBarTeamValuesOverride(true)
 
 --		mode:SetTowerBackdoorProtectionEnabled( false )
 --		mode:SetFountainConstantManaRegen(10.0)

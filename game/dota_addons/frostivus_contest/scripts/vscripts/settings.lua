@@ -14,6 +14,9 @@ BOSS_SPAWN_POINT_TABLE.lich = "altar_4"
 BOSS_SPAWN_POINT_TABLE.treant = "altar_5"
 BOSS_SPAWN_POINT_TABLE.nevermore = "altar_6"
 
+RADIANT_FIGHTING = false
+DIRE_FIGHTING = false
+
 -------------------------------------------------------------------------------------------------
 -- Barebones basics
 -------------------------------------------------------------------------------------------------

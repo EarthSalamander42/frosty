@@ -13,6 +13,8 @@ function Precache(context)
 	LinkLuaModifier("modifier_command_restricted", "modifier/modifier_command_restricted.lua", LUA_MODIFIER_MOTION_NONE )
 	LinkLuaModifier("modifier_river", "modifier/modifier_river.lua", LUA_MODIFIER_MOTION_NONE )
 	LinkLuaModifier("modifier_passive_bounty", "boss_scripts/aura_abilities/modifier_passive_bounty.lua", LUA_MODIFIER_MOTION_NONE )
+	LinkLuaModifier("modifier_frostivus_greevil", "boss_scripts/greevil_innate", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("modifier_greevil_capture_aura", "boss_scripts/greevil_innate.lua", LUA_MODIFIER_MOTION_NONE )
 
 	-- Stuff
 	PrecacheResource("particle_folder", "particles/hero", context)
@@ -58,8 +60,8 @@ function Precache(context)
 
 	-- Nevermore boss
 	PrecacheResource("particle_folder", "particles/boss_nevermore/", context)
-	PrecacheResource("particle_folder", "particles/units/heroes/hero_nevermore/nevermore_ambient_glow.vpcf", context)
-	PrecacheResource("particle", "particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient.vpcf", context)
+	PrecacheResource("particle_folder", "particles/units/heroes/hero_nevermore/", context)
+	PrecacheResource("particle_folder", "particles/econ/items/shadow_fiend/sf_fire_arcana", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts", context)
 
 	-- Models can also be precached by folder or individually

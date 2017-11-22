@@ -42,11 +42,32 @@ end
 -----------------------------------------------------------------------
 
 function capture_start_trigger:OnTakeDamage(keys)
-	local attacker = keys.attacker
-	local target = keys.unit
-
 	if IsServer() then
+		local attacker = keys.attacker
+		local target = keys.unit
+
+		-- If phase 1 has ended, do nothing
+		if PHASE > 1 then
+			return nil
+		end
+
+		-- Start boss fight is conditions are met
 		if target == self:GetParent() and attacker:IsAlive() and attacker:IsRealHero() then
+
+			-- If this team is participating in another boss fight, do nothing, else, flag them as fighting
+			if attacker:GetTeam() == DOTA_TEAM_GOODGUYS then
+				if RADIANT_FIGHTING then
+					return nil
+				else
+					RADIANT_FIGHTING = true
+				end
+			elseif attacker:GetTeam() == DOTA_TEAM_BADGUYS then
+				if DIRE_FIGHTING then
+					return nil
+				else
+					DIRE_FIGHTING = true
+				end
+			end
 
 			-- Notify the console that a boss fight (capture attempt) was started
 			print(self.boss_name, "boss hit, altar handle is", self.altar_handle)

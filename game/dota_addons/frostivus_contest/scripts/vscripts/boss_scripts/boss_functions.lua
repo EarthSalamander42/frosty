@@ -60,19 +60,17 @@ function UnlockArena(altar, victory, team, aura_ability)
 
 	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {})
 
+	-- Mark relevant team as able to fight again
+	if team == DOTA_TEAM_GOODGUYS then
+		RADIANT_FIGHTING = false
+	elseif team == DOTA_TEAM_BADGUYS then
+		DIRE_FIGHTING = false
+	end
+
 	-- Cleanse nearby hero debuffs
 	local nearby_heroes = FindUnitsInRadius(team, altar_handle:GetAbsOrigin(), nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 	for _,hero in pairs(nearby_heroes) do
-		hero:RemoveModifierByName("modifier_frostivus_zeus_positive_charge")
-		hero:RemoveModifierByName("modifier_frostivus_zeus_negative_charge")
-		hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_sting_debuff")
-		hero:RemoveModifierByName("modifier_frostivus_venomancer_venomous_gale")
-		hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_nova")
-		hero:RemoveModifierByName("modifier_frostivus_venomancer_unwilling_host")
-		hero:RemoveModifierByName("modifier_frostivus_venomancer_virulent_plague")
-		hero:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
-		hero:RemoveModifierByName("modifier_frostivus_leech_seed_debuff")
-		hero:RemoveModifierByName("modifier_frostivus_overgrowth_root")
+		CleanseBossDebuffs(hero)
 	end
 
 	-- Adjust altar aura if necessary
@@ -209,10 +207,10 @@ function modifier_altar_active:OnIntervalThink()
 					center_x = altar_loc.x,
 					center_y = altar_loc.y,
 					center_z = altar_loc.z,
-					duration = 0.35,
-					knockback_duration = 0.35,
-					knockback_distance = 400,
-					knockback_height = 70,
+					duration = 0.09,
+					knockback_duration = 0.09,
+					knockback_distance = 100,
+					knockback_height = 60,
 					should_stun = 1
 				}
 
@@ -430,6 +428,11 @@ function SpawnNevermore(altar)
 	return boss
 end
 
+
+---------------------
+-- Other stuff
+---------------------
+
 function BossPhaseAbilityCast(team, ability_image, ability_name, delay)
 	local ability_cast_timer = 0.0
 	Timers:CreateTimer(function()
@@ -444,6 +447,104 @@ function BossPhaseAbilityCast(team, ability_image, ability_name, delay)
 	end)
 end
 
+<<<<<<< HEAD
+function PlaySoundForTeam(team, sound)
+	for player_id = 0, 20 do
+		if PlayerResource:GetPlayer(player_id) then
+			if PlayerResource:GetTeam(player_id) == team then
+				EmitSoundOnClient(sound, PlayerResource:GetPlayer(player_id))
+			end
+		end
+	end
+end
+
+function CleanseBossDebuffs(hero)
+	hero:RemoveModifierByName("modifier_frostivus_zeus_positive_charge")
+	hero:RemoveModifierByName("modifier_frostivus_zeus_negative_charge")
+	hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_sting_debuff")
+	hero:RemoveModifierByName("modifier_frostivus_venomancer_venomous_gale")
+	hero:RemoveModifierByName("modifier_frostivus_venomancer_poison_nova")
+	hero:RemoveModifierByName("modifier_frostivus_venomancer_unwilling_host")
+	hero:RemoveModifierByName("modifier_frostivus_venomancer_virulent_plague")
+	hero:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
+	hero:RemoveModifierByName("modifier_frostivus_leech_seed_debuff")
+	hero:RemoveModifierByName("modifier_frostivus_overgrowth_root")
+end
+
+---------------------
+-- Phase transitions
+---------------------
+
+function StartPhaseTwo()
+
+	-- End all boss fights
+	local all_heroes = HeroList:GetAllHeroes()
+	for _, hero in pairs(all_heroes) do
+		hero:RemoveModifierByName("modifier_fighting_boss")
+		CleanseBossDebuffs(hero)
+		hero:Purge(false, true, false, false, false)
+		hero:AddNewModifier(hero, nil, "modifier_aegis_regen", {duration = 3.0})
+	end
+	RADIANT_FIGHTING = false
+	DIRE_FIGHTING = false
+
+	-- Hide boss health bars
+	CustomGameEventManager:Send_ServerToTeam(DOTA_TEAM_GOODGUYS, "hide_boss_hp", {})
+	CustomGameEventManager:Send_ServerToTeam(DOTA_TEAM_BADGUYS, "hide_boss_hp", {})
+
+	-- Reset all arenas
+	for i = 1, 7 do
+		local altar_handle = Entities:FindByName(nil, "altar_"..i)
+		altar_handle:RemoveModifierByName("modifier_altar_active")
+		if altar_handle.arena_fence_pfx then
+			ParticleManager:DestroyParticle(altar_handle.arena_fence_pfx, true)
+			ParticleManager:ReleaseParticleIndex(altar_handle.arena_fence_pfx)
+		end
+		local nearby_summons = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, altar_handle:GetAbsOrigin(), nil, 2200, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+		for _,summon in pairs(nearby_summons) do
+			if not summon:HasModifier("modifier_frostivus_boss") then
+				summon:Kill(nil, summon)
+			end
+		end
+	end
+
+	-- Reset all bosses
+	local all_bosses = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 20000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
+	for _, boss in pairs(all_bosses) do
+		if boss:HasModifier("modifier_frostivus_boss") then
+			boss:RemoveModifierByName("boss_thinker_zeus")
+			boss:RemoveModifierByName("boss_thinker_venomancer")
+			boss:RemoveModifierByName("boss_thinker_treant")
+			boss:RemoveModifierByName("boss_thinker_nevermore")
+			boss:RemoveModifierByName("boss_thinker_lich")
+			boss:Purge(true, true, false, true, true)
+			boss:Heal(999999, nil)
+			boss:Stop()
+			if boss:GetUnitName() == "npc_frostivus_boss_zuus" then
+				boss:SetAbsOrigin(Entities:FindByName(nil, "altar_2"):GetAbsOrigin() + Vector(0, 300, 0))
+			elseif boss:GetUnitName() == "npc_frostivus_boss_venomancer" then
+				boss:SetAbsOrigin(Entities:FindByName(nil, "altar_3"):GetAbsOrigin() + Vector(0, 300, 0))
+			elseif boss:GetUnitName() == "npc_frostivus_boss_lich" then
+				boss:SetAbsOrigin(Entities:FindByName(nil, "altar_4"):GetAbsOrigin() + Vector(0, 300, 0))
+			elseif boss:GetUnitName() == "npc_frostivus_boss_treant" then
+				boss:SetAbsOrigin(Entities:FindByName(nil, "altar_5"):GetAbsOrigin() + Vector(0, 50, 0))
+			elseif boss:GetUnitName() == "npc_frostivus_boss_nevermore" then
+				boss:SetAbsOrigin(Entities:FindByName(nil, "altar_6"):GetAbsOrigin() + Vector(0, 300, 0))
+			end
+		end
+	end
+end
+
+function StartPhaseThree()
+	if PRESENT_SCORE_2 >= PRESENT_SCORE_3 then
+		GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_death_Stinger")
+	else
+		GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_death_Stinger")
+	end
+end
+=======
 function BossPhaseAbilityCastAlt(team, ability_image, ability_name, delay)
 	local ability_cast_timer = 0.0
 	Timers:CreateTimer(function()
@@ -457,3 +558,4 @@ function BossPhaseAbilityCastAlt(team, ability_image, ability_name, delay)
 		end
 	end)
 end
+>>>>>>> 03628679ef7eeb18e61eef865eab7cf895c41fe7
