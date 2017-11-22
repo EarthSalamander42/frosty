@@ -60,6 +60,7 @@ function UnlockArena(altar, victory, team, aura_ability)
 
 	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {})
 
+	
 	-- Mark relevant team as able to fight again
 	if team == DOTA_TEAM_GOODGUYS then
 		RADIANT_FIGHTING = false
@@ -547,7 +548,7 @@ end
 function BossPhaseAbilityCastAlt(team, ability_image, ability_name, delay)
 	local ability_cast_timer = 0.0
 	Timers:CreateTimer(function()
-		CustomGameEventManager:Send_ServerToTeam(team, "BossStartedCast", {ability_image = ability_image, ability_name = ability_name, current_cast_time = ability_cast_timer, cast_time = delay})
+		CustomGameEventManager:Send_ServerToTeam(team, "BossStartedCastAlt", {ability_image = ability_image, ability_name = ability_name, current_cast_time = ability_cast_timer, cast_time = delay})
 		if ability_cast_timer < delay then
 			ability_cast_timer = ability_cast_timer + FrameTime()
 			return FrameTime()

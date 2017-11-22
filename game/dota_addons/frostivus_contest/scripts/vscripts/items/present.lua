@@ -18,19 +18,17 @@ function item_frostivus_present:OnSpellStart()
 		else
 			if caster:GetTeam() == DOTA_TEAM_GOODGUYS then
 				PRESENT_SCORE_2 = PRESENT_SCORE_2 + 1
-				GameRules:GetGameModeEntity():SetTopBarTeamValue(DOTA_TEAM_GOODGUYS, PRESENT_SCORE_2)
+				CustomNetTables:SetTableValue("game_options", "radiant", {score = PRESENT_SCORE_2})
 				PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "Frostivus.PointScored.Team")
 				PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_receive_present_Stinger")
 			elseif caster:GetTeam() == DOTA_TEAM_BADGUYS then
 				PRESENT_SCORE_3 = PRESENT_SCORE_3 + 1
-				GameRules:GetGameModeEntity():SetTopBarTeamValue(DOTA_TEAM_BADGUYS, PRESENT_SCORE_3)
+				CustomNetTables:SetTableValue("game_options", "dire", {score = PRESENT_SCORE_3})
 				PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_receive_present_Stinger")
 				PlaySoundForTeam(DOTA_TEAM_BADGUYS, "Frostivus.PointScored.Team")
 			end
 
 			caster:AddNewModifier(nil, nil, "modifier_frostivus_present_duplicate_prevention", {duration = 0.03})
-			print("Radiant: "..PRESENT_SCORE_2)
-			print("Dire: "..PRESENT_SCORE_3)
 		end
 	end
 end

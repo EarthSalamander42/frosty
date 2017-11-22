@@ -209,6 +209,7 @@ function HeroPicked(player, hero, team, has_randomed) {
 
 	// Disable the hero button according to hero pick rule
 	var LocalPlayer = Players.GetLocalPlayer()
+	$.Msg(hero)
 	$("#PickList").FindChildTraverse(hero).AddClass("taken");
 
 	// Check if the pick was by the local player

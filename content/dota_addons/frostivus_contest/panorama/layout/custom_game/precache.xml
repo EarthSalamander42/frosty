@@ -1,7 +1,7 @@
 <root>
 	<Panel style="visibility:collapse;">
 		<Panel id="container" style="visibility:collapse;">
-		<!--	<Image src="file://panorama/images/custom_game/loading_screen/loading_screen_bg.png" hittest="false" /> -->
+			<Image src="file://panorama/images/custom_game/present.png" hittest="false" />
 		</Panel>
 	</Panel>
 </root>

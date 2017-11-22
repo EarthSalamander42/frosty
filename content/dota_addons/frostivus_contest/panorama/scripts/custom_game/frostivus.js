@@ -24,8 +24,7 @@ function Phase(args)
 	if (args.Phase == 1)
 	{
 		$("#FrostivusHUD_alt").style.visibility = "visible";
-//	} else if (args.Phase == 2) {
-//		$('#ScorePanel').MoveChildBefore($('#Timer'), $('#Boss'));
+		$("#FrostivusScore").style.visibility = "visible";
 	}
 }
 
@@ -78,6 +77,15 @@ function OnPlayerReconnect( data ) {
 }
 
 function UpdateBossBar(args) {
+	var RadiantScore = CustomNetTables.GetTableValue("game_options", "radiant").score;
+	var DireScore = CustomNetTables.GetTableValue("game_options", "dire").score;
+
+	$("#RadiantScore").SetDialogVariableInt("radiant", RadiantScore);
+	$("#RadiantScore").text = RadiantScore;
+
+	$("#DireScore").SetDialogVariableInt("dire", DireScore);
+	$("#DireScore").text = DireScore;
+
 	var BossTable = CustomNetTables.GetTableValue("game_options", "boss");
 	if (BossTable !== null)
 	{
@@ -88,22 +96,27 @@ function UpdateBossBar(args) {
 		var BossLabel = BossTable.label;
 		var BossShortLabel = BossTable.short_label;
 		var TeamContest = BossTable.team_contest;
+		var bar_color = "";
 
 		$("#BossProgressBar" + TeamContest).value = BossHP_percent / 100;
 		$("#BossHealth" + TeamContest).text = BossHP + "/" + BossMaxHP;
 
 		if (update_boss_level == false)
 		{
-			if (BossShortLabel == "venomancer") {
-				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
-				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
+			if (BossShortLabel == "nevermore") {
+				bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #660000 ), color-stop( 0.3, #cc0000 ), color-stop( .5, #cc0000 ), to( #660000 ) )';
+			} else if (BossShortLabel == "venomancer") {
+				bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
 			} else if (BossShortLabel == "treant") {
-				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
-				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
+				bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
 			} else if (BossShortLabel == "zuus") {
-				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #66a3ff ), color-stop( .5, #66a3ff ), to( #1A75FF ) )';
-				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #66a3ff ), color-stop( .5, #66a3ff ), to( #1A75FF ) )';
+				bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #66a3ff ), color-stop( .5, #66a3ff ), to( #1A75FF ) )';
 			}
+
+			$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = bar_color;
+			$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = bar_color;
+			$("#BossCastProgressBar" + TeamContest + "_2_Left").style.backgroundColor = bar_color;
+
 			$("#BossLevel" + TeamContest).text = $.Localize("boss_level") + BossLvl
 			$("#BossLabel" + TeamContest).text = $.Localize(BossLabel)
 			$("#BossIcon" + TeamContest).style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_'+ BossShortLabel +'.png")';

@@ -1,15 +1,13 @@
-.FrostivusHUD
-{
+.FrostivusHUD {
 	width: 100%;
 	height: 100%;
 	z-index: -10;
 }
 
-#FrostivusHUD_alt
-{
-	margin-top: 8%;
+#FrostivusHUD_alt {
 	width: 40%;
 	height: 25%;
+	margin-top: 9%;
 	horizontal-align: center;
 	visibility: collapse;
 }
@@ -25,14 +23,12 @@
 	flow-children: right;
 }
 
-#FrostivusAltar
-{
+#FrostivusAltar {
 	width: 245px;
 	height: 40px;
 }
 
-#FrostivusAltarButton
-{
+#FrostivusAltarButton {
 	width: 100%;
 	height: 100%;
 	background-color: #000000fa;
@@ -40,13 +36,11 @@
 	border-radius: 5px;
 }
 
-#FrostivusAltarButton:hover
-{
+#FrostivusAltarButton:hover {
 	border: 2px solid white;
 }
 
-#FrostivusAltarButton Label
-{
+#FrostivusAltarButton Label {
 	align: center center;
 	color: #6f6f6f;
 	text-transform: uppercase;
@@ -54,20 +48,17 @@
 	font-size: 16px;
 }
 
-#FrostivusAltarButton:hover Label
-{
+#FrostivusAltarButton:hover Label {
 	color: white;
 }
 
-#FrostivusAltarRespawn
-{
-	margin-bottom: 23%;
+#FrostivusAltarRespawn {
+	margin-bottom: 26%;
 	align: left bottom;
 	flow-children: up;
 }
 
-#FrostivusAltarMenu
-{
+#FrostivusAltarMenu {
 	width: 245px;
 	height: fit-children;
 	flow-children: down;
@@ -108,8 +99,7 @@
 	vertical-align: center;
 }
 
-.AltarButton Label
-{
+.AltarButton Label {
 	color: skyblue;
 }
 
@@ -125,8 +115,7 @@
 	background-color: red;
 }
 
-#Timer,
-{
+#Timer, {
 	font-size: 20px;
 	font-weight: bolder;
 	color: #ffffff;
@@ -135,13 +124,11 @@
 	text-overflow: clip;
 }
 
-#Timer.timer_visible
-{
+#Timer.timer_visible {
 	opacity: 1;
 }
 
-#Timer.timer_alert
-{
+#Timer.timer_alert {
 	color: red;
 }
 
@@ -226,7 +213,7 @@
 	margin-left: 8%;
 	background-repeat: no-repeat;
 	background-position: 50% 0%;
-	background-size: 90% 90%;
+	background-size: cover;
 	z-index: 10;
 }
 
@@ -350,4 +337,70 @@
 	width: 1000px;
 	height: 100px;
 	margin-top: 65px;
+}
+
+/* Present HUD  */
+#FrostivusScore {
+	width: 295px;
+	height: fit-children;
+	margin-top: 3.7%;
+	margin-right: 1px;
+	horizontal-align: center;
+	visibility: collapse;
+}
+
+#PresentScore {
+	width: 75px;
+	height: 36px;
+	align: center top;
+	background-image: url("s2r://panorama/images/hud/reborn/bg_timer_psd.vtex");
+	background-size: cover;
+	z-index: 1;
+}
+
+#RadiantScorePanel,
+#DireScorePanel {
+	width: 35%;
+	height: 36px;
+	margin-left: 15%;
+	align: left top;
+	background-color: #08640EDA;
+	background-size: cover;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+#DireScorePanel {
+	margin-right: 15%;
+	align: right top;
+	background-color: #640808DA;
+}
+
+#RadiantScore {
+	margin-top: 5%;
+	margin-right: 15%;
+	align: center center;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	font-size: 18px;
+}
+
+#DireScore {
+	margin-top: 5%;
+	margin-left: 15%;
+	align: center center;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	font-size: 18px;
+}
+
+#PresentIcon {
+	width: 24px;
+	height: 24px;
+	align: center center;
+	background-image: url("s2r://panorama/images/custom_game/present.png");
+	background-size: cover;
+	z-index: 2;
 }

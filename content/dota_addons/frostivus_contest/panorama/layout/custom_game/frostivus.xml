@@ -88,23 +88,23 @@
 					<Label id="BossHealth2" class="HoldoutLabelSmall" hittest="false" text=""/>
 				</Panel>
 
-
 				<Panel id="CastBars2" class="CastBars" hittest="false">
 					<Panel id="BossCastBar2" class="BossCastBar" hittest="false">
 						<DOTAAbilityImage id="BossCastAbility2" class="BossCastAbility" onmouseover="" onmouseout="" abilityname="" />
-						<Label id="BossCastAbilityName2" class="BossCastAbilityName" hittest="false" text="Lightning Bolt"/>
+						<Label id="BossCastAbilityName2" class="BossCastAbilityName" hittest="false" text=""/>
 						<Label id="BossCastTimeLabel2" class="BossCastTimeLabel" hittest="false" text="0.0/1.0"/>
 						<ProgressBar id="BossCastProgressBar2" class="BossCastProgressBar" hittest="false" value="1.0"/>
 					</Panel>
 
 					<Panel id="BossCastBar2_2" class="BossCastBar" hittest="false">
 						<DOTAAbilityImage id="BossCastAbility2_2" class="BossCastAbility" onmouseover="" onmouseout="" abilityname="" />
-						<Label id="BossCastAbilityName2_2" class="BossCastAbilityName" hittest="false" text="Lightning Bolt"/>
+						<Label id="BossCastAbilityName2_2" class="BossCastAbilityName" hittest="false" text=""/>
 						<Label id="BossCastTimeLabel2_2" class="BossCastTimeLabel" hittest="false" text="0.0/1.0"/>
 						<ProgressBar id="BossCastProgressBar2_2" class="BossCastProgressBar" hittest="false" value="1.0"/>
 					</Panel>
 				</Panel>
 			</Panel>
+
 			<Panel id="BossHP3" class="BossHP" hittest="false">
 				<Panel id="BossInfo3" class="BossInfo" hittest="false">
 					<Label id="BossLevel3" class="BossLevel" hittest="false" text="Level: "/>
@@ -117,12 +117,35 @@
 					<Label id="BossHealth3" class="BossHealth" hittest="false" text=""/>
 				</Panel>
 
-				<Panel id="BossCastBar3" class="BossCastBar" hittest="false">
-					<DOTAAbilityImage id="BossCastAbility3" class="BossCastAbility" onmouseover="" onmouseout="" abilityname="" />
-					<Label id="BossCastAbilityName3" class="BossCastAbilityName" hittest="false" text="Lightning Bolt"/>
-					<Label id="BossCastTimeLabel3" class="BossCastTimeLabel" hittest="false" text="0.0/1.0"/>
-					<ProgressBar id="BossCastProgressBar3" class="BossCastProgressBar" hittest="false" value="1.0"/>
+				<Panel id="CastBars3" class="CastBars" hittest="false">
+					<Panel id="BossCastBar3" class="BossCastBar" hittest="false">
+						<DOTAAbilityImage id="BossCastAbility3" class="BossCastAbility" onmouseover="" onmouseout="" abilityname="" />
+						<Label id="BossCastAbilityName3" class="BossCastAbilityName" hittest="false" text=""/>
+						<Label id="BossCastTimeLabel3" class="BossCastTimeLabel" hittest="false" text="0.0/1.0"/>
+						<ProgressBar id="BossCastProgressBar3" class="BossCastProgressBar" hittest="false" value="1.0"/>
+					</Panel>
+
+					<Panel id="BossCastBar3_2" class="BossCastBar" hittest="false">
+						<DOTAAbilityImage id="BossCastAbility3_2" class="BossCastAbility" onmouseover="" onmouseout="" abilityname="" />
+						<Label id="BossCastAbilityName3_2" class="BossCastAbilityName" hittest="false" text=""/>
+						<Label id="BossCastTimeLabel3_2" class="BossCastTimeLabel" hittest="false" text="0.0/1.0"/>
+						<ProgressBar id="BossCastProgressBar3_2" class="BossCastProgressBar" hittest="false" value="1.0"/>
+					</Panel>
 				</Panel>
+			</Panel>
+		</Panel>
+
+		<Panel id="FrostivusScore" hittest="false">
+			<Panel id="RadiantScorePanel" hittest="false">
+				<Label id="RadiantScore" hittest="false" text="0"/>
+			</Panel>
+
+			<Panel id="PresentScore" hittest="false">
+				<Panel id="PresentIcon" hittest="false"/>
+			</Panel>
+
+			<Panel id="DireScorePanel" hittest="false">
+				<Label id="DireScore" hittest="false" text="0"/>
 			</Panel>
 		</Panel>
 	</Panel>

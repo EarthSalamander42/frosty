@@ -29,8 +29,8 @@ function Frostivus()
 	end
 	PHASE = 1
 	nCOUNTDOWNTIMER = PHASE_TIME -- 481 / 8 Min
-	CustomNetTables:SetTableValue("game_options", "radiant", {score = 50, cp_score = 20})
-	CustomNetTables:SetTableValue("game_options", "dire", {score = 50, cp_score = 20})
+	CustomNetTables:SetTableValue("game_options", "radiant", {score = 0})
+	CustomNetTables:SetTableValue("game_options", "dire", {score = 0})
 	CustomGameEventManager:Send_ServerToAllClients("show_timer", {})
 	FrostivusPhase(PHASE)
 	FrostivusCountdown(1.0)

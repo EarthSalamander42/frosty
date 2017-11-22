@@ -56,21 +56,18 @@ function capture_start_trigger:OnTakeDamage(keys)
 
 			-- If this team is participating in another boss fight, do nothing, else, flag them as fighting
 			if attacker:GetTeam() == DOTA_TEAM_GOODGUYS then
-				if RADIANT_FIGHTING then
+				if _G.RADIANT_FIGHTING then
 					return nil
-				else
-					RADIANT_FIGHTING = true
+				elseif _G.RADIANT_FIGHTING == false then
+					_G.RADIANT_FIGHTING = true
 				end
 			elseif attacker:GetTeam() == DOTA_TEAM_BADGUYS then
-				if DIRE_FIGHTING then
+				if _G.DIRE_FIGHTING then
 					return nil
-				else
-					DIRE_FIGHTING = true
+				elseif _G.DIRE_FIGHTING == false then
+					_G.DIRE_FIGHTING = true
 				end
 			end
-
-			-- Notify the console that a boss fight (capture attempt) was started
-			print(self.boss_name, "boss hit, altar handle is", self.altar_handle)
 
 			-- Send the boss fight event to all clients
 			local attacker_team = attacker:GetTeam()
