@@ -5,7 +5,7 @@ COUNT_DOWN = 1
 PHASE_TIME = 481 -- 481
 PRESENT_SCORE_2 = 0
 PRESENT_SCORE_3 = 0
-if IsInToolsMode() then PHASE_TIME = 10 end -- 481
+if IsInToolsMode() then PHASE_TIME = 481 end -- 481
 
 
 function Frostivus()
@@ -194,4 +194,9 @@ function FrostivusAltarRespawn(hero)
 		respawn_position = Vector(2594, -3759, 128)
 	end
 	FindClearSpaceForUnit(hero, respawn_position, true)
+	if hero:GetLevel() <= 10 then
+		hero:SetTimeUntilRespawn(10)
+	else
+		hero:SetTimeUntilRespawn(hero:GetLevel())
+	end
 end

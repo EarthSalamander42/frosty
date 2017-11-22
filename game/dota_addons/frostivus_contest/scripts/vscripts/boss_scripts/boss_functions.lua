@@ -434,18 +434,20 @@ end
 ---------------------
 
 function BossPhaseAbilityCast(team, ability_image, ability_name, delay)
-	local ability_cast_timer = delay
+	local ability_cast_timer = 0.0
 	Timers:CreateTimer(function()
 		CustomGameEventManager:Send_ServerToTeam(team, "BossStartedCast", {ability_image = ability_image, ability_name = ability_name, current_cast_time = ability_cast_timer, cast_time = delay})
-		if ability_cast_timer > 0 then
-			ability_cast_timer = ability_cast_timer - 0.03
-			return 0.03
-		elseif ability_cast_timer <= 0 then
+		if ability_cast_timer < delay then
+			ability_cast_timer = ability_cast_timer + FrameTime()
+			return FrameTime()
+		elseif ability_cast_timer >= delay then
 			ability_cast_timer = 0.0
+			CustomGameEventManager:Send_ServerToTeam(team, "BossStartedCast", {ability_image = ability_image, ability_name = ability_name, current_cast_time = ability_cast_timer, cast_time = delay})
 		end
 	end)
 end
 
+<<<<<<< HEAD
 function PlaySoundForTeam(team, sound)
 	for player_id = 0, 20 do
 		if PlayerResource:GetPlayer(player_id) then
@@ -542,3 +544,18 @@ function StartPhaseThree()
 		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_death_Stinger")
 	end
 end
+=======
+function BossPhaseAbilityCastAlt(team, ability_image, ability_name, delay)
+	local ability_cast_timer = 0.0
+	Timers:CreateTimer(function()
+		CustomGameEventManager:Send_ServerToTeam(team, "BossStartedCast", {ability_image = ability_image, ability_name = ability_name, current_cast_time = ability_cast_timer, cast_time = delay})
+		if ability_cast_timer < delay then
+			ability_cast_timer = ability_cast_timer + FrameTime()
+			return FrameTime()
+		elseif ability_cast_timer >= delay then
+			ability_cast_timer = 0.0
+			CustomGameEventManager:Send_ServerToTeam(team, "BossStartedCastAlt", {ability_image = ability_image, ability_name = ability_name, current_cast_time = ability_cast_timer, cast_time = delay})
+		end
+	end)
+end
+>>>>>>> 03628679ef7eeb18e61eef865eab7cf895c41fe7

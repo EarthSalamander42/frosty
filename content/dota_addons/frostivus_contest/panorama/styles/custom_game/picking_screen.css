@@ -813,3 +813,8 @@
 #HeroListTNK {
 	margin-left: 10%;
 }
+
+.taken {
+	opacity: 0.5;
+	wash-color: #ff3333;
+}
