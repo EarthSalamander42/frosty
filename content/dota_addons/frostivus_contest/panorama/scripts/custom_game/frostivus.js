@@ -13,12 +13,12 @@ function UpdateTimer( data )
 	timerText += data.timer_second_10;
 	timerText += data.timer_second_01;
 
-	$( "#Timer" ).text = timerText;
+	$( "#Timer" ).text = timerText + " left";
 }
 
 function Phase(args)
 {
-	$("#PhaseLabel").text = $.Localize("#frostivus_phase_" + args.Phase);
+	$("#PhaseLabel").text = $.Localize("#frostivus_phase_" + args.Phase) + ": ";
 	JS_PHASE = args.Phase
 
 	if (args.Phase == 1)
@@ -26,6 +26,18 @@ function Phase(args)
 		$("#FrostivusHUD_alt").style.visibility = "visible";
 //	} else if (args.Phase == 2) {
 //		$('#ScorePanel').MoveChildBefore($('#Timer'), $('#Boss'));
+	}
+}
+
+var toggle = true
+function FrostivusAltar() {
+	if (toggle == false) {
+		$("#FrostivusAltarMenu").style.visibility = "visible";
+		toggle = true
+	}
+	else {
+		$("#FrostivusAltarMenu").style.visibility = "collapse";
+		toggle = false
 	}
 }
 
@@ -89,8 +101,8 @@ function UpdateBossBar(args) {
 				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
 				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
 			} else if (BossShortLabel == "zuus") {
-				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #66a3ff ) )';
-				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #1A75FF ), color-stop( .5, #66a3ff ), to( #66a3ff ) )';
+				$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #66a3ff ), color-stop( .5, #66a3ff ), to( #1A75FF ) )';
+				$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #66a3ff ), color-stop( .5, #66a3ff ), to( #1A75FF ) )';
 			}
 			$("#BossLevel" + TeamContest).text = $.Localize("boss_level") + BossLvl
 			$("#BossLabel" + TeamContest).text = $.Localize(BossLabel)
@@ -128,8 +140,9 @@ function UpdateAltar(args)
 		}
 		$("#AltarButton" + args.altar).AddClass("dire");
 	}
-	$("#AltarState" + args.altar).style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_' + args.team + '.png")';
-	$.Msg("Added a new altar: " + args.altar + " for team: " + args.team)
+
+//	$("#AltarState" + args.altar).style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_' + args.team + '.png")';
+//	$.Msg("Added a new altar: " + args.altar + " for team: " + args.team)
 
 	var localTeam = Players.GetTeam(Players.GetLocalPlayer())
 	if (localTeam == 2) {
@@ -160,12 +173,40 @@ function CastBar(args)
 	$("#BossCastAbilityName" + playerInfo.player_team_id).text = $.Localize(args.ability_name);
 	$("#BossCastTimeLabel" + playerInfo.player_team_id).text = args.current_cast_time.toFixed(1) + "/" + args.cast_time.toFixed(1);
 	$("#BossCastProgressBar" + playerInfo.player_team_id).value = args.current_cast_time / args.cast_time;
+
+//	$.Msg(args.current_cast_time)
+	if (args.current_cast_time != 0) {
+		$("#BossCastBar" + playerInfo.player_team_id).style.visibility = "visible";
+	} else {
+		$("#BossCastBar" + playerInfo.player_team_id).style.visibility = "collapse";
+	}
+}
+
+function CastBarAlt(args)
+{
+	var playerInfo = Game.GetPlayerInfo(Players.GetLocalPlayer())
+	$("#BossCastAbility" + playerInfo.player_team_id + "_2").abilityname = args.ability_image;
+	$("#BossCastAbilityName" + playerInfo.player_team_id + "_2").text = $.Localize(args.ability_name);
+	$("#BossCastTimeLabel" + playerInfo.player_team_id + "_2").text = args.current_cast_time.toFixed(1) + "/" + args.cast_time.toFixed(1);
+	$("#BossCastProgressBar" + playerInfo.player_team_id + "_2").value = args.current_cast_time / args.cast_time;
+
+//	$.Msg(args.current_cast_time)
+	if (args.current_cast_time != 0) {
+		$("#BossCastBar" + playerInfo.player_team_id + "_2").style.visibility = "visible";
+	} else {
+		$("#BossCastBar" + playerInfo.player_team_id + "_2").style.visibility = "collapse";
+	}
 }
 
 (function()
 {
 	$("#AltarButton1").AddClass("radiant");
 	$("#AltarState1").style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_2.png")';
+	$("#AltarState2").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_zuus.png")';
+	$("#AltarState3").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_venomancer.png")';
+	$("#AltarState4").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_lich.png")';
+	$("#AltarState5").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_treant.png")';
+	$("#AltarState6").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_nevermore.png")';
 	$("#AltarButton7").AddClass("dire");
 	$("#AltarState7").style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_3.png")';
 
@@ -176,4 +217,5 @@ function CastBar(args)
 	GameEvents.Subscribe("hide_boss_hp", HideBossBar);
 	GameEvents.Subscribe("update_altar", UpdateAltar);
 	GameEvents.Subscribe("BossStartedCast", CastBar);
+	GameEvents.Subscribe("BossStartedCastAlt", CastBarAlt);
 })();

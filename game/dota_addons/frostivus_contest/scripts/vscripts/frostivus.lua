@@ -3,6 +3,8 @@ PHASE = 0
 FROSTIVUS_WINNER = 2
 COUNT_DOWN = 1
 PHASE_TIME = 481 -- 481
+PRESENT_SCORE_2 = 0
+PRESENT_SCORE_3 = 0
 if IsInToolsMode() then PHASE_TIME = 481 end -- 481
 
 function Frostivus()
@@ -99,7 +101,6 @@ function FrostivusHeroKilled(killer, hero)
 
 	-- Player death
 	if hero:HasModifier("modifier_fighting_boss") then
-
 		-- If any hero is alive, do nothing
 		local fighting_modifier = hero:FindModifierByName("modifier_fighting_boss")
 		local altar_handle = fighting_modifier.altar_handle
@@ -157,15 +158,11 @@ function FrostivusHeroKilled(killer, hero)
 		end
 	end
 
--- I don't know what purpose this code serves, if you need it, uncomment it Cookies
-
---	if hero:GetTeamNumber() == 2 then
---		CustomNetTables:SetTableValue("game_options", "radiant", {score = CustomNetTables:GetTableValue("game_options", "radiant").score +1})
---		CustomNetTables:SetTableValue("game_options", "dire", {score = CustomNetTables:GetTableValue("game_options", "dire").score -1})
---	else
---		CustomNetTables:SetTableValue("game_options", "radiant", {score = CustomNetTables:GetTableValue("game_options", "radiant").score -1})
---		CustomNetTables:SetTableValue("game_options", "dire", {score = CustomNetTables:GetTableValue("game_options", "dire").score +1})
---	end
+	if hero:GetLevel() <= 10 then
+		hero:SetTimeUntilRespawn(10)
+	else
+		hero:SetTimeUntilRespawn(hero:GetLevel())
+	end
 end
 
 function FrostivusAltarRespawn(hero)

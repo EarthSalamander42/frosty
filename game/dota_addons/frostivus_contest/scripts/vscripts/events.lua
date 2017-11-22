@@ -101,6 +101,8 @@ function GameMode:OnGameRulesStateChange(keys)
 		for i = 1, 7 do
 			local altar = Entities:FindByName(nil, "altar_"..i)
 			if i == 5 then
+				altar:SetModel("models/altar_01/altar_01_center.vmdl")
+				altar:SetOriginalModel("models/altar_01/altar_01_center.vmdl")
 				altar:SetMaterialGroup("materialGroup_01")
 			end
 			altar:AddNewModifier(altar, nil, "modifier_altar", {})
