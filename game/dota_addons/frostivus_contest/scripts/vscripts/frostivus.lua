@@ -3,18 +3,18 @@ PHASE = 0
 FROSTIVUS_WINNER = 2
 COUNT_DOWN = 1
 PHASE_TIME = 481 -- 481
-if IsInToolsMode() then PHASE_TIME = 481 end -- 481
+PRESENT_SCORE_2 = 0
+PRESENT_SCORE_3 = 0
+if IsInToolsMode() then PHASE_TIME = 10 end -- 481
+
 
 function Frostivus()
 	for player_id = 0, 20 do
 		if PlayerResource:GetPlayer(player_id) then
 			if PlayerResource:GetTeam(player_id) == DOTA_TEAM_GOODGUYS then
 				--sounds[1] = "greevil_eventstart_Stinger" -- Sound when grabbing a greeviling
-				--sounds[1] = "greevil_receive_present_Stinger" -- high-pitch alert
 				--sounds[2] = "greevil_loot_spawn_Stinger" -- Final boss start
 				--sounds[5] = "greevil_loot_death_Stinger" -- Game end
-				--sounds[2] = "Frostivus.PointScored.Team" -- team score
-				--sounds[3] = "Frostivus.PointScored.Enemy" -- enemy score
 				--sounds[6] = "Conquest.Stinger.GameBegin" -- Lich fight start music
 				--sounds[1] = "Conquest.Stinger.HulkCreep.Generic" -- " oooOOOOOOhhhh"
 				--sounds[1] = "DOTAMusic_Stinger.003" -- item unboxing
@@ -54,6 +54,13 @@ function FrostivusPhase(PHASE)
 			end
 		end
 	end
+
+	-- Phase transitions
+	if PHASE == 2 then
+		StartPhaseTwo()
+	elseif PHASE == 3 then
+		StartPhaseThree()
+	end	
 end
 
 function FrostivusCountdown(tick)
@@ -86,6 +93,11 @@ function FrostivusCountdown(tick)
 			nCOUNTDOWNTIMER = PHASE_TIME
 			PHASE = PHASE + 1
 			FrostivusPhase(PHASE)
+		end
+
+		-- TEST STUFF REMOVE LATER
+		if PHASE == 2 then
+			SpawnGreevil(Vector(0, 0, 0) + RandomVector(1):Normalized() * RandomInt(200, 800), RandomInt(1, 4), RandomInt(0, 255), RandomInt(0, 255), RandomInt(0, 255))
 		end
 		return tick
 	end)
@@ -122,6 +134,7 @@ function FrostivusHeroKilled(killer, hero)
 		-- Delete the boss AI thinker modifier and re-apply the capture attempt detection modifier
 		local nearby_bosses = FindUnitsInRadius(hero:GetTeam(), altar_handle:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 		for _, boss in pairs(nearby_bosses) do
+			boss:Stop()
 			if boss:HasModifier("modifier_frostivus_boss") then
 				if boss:HasModifier("boss_thinker_zeus") then
 					boss:RemoveModifierByName("boss_thinker_zeus")
@@ -156,28 +169,29 @@ function FrostivusHeroKilled(killer, hero)
 			end
 		end
 	end
-
--- I don't know what purpose this code serves, if you need it, uncomment it Cookies
-
---	if hero:GetTeamNumber() == 2 then
---		CustomNetTables:SetTableValue("game_options", "radiant", {score = CustomNetTables:GetTableValue("game_options", "radiant").score +1})
---		CustomNetTables:SetTableValue("game_options", "dire", {score = CustomNetTables:GetTableValue("game_options", "dire").score -1})
---	else
---		CustomNetTables:SetTableValue("game_options", "radiant", {score = CustomNetTables:GetTableValue("game_options", "radiant").score -1})
---		CustomNetTables:SetTableValue("game_options", "dire", {score = CustomNetTables:GetTableValue("game_options", "dire").score +1})
---	end
 end
 
 function FrostivusAltarRespawn(hero)
 	-- Base spawn
+	local respawn_position
 	if hero.altar == 1 or hero.altar == 7 then
 		local building = Entities:FindByName(nil, "altar_"..hero.altar)
-		local respawn_position = building:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
-		FindClearSpaceForUnit(hero, respawn_position, true)
-	-- Altar (obelisk) spawn
-	else
-		local building = Entities:FindByName(nil, "altar_"..hero.altar.."_tower")
-		local respawn_position = building:GetAbsOrigin() + Vector(1, 1, 0):Normalized() * 200
-		FindClearSpaceForUnit(hero, respawn_position, true)
+		respawn_position = building:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
+	-- Zeus
+	elseif hero.altar == 2 then
+		respawn_position = Vector(-3214, 4789, 128)
+	-- Veno
+	elseif hero.altar == 3 then
+		respawn_position = Vector(-3108, -3725, 128)
+	-- Lich
+	elseif hero.altar == 4 then
+		respawn_position = Vector(1127, 905, 128)
+	-- Treant
+	elseif hero.altar == 5 then
+		respawn_position = Vector(2490, 3253, 128)
+	-- SF
+	elseif hero.altar == 6 then
+		respawn_position = Vector(2594, -3759, 128)
 	end
+	FindClearSpaceForUnit(hero, respawn_position, true)
 end

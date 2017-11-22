@@ -52,14 +52,19 @@ function modifier_frostivus_boss:OnIntervalThink()
 end
 
 function modifier_frostivus_boss:CheckState()
-	local state =
-	{
-		[MODIFIER_STATE_NO_HEALTH_BAR] = true,
-		[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
-		[MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
-		[MODIFIER_STATE_NOT_ON_MINIMAP] = true
-	}
-	return state
+	if IsServer() then
+		local state = {
+			[MODIFIER_STATE_NO_HEALTH_BAR] = true,
+			[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
+			[MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true,
+			[MODIFIER_STATE_NOT_ON_MINIMAP] = true
+		}
+		if PHASE > 1 then
+			state[MODIFIER_STATE_INVULNERABLE] = true
+		end
+
+		return state
+	end
 end
 
 function modifier_frostivus_boss:DeclareFunctions()

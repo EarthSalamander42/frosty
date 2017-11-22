@@ -89,7 +89,7 @@ local target = keys.unit
 			end)
 
 			-- Spawn a greevil that runs away
-			local greevil = SpawnGreevil(target_loc, 1, false, 0, 200, 255)
+			local greevil = SpawnGreevil(target_loc, 1, 0, 200, 255)
 			Timers:CreateTimer(3, function()
 				StartAnimation(greevil, {duration = 2.5, activity=ACT_DOTA_FLAIL, rate=1.5})
 				greevil:MoveToPosition(altar_loc + RandomVector(10):Normalized() * 900)

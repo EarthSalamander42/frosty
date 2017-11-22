@@ -98,7 +98,7 @@ local target = keys.unit
 			end)
 
 			-- Spawn a greevil that runs away
-			local greevil = SpawnGreevil(target_loc, 2, false, 50, 255, 50)
+			local greevil = SpawnGreevil(target_loc, 2, 50, 255, 50)
 			Timers:CreateTimer(3, function()
 				StartAnimation(greevil, {duration = 2.5, activity=ACT_DOTA_FLAIL, rate=1.5})
 				greevil:MoveToPosition(altar_loc + RandomVector(10):Normalized() * 900)
@@ -108,7 +108,7 @@ local target = keys.unit
 			end)
 
 			-- Spawn an extra greevil on Tiny's position
-			local tiny_greevil = SpawnGreevil(self.tiny_entities[1]:GetAbsOrigin(), 1, false, 50, 255, 50)
+			local tiny_greevil = SpawnGreevil(self.tiny_entities[1]:GetAbsOrigin(), 1, 50, 255, 50)
 			Timers:CreateTimer(3, function()
 				StartAnimation(tiny_greevil, {duration = 2.5, activity=ACT_DOTA_FLAIL, rate=1.5})
 				tiny_greevil:MoveToPosition(altar_loc + RandomVector(10):Normalized() * 900)
