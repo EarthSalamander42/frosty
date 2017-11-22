@@ -78,11 +78,15 @@ local target = keys.unit
 			local current_power = target:FindModifierByName("modifier_frostivus_boss"):GetStackCount()
 			local altar_loc = Entities:FindByName(nil, self.altar_handle):GetAbsOrigin()
 			local present_amount = 1 + current_power
-			for i = 1, present_amount do
+			Timers:CreateTimer(0, function()
 				local item = CreateItem("item_frostivus_present", nil, nil)
 				CreateItemOnPositionForLaunch(target_loc, item)
-				item:LaunchLootInitialHeight(true, 150, 300, 1.0, altar_loc + RandomVector(100):Normalized() * RandomInt(100, 200))
-			end
+				item:LaunchLootInitialHeight(true, 150, 300, 0.8, keys.attacker:GetAbsOrigin())
+				present_amount = present_amount - 1
+				if present_amount > 0 then
+					return 0.2
+				end
+			end)
 
 			-- Spawn a greevil that runs away
 			local greevil = SpawnGreevil(target_loc, 1, false, 0, 200, 255)
@@ -96,12 +100,16 @@ local target = keys.unit
 
 			-- Respawn the boss and grant it its new capture detection modifier
 			local boss
+			local current_level = target:GetLevel()
 			Timers:CreateTimer(15, function()
 				boss = SpawnZeus(self.altar_handle)
 
 				-- Increase the new boss' power
 				local next_power = math.ceil(current_power * 0.25) + 1
 				boss:FindModifierByName("modifier_frostivus_boss"):SetStackCount(current_power + next_power)
+				for i = 1, current_level do
+					boss:HeroLevelUp(false)
+				end
 			end)
 
 			-- Unlock the arena
@@ -133,12 +141,12 @@ function boss_thinker_zeus:OnIntervalThink()
 		-- Boss move script
 		-- Display of mechanics
 		if self.boss_timer > 1 and not self.events[1] then
-			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 2, 12), 2.5, 175, 350, 120, 200, 800, true)
+			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 2, 12), 2.5, 175, 350, 120, 200, 800, 1)
 			self.events[1] = true
 		end
 
 		if self.boss_timer > 4 and not self.events[2] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 1.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 1)
 			self.events[2] = true
 		end
 
@@ -153,24 +161,24 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 1)
 				self.events[3] = true
 			end
 		end
 
 		if self.boss_timer > 10 and not self.events[4] then
-			self:StaticField(altar_loc, altar_entity, 1.5, 300, 120)
+			self:StaticField(altar_loc, altar_entity, 2.0, 300, 120, 1)
 			self.events[4] = true
 		end
 
 		if self.boss_timer > 13 and not self.events[5] then
-			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80)
+			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80, 1)
 			self.events[5] = true
 		end
 
 		-- Bolt + Thor
 		if self.boss_timer > 18 and not self.events[6] then
-			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, true)
+			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, 1)
 			self.events[6] = true
 		end
 
@@ -185,14 +193,14 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 2)
 				self.events[7] = true
 			end
 		end
 
 		-- Arc + Thor
 		if self.boss_timer > 24 and not self.events[8] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 4.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 1)
 			self.events[8] = true
 		end
 
@@ -207,24 +215,24 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 2)
 				self.events[9] = true
 			end
 		end
 
 		-- Static + double Bolt + Thor + Arc
 		if self.boss_timer > 29 and not self.events[10] then
-			self:StaticField(altar_loc, altar_entity, 1.5, 300, 120)
+			self:StaticField(altar_loc, altar_entity, 1.5, 300, 120, 1)
 			self.events[10] = true
 		end
 
 		if self.boss_timer > 31 and not self.events[11] then
-			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, true)
+			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, 1)
 			self.events[11] = true
 		end
 
 		if self.boss_timer > 33 and not self.events[12] then
-			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, true)
+			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, 2)
 			self.events[12] = true
 		end
 
@@ -239,25 +247,25 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 1)
 				self.events[13] = true
 			end
 		end
 
-		if self.boss_timer > 37 and not self.events[14] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
+		if self.boss_timer > 36.5 and not self.events[14] then
+			self:ArcLightning(altar_loc, altar_entity, 1.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
 			self.events[14] = true
 		end
 
 		-- Wrath to clear static
 		if self.boss_timer > 40 and not self.events[15] then
-			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80)
+			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80, 1)
 			self.events[15] = true
 		end
 
 		-- Static + Thor + Bolt
 		if self.boss_timer > 45 and not self.events[16] then
-			self:StaticField(altar_loc, altar_entity, 1.5, 300, 120)
+			self:StaticField(altar_loc, altar_entity, 1.5, 300, 120, 1)
 			self.events[16] = true
 		end
 
@@ -272,19 +280,19 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 1)
 				self.events[17] = true
 			end
 		end
 
 		if self.boss_timer > 49 and not self.events[18] then
-			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, true)
+			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, 2)
 			self.events[18] = true
 		end
 
 		-- Arc + Thor
 		if self.boss_timer > 52 and not self.events[19] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 1.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 1)
 			self.events[19] = true
 		end
 
@@ -299,24 +307,24 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 2)
 				self.events[20] = true
 			end
 		end
 
 		-- Triple bolt
 		if self.boss_timer > 54 and not self.events[21] then
-			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 4, 12), 2.5, 175, 350, 120, 200, 800, true)
+			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 4, 12), 2.5, 175, 350, 120, 200, 800, 1)
 			self.events[21] = true
 		end
 
 		if self.boss_timer > 56 and not self.events[22] then
-			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 4, 12), 2.5, 175, 350, 120, 200, 800, true)
+			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 4, 12), 2.5, 175, 350, 120, 200, 800, 2)
 			self.events[22] = true
 		end
 
 		if self.boss_timer > 58 and not self.events[23] then
-			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 4, 12), 2.5, 175, 350, 120, 200, 800, true)
+			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 4, 12), 2.5, 175, 350, 120, 200, 800, 1)
 			self.events[23] = true
 		end
 
@@ -332,13 +340,13 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 1)
 				self.events[24] = true
 			end
 		end
 
-		if self.boss_timer > 64 and not self.events[25] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
+		if self.boss_timer > 63.5 and not self.events[25] then
+			self:ArcLightning(altar_loc, altar_entity, 1.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
 			self.events[25] = true
 		end
 
@@ -353,24 +361,24 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 1)
 				self.events[26] = true
 			end
 		end
 
 		if self.boss_timer > 69 and not self.events[27] then
-			self:ArcLightning(altar_loc, altar_entity, 1.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 1.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
 			self.events[27] = true
 		end
 
 		if self.boss_timer > 72 and not self.events[28] then
-			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80)
+			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80, 1)
 			self.events[28] = true
 		end
 
 		-- Bolt spam
 		if self.boss_timer > 77 and not self.events[29] then
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1], 3, 3.5, 175, 350, 120, 200, 200, true)
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1], 3, 3.5, 175, 350, 120, 200, 200, 1)
 			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1] + 15, 4, 3.5, 175, 350, 120, 400, 400, false)
 			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1] + 30, 5, 3.5, 175, 350, 120, 600, 600, false)
 			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1] + 45, 6, 3.5, 175, 350, 120, 800, 800, false)
@@ -378,13 +386,13 @@ function boss_thinker_zeus:OnIntervalThink()
 		end
 
 		if self.boss_timer > 78 and not self.events[30] then
-			self:ArcLightning(altar_loc, altar_entity, 2.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks)
+			self:ArcLightning(altar_loc, altar_entity, 2.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
 			self.events[30] = true
 		end
 
 		-- Bolt spam 2
 		if self.boss_timer > 83 and not self.events[31] then
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2], 10, 3.5, 175, 350, 120, 800, 800, true)
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2], 10, 3.5, 175, 350, 120, 800, 800, 1)
 			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 10, 9, 3.5, 175, 350, 120, 725, 725, false)
 			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 20, 8, 3.5, 175, 350, 120, 650, 650, false)
 			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 30, 7, 3.5, 175, 350, 120, 575, 575, false)
@@ -395,14 +403,14 @@ function boss_thinker_zeus:OnIntervalThink()
 
 		-- Static + double Bolt + Thor + Arc
 		if self.boss_timer > 84 and not self.events[32] then
-			self:StaticField(altar_loc, altar_entity, 4.0, 300, 120)
+			self:StaticField(altar_loc, altar_entity, 4.0, 300, 120, 2)
 			self.events[32] = true
 		end
 
 		-- Enrage
-		if self.boss_timer > 88 then
+		if self.boss_timer > 89 then
 			boss:MoveToPosition(altar_loc + Vector(0, 300, 0))
-			self:GodsWrath(altar_loc, altar_entity, 2.0, 900, 300)
+			self:GodsWrath(altar_loc, altar_entity, 2.0, 900, 300, 1)
 			self.boss_timer = self.boss_timer - 2.1
 		end
 	end
@@ -417,9 +425,16 @@ function boss_thinker_zeus:LightningBolt(center_point, altar_handle, angle, amou
 	local bolt_damage = boss:GetAttackDamage() * damage * 0.01
 
 	-- Warnings
-	if cast_bar then
+	if cast_bar == 1 then
+
 		-- Send cast bar event
 		BossPhaseAbilityCast(self.team, "zuus_lightning_bolt", "boss_zeus_lightning_bolt", delay)
+
+		-- Play warning sound
+		altar_handle:EmitSound("Hero_Disruptor.KineticField")
+	elseif cast_bar == 2 then
+		-- Send cast bar event
+		BossPhaseAbilityCastAlt(self.team, "zuus_lightning_bolt", "boss_zeus_lightning_bolt", delay)
 
 		-- Play warning sound
 		altar_handle:EmitSound("Hero_Disruptor.KineticField")
@@ -441,8 +456,8 @@ function boss_thinker_zeus:LightningBolt(center_point, altar_handle, angle, amou
 
 	-- Move boss to cast position and animate cast
 	boss:MoveToPosition(center_point + Vector(0, 300, 0))
-	boss:FaceTowards(center_point)
 	Timers:CreateTimer(delay - 0.4, function()
+		boss:FaceTowards(center_point)
 		StartAnimation(boss, {duration = 0.83, activity=ACT_DOTA_CAST_ABILITY_2, rate=1.0})
 	end)
 
@@ -489,14 +504,18 @@ function boss_thinker_zeus:LightningBolt(center_point, altar_handle, angle, amou
 end
 
 -- Arc Lightning
-function boss_thinker_zeus:ArcLightning(center_point, altar_handle, delay, bounce_delay, bounce_radius, damage, damage_ramp)
+function boss_thinker_zeus:ArcLightning(center_point, altar_handle, delay, bounce_delay, bounce_radius, damage, damage_ramp, send_cast_bar)
 	local boss = self:GetParent()
 	local boss_position = boss:GetAbsOrigin()
 	local chain_damage = boss:GetAttackDamage() * damage * 0.01
 	local chain_target = false
 
 	-- Send cast bar event
-	BossPhaseAbilityCast(self.team, "zuus_arc_lightning", "boss_zeus_arc_lightning", delay)
+	if send_cast_bar == 1 then
+		BossPhaseAbilityCast(self.team, "zuus_arc_lightning", "boss_zeus_arc_lightning", delay)
+	elseif send_cast_bar == 2 then
+		BossPhaseAbilityCastAlt(self.team, "zuus_arc_lightning", "boss_zeus_arc_lightning", delay)
+	end
 
 	-- Find nearest target hero to attack
 	local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), boss_position, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)
@@ -515,8 +534,8 @@ function boss_thinker_zeus:ArcLightning(center_point, altar_handle, delay, bounc
 	-- Move boss to cast position and animate cast
 	local chain_target_position = chain_target:GetAbsOrigin()
 	boss:MoveToPosition(chain_target_position + (boss_position - chain_target_position):Normalized() * 300)
-	boss:FaceTowards(chain_target_position)
 	Timers:CreateTimer(delay - 0.2, function()
+		boss:FaceTowards(chain_target_position)
 		StartAnimation(boss, {duration = 0.83, activity=ACT_DOTA_CAST_ABILITY_1, rate=1.0})
 	end)
 
@@ -565,12 +584,16 @@ function boss_thinker_zeus:ArcLightningBounce(altar_handle, source, target, dama
 end
 
 -- El Thor
-function boss_thinker_zeus:ElThor(altar_handle, target, radius, delay, damage)
+function boss_thinker_zeus:ElThor(altar_handle, target, radius, delay, damage, send_cast_bar)
 	local boss = self:GetParent()
 	local thor_damage = boss:GetAttackDamage() * damage * 0.01
 
 	-- Send cast bar event
-	BossPhaseAbilityCast(self.team, "zuus_cloud", "boss_zeus_el_thor", delay)
+	if send_cast_bar == 1 then
+		BossPhaseAbilityCast(self.team, "zuus_cloud", "boss_zeus_el_thor", delay)
+	elseif send_cast_bar == 2 then
+		BossPhaseAbilityCastAlt(self.team, "zuus_cloud", "boss_zeus_el_thor", delay)
+	end
 
 	-- Draw stack up marker
 	local marker_pfx = ParticleManager:CreateParticle("particles/generic_particles/stack_up_center_zeus.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
@@ -584,9 +607,12 @@ function boss_thinker_zeus:ElThor(altar_handle, target, radius, delay, damage)
 	-- Play warning sound
 	target:EmitSound("Frostivus.ElThorWarning")
 
+	-- Move boss to cast position
+	boss:MoveToPosition(altar_handle:GetAbsOrigin() + Vector(0, 300, 0))
+
 	-- Face boss to cast position and animate cast
 	Timers:CreateTimer(delay - 0.63, function()
-		boss:FaceTowards(boss:GetAbsOrigin() + (target:GetAbsOrigin() - boss:GetAbsOrigin()):Normalized())
+		boss:FaceTowards(target:GetAbsOrigin())
 		StartAnimation(boss, {duration = 1.0, activity=ACT_DOTA_ATTACK, rate=1.0})
 	end)
 
@@ -631,17 +657,21 @@ function boss_thinker_zeus:ElThor(altar_handle, target, radius, delay, damage)
 end
 
 -- Static Field
-function boss_thinker_zeus:StaticField(center_point, altar_handle, delay, radius, damage)
+function boss_thinker_zeus:StaticField(center_point, altar_handle, delay, radius, damage, send_cast_bar)
 	local boss = self:GetParent()
 	local field_damage = boss:GetAttackDamage() * damage * 0.01
 
 	-- Send cast bar event
-	BossPhaseAbilityCast(self.team, "zuus_static_field", "boss_zeus_static_field", delay)
+	if send_cast_bar == 1 then
+		BossPhaseAbilityCast(self.team, "zuus_static_field", "boss_zeus_static_field", delay)
+	elseif send_cast_bar == 2 then
+		BossPhaseAbilityCastAlt(self.team, "zuus_static_field", "boss_zeus_static_field", delay)
+	end
 
 	-- Move boss to cast position and animate cast
 	boss:MoveToPosition(center_point + Vector(0, 300, 0))
-	boss:FaceTowards(center_point)
 	Timers:CreateTimer(delay - 0.6, function()
+		boss:FaceTowards(center_point)
 		StartAnimation(boss, {duration = 0.84, activity=ACT_DOTA_CAST_ABILITY_4, rate=1.0})
 	end)
 
@@ -909,12 +939,16 @@ function modifier_frostivus_zeus_negative_charge:OnIntervalThink()
 end
 
 -- God's Wrath
-function boss_thinker_zeus:GodsWrath(center_point, altar_handle, delay, charge_movement, damage)
+function boss_thinker_zeus:GodsWrath(center_point, altar_handle, delay, charge_movement, damage, send_cast_bar)
 	local boss = self:GetParent()
 	local wrath_damage = boss:GetAttackDamage() * damage * 0.01
 
 	-- Send cast bar event
-	BossPhaseAbilityCast(self.team, "zuus_thundergods_wrath", "boss_zeus_thundergod_wrath", delay)
+	if send_cast_bar == 1 then
+		BossPhaseAbilityCast(self.team, "zuus_thundergods_wrath", "boss_zeus_thundergod_wrath", delay)
+	elseif send_cast_bar == 2 then
+		BossPhaseAbilityCastAlt(self.team, "zuus_thundergods_wrath", "boss_zeus_thundergod_wrath", delay)
+	end
 
 	-- Play warning sound
 	altar_handle:EmitSound("Hero_Zuus.GodsWrath.PreCast")

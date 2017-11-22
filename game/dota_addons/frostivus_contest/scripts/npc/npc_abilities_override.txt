@@ -4182,6 +4182,8 @@
 
 		"AbilityManaCost"				"150 200 250"
 
+		"AbilityDamage"					"200 350 500"
+
 		"AbilitySpecial"
 		{
 			"01"
@@ -4197,7 +4199,7 @@
 			"03"
 			{	
 				"var_type"				"FIELD_FLOAT"
-				"duration"				"2.0 2.4 2.8"
+				"duration"				"1.5 1.75 2.0"
 			}
 		}
 	}
