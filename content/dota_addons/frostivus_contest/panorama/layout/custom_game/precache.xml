@@ -1,7 +1,8 @@
 <root>
 	<Panel style="visibility:collapse;">
 		<Panel id="container" style="visibility:collapse;">
-			<Image src="file://panorama/images/custom_game/present.png" hittest="false" />
+			<Image src="file://panorama/images/custom_game/altar_captured_2.png" hittest="false" />
+			<Image src="file://panorama/images/custom_game/altar_captured_3.png" hittest="false" />
 		</Panel>
 	</Panel>
 </root>

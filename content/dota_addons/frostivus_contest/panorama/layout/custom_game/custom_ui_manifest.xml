@@ -78,6 +78,9 @@
 
 		//Skin Killer - minimap
 		hudElements.FindChildTraverse("HUDSkinMinimap").style.visibility = "collapse";
+
+		//Adding static margin-top, so .minimapextralarge class don't move it higher
+		hudElements.FindChildTraverse("combat_events").style.marginTop = "363px";
 	</script>
 
 	<Panel>
@@ -89,6 +92,6 @@
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/netgraph.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/frostivus.xml" />
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/precache.xml" />
-<!--		<CustomUIElement type="EndScreen" layoutfile="file://{resources}/layout/custom_game/multiteam_end_screen.xml" /> -->
+<!--	<CustomUIElement type="EndScreen" layoutfile="file://{resources}/layout/custom_game/multiteam_end_screen.xml" /> -->
 	</Panel>
 </root>

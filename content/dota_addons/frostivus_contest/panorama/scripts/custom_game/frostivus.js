@@ -223,6 +223,14 @@ function CastBarAlt(args)
 	$("#AltarButton7").AddClass("dire");
 	$("#AltarState7").style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_3.png")';
 
+//	var hudElements = $.GetContextPanel().GetParent().GetParent().GetParent().FindChildTraverse("HUDElements");
+//	var minimap = hudElements.FindChildTraverse("minimap")
+
+	/* For reasons it doesn't find the class for extra minimap option enabled */
+//	if (minimap.BHasClass("MinimapExtraLarge")) {
+//		$.Msg("Super minimap!")
+//	}
+
 	GameEvents.Subscribe("countdown", UpdateTimer);
 	GameEvents.Subscribe("frostivus_phase", Phase);
 	GameEvents.Subscribe("frostivus_player_reconnected", OnPlayerReconnect);

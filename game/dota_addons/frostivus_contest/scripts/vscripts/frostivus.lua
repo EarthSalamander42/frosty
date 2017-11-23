@@ -188,7 +188,7 @@ function FrostivusAltarRespawn(hero)
 		local respawn_position
 		if hero.altar == 1 or hero.altar == 7 then
 			local building = Entities:FindByName(nil, "altar_"..hero.altar)
-			respawn_position = building:GetAbsOrigin() + RandomVector(RandomFloat(200, 800))
+			respawn_position = building:GetAbsOrigin() + RandomVector(RandomFloat(300, 800))
 		-- Zeus
 		elseif hero.altar == 2 then
 			respawn_position = Vector(-3214, 4789, 128)
@@ -214,4 +214,31 @@ function FrostivusAltarRespawn(hero)
 
 		FindClearSpaceForUnit(hero, respawn_position, true)
 	end
+end
+
+function DoorThink(team)
+local door = Entities:FindByName(nil, "gate_0"..team)
+local door_obs = Entities:FindAllByName(door:GetName().."_obs")
+local door_opened = false
+
+	Timers:CreateTimer(function()
+		local heroes = FindUnitsInRadius(team, door:GetAbsOrigin(), nil, 600, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+		
+		if #heroes > 0 and door_opened == false then
+			for _, obs in pairs(door_obs) do
+				obs:SetEnabled(false, true)
+			end
+
+			door_opened = true
+			DoEntFire(door:GetName(), "SetAnimation", "gate_02_open", 0, nil, nil)
+		elseif #heroes == 0 and door_opened == true then
+			for _, obs in pairs(door_obs) do
+				obs:SetEnabled(true, false)
+			end
+
+			door_opened = false
+			DoEntFire(door:GetName(), "SetAnimation", "gate_02_close", 0, nil, nil)
+		end
+		return 1.0
+	end)
 end
