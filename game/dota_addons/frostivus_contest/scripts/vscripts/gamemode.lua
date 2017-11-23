@@ -285,19 +285,17 @@ local time_elapsed = 0
 		elseif not hero.is_real_wisp then
 			if hero:GetUnitName() == "npc_dota_hero_wisp" then
 				Timers:CreateTimer(function()
-					if not hero:HasModifier("modifier_command_restricted") then
-						hero:AddNewModifier(hero, nil, "modifier_command_restricted", {})
-						hero:AddEffects(EF_NODRAW)
-						hero:SetDayTimeVisionRange(475)
-						hero:SetNightTimeVisionRange(475)				
-						if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
-							PlayerResource:SetCameraTarget(hero:GetPlayerOwnerID(), GoodCamera)
-							FindClearSpaceForUnit(hero, GoodCamera:GetAbsOrigin(), false)
-						else
-							PlayerResource:SetCameraTarget(hero:GetPlayerOwnerID(), BadCamera)					
-							FindClearSpaceForUnit(hero, BadCamera:GetAbsOrigin(), false)
-						end
+					hero:AddEffects(EF_NODRAW)
+					hero:SetDayTimeVisionRange(475)
+					hero:SetNightTimeVisionRange(475)				
+					if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
+						PlayerResource:SetCameraTarget(hero:GetPlayerOwnerID(), GoodCamera)
+						FindClearSpaceForUnit(hero, GoodCamera:GetAbsOrigin(), false)
+					else
+						PlayerResource:SetCameraTarget(hero:GetPlayerOwnerID(), BadCamera)					
+						FindClearSpaceForUnit(hero, BadCamera:GetAbsOrigin(), false)
 					end
+
 					if time_elapsed < 0.9 then
 						time_elapsed = time_elapsed + 0.1
 					else			
@@ -309,6 +307,10 @@ local time_elapsed = 0
 			return
 		end
 	end)
+
+	if GameRules:State_Get() == DOTA_GAMERULES_STATE_PRE_GAME and not hero:HasModifier("modifier_command_restricted") then
+		hero:AddNewModifier(hero, nil, "modifier_command_restricted", {})
+	end
 end
 
 function GameMode:OnGameInProgress()

@@ -377,7 +377,6 @@ function HeroSelection:AssignHero(player_id, hero_name)
 		-- First hero spawn initialization
 		-------------------------------------------------------------------------------------------------
 		
-		hero:RespawnHero(false, false)
 		PlayerResource:SetCameraTarget(player_id, hero)
 		Timers:CreateTimer(FrameTime(), function()
 			PlayerResource:SetCameraTarget(player_id, nil)
@@ -412,8 +411,6 @@ function HeroSelection:AssignHero(player_id, hero_name)
 		else
 			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD, false)
 		end
-
-		hero:AddNewModifier(hero, nil, "modifier_command_restricted", {})
 
 		-- fail-safe, check it really needed else remove it
 		Timers:CreateTimer(1.0, function()
