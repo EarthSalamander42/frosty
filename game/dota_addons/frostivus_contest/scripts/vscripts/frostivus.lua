@@ -5,10 +5,10 @@ COUNT_DOWN = 1
 PHASE_TIME = 481 -- 481
 PRESENT_SCORE_2 = 0
 PRESENT_SCORE_3 = 0
-if IsInToolsMode() then PHASE_TIME = 10 end -- 481
+if IsInToolsMode() then PHASE_TIME = 120 end -- 481
 
 function Frostivus()
-	for player_id = 0, 20 do
+	for player_id = 0, PlayerResource:GetPlayerCount() -1 do
 		if PlayerResource:GetPlayer(player_id) then
 			if PlayerResource:GetTeam(player_id) == DOTA_TEAM_GOODGUYS then
 				--sounds[6] = "Conquest.Stinger.GameBegin" -- Lich fight start music
@@ -20,8 +20,13 @@ function Frostivus()
 			elseif PlayerResource:GetTeam(player_id) == DOTA_TEAM_BADGUYS then
 				EmitSoundOnClient("FrostivusGameStart.DireSide", PlayerResource:GetPlayer(player_id))
 			end
+
+			if PlayerResource:GetPlayer(player_id):GetAssignedHero():HasModifier("modifier_command_restricted") then
+				PlayerResource:GetPlayer(player_id):GetAssignedHero():RemoveModifierByName("modifier_command_restricted")
+			end
 		end
 	end
+
 	PHASE = 1
 	nCOUNTDOWNTIMER = PHASE_TIME -- 481 / 8 Min
 	CustomNetTables:SetTableValue("game_options", "radiant", {score = 0})
@@ -29,6 +34,8 @@ function Frostivus()
 	CustomGameEventManager:Send_ServerToAllClients("show_timer", {})
 	FrostivusPhase(PHASE)
 	FrostivusCountdown(1.0)
+	DoorThink(2)
+	DoorThink(3)
 
 	-- Spawn bosses
 	SpawnZeus(BOSS_SPAWN_POINT_TABLE.zeus)
@@ -56,7 +63,6 @@ function FrostivusPhase(PHASE)
 		for i = 1, 6 do
 			SpawnGreevil(spawn_locations[RandomInt(1, #spawn_locations)]:GetAbsOrigin(), RandomInt(1, 4), RandomInt(0, 255), RandomInt(0, 255), RandomInt(0, 255))
 		end
-
 	elseif PHASE == 3 then
 
 		-- Clean-up phase 2
@@ -222,16 +228,16 @@ local door_obs = Entities:FindAllByName(door:GetName().."_obs")
 local door_opened = false
 
 	Timers:CreateTimer(function()
-		local heroes = FindUnitsInRadius(team, door:GetAbsOrigin(), nil, 600, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
-		
-		if #heroes > 0 and door_opened == false then
+		local units = FindUnitsInRadius(team, door:GetAbsOrigin(), nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+
+		if #units > 0 and door_opened == false then
 			for _, obs in pairs(door_obs) do
 				obs:SetEnabled(false, true)
 			end
 
 			door_opened = true
 			DoEntFire(door:GetName(), "SetAnimation", "gate_02_open", 0, nil, nil)
-		elseif #heroes == 0 and door_opened == true then
+		elseif #units == 0 and door_opened == true then
 			for _, obs in pairs(door_obs) do
 				obs:SetEnabled(true, false)
 			end

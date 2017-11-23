@@ -114,7 +114,7 @@
 				<Panel id="BossProgressBarContainer3" class="BossProgressBarContainer" hittest="false">
 					<DOTAHeroImage id="BossIcon3" class="BossIcon" hittest="false"/>
 					<ProgressBar id="BossProgressBar3" class="BossProgressBar" hittest="false" value="1.0"/>
-					<Label id="BossHealth3" class="BossHealth" hittest="false" text=""/>
+					<Label id="BossHealth3" class="HoldoutLabelSmall" hittest="false" text=""/>
 				</Panel>
 
 				<Panel id="CastBars3" class="CastBars" hittest="false">

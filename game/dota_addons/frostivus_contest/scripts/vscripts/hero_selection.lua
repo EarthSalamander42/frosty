@@ -414,11 +414,10 @@ function HeroSelection:AssignHero(player_id, hero_name)
 			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD, false)
 		end
 
+		hero:AddNewModifier(hero, nil, "modifier_command_restricted", {})
+
 		-- fail-safe, check it really needed else remove it
-		Timers:CreateTimer(3.0, function()
-			if not hero:HasModifier("modifier_command_restricted") then
-				PlayerResource:SetCameraTarget(player_id, nil)
-			end
+		Timers:CreateTimer(1.0, function()
 			UTIL_Remove(wisp)
 		end)
 
