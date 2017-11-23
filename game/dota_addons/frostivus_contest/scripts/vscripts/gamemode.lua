@@ -46,6 +46,7 @@ function GameMode:OnFirstPlayerLoaded()
 	-- Altar particle attach points
 	local nature_particle_points = Entities:FindAllByName("nature_rock_particle")
 	local fire_particle_points = Entities:FindAllByName("fire_rock_particle")
+	local ice_particle_points = Entities:FindAllByName("ice_rock_particle")
 	local lightning_particle_points = Entities:FindAllByName("lightning_rock_particle")
 
 	-- Draw altar particles
@@ -61,10 +62,26 @@ function GameMode:OnFirstPlayerLoaded()
 		ParticleManager:ReleaseParticleIndex(fire_pfx)
 	end
 
+	for _, particle_point in pairs(ice_particle_points) do
+		local ice_pfx = ParticleManager:CreateParticle("particles/generic_particles/ambient_ice_altar.vpcf", PATTACH_WORLDORIGIN, nil)
+		ParticleManager:SetParticleControl(ice_pfx, 0, particle_point:GetAbsOrigin())
+		ParticleManager:ReleaseParticleIndex(ice_pfx)
+	end
+
 	for _, particle_point in pairs(lightning_particle_points) do
 		local lightning_pfx = ParticleManager:CreateParticle("particles/generic_particles/ambient_lightning_altar.vpcf", PATTACH_WORLDORIGIN, nil)
 		ParticleManager:SetParticleControl(lightning_pfx, 0, particle_point:GetAbsOrigin())
 		ParticleManager:ReleaseParticleIndex(lightning_pfx)
+	end
+
+	-- Icewrack lanterns attach points
+	local icewrack_lantern_spawn_points = Entities:FindAllByName("icewrack_lantern")
+	for _, point in pairs(icewrack_lantern_spawn_points) do
+		local spawn_point = point:GetAbsOrigin()
+		local lantern = CreateUnitByName("npc_dota_dungeon_checkpoint", spawn_point, false, nil, nil, DOTA_TEAM_NEUTRALS)
+		lantern:AddNewModifier(nil, nil, "modifier_frostivus_lantern", {})
+		AddFOWViewer(DOTA_TEAM_GOODGUYS, spawn_point, 1600, 1800, false)
+		AddFOWViewer(DOTA_TEAM_BADGUYS, spawn_point, 1600, 1800, false)
 	end
 
 --	local developer_statues = {

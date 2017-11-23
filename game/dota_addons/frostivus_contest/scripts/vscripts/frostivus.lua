@@ -5,21 +5,17 @@ COUNT_DOWN = 1
 PHASE_TIME = 481 -- 481
 PRESENT_SCORE_2 = 0
 PRESENT_SCORE_3 = 0
-if IsInToolsMode() then PHASE_TIME = 481 end -- 481
+if IsInToolsMode() then PHASE_TIME = 10 end -- 481
 
 function Frostivus()
 	for player_id = 0, 20 do
 		if PlayerResource:GetPlayer(player_id) then
 			if PlayerResource:GetTeam(player_id) == DOTA_TEAM_GOODGUYS then
-				--sounds[1] = "greevil_eventstart_Stinger" -- Sound when grabbing a greeviling
-				--sounds[2] = "greevil_loot_spawn_Stinger" -- Final boss start
-				--sounds[5] = "greevil_loot_death_Stinger" -- Game end
 				--sounds[6] = "Conquest.Stinger.GameBegin" -- Lich fight start music
 				--sounds[1] = "Conquest.Stinger.HulkCreep.Generic" -- " oooOOOOOOhhhh"
 				--sounds[1] = "DOTAMusic_Stinger.003" -- item unboxing
 				--sounds[2] = "DOTAMusic_Stinger.004" -- mystery music
 				--sounds[3] = "DOTAMusic_Stinger.005" -- fight decision
-				--"Tutorial.Quest.complete_01" -- quest complete
 				EmitSoundOnClient("FrostivusGameStart.RadiantSide", PlayerResource:GetPlayer(player_id))
 			elseif PlayerResource:GetTeam(player_id) == DOTA_TEAM_BADGUYS then
 				EmitSoundOnClient("FrostivusGameStart.DireSide", PlayerResource:GetPlayer(player_id))
@@ -45,20 +41,33 @@ function FrostivusPhase(PHASE)
 	print("Phase: ", PHASE)
 	CustomGameEventManager:Send_ServerToAllClients("frostivus_phase", {Phase = tostring(PHASE)})
 
-	-- Play phase change stinger
-	if PHASE > 1 then
-		for player_id = 0, 20 do
-			if PlayerResource:GetPlayer(player_id) then
-				EmitSoundOnClient("greevil_mega_spawn_Stinger", PlayerResource:GetPlayer(player_id))
-			end
-		end
-	end
-
 	-- Phase transitions
 	if PHASE == 2 then
+
+		-- Clean up phase 1
 		StartPhaseTwo()
+
+		-- Play phase 2 stinger
+		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_mega_spawn_Stinger")
+		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_mega_spawn_Stinger")
+
+		-- Spawn some initial greevils
+		local spawn_locations = Entities:FindAllByName("greevil_node")
+		for i = 1, 6 do
+			SpawnGreevil(spawn_locations[RandomInt(1, #spawn_locations)]:GetAbsOrigin(), RandomInt(1, 4), RandomInt(0, 255), RandomInt(0, 255), RandomInt(0, 255))
+		end
+
 	elseif PHASE == 3 then
+
+		-- Clean-up phase 2
 		StartPhaseThree()
+
+		-- Play phase 2 stinger
+		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_spawn_Stinger")
+		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_spawn_Stinger")
+
+		-- Spawn Mega Greevil
+		SpawnMegaGreevil()
 	end	
 end
 
@@ -94,9 +103,10 @@ function FrostivusCountdown(tick)
 			FrostivusPhase(PHASE)
 		end
 
-		-- TEST STUFF REMOVE LATER
-		if PHASE == 2 then
-			SpawnGreevil(Vector(0, 0, 0) + RandomVector(1):Normalized() * RandomInt(200, 800), RandomInt(1, 4), RandomInt(0, 255), RandomInt(0, 255), RandomInt(0, 255))
+		-- Spawn greevils periodically during phase 2 
+		if PHASE == 2 and (nCOUNTDOWNTIMER % 15) == 0 then
+			local spawn_locations = Entities:FindAllByName("greevil_node")
+			SpawnGreevil(spawn_locations[RandomInt(1, #spawn_locations)]:GetAbsOrigin(), RandomInt(1, 4), RandomInt(0, 255), RandomInt(0, 255), RandomInt(0, 255))
 		end
 		return tick
 	end)
@@ -164,6 +174,7 @@ function FrostivusHeroKilled(killer, hero)
 				-- Reset boss status & position
 				boss:Purge(true, true, false, true, true)
 				boss:Heal(999999, nil)
+				boss:GiveMana(boss:GetMaxMana())
 				boss:FaceTowards(altar_handle:GetAbsOrigin())
 			end
 		end
@@ -172,7 +183,7 @@ end
 
 function FrostivusAltarRespawn(hero)
 	-- fix boss respawning at dire fountain
-	if hero:GetPlayerID() ~= -1 then
+	if hero:GetPlayerID() ~= -1 and not hero:IsRealHero() then
 		-- Base spawn
 		local respawn_position
 		if hero.altar == 1 or hero.altar == 7 then

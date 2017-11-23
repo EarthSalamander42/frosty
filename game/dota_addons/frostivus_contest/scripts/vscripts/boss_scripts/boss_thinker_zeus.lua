@@ -145,12 +145,12 @@ function boss_thinker_zeus:OnIntervalThink()
 			self.events[1] = true
 		end
 
-		if self.boss_timer > 4 and not self.events[2] then
-			self:ArcLightning(altar_loc, altar_entity, 1.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 1)
+		if self.boss_timer > 4.5 and not self.events[2] then
+			self:ArcLightning(altar_loc, altar_entity, 2.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 1)
 			self.events[2] = true
 		end
 
-		if self.boss_timer > 6 and not self.events[3] then
+		if self.boss_timer > 9 and not self.events[3] then
 			-- Find random target hero to attack
 			local target = false
 			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
@@ -161,28 +161,28 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 1)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 4.0, 300, 1)
 				self.events[3] = true
 			end
 		end
 
-		if self.boss_timer > 10 and not self.events[4] then
-			self:StaticField(altar_loc, altar_entity, 2.0, 300, 120, 1)
+		if self.boss_timer > 15 and not self.events[4] then
+			self:StaticField(altar_loc, altar_entity, 2.5, 275, 100, 1)
 			self.events[4] = true
 		end
 
-		if self.boss_timer > 13 and not self.events[5] then
+		if self.boss_timer > 19.5 and not self.events[5] then
 			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80, 1)
 			self.events[5] = true
 		end
 
 		-- Bolt + Thor
-		if self.boss_timer > 18 and not self.events[6] then
+		if self.boss_timer > 24 and not self.events[6] then
 			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, 1)
 			self.events[6] = true
 		end
 
-		if self.boss_timer > 19 and not self.events[7] then
+		if self.boss_timer > 24 and not self.events[7] then
 			-- Find random target hero to attack
 			local target = false
 			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
@@ -193,18 +193,18 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 2)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 4.0, 300, 2)
 				self.events[7] = true
 			end
 		end
 
 		-- Arc + Thor
-		if self.boss_timer > 24 and not self.events[8] then
+		if self.boss_timer > 30 and not self.events[8] then
 			self:ArcLightning(altar_loc, altar_entity, 4.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 1)
 			self.events[8] = true
 		end
 
-		if self.boss_timer > 25 and not self.events[9] then
+		if self.boss_timer > 30 and not self.events[9] then
 			-- Find random target hero to attack
 			local target = false
 			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
@@ -215,28 +215,28 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 2)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 4.0, 300, 2)
 				self.events[9] = true
 			end
 		end
 
 		-- Static + double Bolt + Thor + Arc
-		if self.boss_timer > 29 and not self.events[10] then
-			self:StaticField(altar_loc, altar_entity, 1.5, 300, 120, 1)
+		if self.boss_timer > 36 and not self.events[10] then
+			self:StaticField(altar_loc, altar_entity, 2.5, 275, 100, 1)
 			self.events[10] = true
 		end
 
-		if self.boss_timer > 31 and not self.events[11] then
+		if self.boss_timer > 40.5 and not self.events[11] then
 			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, 1)
 			self.events[11] = true
 		end
 
-		if self.boss_timer > 33 and not self.events[12] then
-			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, 2)
+		if self.boss_timer > 40.5 and not self.events[12] then
+			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 3.5, 175, 350, 120, 200, 800, 2)
 			self.events[12] = true
 		end
 
-		if self.boss_timer > 35 and not self.events[13] then
+		if self.boss_timer > 46 and not self.events[13] then
 			-- Find random target hero to attack
 			local target = false
 			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
@@ -247,29 +247,29 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 1)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 4.0, 300, 1)
 				self.events[13] = true
 			end
 		end
 
-		if self.boss_timer > 36.5 and not self.events[14] then
-			self:ArcLightning(altar_loc, altar_entity, 1.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
+		if self.boss_timer > 46 and not self.events[14] then
+			self:ArcLightning(altar_loc, altar_entity, 4.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
 			self.events[14] = true
 		end
 
 		-- Wrath to clear static
-		if self.boss_timer > 40 and not self.events[15] then
+		if self.boss_timer > 51 and not self.events[15] then
 			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80, 1)
 			self.events[15] = true
 		end
 
 		-- Static + Thor + Bolt
-		if self.boss_timer > 45 and not self.events[16] then
-			self:StaticField(altar_loc, altar_entity, 1.5, 300, 120, 1)
+		if self.boss_timer > 55.5 and not self.events[16] then
+			self:StaticField(altar_loc, altar_entity, 2.5, 275, 100, 1)
 			self.events[16] = true
 		end
 
-		if self.boss_timer > 47 and not self.events[17] then
+		if self.boss_timer > 60 and not self.events[17] then
 			-- Find random target hero to attack
 			local target = false
 			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
@@ -280,23 +280,23 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 1)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 4.0, 300, 1)
 				self.events[17] = true
 			end
 		end
 
-		if self.boss_timer > 49 and not self.events[18] then
-			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 2.5, 175, 350, 120, 200, 800, 2)
+		if self.boss_timer > 60 and not self.events[18] then
+			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 3, 12), 4.0, 175, 350, 120, 200, 800, 2)
 			self.events[18] = true
 		end
 
 		-- Arc + Thor
-		if self.boss_timer > 52 and not self.events[19] then
-			self:ArcLightning(altar_loc, altar_entity, 1.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 1)
+		if self.boss_timer > 66 and not self.events[19] then
+			self:ArcLightning(altar_loc, altar_entity, 3.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 1)
 			self.events[19] = true
 		end
 
-		if self.boss_timer > 52 and not self.events[20] then
+		if self.boss_timer > 66 and not self.events[20] then
 			-- Find random target hero to attack
 			local target = false
 			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
@@ -307,29 +307,29 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 2)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 4.0, 300, 2)
 				self.events[20] = true
 			end
 		end
 
 		-- Triple bolt
-		if self.boss_timer > 54 and not self.events[21] then
+		if self.boss_timer > 72 and not self.events[21] then
 			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 4, 12), 2.5, 175, 350, 120, 200, 800, 1)
 			self.events[21] = true
 		end
 
-		if self.boss_timer > 56 and not self.events[22] then
+		if self.boss_timer > 74 and not self.events[22] then
 			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 4, 12), 2.5, 175, 350, 120, 200, 800, 2)
 			self.events[22] = true
 		end
 
-		if self.boss_timer > 58 and not self.events[23] then
+		if self.boss_timer > 76 and not self.events[23] then
 			self:LightningBolt(altar_loc, altar_entity, RandomInt(1, 360), math.min(power_stacks + 4, 12), 2.5, 175, 350, 120, 200, 800, 1)
 			self.events[23] = true
 		end
 
 		-- Thor + Arc + Thor + Arc
-		if self.boss_timer > 62 and not self.events[24] then
+		if self.boss_timer > 80.5 and not self.events[24] then
 			-- Find random target hero to attack
 			local target = false
 			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
@@ -340,17 +340,17 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 1)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 4.0, 300, 1)
 				self.events[24] = true
 			end
 		end
 
-		if self.boss_timer > 63.5 and not self.events[25] then
-			self:ArcLightning(altar_loc, altar_entity, 1.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
+		if self.boss_timer > 80.5 and not self.events[25] then
+			self:ArcLightning(altar_loc, altar_entity, 3.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
 			self.events[25] = true
 		end
 
-		if self.boss_timer > 67 and not self.events[26] then
+		if self.boss_timer > 85.5 and not self.events[26] then
 			-- Find random target hero to attack
 			local target = false
 			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
@@ -361,54 +361,85 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 1)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 4.0, 300, 1)
 				self.events[26] = true
 			end
 		end
 
-		if self.boss_timer > 69 and not self.events[27] then
-			self:ArcLightning(altar_loc, altar_entity, 1.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
+		if self.boss_timer > 85.5 and not self.events[27] then
+			self:ArcLightning(altar_loc, altar_entity, 3.0, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
 			self.events[27] = true
 		end
 
-		if self.boss_timer > 72 and not self.events[28] then
+		if self.boss_timer > 90.5 and not self.events[28] then
 			self:GodsWrath(altar_loc, altar_entity, 2.5, math.min(150 + 10 * power_stacks, 300), 80, 1)
 			self.events[28] = true
 		end
 
 		-- Bolt spam
-		if self.boss_timer > 77 and not self.events[29] then
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1], 3, 3.5, 175, 350, 120, 200, 200, 1)
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1] + 15, 4, 3.5, 175, 350, 120, 400, 400, false)
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1] + 30, 5, 3.5, 175, 350, 120, 600, 600, false)
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1] + 45, 6, 3.5, 175, 350, 120, 800, 800, false)
+		if self.boss_timer > 95 and not self.events[29] then
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1], 3, 4.5, 175, 350, 120, 200, 200, 1)
 			self.events[29] = true
 		end
 
-		if self.boss_timer > 78 and not self.events[30] then
-			self:ArcLightning(altar_loc, altar_entity, 2.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
+		if self.boss_timer > 95.5 and not self.events[30] then
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1] + 15, 4, 4.0, 175, 350, 120, 400, 400, false)
 			self.events[30] = true
 		end
 
-		-- Bolt spam 2
-		if self.boss_timer > 83 and not self.events[31] then
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2], 10, 3.5, 175, 350, 120, 800, 800, 1)
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 10, 9, 3.5, 175, 350, 120, 725, 725, false)
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 20, 8, 3.5, 175, 350, 120, 650, 650, false)
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 30, 7, 3.5, 175, 350, 120, 575, 575, false)
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 40, 6, 3.5, 175, 350, 120, 500, 500, false)
-			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 50, 5, 3.5, 175, 350, 120, 425, 425, false)
+		if self.boss_timer > 96 and not self.events[31] then
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1] + 30, 5, 3.5, 175, 350, 120, 600, 600, false)
 			self.events[31] = true
 		end
 
-		-- Static + double Bolt + Thor + Arc
-		if self.boss_timer > 84 and not self.events[32] then
-			self:StaticField(altar_loc, altar_entity, 4.0, 300, 120, 2)
+		if self.boss_timer > 96.5 and not self.events[32] then
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[1] + 45, 6, 3.0, 175, 350, 120, 800, 800, false)
 			self.events[32] = true
 		end
 
+		if self.boss_timer > 95 and not self.events[33] then
+			self:ArcLightning(altar_loc, altar_entity, 4.5, math.max(1.1 - power_stacks * 0.05, 0.6), 375, 40, 30 + power_stacks, 2)
+			self.events[33] = true
+		end
+
+		-- Bolt spam 2
+		if self.boss_timer > 101.5 and not self.events[34] then
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2], 10, 5.5, 175, 350, 120, 800, 800, 1)
+			self.events[34] = true
+		end
+
+		if self.boss_timer > 102 and not self.events[35] then
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 10, 9, 5.0, 175, 350, 120, 725, 725, false)
+			self.events[35] = true
+		end
+
+		if self.boss_timer > 102.5 and not self.events[36] then
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 20, 8, 4.5, 175, 350, 120, 650, 650, false)
+			self.events[36] = true
+		end
+
+		if self.boss_timer > 103 and not self.events[37] then
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 30, 7, 4.0, 175, 350, 120, 575, 575, false)
+			self.events[37] = true
+		end
+
+		if self.boss_timer > 103.5 and not self.events[38] then
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 40, 6, 3.5, 175, 350, 120, 500, 500, false)
+			self.events[38] = true
+		end
+
+		if self.boss_timer > 104 and not self.events[39] then
+			self:LightningBolt(altar_loc, altar_entity, self.random_constants[2] - 50, 5, 3.0, 175, 350, 120, 425, 425, false)
+			self.events[39] = true
+		end
+
+		if self.boss_timer > 101.5 and not self.events[40] then
+			self:StaticField(altar_loc, altar_entity, 5.5, 275, 100, 2)
+			self.events[40] = true
+		end
+
 		-- Enrage
-		if self.boss_timer > 89 then
+		if self.boss_timer > 109 then
 			boss:MoveToPosition(altar_loc + Vector(0, 300, 0))
 			self:GodsWrath(altar_loc, altar_entity, 2.0, 900, 300, 1)
 			self.boss_timer = self.boss_timer - 2.1

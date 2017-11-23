@@ -167,13 +167,13 @@ function boss_thinker_treant:OnIntervalThink()
 
 		-- Boss script
 		-- Skill demonstration
-		if self.boss_timer > 1 and not self.events[1] then
+		if self.boss_timer > 0 and not self.events[1] then
 			boss:MoveToPosition(self.random_constants[1])
 			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 1, 150, 125, 1)
 			self.events[1] = true
 		end
 
-		if self.boss_timer > 6 and not self.events[2] then
+		if self.boss_timer > 5.5 and not self.events[2] then
 			boss:MoveToPosition(self.random_constants[1])
 			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, 1)
 			self.events[2] = true
@@ -185,252 +185,245 @@ function boss_thinker_treant:OnIntervalThink()
 			self.events[3] = true
 		end
 
-		if self.boss_timer > 15 and not self.events[4] then
+		if self.boss_timer > 15.5 and not self.events[4] then
 			boss:MoveToPosition(altar_loc + RandomVector(1):Normalized() * 400)
 			self:RingOfThorns(altar_loc, altar_entity, 3.0, 450, 125, 1)
 			self.events[4] = true
 		end
 
 		-- Double tree hidden vine smash + ring of thorns
-		if self.boss_timer > 19 and not self.events[5] then
+		if self.boss_timer > 20.5 and not self.events[5] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:RapidGrowth(altar_loc, altar_entity, 2.0, {self.random_constants[2], RotatePosition(altar_loc, QAngle(0, 180, 0), self.random_constants[2])}, math.min(4 + power_stacks * 0.2, 6), 1)
+			self:RapidGrowth(altar_loc, altar_entity, 3.0, {self.random_constants[2], RotatePosition(altar_loc, QAngle(0, 180, 0), self.random_constants[2])}, math.min(4 + power_stacks * 0.2, 6), 1)
 			self.events[5] = true
 		end
 
-		if self.boss_timer > 22 and not self.events[6] then
-			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:NaturesGuise(altar_loc, altar_entity, 2.0, 1)
+		if self.boss_timer > 20.5 and not self.events[6] then
+			self:NaturesGuise(altar_loc, altar_entity, 4.5, 2)
 			self.events[6] = true
 		end
 
-		if self.boss_timer > 25 and not self.events[7] then
+		if self.boss_timer > 27 and not self.events[7] then
 			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, 1)
 			self.events[7] = true
 		end
 
-		if self.boss_timer > 29 and not self.events[8] then
+		if self.boss_timer > 32.5 and not self.events[8] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:NaturesGuise(altar_loc, altar_entity, 2.0, 1)
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
 			self.events[8] = true
 		end
 
-		if self.boss_timer > 32 and not self.events[9] then
-			self:RingOfThorns(altar_loc, altar_entity, 2.5, math.max(450 - 10 * power_stacks, 300), 125, 1)
+		if self.boss_timer > 32.5 and not self.events[9] then
+			self:RingOfThorns(altar_loc, altar_entity, 3.5, math.max(450 - 10 * power_stacks, 300), 125, 2)
 			self.events[9] = true
 		end
 
-		if self.boss_timer > 35 and not self.events[10] then
+		if self.boss_timer > 38 and not self.events[10] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:LeechSeed(altar_loc, altar_entity, 1.5, 25, math.min(1 + power_stacks * 0.1, 2), 1)
+			self:LeechSeed(altar_loc, altar_entity, 2.5, 25, math.min(1 + power_stacks * 0.1, 2), 1)
 			self.events[10] = true
 		end
 
 		-- Overgrowth + Rock Smash
-		if self.boss_timer > 37 and not self.events[11] then
+		if self.boss_timer > 42.5 and not self.events[11] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
 			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 4.0, 1)
 			self.events[11] = true
 		end
 
-		if self.boss_timer > 41 and not self.events[12] then
+		if self.boss_timer > 42.5 and not self.events[12] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:RockSmash(altar_loc, altar_entity, nil, 2, 2.5, 450, 175, 1)
+			self:RockSmash(altar_loc, altar_entity, nil, 2, 3.5, 450, 175, 2)
 			self.events[12] = true
 		end
 
 		-- Double living armor tree hidden ring of thorns + overgrowth + double Vine Smash
-		if self.boss_timer > 45 and not self.events[13] then
+		if self.boss_timer > 48 and not self.events[13] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:RapidGrowth(altar_loc, altar_entity, 1.5, {RotatePosition(altar_loc, QAngle(0, 90, 0), self.random_constants[2]), RotatePosition(altar_loc, QAngle(0, 270, 0), self.random_constants[2])}, math.min(4 + power_stacks * 0.2, 6), 1)
+			self:RapidGrowth(altar_loc, altar_entity, 2.5, {RotatePosition(altar_loc, QAngle(0, 90, 0), self.random_constants[2]), RotatePosition(altar_loc, QAngle(0, 270, 0), self.random_constants[2])}, math.min(4 + power_stacks * 0.2, 6), 1)
 			self.events[13] = true
 		end
 
-		if self.boss_timer > 47 and not self.events[14] then
-			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:LivingArmor(altar_loc, altar_entity, 2.0, 2, math.min(5 + power_stacks, 15), 1)
+		if self.boss_timer > 48 and not self.events[14] then
+			self:LivingArmor(altar_loc, altar_entity, 3.5, 2, math.min(5 + power_stacks, 15), 2)
 			self.events[14] = true
 		end
 
-		if self.boss_timer > 50 and not self.events[15] then
+		if self.boss_timer > 53.5 and not self.events[15] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:NaturesGuise(altar_loc, altar_entity, 1.5, 1)
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
 			self.events[15] = true
 		end
 
-		if self.boss_timer > 52 and not self.events[16] then
-			self:RingOfThorns(altar_loc, altar_entity, 2.5, math.max(450 - 10 * power_stacks, 300), 125, 1)
+		if self.boss_timer > 53.5 and not self.events[16] then
+			self:RingOfThorns(altar_loc, altar_entity, 3.5, math.max(450 - 10 * power_stacks, 300), 125, 2)
 			self.events[16] = true
 		end
 
-		if self.boss_timer > 55 and not self.events[17] then
+		if self.boss_timer > 59 and not self.events[17] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:NaturesGuise(altar_loc, altar_entity, 1.5, 1)
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
 			self.events[17] = true
 		end
 
-		if self.boss_timer > 57 and not self.events[18] then
-			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 5.0, 1)
+		if self.boss_timer > 59 and not self.events[18] then
+			self:Overgrowth(altar_loc, altar_entity, 3.5, 450, 50, 5.5, 2)
 			self.events[18] = true
 		end
 
-		if self.boss_timer > 61 and not self.events[19] then
+		if self.boss_timer > 64.5 and not self.events[19] then
 			boss:MoveToPosition(self.random_constants[3])
 			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, 1)
 			self.events[19] = true
 		end
 
-		if self.boss_timer > 66 and not self.events[20] then
+		if self.boss_timer > 70 and not self.events[20] then
 			boss:MoveToPosition(self.random_constants[3])
 			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 3, 150, 125, 1)
 			self.events[20] = true
 		end
 
-		if self.boss_timer > 70 and not self.events[21] then
+		if self.boss_timer > 75.5 and not self.events[21] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:LeechSeed(altar_loc, altar_entity, 1.5, 25, math.min(1 + power_stacks * 0.1, 2), 1)
+			self:LeechSeed(altar_loc, altar_entity, 2.5, 25, math.min(1 + power_stacks * 0.1, 2), 1)
 			self.events[21] = true
 		end
 
 		-- Treantling demonstration
-		if self.boss_timer > 72 and not self.events[22] then
+		if self.boss_timer > 80 and not self.events[22] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:EyesInTheForest(altar_loc, altar_entity, 2.0, {RotatePosition(altar_loc, QAngle(0, 180, 0), self.random_constants[4])}, math.min(6 + power_stacks * 0.2, 8), 1)
+			self:EyesInTheForest(altar_loc, altar_entity, 2.5, {RotatePosition(altar_loc, QAngle(0, 120, 0), self.random_constants[4])}, math.min(6 + power_stacks * 0.2, 8), 1)
 			self.events[22] = true
 		end
 
-		if self.boss_timer > 75 and not self.events[23] then
+		if self.boss_timer > 84.5 and not self.events[23] then
 			boss:MoveToPosition(self.random_constants[4])
 			self:RingOfThorns(altar_loc, altar_entity, 2.5, math.max(450 - 10 * power_stacks, 300), 125, 1)
 			self.events[23] = true
 		end
 
-		if self.boss_timer > 78 and not self.events[24] then
+		if self.boss_timer > 89 and not self.events[24] then
 			boss:MoveToPosition(self.random_constants[4])
-			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 4.0, 1)
+			self:Overgrowth(altar_loc, altar_entity, 3.0, 450, 50, 4.0, 1)
 			self.events[24] = true
 		end
 
-		if self.boss_timer > 81 and not self.events[25] then
-			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:RockSmash(altar_loc, altar_entity, self.random_constants[4], 3, 2.5, 450, 175, 1)
+		if self.boss_timer > 89 and not self.events[25] then
+			self:RockSmash(altar_loc, altar_entity, RotatePosition(altar_loc, QAngle(0, 240, 0), self.random_constants[4]), 3, 3.0, 450, 175, 2)
 			self.events[25] = true
 		end
 
 		-- Tree + Treantling hell
-		if self.boss_timer > 85 and not self.events[26] then
+		if self.boss_timer > 94 and not self.events[26] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:RapidGrowth(altar_loc, altar_entity, 1.5, {self.random_constants[5], RotatePosition(altar_loc, QAngle(0, 72, 0), self.random_constants[5]), RotatePosition(altar_loc, QAngle(0, 144, 0), self.random_constants[5]), RotatePosition(altar_loc, QAngle(0, 216, 0), self.random_constants[5])}, math.min(5 + power_stacks * 0.2, 7), 1)
+			self:RapidGrowth(altar_loc, altar_entity, 2.5, {self.random_constants[5], RotatePosition(altar_loc, QAngle(0, 72, 0), self.random_constants[5]), RotatePosition(altar_loc, QAngle(0, 144, 0), self.random_constants[5]), RotatePosition(altar_loc, QAngle(0, 216, 0), self.random_constants[5])}, math.min(5 + power_stacks * 0.2, 7), 1)
 			self.events[26] = true
 		end
 
-		if self.boss_timer > 86 and not self.events[27] then
-			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:LivingArmor(altar_loc, altar_entity, 1.5, 2, math.min(5 + power_stacks, 15), 2)
+		if self.boss_timer > 94 and not self.events[27] then
+			self:EyesInTheForest(altar_loc, altar_entity, 2.5, {RotatePosition(altar_loc, QAngle(0, 288, 0), self.random_constants[5])}, math.min(6 + power_stacks * 0.2, 8), 2)
 			self.events[27] = true
 		end
 
-		if self.boss_timer > 87 and not self.events[28] then
+		if self.boss_timer > 98 and not self.events[28] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:EyesInTheForest(altar_loc, altar_entity, 1.5, {RotatePosition(altar_loc, QAngle(0, 288, 0), self.random_constants[5])}, math.min(6 + power_stacks * 0.2, 8), 1)
+			self:LivingArmor(altar_loc, altar_entity, 2.0, 2, math.min(5 + power_stacks, 15), 1)
 			self.events[28] = true
 		end
 
-		if self.boss_timer > 88 and not self.events[29] then
-			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:NaturesGuise(altar_loc, altar_entity, 1.4, 2)
+		if self.boss_timer > 98 and not self.events[29] then
+			self:NaturesGuise(altar_loc, altar_entity, 3.0, 2)
 			self.events[29] = true
 		end
 
-		if self.boss_timer > 89.5 and not self.events[30] then
+		if self.boss_timer > 103 and not self.events[30] then
 			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 5.5, 1)
 			self.events[30] = true
 		end
 
-		if self.boss_timer > 92.5 and not self.events[31] then
+		if self.boss_timer > 107.5 and not self.events[31] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:NaturesGuise(altar_loc, altar_entity, 1.4, 1)
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
 			self.events[31] = true
 		end
 
-		if self.boss_timer > 94 and not self.events[32] then
-			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, 1)
+		if self.boss_timer > 107.5 and not self.events[32] then
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, 2)
 			self.events[32] = true
 		end
 
-		if self.boss_timer > 98 and not self.events[33] then
+		if self.boss_timer > 113 and not self.events[33] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:NaturesGuise(altar_loc, altar_entity, 1.4, 1)
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
 			self.events[33] = true
 		end
 
-		if self.boss_timer > 99.5 and not self.events[34] then
-			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 3, 150, 125, 1)
+		if self.boss_timer > 113 and not self.events[34] then
+			self:VineSmash(altar_loc, altar_entity, 4.0, 2.5, 3, 150, 125, 2)
 			self.events[34] = true
 		end
 
-		if self.boss_timer > 103.5 and not self.events[35] then
+		if self.boss_timer > 119 and not self.events[35] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:NaturesGuise(altar_loc, altar_entity, 1.4, 1)
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
 			self.events[35] = true
 		end
 
-		if self.boss_timer > 105 and not self.events[36] then
-			self:RingOfThorns(altar_loc, altar_entity, 2.5, math.max(450 - 10 * power_stacks, 300), 125, 1)
+		if self.boss_timer > 119 and not self.events[36] then
+			self:RingOfThorns(altar_loc, altar_entity, 3.5, math.max(450 - 10 * power_stacks, 300), 125, 2)
 			self.events[36] = true
 		end
 
-		if self.boss_timer > 108 and not self.events[37] then
+		if self.boss_timer > 124 and not self.events[37] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:LeechSeed(altar_loc, altar_entity, 1.5, 25, math.min(1 + power_stacks * 0.1, 2), 1)
+			self:LeechSeed(altar_loc, altar_entity, 2.5, 25, math.min(1 + power_stacks * 0.1, 2), 1)
 			self.events[37] = true
 		end
 
 		-- Double treantling shenanigans
-		if self.boss_timer > 110 and not self.events[38] then
+		if self.boss_timer > 128.5 and not self.events[38] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:EyesInTheForest(altar_loc, altar_entity, 1.5, {RotatePosition(altar_loc, QAngle(0, 120, 0), self.random_constants[6]), RotatePosition(altar_loc, QAngle(0, 240, 0), self.random_constants[6])}, math.min(6 + power_stacks * 0.2, 8), 1)
+			self:EyesInTheForest(altar_loc, altar_entity, 2.5, {RotatePosition(altar_loc, QAngle(0, 120, 0), self.random_constants[6]), RotatePosition(altar_loc, QAngle(0, 240, 0), self.random_constants[6])}, math.min(6 + power_stacks * 0.2, 8), 1)
 			self.events[38] = true
 		end
 
-		if self.boss_timer > 111 and not self.events[39] then
+		if self.boss_timer > 128.5 and not self.events[39] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:LivingArmor(altar_loc, altar_entity, 1.5, 2, math.min(5 + power_stacks, 15), 2)
+			self:LivingArmor(altar_loc, altar_entity, 3.5, 2, math.min(5 + power_stacks, 15), 2)
 			self.events[39] = true
 		end
 
-		if self.boss_timer > 113 and not self.events[40] then
+		if self.boss_timer > 134 and not self.events[40] then
 			boss:MoveToPosition(self.random_constants[6])
-			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 4.0, 1)
+			self:Overgrowth(altar_loc, altar_entity, 3.0, 450, 50, 4.0, 1)
 			self.events[40] = true
 		end
 
-		if self.boss_timer > 116 and not self.events[41] then
-			boss:MoveToPosition(self.random_constants[6])
-			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, 1)
+		if self.boss_timer > 134 and not self.events[41] then
+			self:VineSmash(altar_loc, altar_entity, 4.5, 3.0, 2, 150, 125, 2)
 			self.events[41] = true
 		end
 
-		if self.boss_timer > 120 and not self.events[42] then
+		if self.boss_timer > 140.5 and not self.events[42] then
 			boss:MoveToPosition(self.random_constants[6])
-			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 3, 150, 125, 1)
+			self:VineSmash(altar_loc, altar_entity, 4.5, 3.0, 3, 150, 125, 1)
 			self.events[42] = true
 		end
 
-		if self.boss_timer > 124 and not self.events[43] then
-			boss:MoveToPosition(self.random_constants[6])
-			self:RockSmash(altar_loc, altar_entity, nil, 4, 4.5, 500, 175, 1)
+		if self.boss_timer > 140.5 and not self.events[43] then
+			self:RockSmash(altar_loc, altar_entity, nil, 4, 4.5, 500, 175, 2)
 			self.events[43] = true
 		end
 
-		if self.boss_timer > 125 and not self.events[44] then
+		if self.boss_timer > 147 and not self.events[44] then
 			boss:MoveToPosition(self.random_constants[6])
-			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 3, 150, 125, 2)
+			self:VineSmash(altar_loc, altar_entity, 4.5, 3.0, 3, 150, 125, 2)
 			self.events[44] = true
 		end
 
 		-- Enrage
-		if self.boss_timer > 130 then
+		if self.boss_timer > 153 then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
 			self:Overgrowth(altar_loc, altar_entity, 2.0, 950, 500, 2.0, 1)
 			self.boss_timer = self.boss_timer - 2.1
@@ -579,9 +572,7 @@ end
 
 -- Stack Leech Seed up
 function boss_thinker_treant:LeechSeedStackUp(boss, enemy)
-	if not enemy:HasModifier("modifier_frostivus_leech_seed_debuff") then
-		enemy:AddNewModifier(boss, boss:FindAbilityByName("frostivus_boss_leech_seed"), "modifier_frostivus_leech_seed_debuff", {})
-	end
+	enemy:AddNewModifier(boss, boss:FindAbilityByName("frostivus_boss_leech_seed"), "modifier_frostivus_leech_seed_debuff", {duration = 60})
 	local seed_modifier = enemy:FindModifierByName("modifier_frostivus_leech_seed_debuff")
 	seed_modifier:SetStackCount(seed_modifier:GetStackCount() + 1)
 end

@@ -1,6 +1,6 @@
 modifier_river = class({})
 
-function modifier_river:IsHidden() return false end
+function modifier_river:IsHidden() return true end
 function modifier_river:IsDebuff() return false end
 function modifier_river:IsPurgable() return false end
 
