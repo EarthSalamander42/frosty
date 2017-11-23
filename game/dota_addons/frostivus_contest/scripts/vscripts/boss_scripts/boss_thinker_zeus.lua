@@ -161,7 +161,7 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 1)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 1)
 				self.events[3] = true
 			end
 		end
@@ -193,7 +193,7 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 2)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 2)
 				self.events[7] = true
 			end
 		end
@@ -215,7 +215,7 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 2)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 2)
 				self.events[9] = true
 			end
 		end
@@ -247,7 +247,7 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 1)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 1)
 				self.events[13] = true
 			end
 		end
@@ -280,7 +280,7 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 1)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 1)
 				self.events[17] = true
 			end
 		end
@@ -307,7 +307,7 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 2)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 2)
 				self.events[20] = true
 			end
 		end
@@ -340,7 +340,7 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 1)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 1)
 				self.events[24] = true
 			end
 		end
@@ -361,7 +361,7 @@ function boss_thinker_zeus:OnIntervalThink()
 				end
 			end
 			if target then
-				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 350, 1)
+				self:ElThor(altar_entity, target, math.max(400 - 7 * power_stacks, 325), 3.0, 150, 1)
 				self.events[26] = true
 			end
 		end

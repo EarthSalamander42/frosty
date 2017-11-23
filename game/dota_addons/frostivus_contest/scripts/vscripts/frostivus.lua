@@ -7,7 +7,6 @@ PRESENT_SCORE_2 = 0
 PRESENT_SCORE_3 = 0
 if IsInToolsMode() then PHASE_TIME = 481 end -- 481
 
-
 function Frostivus()
 	for player_id = 0, 20 do
 		if PlayerResource:GetPlayer(player_id) then
