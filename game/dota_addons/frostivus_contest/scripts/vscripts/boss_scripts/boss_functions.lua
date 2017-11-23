@@ -59,7 +59,6 @@ function UnlockArena(altar, victory, team, aura_ability)
 	ParticleManager:ReleaseParticleIndex(altar_handle.arena_fence_pfx)
 
 	CustomGameEventManager:Send_ServerToTeam(team, "hide_boss_hp", {})
-
 	
 	-- Mark relevant team as able to fight again
 	if team == DOTA_TEAM_GOODGUYS then
@@ -163,6 +162,19 @@ function modifier_altar_active:OnCreated( params )
 			self.exp_bounty = params.exp_bounty
 		end
 
+		-- Define knockback position based on the altar
+		if self:GetParent():GetName() == "altar_2" then
+			self.knockback_loc = Vector(-3214, 4789, 128)
+		elseif self:GetParent():GetName() == "altar_3" then
+			self.knockback_loc = Vector(-3108, -3725, 128)
+		elseif self:GetParent():GetName() == "altar_4" then
+			self.knockback_loc = Vector(1127, 905, 128)
+		elseif self:GetParent():GetName() == "altar_5" then
+			self.knockback_loc = Vector(2490, 3253, 128)
+		elseif self:GetParent():GetName() == "altar_6" then
+			self.knockback_loc = Vector(2594, -3759, 128)
+		end
+
 		self.fighting_heroes = {}
 		self:StartIntervalThink(0.03)
 	end
@@ -203,15 +215,18 @@ function modifier_altar_active:OnIntervalThink()
 			if fighter:GetTeam() == DOTA_TEAM_NEUTRALS then
 
 			elseif fighter:GetTeam() ~= self.team and not fighter:HasModifier("modifier_frostivus_boss") and not fighter:HasModifier("modifier_knockback") then
+				local knockback = fighter:GetAbsOrigin() - self.knockback_loc
+				local knockback_length = knockback:Length2D()
+				local knockback_center = fighter:GetAbsOrigin() + knockback:Normalized() * 100
 				local enemy_knockback =
 				{
-					center_x = altar_loc.x,
-					center_y = altar_loc.y,
-					center_z = altar_loc.z,
-					duration = 0.09,
-					knockback_duration = 0.09,
-					knockback_distance = 100,
-					knockback_height = 60,
+					center_x = knockback_center.x,
+					center_y = knockback_center.y,
+					center_z = knockback_center.z,
+					duration = knockback_length / 900,
+					knockback_duration = knockback_length / 900,
+					knockback_distance = knockback_length,
+					knockback_height = knockback_length * 0.2,
 					should_stun = 1
 				}
 
@@ -329,13 +344,13 @@ function SpawnVenomancer(altar)
 	boss:FindAbilityByName("frostivus_boss_green_death"):SetLevel(1)
 
 	-- Cosmetics
-	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_head/poison_touch_head.vmdl"})
+	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/ferocious_toxicants_embrace_head/ferocious_toxicants_embrace_head.vmdl"})
 	boss.head:FollowEntity(boss, true)
-	boss.shoulder = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_shoulder/poison_touch_shoulder.vmdl"})
+	boss.shoulder = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/ferocious_toxicants_embrace_shoulder/ferocious_toxicants_embrace_shoulder.vmdl"})
 	boss.shoulder:FollowEntity(boss, true)
-	boss.arms = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/venomancer_hydra_switch_color_arms/venomancer_hydra_switch_color_arms.vmdl"})
+	boss.arms = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/deathbringer_arms/deathbringer_arms.vmdl"})
 	boss.arms:FollowEntity(boss, true)
-	boss.tail = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/poison_touch_tail/poison_touch_tail.vmdl"})
+	boss.tail = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/deathbringer_tail/deathbringer_tail.vmdl"})
 	boss.tail:FollowEntity(boss, true)
 
 	return boss
@@ -429,6 +444,21 @@ function SpawnNevermore(altar)
 	return boss
 end
 
+function SpawnMegaGreevil()
+	local boss = CreateUnitByName("npc_frostivus_boss_greevil", Vector(0, 0, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
+	boss:FaceTowards(boss:GetAbsOrigin() + Vector(0, -10, 0))
+
+	-- Abilities
+	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
+	boss:FindModifierByName("modifier_frostivus_boss"):SetStackCount(10)
+	--boss:FindAbilityByName("frostivus_boss_necromastery"):SetLevel(1)
+	--boss:FindAbilityByName("frostivus_boss_requiem_of_souls"):SetLevel(1)
+
+	-- Cosmetics
+	boss:SetRenderColor(25, 0, 0)
+
+	return boss
+end
 
 ---------------------
 -- Other stuff
@@ -519,6 +549,7 @@ function StartPhaseTwo()
 			boss:RemoveModifierByName("boss_thinker_lich")
 			boss:Purge(true, true, false, true, true)
 			boss:Heal(999999, nil)
+			boss:GiveMana(boss:GetMaxMana())
 			boss:Stop()
 			if boss:GetUnitName() == "npc_frostivus_boss_zuus" then
 				boss:SetAbsOrigin(Entities:FindByName(nil, "altar_2"):GetAbsOrigin() + Vector(0, 300, 0))
@@ -536,13 +567,15 @@ function StartPhaseTwo()
 end
 
 function StartPhaseThree()
-	if PRESENT_SCORE_2 >= PRESENT_SCORE_3 then
-		GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
-		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_death_Stinger")
-	else
-		GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
-		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_death_Stinger")
-	end
+	Timers:CreateTimer(10, function()
+		if PRESENT_SCORE_2 >= PRESENT_SCORE_3 then
+			GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+			PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_death_Stinger")
+		else
+			GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+			PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_death_Stinger")
+		end
+	end)
 end
 
 function BossPhaseAbilityCastAlt(team, ability_image, ability_name, delay)

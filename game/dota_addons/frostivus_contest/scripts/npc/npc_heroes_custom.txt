@@ -24,6 +24,8 @@
 		"Ability15"				"special_bonus_attack_damage_90"
 		"Ability16"				"special_bonus_unique_abaddon"
 		"Ability17"				"special_bonus_unique_abaddon_3"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -51,6 +53,8 @@
 		"Ability15"				"special_bonus_unique_alchemist_2"
 		"Ability16"				"special_bonus_unique_alchemist_3"
 		"Ability17"				"special_bonus_unique_alchemist_4"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -77,6 +81,8 @@
 		"Ability15"				"special_bonus_unique_antimage_3"
 		"Ability16"				"special_bonus_unique_antimage_4"
 		"Ability17"				"special_bonus_unique_antimage_2"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -103,6 +109,8 @@
 		"Ability15"				"special_bonus_unique_axe_2"
 		"Ability16"				"special_bonus_hp_regen_40"
 		"Ability17"				"special_bonus_unique_axe"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -129,6 +137,8 @@
 		"Ability15"				"special_bonus_unique_bristleback_2"
 		"Ability16"				"special_bonus_spell_lifesteal_20"
 		"Ability17"				"special_bonus_unique_bristleback_3"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -155,6 +165,8 @@
 		"Ability15"				"special_bonus_unique_crystal_maiden_4"
 		"Ability16"				"special_bonus_unique_crystal_maiden_1"
 		"Ability17"				"special_bonus_unique_crystal_maiden_2"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -181,6 +193,8 @@
 		"Ability15"				"special_bonus_unique_dazzle_4"
 		"Ability16"				"special_bonus_unique_dazzle_1"
 		"Ability17"				"special_bonus_unique_dazzle_3"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -207,6 +221,8 @@
 		"Ability15"				"special_bonus_unique_drow_ranger_4"
 		"Ability16"				"special_bonus_unique_drow_ranger_1"
 		"Ability17"				"special_bonus_cooldown_reduction_50"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -233,6 +249,8 @@
 		"Ability15"				"special_bonus_attack_damage_90"
 		"Ability16"				"special_bonus_unique_ember_spirit_4"
 		"Ability17"				"special_bonus_unique_ember_spirit_5"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -259,6 +277,8 @@
 		"Ability15"				"special_bonus_unique_gyrocopter_4"
 		"Ability16"				"special_bonus_unique_gyrocopter_1"
 		"Ability17"				"special_bonus_unique_gyrocopter_5"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -285,6 +305,8 @@
 		"Ability15"				"special_bonus_unique_juggernaut_3"
 		"Ability16"				"special_bonus_hp_600"
 		"Ability17"				"special_bonus_unique_juggernaut_2"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -311,6 +333,8 @@
 		"Ability15"				"special_bonus_unique_legion_commander_3"
 		"Ability16"				"special_bonus_attack_damage_150"
 		"Ability17"				"special_bonus_unique_legion_commander_2"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -337,6 +361,8 @@
 		"Ability15"				"special_bonus_unique_leshrac_3"
 		"Ability16"				"special_bonus_unique_leshrac_1"
 		"Ability17"				"special_bonus_movement_speed_100"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -366,6 +392,8 @@
 		"Ability15"				"special_bonus_unique_lifestealer_2"
 		"Ability16"				"special_bonus_unique_lifestealer_3"
 		"Ability17"				"special_bonus_haste"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -392,6 +420,8 @@
 		"Ability15"				"special_bonus_unique_lina_2"
 		"Ability16"				"special_bonus_unique_lina_1"
 		"Ability17"				"special_bonus_attack_range_250"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -444,6 +474,8 @@
 		"Ability15"				"special_bonus_unique_medusa"
 		"Ability16"				"special_bonus_attack_damage_120"
 		"Ability17"				"special_bonus_unique_medusa_4"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -472,6 +504,8 @@
 		"Ability15"				"special_bonus_unique_monkey_king_3"
 		"Ability16"				"special_bonus_unique_monkey_king_4"
 		"Ability17"				"special_bonus_unique_monkey_king_6"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -498,6 +532,8 @@
 		"Ability15"				"special_bonus_unique_ogre_magi"
 		"Ability16"				"special_bonus_movement_speed_90"
 		"Ability17"				"special_bonus_unique_ogre_magi_2"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -524,6 +560,8 @@
 		"Ability15"				"special_bonus_mp_regen_6"
 		"Ability16"				"special_bonus_unique_omniknight_1"
 		"Ability17"				"special_bonus_unique_omniknight_4"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -550,6 +588,8 @@
 		"Ability15"				"special_bonus_unique_oracle_4"
 		"Ability16"				"special_bonus_unique_oracle_3"
 		"Ability17"				"special_bonus_unique_oracle"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -576,6 +616,8 @@
 		"Ability15"				"special_bonus_unique_phantom_assassin"
 		"Ability16"				"special_bonus_cleave_60"
 		"Ability17"				"special_bonus_unique_phantom_assassin_2"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -602,6 +644,8 @@
 		"Ability15"				"special_bonus_unique_pugna_5"
 		"Ability16"				"special_bonus_unique_pugna_2"
 		"Ability17"				"special_bonus_unique_pugna_3"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -628,6 +672,8 @@
 		"Ability15"				"special_bonus_attack_damage_75"
 		"Ability16"				"special_bonus_unique_queen_of_pain_2"
 		"Ability17"				"special_bonus_cooldown_reduction_25"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -658,6 +704,8 @@
 		"Ability16"				"special_bonus_unique_rubick"
 		"Ability17"				"special_bonus_unique_rubick_4"
 		"Ability18"				"special_bonus_unique_rubick_5"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -684,6 +732,8 @@
 		"Ability15"				"special_bonus_unique_nevermore_2"
 		"Ability16"				"special_bonus_unique_nevermore_1"
 		"Ability17"				"special_bonus_cooldown_reduction_40"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -710,6 +760,8 @@
 		"Ability15"				"special_bonus_truestrike"
 		"Ability16"				"special_bonus_attack_range_200"
 		"Ability17"				"special_bonus_unique_sniper_2"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -736,6 +788,8 @@
 		"Ability15"				"special_bonus_unique_spectre"
 		"Ability16"				"special_bonus_unique_spectre_4"
 		"Ability17"				"special_bonus_unique_spectre_5"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -762,6 +816,8 @@
 		"Ability15"				"special_bonus_unique_sven"
 		"Ability16"				"special_bonus_30_crit_2"
 		"Ability17"				"special_bonus_unique_sven_2"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -788,6 +844,8 @@
 		"Ability15"				"special_bonus_unique_templar_assassin_5"
 		"Ability16"				"special_bonus_unique_templar_assassin_2"
 		"Ability17"				"special_bonus_lifesteal_30"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -814,6 +872,8 @@
 		"Ability15"				"special_bonus_unique_tidehunter"
 		"Ability16"				"special_bonus_cooldown_reduction_30"
 		"Ability17"				"special_bonus_attack_damage_250"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -842,6 +902,8 @@
 		"Ability15"				"special_bonus_cooldown_reduction_20"
 		"Ability16"				"special_bonus_unique_timbersaw"
 		"Ability17"				"special_bonus_unique_timbersaw_3"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -868,6 +930,8 @@
 		"Ability15"				"special_bonus_agility_40"
 		"Ability16"				"special_bonus_lifesteal_30"
 		"Ability17"				"special_bonus_attack_range_300"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -894,6 +958,8 @@
 		"Ability15"				"special_bonus_movement_speed_100"
 		"Ability16"				"special_bonus_unique_ursa_5"
 		"Ability17"				"special_bonus_20_bash_2"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -920,6 +986,8 @@
 		"Ability15"				"special_bonus_unique_vengeful_spirit_1"
 		"Ability16"				"special_bonus_unique_vengeful_spirit_5"
 		"Ability17"				"special_bonus_unique_vengeful_spirit_3"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -946,6 +1014,8 @@
 		"Ability15"				"special_bonus_unique_viper_2"
 		"Ability16"				"special_bonus_unique_viper_3"
 		"Ability17"				"special_bonus_attack_damage_120"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -972,6 +1042,8 @@
 		"Ability15"				"special_bonus_haste"
 		"Ability16"				"special_bonus_unique_windranger_4"
 		"Ability17"				"special_bonus_cooldown_reduction_30"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -998,6 +1070,8 @@
 		"Ability15"				"special_bonus_unique_winter_wyvern_2"
 		"Ability16"				"special_bonus_unique_winter_wyvern_3"
 		"Ability17"				"special_bonus_unique_winter_wyvern_4"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -1025,6 +1099,8 @@
 		"Ability16"				"special_bonus_unique_wisp_2"
 		"Ability17"				"special_bonus_unique_wisp_4"
 		"Ability18"				"special_bonus_hp_regen_50"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	//=================================================================================================================
@@ -1051,6 +1127,8 @@
 		"Ability15"				"special_bonus_gold_income_40"
 		"Ability16"				"special_bonus_unique_witch_doctor_4"
 		"Ability17"				"special_bonus_unique_witch_doctor_5"
+
+		"VisionNighttimeRange"	"1000"
 	}
 
 	"npc_dota_hero_ancient_apparition"		{ "IsDisabled" "1" }

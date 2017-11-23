@@ -51,6 +51,7 @@
 			_class = "C_OP_ColorInterpolate"
 			m_ColorFade = [ 0, 255, 0, 255 ]
 			m_flFadeStartTime = 0.35
+			m_flFadeEndTime = 0.9
 		},
 		{
 			_class = "C_OP_InterpolateRadius"
@@ -69,9 +70,8 @@
 		},
 		{
 			_class = "C_INIT_RandomColor"
-			m_ColorMax = [ 90, 247, 0, 255 ]
-			m_ColorMin = [ 226, 210, 0, 255 ]
-			m_bDisableOperator = true
+			m_ColorMax = [ 160, 82, 45, 255 ]
+			m_ColorMin = [ 218, 165, 32, 255 ]
 		},
 		{
 			_class = "C_INIT_RandomYaw"

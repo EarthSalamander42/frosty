@@ -1483,7 +1483,7 @@
 			"03"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"omni_slash_radius"			"300"
+				"omni_slash_radius"			"425"
 			}
 			"04"
 			{

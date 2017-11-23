@@ -20,11 +20,11 @@ function item_frostivus_present:OnSpellStart()
 				PRESENT_SCORE_2 = PRESENT_SCORE_2 + 1
 				CustomNetTables:SetTableValue("game_options", "radiant", {score = PRESENT_SCORE_2})
 				PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "Frostivus.PointScored.Team")
-				PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_receive_present_Stinger")
+				PlaySoundForTeam(DOTA_TEAM_BADGUYS, "Frostivus.PointScored.Enemy")
 			elseif caster:GetTeam() == DOTA_TEAM_BADGUYS then
 				PRESENT_SCORE_3 = PRESENT_SCORE_3 + 1
 				CustomNetTables:SetTableValue("game_options", "dire", {score = PRESENT_SCORE_3})
-				PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_receive_present_Stinger")
+				PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "Frostivus.PointScored.Enemy")
 				PlaySoundForTeam(DOTA_TEAM_BADGUYS, "Frostivus.PointScored.Team")
 			end
 

@@ -28,7 +28,7 @@ function modifier_frostivus_boss:OnCreated()
 	self.armor_per_power = ability:GetSpecialValueFor("armor_per_power")
 	self.magic_resist_per_power = 1 - ability:GetSpecialValueFor("magic_resist_per_power") * 0.01
 	self.health_per_power = ability:GetSpecialValueFor("health_per_power") * 0.01
-	self.damage_per_power = 200 * ability:GetSpecialValueFor("damage_per_power") * 0.01
+	self.damage_per_power = 160 * ability:GetSpecialValueFor("damage_per_power") * 0.01
 
 	self:ForceRefresh()
 

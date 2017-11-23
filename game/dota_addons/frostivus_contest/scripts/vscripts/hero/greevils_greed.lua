@@ -29,7 +29,7 @@ function custom_alchemist_goblins_greed_passive:OnAttackLanded(keys)
 			local ability = self:GetAbility()
 			local gold = ability:GetLevelSpecialValueFor("gold_per_hit", ability:GetLevel() -1)
 			attacker:ModifyGold(gold, false, DOTA_ModifyGold_CreepKill)
-			SendOverheadEventMessage(attacker, OVERHEAD_ALERT_GOLD, attacker, gold, nil)
+			SendOverheadEventMessage(PlayerResource:GetPlayer(attacker:GetPlayerID()), OVERHEAD_ALERT_GOLD, attacker, gold, nil)
 		end
 	end
 end

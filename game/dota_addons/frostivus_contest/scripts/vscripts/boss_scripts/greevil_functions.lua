@@ -18,7 +18,7 @@ function SpawnGreevil(location, level, red, green, blue)
 
 	-- Add phase-appropriate modifiers
 	if PHASE == 2 then
-		greevil:AddNewModifier(nil, nil, "modifier_greevil_capture_aura", {level = level})
+		greevil:AddNewModifier(nil, nil, "modifier_greevil_capture_aura", {})
 	else
 		greevil:AddNewModifier(nil, nil, "modifier_frostivus_greevil", {})
 	end

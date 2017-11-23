@@ -13,8 +13,12 @@ function Precache(context)
 	LinkLuaModifier("modifier_command_restricted", "modifier/modifier_command_restricted.lua", LUA_MODIFIER_MOTION_NONE )
 	LinkLuaModifier("modifier_river", "modifier/modifier_river.lua", LUA_MODIFIER_MOTION_NONE )
 	LinkLuaModifier("modifier_passive_bounty", "boss_scripts/aura_abilities/modifier_passive_bounty.lua", LUA_MODIFIER_MOTION_NONE )
-	LinkLuaModifier("modifier_frostivus_greevil", "boss_scripts/greevil_innate", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("modifier_frostivus_lantern", "boss_scripts/icewrack_lantern.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("modifier_frostivus_greevil", "boss_scripts/greevil_innate.lua", LUA_MODIFIER_MOTION_NONE)
 	LinkLuaModifier("modifier_greevil_capture_aura", "boss_scripts/greevil_innate.lua", LUA_MODIFIER_MOTION_NONE )
+	LinkLuaModifier("modifier_greevil_captured_owner", "boss_scripts/greevil_innate.lua", LUA_MODIFIER_MOTION_NONE )
+	LinkLuaModifier("modifier_greevil_captured_greevil", "boss_scripts/greevil_innate.lua", LUA_MODIFIER_MOTION_NONE )
+
 
 	-- Stuff
 	PrecacheResource("particle_folder", "particles/hero", context)
