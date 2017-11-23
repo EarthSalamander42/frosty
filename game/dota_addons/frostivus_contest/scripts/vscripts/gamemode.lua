@@ -108,18 +108,9 @@ function GameMode:OnFirstPlayerLoaded()
 --		end
 --		statue_entity:AddNewModifier(statue_entity, nil, "modifier_imba_contributor_statue", {})
 --	end
-
---	CustomNetTables:SetTableValue("arena_capture", "radiant_score", {0})
---	CustomNetTables:SetTableValue("arena_capture", "dire_score", {0})
 end
 
 function GameMode:ModifierFilter( keys )
--- entindex_parent_const	215
--- entindex_ability_const	610
--- duration					-1
--- entindex_caster_const	215
--- name_const				modifier_imba_roshan_rage_stack
-
 	if IsServer() then
 		local modifier_owner = EntIndexToHScript(keys.entindex_parent_const)
 		local modifier_name = keys.name_const
@@ -134,7 +125,7 @@ function GameMode:ModifierFilter( keys )
 		-- Special boss modifier rules
 		-------------------------------------------------------------------------------------------------
 		if modifier_owner:HasModifier("modifier_frostivus_boss") then
-			
+
 			-- Ignore stuns and knockbacks
 			if modifier_name == "modifier_stunned" or modifier_name == "modifier_knockback" or modifier_name == "modifier_rooted" or modifier_name == "modifier_item_forcestaff_active" or modifier_name == "modifier_item_hurricane_pike_active_alternate" then
 				return false
@@ -383,9 +374,6 @@ function GameMode:InitGameMode()
 
 		self:OnFirstPlayerLoaded()
 	end 
-
-	-- IMBA testbed command
-	Convars:RegisterCommand("imba_test", Dynamic_Wrap(GameMode, 'StartImbaTest'), "Spawns several units to help with testing", FCVAR_CHEAT)
 
 	CustomGameEventManager:RegisterListener("spawn_point", AltarRespawn)
 

@@ -1,5 +1,4 @@
 --[[	Custom Spell Shield for Frostivus
-		Based on Dota IMBA code
 		By: Firetoad, 11-12-2017		]]
 
 custom_antimage_spell_shield = custom_antimage_spell_shield or class({})

@@ -1,5 +1,4 @@
 --[[	Custom Mist Coil for Frostivus
-		Based on Dota IMBA code
 		By: Firetoad, 11-12-2017		]]
 
 custom_abaddon_death_coil = custom_abaddon_death_coil or class({})

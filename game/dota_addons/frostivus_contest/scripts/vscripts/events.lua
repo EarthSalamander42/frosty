@@ -15,10 +15,6 @@ function GameMode:OnDisconnect(keys)
 	-- userid: 7
 	-- xuid: 76561198055762111
 
-	-------------------------------------------------------------------------------------------------
-	-- IMBA: Player disconnect/abandon logic
-	-------------------------------------------------------------------------------------------------
-
 	-- If the game hasn't started, or has already ended, do nothing
 	if (GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME) or (GameRules:State_Get() < DOTA_GAMERULES_STATE_PRE_GAME) then
 		return nil
@@ -140,14 +136,6 @@ local npc = EntIndexToHScript(keys.entindex)
 
 	if npc then
 		if npc:IsRealHero() then
-			for i = 1, #IMBA_DEVS do
-				if PlayerResource:GetSteamAccountID(npc:GetPlayerID()) == IMBA_DEVS[i] then
-					if not npc.is_dev then
-						npc.is_dev = true
-					end
-				end
-			end
-
 			if not npc.first_spawn then
 				npc.first_spawn = true
 				-- Disabled boss respawning since they are tagged as heroes

@@ -1,5 +1,4 @@
 --[[  Custom Battle Hunger for Frostivus
-		Based on Dota IMBA code
 		By: Firetoad, 11-13-2017    ]]
 
 custom_axe_battle_hunger = custom_axe_battle_hunger or class({})

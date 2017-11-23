@@ -1,5 +1,4 @@
 --[[	Custom Purification for Frostivus
-		Based on Dota IMBA code
 		By: Firetoad, 11-15-2017				]]
 
 custom_omniknight_purification = custom_omniknight_purification or class({})

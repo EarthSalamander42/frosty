@@ -189,7 +189,7 @@ end
 
 function FrostivusAltarRespawn(hero)
 	-- fix boss respawning at dire fountain
-	if hero:GetPlayerID() ~= -1 and not hero:IsRealHero() then
+	if hero:GetPlayerID() ~= -1 then
 		-- Base spawn
 		local respawn_position
 		if hero.altar == 1 or hero.altar == 7 then
@@ -218,6 +218,7 @@ function FrostivusAltarRespawn(hero)
 			hero:SetTimeUntilRespawn(hero:GetLevel())
 		end
 
+		print(hero:GetUnitName(), hero.altar, respawn_position)
 		FindClearSpaceForUnit(hero, respawn_position, true)
 	end
 end
@@ -228,7 +229,7 @@ local door_obs = Entities:FindAllByName(door:GetName().."_obs")
 local door_opened = false
 
 	Timers:CreateTimer(function()
-		local units = FindUnitsInRadius(team, door:GetAbsOrigin(), nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+		local units = FindUnitsInRadius(team, door:GetAbsOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 
 		if #units > 0 and door_opened == false then
 			for _, obs in pairs(door_obs) do

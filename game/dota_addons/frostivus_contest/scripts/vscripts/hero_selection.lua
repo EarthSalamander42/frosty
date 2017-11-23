@@ -20,7 +20,6 @@ function HeroSelection:HeroListPreLoad()
 
 	HeroSelection.vanilla_heroes = {}
 --	HeroSelection.new_heroes = {}
-	HeroSelection.random_heroes = {}
 	HeroSelection.picked_heroes = {}
 
 	for hero, attributes in pairs(NPC_HEROES_CUSTOM) do
@@ -134,7 +133,6 @@ function HeroSelection:Start()
 	-- Listen for pick and repick events
 	HeroSelection.listener_select = CustomGameEventManager:RegisterListener("hero_selected", HeroSelection.HeroSelect )
 	HeroSelection.listener_random = CustomGameEventManager:RegisterListener("hero_randomed", HeroSelection.RandomHero )
-	HeroSelection.listener_imba_random = CustomGameEventManager:RegisterListener("hero_imba_randomed", HeroSelection.RandomImbaHero )
 	HeroSelection.listener_repick = CustomGameEventManager:RegisterListener("hero_repicked", HeroSelection.HeroRepicked )
 	HeroSelection.listener_ui_initialize = CustomGameEventManager:RegisterListener("ui_initialized", HeroSelection.UiInitialized )
 	HeroSelection.listener_abilities_requested = CustomGameEventManager:RegisterListener("pick_abilities_requested", HeroSelection.PickAbilitiesRequested )
@@ -184,7 +182,7 @@ else
 end
 
 	-- Roll a random hero
-	local random_hero = HeroSelection.random_heroes[RandomInt(1, #HeroSelection.random_heroes)]
+	local random_hero = HeroSelection.vanilla_heroes[RandomInt(1, #HeroSelection.vanilla_heroes)]
 
 	for _, picked_hero in pairs(HeroSelection.picked_heroes) do
 		if random_hero == picked_hero then
@@ -198,6 +196,7 @@ end
 	PlayerResource:SetHasRandomed(id)
 
 	-- If it's a valid hero, allow the player to select it
+	print("Random Hero:", random_hero)
 	HeroSelection:HeroSelect({PlayerID = id, HeroName = random_hero, HasRandomed = true})
 
 	-- The person has randomed (separate from Set/HasRandomed, because those cannot be unset)
@@ -254,7 +253,7 @@ function HeroSelection:HeroSelect(event)
 	end
 
 	-- If this is All Random and the player picked a hero manually, refuse it
-	if IMBA_PICK_MODE_ALL_RANDOM or IMBA_PICK_MODE_ALL_RANDOM_SAME_HERO and (not event.HasRandomed) then
+	if (not event.HasRandomed) then
 		return nil
 	end
 
@@ -375,7 +374,7 @@ function HeroSelection:AssignHero(player_id, hero_name)
 		end
 
 		-------------------------------------------------------------------------------------------------
-		-- IMBA: First hero spawn initialization
+		-- First hero spawn initialization
 		-------------------------------------------------------------------------------------------------
 		
 		hero:RespawnHero(false, false)
@@ -408,7 +407,7 @@ function HeroSelection:AssignHero(player_id, hero_name)
 			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD +100, false)
 		elseif has_repicked then
 			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD -100, false)
-		elseif has_randomed or IMBA_PICK_MODE_ALL_RANDOM or IMBA_PICK_MODE_ALL_RANDOM_SAME_HERO then
+		elseif has_randomed then
 			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD +200, false)
 		else
 			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD, false)

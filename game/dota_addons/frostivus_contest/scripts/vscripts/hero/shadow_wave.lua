@@ -1,5 +1,4 @@
 --[[  Custom Shadow Wave for Frostivus
-		Based on Dota IMBA code
 		By: Firetoad, 11-14-2017    ]]
 
 if custom_dazzle_shadow_wave == nil then custom_dazzle_shadow_wave = class({}) end

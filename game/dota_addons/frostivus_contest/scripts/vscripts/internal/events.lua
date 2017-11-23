@@ -76,45 +76,4 @@ function GameMode:OnPlayerChat(keys)
 	local caster = PlayerResource:GetSelectedHeroEntity(keys.playerid)
 	local caster_heroname = PlayerResource:GetSelectedHeroName(keys.playerid)
 	local color = {}
-	
-	-- Check for Chakram-Colorcode
-	-- if caster_heroname == "npc_dota_hero_shredder" then
-	-- 	local chakram_command = false
-	-- 	for str in string.gmatch(text, "%S+") do
-	-- 		if str == "-chakram" then
-	-- 			chakram_command = true
-	-- 		elseif chakram_command == false then
-	-- 			break
-	-- 		end
-			
-	-- 		if tonumber(str) then
-	-- 			if correct_command and tonumber(str) >= 0 and tonumber(str) <=255 then
-	-- 				table.insert(color,str)
-	-- 				if #color >= 3 then
-	-- 					break
-	-- 				end
-	-- 			else
-	-- 				chakram_command = false
-	-- 			end
-	-- 		end
-			
-	-- 		if chakram_command == false then
-	-- 			break
-	-- 		end
-	-- 	end
-	-- 	if chakram_command == true then
-	-- 		caster.color = Vector ( color[1], color[2], color[3])
-	-- 		return nil
-	-- 	end
-	-- end
-
-	-- Check for Blink-Colorcode
-	local blink_command = false
-	for str in string.gmatch(text, "%S+") do
-		for i = 1, #IMBA_DEVS do
-			if caster and PlayerResource:GetSteamAccountID(caster:GetPlayerID()) == IMBA_DEVS[i] then
-				
-			end
-		end
-	end
 end
