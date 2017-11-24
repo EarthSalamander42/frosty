@@ -542,10 +542,6 @@
 	color: grey;
 }
 
-#PreviousTutorial {
-	visibility: collapse;
-}
-
 #PreviousTutorial,
 #NextTutorial {
 	margin-left: 1%;
@@ -554,4 +550,19 @@
 
 #TutorialCloseButton {
 	horizontal-align: right;
+}
+
+#PresentTimer, {
+	font-size: 20px;
+	margin-top: 13%;
+	font-weight: bolder;
+	color: #ffffff;
+	text-shadow: 2px 2px 2px #7b612b;
+	text-align: center;
+	text-overflow: clip;
+	align: center top;
+}
+
+#PresentTimer.timer_alert {
+	color: red;
 }

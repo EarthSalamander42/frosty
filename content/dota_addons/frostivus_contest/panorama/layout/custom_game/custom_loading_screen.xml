@@ -11,15 +11,15 @@
 	<Panel class="AddonLoadingRoot">
 		<Panel id="CustomBg">
 			<Panel id="community_stuff_container" >
-				<Button id="show_community_panel_button" onactivate="ShowCommunityButton();" >
-					<Label id="show_community_panel_button_label" html="true" text="#community_header" />
-				</Button>
+				<Panel id="show_community_panel_button" >
+					<Label id="show_community_panel_button_label" html="true" text="#addonname" />
+				</Panel>
 
 				<Panel id="CommunityPanel">
 					<Label id="community_description" class="CommunityText" html="true" text="#community_description" />
 					<Label id="community_post_description_01" class="CommunityText" html="true" text="#community_post_description_01"/>
 
-					<Button id="community_discord_header" class="CommunityImg" onactivate="DOTADisplayURL('https://discord.gg/CKF9FPv');" >
+					<Button id="community_discord_header" class="CommunityImg" onactivate="DOTADisplayURL('https://discord.gg/CTzwmrx');" >
 						<Image src="file://{images}/custom_game/loading_screen/community_discord_header.png" />
 					</Button>
 				</Panel>
