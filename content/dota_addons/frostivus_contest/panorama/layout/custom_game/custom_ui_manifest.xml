@@ -58,7 +58,7 @@
 		//Skin Killer - TopBar
 		var topbar = hudElements.FindChildTraverse("topbar");
 		topbar.FindChildTraverse("HUDSkinTopBarBG").style.visibility = "collapse";
-		topbar.FindChildTraverse("TimeUntil").style.marginBottom = "0px";
+//		topbar.FindChildTraverse("TimeUntil").style.marginBottom = "0px";
 
 		//Skin Killer - Portrait
 		Parent.FindChildTraverse("HUDSkinPortrait").style.visibility = "collapse";

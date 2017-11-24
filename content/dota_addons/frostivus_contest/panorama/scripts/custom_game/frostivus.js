@@ -16,15 +16,27 @@ function UpdateTimer( data )
 	$( "#Timer" ).text = timerText + " left";
 }
 
+function UpdatePresentTimer( data )
+{
+	var timerText = "";
+	timerText += data.timer_minute_10;
+	timerText += data.timer_minute_01;
+	timerText += ":";
+	timerText += data.timer_second_10;
+	timerText += data.timer_second_01;
+
+	$( "#PresentTimer" ).text = timerText + " left till next present drop";
+}
+
 function Phase(args)
 {
 	JS_PHASE = args.Phase
-	$("#PhaseLabel").text = $.Localize("#frostivus_phase_" + JS_PHASE);
+	$("#PhaseLabel").text = $.Localize("#frostivus_phase_" + JS_PHASE + ": ");
 
 	if (JS_PHASE == 1)
 	{
 		$("#FrostivusHUD_alt").style.visibility = "visible";
-		$("#FrostivusScore").style.visibility = "visible";
+//		$("#FrostivusScore").style.visibility = "visible";
 	}
 }
 
@@ -103,14 +115,14 @@ function OnPlayerReconnect( data ) {
 }
 
 function UpdateBossBar(args) {
-	var RadiantScore = CustomNetTables.GetTableValue("game_options", "radiant").score;
-	var DireScore = CustomNetTables.GetTableValue("game_options", "dire").score;
+//	var RadiantScore = CustomNetTables.GetTableValue("game_options", "radiant").score;
+//	var DireScore = CustomNetTables.GetTableValue("game_options", "dire").score;
 
-	$("#RadiantScore").SetDialogVariableInt("radiant", RadiantScore);
-	$("#RadiantScore").text = RadiantScore;
+//	$("#RadiantScore").SetDialogVariableInt("radiant", RadiantScore);
+//	$("#RadiantScore").text = RadiantScore;
 
-	$("#DireScore").SetDialogVariableInt("dire", DireScore);
-	$("#DireScore").text = DireScore;
+//	$("#DireScore").SetDialogVariableInt("dire", DireScore);
+//	$("#DireScore").text = DireScore;
 
 	var BossTable = CustomNetTables.GetTableValue("game_options", "boss");
 	if (BossTable !== null)
@@ -253,6 +265,7 @@ function CastBarAlt(args)
 //	}
 
 	GameEvents.Subscribe("countdown", UpdateTimer);
+	GameEvents.Subscribe("countdown_present", UpdatePresentTimer);
 	GameEvents.Subscribe("frostivus_phase", Phase);
 	GameEvents.Subscribe("frostivus_player_reconnected", OnPlayerReconnect);
 	GameEvents.Subscribe("show_boss_hp", ShowBossBar);
