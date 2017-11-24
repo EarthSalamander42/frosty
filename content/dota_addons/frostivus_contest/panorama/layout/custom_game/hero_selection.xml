@@ -104,7 +104,7 @@
 
 								<Panel id="PickedHeroPanel">
 									<Button id="PickHeroBtn" onactivate="PickHero()" >
-										<Label id="PickHeroBtnTxt" text="#imba_confirm_pick_button" />
+										<Label id="PickHeroBtnTxt" text="#confirm_pick_button" />
 									</Button>
 									<DOTAHeroImage id="PickedHeroImage" heroname="" />
 								</Panel>

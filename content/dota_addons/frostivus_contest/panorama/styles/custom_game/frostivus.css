@@ -29,11 +29,20 @@
 }
 
 #FrostivusAltarButton {
-	width: 100%;
+	width: 50%;
 	height: 100%;
 	background-color: #000000fa;
 	border: 2px solid #4d5051;
 	border-radius: 5px;
+}
+
+#FrostivusTutorialButton {
+	width: 50%;
+	height: 100%;
+	background-color: #000000fa;
+	border: 2px solid #4d5051;
+	border-radius: 5px;
+	horizontal-align: right;
 }
 
 #FrostivusAltarButton:hover {
@@ -49,6 +58,22 @@
 }
 
 #FrostivusAltarButton:hover Label {
+	color: white;
+}
+
+#FrostivusTutorialButton:hover {
+	border: 2px solid white;
+}
+
+#FrostivusTutorialButton Label {
+	align: center center;
+	color: #6f6f6f;
+	text-transform: uppercase;
+	text-align: center center;
+	font-size: 16px;
+}
+
+#FrostivusTutorialButton:hover Label {
 	color: white;
 }
 
@@ -403,4 +428,130 @@
 	background-image: url("s2r://panorama/images/custom_game/present.png");
 	background-size: cover;
 	z-index: 2;
+}
+
+/* Tutorial HUD */
+#TutorialPanel {
+	width: 844px;
+	height: 800px;
+	margin-top: 4%;
+	background-image: url("s2r://panorama/images/custom_game/tutorial.png");
+	background-position: 50% 0%;
+	align: center top;
+	visibility: collapse;
+}
+
+#TutorialTitle {
+	margin-top: 5%;
+	color: dodgerblue;
+	font-weight: bold;
+	text-align: center;
+	font-size: 28px;
+	align: center top;
+}
+
+#TutorialTextPanel {
+	width: 700px;
+	height: 270px;
+	align: center bottom;
+	flow-children: down;
+}
+
+.TutorialText {
+	color: white;
+	font-weight: bold;
+	text-align: left;
+	font-size: 18px;
+	text-shadow: 3px 3px 0px 1.0 #000000;
+}
+
+#TutorialButtonPanel {
+	width: 400px;
+	height: 50px;
+	margin-right: 8%;
+	margin-bottom: 2%;
+	align: right bottom;
+	flow-children: right;
+}
+
+.CloseTutorial {
+	vertical-align: bottom;
+	box-shadow: fill #00000088 0px 0px 8px 4px;
+	padding: 4px 10px;
+	border-top-color: #555555;
+	border-left-color: #494949;
+	border-bottom-color: #333333;
+	border-right-color: #404040;
+	transition-property: background-color, opacity;
+	transition-duration: 0.05s;
+	transition-timing-function: linear;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #373d45 ), to( #4d5860 ) );
+	border-style: solid;
+	border-width: 1px;
+}
+
+.CloseTutorial:hover {
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #4c5561 ), to( #6c7d88 ) );
+	border-top-color: #aaaaaa77;
+	border-left-color: #aaaaaa33;
+	border-bottom-color: #333333;
+	border-right-color: #404040;
+}
+
+.CloseTutorial:active {
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #393939), to( #555555 ) );
+
+	border-top-color: #222222;
+	border-left-color: #303030;
+	border-bottom-color: #666666;
+	border-right-color: #444444;
+	sound: "ui_generic_button_click";
+}
+
+.CloseTutorial Label {
+	align: center center;
+	color: #6f6f6f;
+	text-transform: uppercase;
+	text-align: center center;
+	font-size: 18px;
+}
+
+.CloseTutorial:hover Label {
+	color: white;
+}
+
+.CloseTutorial Label
+{
+	margin-top: 2px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: #FFFFFF;
+	horizontal-align: center;
+	text-align: center;
+	vertical-align: middle;
+	text-shadow: 2px 2px 0px 1.0 #000000;
+	
+	transition-property: color;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-in-out;	
+}
+
+.CloseTutorial:active Label 
+{
+	transform: translateY(1px);
+	color: grey;
+}
+
+#PreviousTutorial {
+	visibility: collapse;
+}
+
+#PreviousTutorial,
+#NextTutorial {
+	margin-left: 1%;
+	margin-right: 1%;
+}
+
+#TutorialCloseButton {
+	horizontal-align: right;
 }

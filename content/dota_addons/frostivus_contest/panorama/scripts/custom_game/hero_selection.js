@@ -36,7 +36,6 @@ var hiddenAbilities = [
 	"monkey_king_untransform",
 	"morphling_morph_replicate",
 	"morphling_morph",
-	"troll_warlord_whirling_axes_melee",
 	"ogre_magi_unrefined_fireblast",
 	"rubick_hidden_1",
 	"rubick_telekinesis_land",
@@ -209,7 +208,6 @@ function HeroPicked(player, hero, team, has_randomed) {
 
 	// Disable the hero button according to hero pick rule
 	var LocalPlayer = Players.GetLocalPlayer()
-	$.Msg(hero)
 	$("#PickList").FindChildTraverse(hero).AddClass("taken");
 
 	// Check if the pick was by the local player

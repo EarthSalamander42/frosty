@@ -41,7 +41,7 @@ function GameMode:OnDisconnect(keys)
 				-- Abandon message
 				Notifications:BottomToAll({hero = hero_name, duration = line_duration})
 				Notifications:BottomToAll({text = player_name.." ", duration = line_duration, continue = true})
-				Notifications:BottomToAll({text = "#imba_player_abandon_message", duration = line_duration, style = {color = "DodgerBlue"}, continue = true})
+				Notifications:BottomToAll({text = "#player_abandon_message", duration = line_duration, style = {color = "DodgerBlue"}, continue = true})
 				PlayerResource:SetHasAbandonedDueToLongDisconnect(player_id, true)
 				print("player "..player_id.." has abandoned the game.")
 
@@ -53,7 +53,7 @@ function GameMode:OnDisconnect(keys)
 
 				-- If this was the last player to abandon on his team, wait 15 seconds and end the game if no one came back.
 				if REMAINING_GOODGUYS <= 0 then
-					Notifications:BottomToAll({text = "#imba_team_good_abandon_message", duration = line_duration, style = {color = "DodgerBlue"} })
+					Notifications:BottomToAll({text = "#team_good_abandon_message", duration = line_duration, style = {color = "DodgerBlue"} })
 					Timers:CreateTimer(FULL_ABANDON_TIME, function()
 						if REMAINING_GOODGUYS <= 0 then
 							GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
@@ -61,7 +61,7 @@ function GameMode:OnDisconnect(keys)
 						end
 					end)
 				elseif REMAINING_BADGUYS <= 0 then
-					Notifications:BottomToAll({text = "#imba_team_bad_abandon_message", duration = line_duration, style = {color = "DodgerBlue"} })
+					Notifications:BottomToAll({text = "#team_bad_abandon_message", duration = line_duration, style = {color = "DodgerBlue"} })
 					Timers:CreateTimer(FULL_ABANDON_TIME, function()
 						if REMAINING_BADGUYS <= 0 then
 							GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
