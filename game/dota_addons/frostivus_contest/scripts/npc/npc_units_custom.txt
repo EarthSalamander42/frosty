@@ -452,9 +452,12 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"frostivus_boss_innate"
-		"Ability2"					""
-		"Ability3"					""
+		"Ability1"					"frostivus_boss_lightning_bolt"
+		"Ability2"					"frostivus_boss_arc_lightning"
+		"Ability3"					"frostivus_boss_el_thor"
+		"Ability4"					"frostivus_boss_static_field"
+		"Ability5"					"frostivus_boss_thundergods_wrath"
+		"Ability6"					"frostivus_boss_innate"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -524,11 +527,14 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"frostivus_boss_innate"
-		"Ability2"					"frostivus_boss_venomous_gale"
-		"Ability3"					"frostivus_boss_poison_nova"
-		"Ability4"					"frostivus_boss_unwilling_host"
-		"Ability5"					"frostivus_boss_green_death"
+		"Ability1"					"frostivus_boss_venomous_gale"
+		"Ability2"					"frostivus_boss_scourge_ward"
+		"Ability3"					"frostivus_boss_vile_ward"
+		"Ability4"					"frostivus_boss_parasite"
+		"Ability5"					"frostivus_boss_poison_nova"
+		"Ability6"					"frostivus_boss_unwilling_host"
+		"Ability7"					"frostivus_boss_green_death"
+		"Ability8"					"frostivus_boss_innate"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -814,11 +820,16 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"frostivus_boss_innate"
-		"Ability2"					"frostivus_boss_leech_seed"
-		"Ability3"					"frostivus_boss_living_armor"
-		"Ability4"					"frostivus_boss_overgrowth"
-		"Ability5"					""
+		"Ability1"					"frostivus_boss_vine_smash"
+		"Ability2"					"frostivus_boss_rock_smash"
+		"Ability3"					"frostivus_boss_ring_of_thorns"
+		"Ability4"					"frostivus_boss_leech_seed"
+		"Ability5"					"frostivus_boss_rapid_growth"
+		"Ability6"					"frostivus_boss_eyes_in_the_forest"
+		"Ability7"					"frostivus_boss_living_armor"
+		"Ability8"					"frostivus_boss_overgrowth"
+		"Ability9"					"frostivus_boss_natures_guise"
+		"Ability10"					"frostivus_boss_innate"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1705,7 +1716,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"frostivus_boss_innate"
+		"Ability1"					"frostivus_mega_greevil"
 		"Ability2"					""
 		"Ability3"					""
 		"Ability4"					""
@@ -1713,14 +1724,14 @@
 
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"
-		"MagicalResistance"			"0"
+		"ArmorPhysical"				"10"
+		"MagicalResistance"			"25"
 
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-		"AttackDamageMin"			"160"
-		"AttackDamageMax"			"160"
+		"AttackDamageMin"			"800"
+		"AttackDamageMax"			"800"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackRate"				"1.5"
 		"AttackAnimationPoint"		"0.0"
@@ -1746,9 +1757,85 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"10000"
+		"StatusHealth"				"100000"
 		"StatusHealthRegen"			"0.0"
-		"StatusMana"				"1200"
+		"StatusMana"				"3000"
+		"StatusManaRegen"			"10"
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_NEUTRALS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"2000"
+		"VisionNighttimeRange"		"2000"
+	}
+
+	//=================================================================================
+	// BOSS: Tusk
+	//=================================================================================
+	"npc_frostivus_boss_tusk"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_hero"
+		"Model"						"models/heroes/tuskarr/tuskarr.vmdl"
+		"SoundSet"					"Creep_Good_Range"
+		"Level"						"1"
+		"ModelScale"				"2.0"
+		"MinimapIcon"				"minimap_shield"
+		"MinimapIconSize"			"512"
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					"frostivus_tusk"
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+		"Ability5"					""
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
+		"AttackDamageMin"			"1000"
+		"AttackDamageMax"			"1000"
+		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackRate"				"1.5"
+		"AttackAnimationPoint"		"0.0"
+		"AttackAcquisitionRange"	"0"
+		"AttackRange"				"0"
+
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
+		"HealthBarOffset"			"130"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"
+		"BountyGoldMin"				"0"
+		"BountyGoldMax"				"0"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"1000"
+		"MovementTurnRate"			"1.0"
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"100000"
+		"StatusHealthRegen"			"0.0"
+		"StatusMana"				"3000"
 		"StatusManaRegen"			"10"
 
 		// Team
@@ -1872,7 +1959,7 @@
 		"BaseClass"					"npc_dota_building"	// Class of entity of link to.
 		"Model"						"models/props_structures/radiant_checkpoint_01.vmdl"	// Model.
 		"SoundSet"					"Creep_Good_Melee"					// Name of sound set.
-		"MinimapIcon"				"minimap_miscbuilding"
+		"MinimapIcon"				"minimap_creepcamp"
 		"ModelScale" 				"1.0"
 
 		// Armor

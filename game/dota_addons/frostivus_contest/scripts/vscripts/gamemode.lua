@@ -84,6 +84,15 @@ function GameMode:OnFirstPlayerLoaded()
 		AddFOWViewer(DOTA_TEAM_BADGUYS, spawn_point, 1600, 1800, false)
 	end
 
+	-- Grant vision of the center altar to both teams
+	AddFOWViewer(DOTA_TEAM_GOODGUYS, Vector(0, 0, 0), 1200, 1800, false)
+	AddFOWViewer(DOTA_TEAM_BADGUYS, Vector(0, 0, 0), 1200, 1800, false)
+
+	-- Make gates (bases & SF altar) think
+	DoorThink(2)
+	DoorThink(3)
+	GateThink()
+
 --	local developer_statues = {
 --		"npc_dota_developer_cookies",
 --		"npc_dota_developer_firetoad",
@@ -287,7 +296,8 @@ local time_elapsed = 0
 				Timers:CreateTimer(function()
 					hero:AddEffects(EF_NODRAW)
 					hero:SetDayTimeVisionRange(475)
-					hero:SetNightTimeVisionRange(475)				
+					hero:SetNightTimeVisionRange(475)	
+					hero:AddNewModifier(hero, nil, "modifier_command_restricted", {})			
 					if hero:GetTeamNumber() == DOTA_TEAM_GOODGUYS then
 						PlayerResource:SetCameraTarget(hero:GetPlayerOwnerID(), GoodCamera)
 						FindClearSpaceForUnit(hero, GoodCamera:GetAbsOrigin(), false)
@@ -307,10 +317,6 @@ local time_elapsed = 0
 			return
 		end
 	end)
-
-	if GameRules:State_Get() == DOTA_GAMERULES_STATE_PRE_GAME and not hero:HasModifier("modifier_command_restricted") then
-		hero:AddNewModifier(hero, nil, "modifier_command_restricted", {})
-	end
 end
 
 function GameMode:OnGameInProgress()
@@ -356,19 +362,19 @@ function GameMode:InitGameMode()
 	if mode == nil then
 		mode = GameRules:GetGameModeEntity()
 		mode:SetRecommendedItemsDisabled( false )
-		mode:SetCameraDistanceOverride( 1134 )
+		mode:SetCameraDistanceOverride( 1350 )
 		mode:SetCustomGameForceHero("npc_dota_hero_wisp")
 		mode:SetLoseGoldOnDeath(true)
 		mode:SetMaximumAttackSpeed(600.0)
 		mode:SetMinimumAttackSpeed(20.0)
 		mode:SetCustomAttributeDerivedStatValue(DOTA_ATTRIBUTE_STRENGTH_STATUS_RESISTANCE_PERCENT, 0)
-		mode:SetFixedRespawnTime(26.0)
 		mode:SetTopBarTeamValuesOverride(true)
+		mode:SetTopBarTeamValuesOverride(true)
+		mode:SetFountainPercentageHealthRegen(15.0)
+		mode:SetFountainPercentageManaRegen(15.0)
 
 --		mode:SetTowerBackdoorProtectionEnabled( false )
 --		mode:SetFountainConstantManaRegen(10.0)
---		mode:SetFountainPercentageHealthRegen(5.0)
---		mode:SetFountainPercentageManaRegen(5.0)
 
 --		for rune, spawn in pairs(ENABLED_RUNES) do
 --			mode:SetRuneEnabled(rune, spawn)

@@ -10,8 +10,8 @@ function modifier_passive_bounty:OnCreated(keys)
 	if IsServer() then
 
 		-- Parameters
-		local passive_gpm = 300
-		local passive_xpm = 300
+		local passive_gpm = 450
+		local passive_xpm = 450
 		self.gold_per_tick = passive_gpm / 30
 		self.xp_per_tick = passive_xpm / 30
 
@@ -29,9 +29,7 @@ function modifier_passive_bounty:OnIntervalThink()
 				local hero = PlayerResource:GetSelectedHeroEntity(player_id)
 				if hero then
 					
-					-- Altar buffs
-					local gold_bonus_modifier = hero:FindModifierByName("modifier_frostivus_altar_aura_fire_buff")
-					local exp_bonus_modifier = hero:FindModifierByName("modifier_frostivus_altar_aura_zeus_buff")
+					-- Calculate extra gold/exp
 					local extra_gold = 0
 					local extra_exp = 0
 
@@ -41,11 +39,22 @@ function modifier_passive_bounty:OnIntervalThink()
 						extra_gold = extra_gold + greed_ability:GetLevelSpecialValueFor("gold_per_tick", greed_ability:GetLevel() - 1)
 					end
 
-					if gold_bonus_modifier then
-						extra_gold = extra_gold + 3 + gold_bonus_modifier:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_fire"):GetStackCount()
+					-- Altar bonuses
+					if hero:HasModifier("modifier_frostivus_altar_aura_fire_buff") then
+						extra_gold = extra_gold + 3
+						extra_exp = extra_exp + 3
 					end
-					if exp_bonus_modifier then
-						extra_exp = extra_exp + 4 + 2 * exp_bonus_modifier:GetCaster():FindModifierByName("modifier_frostivus_altar_aura_zeus"):GetStackCount()
+					if hero:HasModifier("modifier_frostivus_altar_aura_treant_buff") then
+						extra_gold = extra_gold + 3
+						extra_exp = extra_exp + 3
+					end
+					if hero:HasModifier("modifier_frostivus_altar_aura_veno_buff") then
+						extra_gold = extra_gold + 3
+						extra_exp = extra_exp + 3
+					end
+					if hero:HasModifier("modifier_frostivus_altar_aura_zeus") then
+						extra_gold = extra_gold + 3
+						extra_exp = extra_exp + 3
 					end
 
 					hero:ModifyGold(self.gold_per_tick + extra_gold, false, DOTA_ModifyGold_GameTick)

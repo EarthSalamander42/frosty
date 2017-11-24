@@ -16,16 +16,26 @@ function item_frostivus_present:OnSpellStart()
 		if caster:HasModifier("modifier_frostivus_present_duplicate_prevention") then
 			caster:RemoveModifierByName("modifier_frostivus_present_duplicate_prevention")
 		else
-			if caster:GetTeam() == DOTA_TEAM_GOODGUYS then
+			local team = caster:GetTeam()
+			if team == DOTA_TEAM_GOODGUYS then
 				PRESENT_SCORE_2 = PRESENT_SCORE_2 + 1
 				CustomNetTables:SetTableValue("game_options", "radiant", {score = PRESENT_SCORE_2})
 				PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "Frostivus.PointScored.Team")
 				PlaySoundForTeam(DOTA_TEAM_BADGUYS, "Frostivus.PointScored.Enemy")
-			elseif caster:GetTeam() == DOTA_TEAM_BADGUYS then
+			elseif team == DOTA_TEAM_BADGUYS then
 				PRESENT_SCORE_3 = PRESENT_SCORE_3 + 1
 				CustomNetTables:SetTableValue("game_options", "dire", {score = PRESENT_SCORE_3})
 				PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "Frostivus.PointScored.Enemy")
 				PlaySoundForTeam(DOTA_TEAM_BADGUYS, "Frostivus.PointScored.Team")
+			end
+
+			-- Grant all players in the team bonus gold and experience
+			for _, hero in pairs(HeroList:GetAllHeroes()) do
+				if hero:GetTeam() == team then
+					hero:ModifyGold(50, false, DOTA_ModifyGold_HeroKill)
+					hero:AddExperience(50, DOTA_ModifyXP_HeroKill, false, true)
+					SendOverheadEventMessage(PlayerResource:GetPlayer(hero:GetPlayerID()), OVERHEAD_ALERT_GOLD, hero, 50, nil)
+				end
 			end
 
 			caster:AddNewModifier(nil, nil, "modifier_frostivus_present_duplicate_prevention", {duration = 0.03})

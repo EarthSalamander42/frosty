@@ -135,6 +135,14 @@ GameMode:_OnNPCSpawned(keys)
 local npc = EntIndexToHScript(keys.entindex)
 
 	if npc then
+		if npc:GetUnitName() == "npc_dota_hero_monkey_king" then
+			if TRUE_MK_HAS_SPAWNED then
+				return nil
+			else
+				TRUE_MK_HAS_SPAWNED = true
+			end
+		end
+		
 		if npc:IsRealHero() then
 			if not npc.first_spawn then
 				npc.first_spawn = true
@@ -153,7 +161,6 @@ local npc = EntIndexToHScript(keys.entindex)
 			end
 
 			FrostivusAltarRespawn(npc)
-			npc:AddNewModifier(npc, nil, "modifier_river", {})
 		end
 	end
 end

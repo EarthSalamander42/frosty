@@ -253,55 +253,6 @@ function GetAltarBountyValue(altar, altar_name)
 	local gold_bounty = 300
 	local exp_bounty = 300
 
-	-- Zeus (easy)
-	if altar_name == "altar_2" then
-		gold_bounty = 300
-		exp_bounty = 300
-	-- Veno (medium)
-	elseif altar_name == "altar_3" then
-		gold_bounty = 400
-		exp_bounty = 400
-	-- Lich (hard)
-	elseif altar_name == "altar_4" then
-		gold_bounty = 500
-		exp_bounty = 500
-	-- Treant (medium)
-	elseif altar_name == "altar_5" then
-		gold_bounty = 400
-		exp_bounty = 400
-	-- Fire (easy)
-	elseif altar_name == "altar_6" then
-		gold_bounty = 300
-		exp_bounty = 300
-	end
-
-	-- Zeus (easy)
-	if altar:HasModifier("modifier_frostivus_altar_aura_zeus") then
-		local stacks = altar:FindModifierByName("modifier_frostivus_altar_aura_zeus"):GetStackCount()
-		gold_bounty = gold_bounty + 75 * stacks
-		exp_bounty = exp_bounty + 75 * stacks
-	-- Veno (medium)
-	elseif altar:HasModifier("modifier_frostivus_altar_aura_veno") then
-		local stacks = altar:FindModifierByName("modifier_frostivus_altar_aura_veno"):GetStackCount()
-		gold_bounty = gold_bounty + 100 * stacks
-		exp_bounty = exp_bounty + 100 * stacks
-	-- Lich (hard)
-	elseif altar:HasModifier("modifier_frostivus_altar_aura_lich") then
-		local stacks = altar:FindModifierByName("modifier_frostivus_altar_aura_lich"):GetStackCount()
-		gold_bounty = gold_bounty + 125 * stacks
-		exp_bounty = exp_bounty + 125 * stacks
-	-- Treant (medium)
-	elseif altar:HasModifier("modifier_frostivus_altar_aura_treant") then
-		local stacks = altar:FindModifierByName("modifier_frostivus_altar_aura_treant"):GetStackCount()
-		gold_bounty = gold_bounty + 100 * stacks
-		exp_bounty = exp_bounty + 100 * stacks
-	-- Fire (easy)
-	elseif altar:HasModifier("modifier_frostivus_altar_aura_fire") then
-		local stacks = altar:FindModifierByName("modifier_frostivus_altar_aura_fire"):GetStackCount()
-		gold_bounty = gold_bounty + 75 * stacks
-		exp_bounty = exp_bounty + 75 * stacks
-	end
-
 	return {gold_bounty, exp_bounty}
 end
 
@@ -317,6 +268,11 @@ function SpawnZeus(altar)
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "zeus", altar_handle = altar})
 
 	-- Abilities
+	boss:FindAbilityByName("frostivus_boss_lightning_bolt"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_arc_lightning"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_el_thor"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_static_field"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_thundergods_wrath"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 
 	-- Cosmetics
@@ -337,11 +293,14 @@ function SpawnVenomancer(altar)
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "venomancer", altar_handle = altar})
 
 	-- Abilities
-	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_venomous_gale"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_scourge_ward"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_vile_ward"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_parasite"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_poison_nova"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_unwilling_host"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_green_death"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 
 	-- Cosmetics
 	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/venomancer/ferocious_toxicants_embrace_head/ferocious_toxicants_embrace_head.vmdl"})
@@ -363,10 +322,16 @@ function SpawnTreant(altar)
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "treant", altar_handle = altar})
 
 	-- Abilities
-	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_vine_smash"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_rock_smash"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_ring_of_thorns"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_leech_seed"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_rapid_growth"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_eyes_in_the_forest"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_living_armor"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_overgrowth"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_natures_guise"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 
 	-- Cosmetics
 	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/treant/ancient_seal_protector_set_head/ancient_seal_protector_set_head.vmdl"})
@@ -444,15 +409,36 @@ function SpawnNevermore(altar)
 	return boss
 end
 
-function SpawnMegaGreevil()
-	local boss = CreateUnitByName("npc_frostivus_boss_greevil", Vector(0, 0, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
-	boss:FaceTowards(boss:GetAbsOrigin() + Vector(0, -10, 0))
+function SpawnTusk()
+	local boss = CreateUnitByName("npc_frostivus_boss_tusk", Vector(-200, 0, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
+	boss:FaceTowards(boss:GetAbsOrigin() + Vector(10, 0, 0))
 
 	-- Abilities
-	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
-	boss:FindModifierByName("modifier_frostivus_boss"):SetStackCount(10)
-	--boss:FindAbilityByName("frostivus_boss_necromastery"):SetLevel(1)
-	--boss:FindAbilityByName("frostivus_boss_requiem_of_souls"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_tusk"):SetLevel(1)
+
+	-- Cosmetics
+	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/frostiron_raider_helm/frostiron_raider_helm.vmdl"})
+	boss.head:FollowEntity(boss, true)
+	boss.glove = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/snowball_stinger/snowball_stinger.vmdl"})
+	boss.glove:FollowEntity(boss, true)
+	boss.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/nexon_glacialshard/nexon_glacialshard.vmdl"})
+	boss.weapon:FollowEntity(boss, true)
+	boss.shirt = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/onizaphk_ahunter_shoulder/onizaphk_ahunter_shoulder.vmdl"})
+	boss.shirt:FollowEntity(boss, true)
+	boss.tusks = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/onizaphk_ahunter_neck/onizaphk_ahunter_neck.vmdl"})
+	boss.tusks:FollowEntity(boss, true)
+	boss.back = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/glaciomarine_back/glaciomarine_back.vmdl"})
+	boss.back:FollowEntity(boss, true)
+
+	return boss
+end
+
+function SpawnMegaGreevil()
+	local boss = CreateUnitByName("npc_frostivus_boss_greevil", Vector(200, 0, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
+	boss:FaceTowards(boss:GetAbsOrigin() + Vector(-10, 0, 0))
+
+	-- Abilities
+	boss:FindAbilityByName("frostivus_mega_greevil"):SetLevel(1)
 
 	-- Cosmetics
 	boss:SetRenderColor(25, 0, 0)
@@ -499,6 +485,25 @@ function CleanseBossDebuffs(hero)
 	hero:RemoveModifierByName("modifier_frostivus_venomancer_parasite")
 	hero:RemoveModifierByName("modifier_frostivus_leech_seed_debuff")
 	hero:RemoveModifierByName("modifier_frostivus_overgrowth_root")
+end
+
+function PresentWave(count)
+	local north = RandomVector(100):Normalized() * RandomInt(550, 750)
+	local launch_positions = {}
+	for i = 1, count do
+		launch_positions[i] = RotatePosition(Vector(0, 0, 0), QAngle(0, (i - 1) * 360 / count, 0), north)
+	end
+
+	-- Launch presents
+	local remaining_presents = count
+	for _, launch_position in pairs(launch_positions) do
+		Timers:CreateTimer(0.2 * (remaining_presents - 1), function()
+			local item = CreateItem("item_frostivus_present", nil, nil)
+			CreateItemOnPositionForLaunch(Vector(0, 0, 0), item)
+			item:LaunchLootInitialHeight(true, 150, 300, 0.8, launch_position)
+			remaining_presents = remaining_presents - 1
+		end)
+	end
 end
 
 ---------------------

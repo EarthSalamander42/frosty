@@ -58,7 +58,7 @@
 		},
 		{
 			_class = "C_OP_MaxVelocity"
-			m_flMaxVelocity = 225.0
+			m_flMaxVelocity = 275.0
 		},
 	]
 	m_Initializers = 
@@ -79,8 +79,8 @@
 		},
 		{
 			_class = "C_INIT_PositionOffset"
-			m_OffsetMin = [ 250.0, 0.0, 64.0 ]
-			m_OffsetMax = [ 250.0, 0.0, 64.0 ]
+			m_OffsetMin = [ 500.0, 0.0, 64.0 ]
+			m_OffsetMax = [ 500.0, 0.0, 64.0 ]
 		},
 		{
 			_class = "C_INIT_RandomRotation"
