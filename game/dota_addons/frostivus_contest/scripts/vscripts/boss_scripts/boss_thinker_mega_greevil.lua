@@ -1,24 +1,24 @@
--- Nevermore AI thinker
+-- Mega Greevil AI thinker
 
-boss_thinker_nevermore = class({})
+boss_thinker_mega_greevil = class({})
 
 -----------------------------------------------------------------------
 
-function boss_thinker_nevermore:IsHidden()
+function boss_thinker_mega_greevil:IsHidden()
 	return true
 end
 
 -----------------------------------------------------------------------
 
-function boss_thinker_nevermore:IsPurgable()
+function boss_thinker_mega_greevil:IsPurgable()
 	return false
 end
 
 -----------------------------------------------------------------------
 
-function boss_thinker_nevermore:OnCreated( params )
+function boss_thinker_mega_greevil:OnCreated( params )
 	if IsServer() then
-		self.boss_name = "nevermore"
+		self.boss_name = "treant"
 		self.team = "no team passed"
 		self.altar_handle = "no altar handle passed"
 		if params.team then
@@ -28,35 +28,19 @@ function boss_thinker_nevermore:OnCreated( params )
 			self.altar_handle = params.altar_handle
 		end
 
-		-- Draw boss ambient articles
-		if not self.fire_pfx then
-			local boss = self:GetParent()
-			local boss_loc = boss:GetAbsOrigin()
-			self.fire_pfx = ParticleManager:CreateParticle("particles/econ/items/shadow_fiend/sf_fire_arcana/sf_fire_arcana_ambient.vpcf", PATTACH_POINT_FOLLOW, boss)
-			ParticleManager:SetParticleControlEnt(self.fire_pfx, 0, boss, PATTACH_POINT_FOLLOW, "attach_hitloc", boss_loc, true)
-			ParticleManager:SetParticleControlEnt(self.fire_pfx, 1, boss, PATTACH_POINT_FOLLOW, "attach_arm_L", boss_loc, true)
-			ParticleManager:SetParticleControlEnt(self.fire_pfx, 2, boss, PATTACH_POINT_FOLLOW, "attach_arm_L", boss_loc, true)
-			ParticleManager:SetParticleControlEnt(self.fire_pfx, 3, boss, PATTACH_POINT_FOLLOW, "attach_arm_L", boss_loc, true)
-			ParticleManager:SetParticleControlEnt(self.fire_pfx, 4, boss, PATTACH_POINT_FOLLOW, "attach_arm_R", boss_loc, true)
-			ParticleManager:SetParticleControlEnt(self.fire_pfx, 5, boss, PATTACH_POINT_FOLLOW, "attach_arm_R", boss_loc, true)
-			ParticleManager:SetParticleControlEnt(self.fire_pfx, 6, boss, PATTACH_POINT_FOLLOW, "attach_arm_R", boss_loc, true)
-			ParticleManager:SetParticleControlEnt(self.fire_pfx, 7, boss, PATTACH_POINT_FOLLOW, "attach_head", boss_loc, true)
-			ParticleManager:SetParticleControlEnt(self.fire_pfx, 8, boss, PATTACH_POINT_FOLLOW, "attach_hitloc", boss_loc, true)
-
-			self.shoulders_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/nevermore_shoulder_ambient.vpcf", PATTACH_POINT_FOLLOW, boss)
-			ParticleManager:SetParticleControlEnt(self.shoulders_pfx, 0, boss, PATTACH_POINT_FOLLOW, "attach_shoulder_l", boss_loc, true)
-			ParticleManager:SetParticleControlEnt(self.shoulders_pfx, 4, boss, PATTACH_POINT_FOLLOW, "attach_hitloc", boss_loc, true)
-			ParticleManager:ReleaseParticleIndex(self.shoulders_pfx)
-
-			self.shadow_trail_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_nevermore/nevermore_trail.vpcf", PATTACH_ABSORIGIN_FOLLOW, boss)
-			ParticleManager:SetParticleControl(self.shadow_trail_pfx, 0, boss_loc)
-			ParticleManager:ReleaseParticleIndex(self.shadow_trail_pfx)
-		end
+		-- Spawn Treant's little helper
+		self.tiny_entities = {}
+		self.tiny_entities = SpawnTiny()
 
 		-- Boss script constants
+		local altar_loc = Entities:FindByName(nil, self.altar_handle):GetAbsOrigin()
 		self.random_constants = {}
-		self.random_constants[1] = RandomInt(1, 360)
-		self.random_constants[2] = RandomInt(1, 360)
+		self.random_constants[1] = altar_loc + RandomVector(1):Normalized() * 850
+		self.random_constants[2] = altar_loc + RandomVector(1):Normalized() * 850
+		self.random_constants[3] = altar_loc + RandomVector(1):Normalized() * 850
+		self.random_constants[4] = altar_loc + RandomVector(1):Normalized() * 450
+		self.random_constants[5] = altar_loc + RandomVector(1):Normalized() * 850
+		self.random_constants[6] = altar_loc + RandomVector(1):Normalized() * 450
 
 		-- Start thinking
 		self.boss_timer = 0
@@ -67,7 +51,7 @@ end
 
 -----------------------------------------------------------------------
 
-function boss_thinker_nevermore:DeclareFunctions()
+function boss_thinker_mega_greevil:DeclareFunctions()
 	local funcs = 
 	{
 		MODIFIER_EVENT_ON_DEATH,
@@ -77,7 +61,7 @@ end
 
 -----------------------------------------------------------------------
 
-function boss_thinker_nevermore:OnDeath(keys)
+function boss_thinker_mega_greevil:OnDeath(keys)
 local target = keys.unit
 
 	if IsServer() then
@@ -92,7 +76,7 @@ local target = keys.unit
 			local target_loc = target:GetAbsOrigin()
 			for player_id = 0, 20 do
 				if PlayerResource:GetPlayer(player_id) and PlayerResource:GetTeam(player_id) == self.team then
-					local win_pfx = ParticleManager:CreateParticleForPlayer("particles/boss_nevermore/screen_nevermore_win.vpcf", PATTACH_EYES_FOLLOW, PlayerResource:GetSelectedHeroEntity(player_id), PlayerResource:GetPlayer(player_id))
+					local win_pfx = ParticleManager:CreateParticleForPlayer("particles/boss_treant/screen_treant_win.vpcf", PATTACH_EYES_FOLLOW, PlayerResource:GetSelectedHeroEntity(player_id), PlayerResource:GetPlayer(player_id))
 					self:AddParticle(win_pfx, false, false, -1, false, false)
 					ParticleManager:ReleaseParticleIndex(win_pfx)
 					EmitSoundOnClient("greevil_eventend_Stinger", PlayerResource:GetPlayer(player_id))
@@ -114,7 +98,7 @@ local target = keys.unit
 			end)
 
 			-- Spawn a greevil that runs away
-			local greevil = SpawnGreevil(target_loc, RandomInt(2, 3), 255, 100, 0)
+			local greevil = SpawnGreevil(target_loc, RandomInt(2, 3), 50, 255, 50)
 			Timers:CreateTimer(3, function()
 				StartAnimation(greevil, {duration = 2.5, activity=ACT_DOTA_FLAIL, rate=1.5})
 				greevil:MoveToPosition(altar_loc + RandomVector(10):Normalized() * 900)
@@ -123,11 +107,21 @@ local target = keys.unit
 				end)
 			end)
 
+			-- Spawn an extra greevil on Tiny's position
+			local tiny_greevil = SpawnGreevil(self.tiny_entities[1]:GetAbsOrigin(), 1, 50, 255, 50)
+			Timers:CreateTimer(3, function()
+				StartAnimation(tiny_greevil, {duration = 2.5, activity=ACT_DOTA_FLAIL, rate=1.5})
+				tiny_greevil:MoveToPosition(altar_loc + RandomVector(10):Normalized() * 900)
+				Timers:CreateTimer(2.5, function()
+					tiny_greevil:Kill(nil, tiny_greevil)
+				end)
+			end)
+
 			-- Respawn the boss and grant it its new capture detection modifier
 			local boss
 			local current_level = target:GetLevel()
 			Timers:CreateTimer(15, function()
-				boss = SpawnNevermore(self.altar_handle)
+				boss = SpawnTreant(self.altar_handle)
 
 				-- Increase the new boss' power
 				local next_power = math.ceil(current_power * 0.25) + 1
@@ -138,7 +132,7 @@ local target = keys.unit
 			end)
 
 			-- Destroy any existing adds
-			local nearby_summons = FindUnitsInRadius(target:GetTeam(), target:GetAbsOrigin(), nil, 1800, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+			local nearby_summons = FindUnitsInRadius(target:GetTeam(), target:GetAbsOrigin(), nil, 2200, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 			for _,summon in pairs(nearby_summons) do
 				if not summon:HasModifier("modifier_frostivus_greevil") then
 					summon:Kill(nil, summon)
@@ -146,17 +140,17 @@ local target = keys.unit
 			end
 
 			-- Unlock the arena
-			UnlockArena(self.altar_handle, true, self.team, "frostivus_altar_aura_fire")
+			UnlockArena(self.altar_handle, true, self.team, "frostivus_altar_aura_treant")
 
 			-- Delete the boss AI thinker modifier
-			target:RemoveModifierByName("boss_thinker_nevermore")
+			target:RemoveModifierByName("boss_thinker_mega_greevil")
 		end
 	end
 end
 
 -----------------------------------------------------------------------
 
-function boss_thinker_nevermore:OnIntervalThink()
+function boss_thinker_mega_greevil:OnIntervalThink()
 	if IsServer() then
 
 		-- Parameters
@@ -171,11 +165,269 @@ function boss_thinker_nevermore:OnIntervalThink()
 		-- Think
 		self.boss_timer = self.boss_timer + 0.1
 
-		-- Boss move script
-		--if self.boss_timer > 0 and not self.events[1] then
-		--	self:VenomousGale(altar_loc, altar_entity, 3.0, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
-		--	self.events[1] = true
-		--end
+		-- Boss script
+		-- Skill demonstration
+		if self.boss_timer > 0 and not self.events[1] then
+			boss:MoveToPosition(self.random_constants[1])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 1, 150, 125, 1)
+			self.events[1] = true
+		end
+
+		if self.boss_timer > 5.5 and not self.events[2] then
+			boss:MoveToPosition(self.random_constants[1])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, 1)
+			self.events[2] = true
+		end
+
+		if self.boss_timer > 11 and not self.events[3] then
+			boss:MoveToPosition(self.random_constants[1])
+			self:RockSmash(altar_loc, altar_entity, nil, 1, 2.5, 400, 175, 1)
+			self.events[3] = true
+		end
+
+		if self.boss_timer > 15.5 and not self.events[4] then
+			boss:MoveToPosition(altar_loc + RandomVector(1):Normalized() * 400)
+			self:RingOfThorns(altar_loc, altar_entity, 3.0, 450, 125, 1)
+			self.events[4] = true
+		end
+
+		-- Double tree hidden vine smash + ring of thorns
+		if self.boss_timer > 20.5 and not self.events[5] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:RapidGrowth(altar_loc, altar_entity, 3.0, {self.random_constants[2], RotatePosition(altar_loc, QAngle(0, 180, 0), self.random_constants[2])}, math.min(4 + power_stacks * 0.2, 6), 1)
+			self.events[5] = true
+		end
+
+		if self.boss_timer > 20.5 and not self.events[6] then
+			self:NaturesGuise(altar_loc, altar_entity, 4.5, 2)
+			self.events[6] = true
+		end
+
+		if self.boss_timer > 27 and not self.events[7] then
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, 1)
+			self.events[7] = true
+		end
+
+		if self.boss_timer > 32.5 and not self.events[8] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
+			self.events[8] = true
+		end
+
+		if self.boss_timer > 32.5 and not self.events[9] then
+			self:RingOfThorns(altar_loc, altar_entity, 3.5, math.max(450 - 10 * power_stacks, 300), 125, 2)
+			self.events[9] = true
+		end
+
+		if self.boss_timer > 38 and not self.events[10] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:LeechSeed(altar_loc, altar_entity, 2.5, 25, math.min(1 + power_stacks * 0.1, 2), 1)
+			self.events[10] = true
+		end
+
+		-- Overgrowth + Rock Smash
+		if self.boss_timer > 42.5 and not self.events[11] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 4.0, 1)
+			self.events[11] = true
+		end
+
+		if self.boss_timer > 42.5 and not self.events[12] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:RockSmash(altar_loc, altar_entity, nil, 2, 3.5, 450, 175, 2)
+			self.events[12] = true
+		end
+
+		-- Double living armor tree hidden ring of thorns + overgrowth + double Vine Smash
+		if self.boss_timer > 48 and not self.events[13] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:RapidGrowth(altar_loc, altar_entity, 2.5, {RotatePosition(altar_loc, QAngle(0, 90, 0), self.random_constants[2]), RotatePosition(altar_loc, QAngle(0, 270, 0), self.random_constants[2])}, math.min(4 + power_stacks * 0.2, 6), 1)
+			self.events[13] = true
+		end
+
+		if self.boss_timer > 48 and not self.events[14] then
+			self:LivingArmor(altar_loc, altar_entity, 3.5, 2, math.min(5 + power_stacks, 15), 2)
+			self.events[14] = true
+		end
+
+		if self.boss_timer > 53.5 and not self.events[15] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
+			self.events[15] = true
+		end
+
+		if self.boss_timer > 53.5 and not self.events[16] then
+			self:RingOfThorns(altar_loc, altar_entity, 3.5, math.max(450 - 10 * power_stacks, 300), 125, 2)
+			self.events[16] = true
+		end
+
+		if self.boss_timer > 59 and not self.events[17] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
+			self.events[17] = true
+		end
+
+		if self.boss_timer > 59 and not self.events[18] then
+			self:Overgrowth(altar_loc, altar_entity, 3.5, 450, 50, 5.5, 2)
+			self.events[18] = true
+		end
+
+		if self.boss_timer > 64.5 and not self.events[19] then
+			boss:MoveToPosition(self.random_constants[3])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, 1)
+			self.events[19] = true
+		end
+
+		if self.boss_timer > 70 and not self.events[20] then
+			boss:MoveToPosition(self.random_constants[3])
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 3, 150, 125, 1)
+			self.events[20] = true
+		end
+
+		if self.boss_timer > 75.5 and not self.events[21] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:LeechSeed(altar_loc, altar_entity, 2.5, 25, math.min(1 + power_stacks * 0.1, 2), 1)
+			self.events[21] = true
+		end
+
+		-- Treantling demonstration
+		if self.boss_timer > 80 and not self.events[22] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:EyesInTheForest(altar_loc, altar_entity, 2.5, {RotatePosition(altar_loc, QAngle(0, 120, 0), self.random_constants[4])}, math.min(6 + power_stacks * 0.2, 8), 1)
+			self.events[22] = true
+		end
+
+		if self.boss_timer > 84.5 and not self.events[23] then
+			boss:MoveToPosition(self.random_constants[4])
+			self:RingOfThorns(altar_loc, altar_entity, 2.5, math.max(450 - 10 * power_stacks, 300), 125, 1)
+			self.events[23] = true
+		end
+
+		if self.boss_timer > 89 and not self.events[24] then
+			boss:MoveToPosition(self.random_constants[4])
+			self:Overgrowth(altar_loc, altar_entity, 3.0, 450, 50, 4.0, 1)
+			self.events[24] = true
+		end
+
+		if self.boss_timer > 89 and not self.events[25] then
+			self:RockSmash(altar_loc, altar_entity, RotatePosition(altar_loc, QAngle(0, 240, 0), self.random_constants[4]), 3, 3.0, 450, 175, 2)
+			self.events[25] = true
+		end
+
+		-- Tree + Treantling hell
+		if self.boss_timer > 94 and not self.events[26] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:RapidGrowth(altar_loc, altar_entity, 2.5, {self.random_constants[5], RotatePosition(altar_loc, QAngle(0, 72, 0), self.random_constants[5]), RotatePosition(altar_loc, QAngle(0, 144, 0), self.random_constants[5]), RotatePosition(altar_loc, QAngle(0, 216, 0), self.random_constants[5])}, math.min(5 + power_stacks * 0.2, 7), 1)
+			self.events[26] = true
+		end
+
+		if self.boss_timer > 94 and not self.events[27] then
+			self:EyesInTheForest(altar_loc, altar_entity, 2.5, {RotatePosition(altar_loc, QAngle(0, 288, 0), self.random_constants[5])}, math.min(6 + power_stacks * 0.2, 8), 2)
+			self.events[27] = true
+		end
+
+		if self.boss_timer > 98 and not self.events[28] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:LivingArmor(altar_loc, altar_entity, 2.0, 2, math.min(5 + power_stacks, 15), 1)
+			self.events[28] = true
+		end
+
+		if self.boss_timer > 98 and not self.events[29] then
+			self:NaturesGuise(altar_loc, altar_entity, 3.0, 2)
+			self.events[29] = true
+		end
+
+		if self.boss_timer > 103 and not self.events[30] then
+			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 5.5, 1)
+			self.events[30] = true
+		end
+
+		if self.boss_timer > 107.5 and not self.events[31] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
+			self.events[31] = true
+		end
+
+		if self.boss_timer > 107.5 and not self.events[32] then
+			self:VineSmash(altar_loc, altar_entity, 3.5, 2.0, 2, 150, 125, 2)
+			self.events[32] = true
+		end
+
+		if self.boss_timer > 113 and not self.events[33] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
+			self.events[33] = true
+		end
+
+		if self.boss_timer > 113 and not self.events[34] then
+			self:VineSmash(altar_loc, altar_entity, 4.0, 2.5, 3, 150, 125, 2)
+			self.events[34] = true
+		end
+
+		if self.boss_timer > 119 and not self.events[35] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:NaturesGuise(altar_loc, altar_entity, 2.5, 1)
+			self.events[35] = true
+		end
+
+		if self.boss_timer > 119 and not self.events[36] then
+			self:RingOfThorns(altar_loc, altar_entity, 3.5, math.max(450 - 10 * power_stacks, 300), 125, 2)
+			self.events[36] = true
+		end
+
+		if self.boss_timer > 124 and not self.events[37] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:LeechSeed(altar_loc, altar_entity, 2.5, 25, math.min(1 + power_stacks * 0.1, 2), 1)
+			self.events[37] = true
+		end
+
+		-- Double treantling shenanigans
+		if self.boss_timer > 128.5 and not self.events[38] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:EyesInTheForest(altar_loc, altar_entity, 2.5, {RotatePosition(altar_loc, QAngle(0, 120, 0), self.random_constants[6]), RotatePosition(altar_loc, QAngle(0, 240, 0), self.random_constants[6])}, math.min(6 + power_stacks * 0.2, 8), 1)
+			self.events[38] = true
+		end
+
+		if self.boss_timer > 128.5 and not self.events[39] then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:LivingArmor(altar_loc, altar_entity, 3.5, 2, math.min(5 + power_stacks, 15), 2)
+			self.events[39] = true
+		end
+
+		if self.boss_timer > 134 and not self.events[40] then
+			boss:MoveToPosition(self.random_constants[6])
+			self:Overgrowth(altar_loc, altar_entity, 3.0, 450, 50, 4.0, 1)
+			self.events[40] = true
+		end
+
+		if self.boss_timer > 134 and not self.events[41] then
+			self:VineSmash(altar_loc, altar_entity, 4.5, 3.0, 2, 150, 125, 2)
+			self.events[41] = true
+		end
+
+		if self.boss_timer > 140.5 and not self.events[42] then
+			boss:MoveToPosition(self.random_constants[6])
+			self:VineSmash(altar_loc, altar_entity, 4.5, 3.0, 3, 150, 125, 1)
+			self.events[42] = true
+		end
+
+		if self.boss_timer > 140.5 and not self.events[43] then
+			self:RockSmash(altar_loc, altar_entity, nil, 4, 4.5, 500, 175, 2)
+			self.events[43] = true
+		end
+
+		if self.boss_timer > 147 and not self.events[44] then
+			boss:MoveToPosition(self.random_constants[6])
+			self:VineSmash(altar_loc, altar_entity, 4.5, 3.0, 3, 150, 125, 2)
+			self.events[44] = true
+		end
+
+		-- Enrage
+		if self.boss_timer > 153 then
+			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
+			self:Overgrowth(altar_loc, altar_entity, 2.0, 950, 500, 2.0, 1)
+			self.boss_timer = self.boss_timer - 2.1
+		end
 	end
 end
 
@@ -184,7 +436,7 @@ end
 ---------------------------
 
 -- Returns all treantlings
-function boss_thinker_nevermore:GetRealTrees(center_point)
+function boss_thinker_mega_greevil:GetRealTrees(center_point)
 	local real_trees ={}
 	local nearby_allies = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
 	for _, ally in pairs(nearby_allies) do
@@ -196,7 +448,7 @@ function boss_thinker_nevermore:GetRealTrees(center_point)
 end
 
 -- Returns a random tree, or Treant if no fake trees are available
-function boss_thinker_nevermore:PickRandomFakeTree(center_point)
+function boss_thinker_mega_greevil:PickRandomFakeTree(center_point)
 	local fake_trees ={}
 	local nearby_allies = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
 	for _, ally in pairs(nearby_allies) do
@@ -213,7 +465,7 @@ function boss_thinker_nevermore:PickRandomFakeTree(center_point)
 end
 
 -- Spawns a fake tree
-function boss_thinker_nevermore:SpawnFakeTree(location, health)
+function boss_thinker_mega_greevil:SpawnFakeTree(location, health)
 	if IsServer() then
 		local boss = self:GetParent()
 		local tree_health = boss:GetMaxHealth() * health * 0.01
@@ -234,7 +486,7 @@ function boss_thinker_nevermore:SpawnFakeTree(location, health)
 end
 
 -- Fake tree passive modifier
-LinkLuaModifier("modifier_frostivus_fake_tree_passive", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_fake_tree_passive", "boss_scripts/boss_thinker_mega_greevil.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_fake_tree_passive = modifier_frostivus_fake_tree_passive or class({})
 
 function modifier_frostivus_fake_tree_passive:IsHidden() return true end
@@ -242,7 +494,7 @@ function modifier_frostivus_fake_tree_passive:IsPurgable() return false end
 function modifier_frostivus_fake_tree_passive:IsDebuff() return true end
 
 -- Spawns a treantling
-function boss_thinker_nevermore:SpawnTreantling(location, health, center_point)
+function boss_thinker_mega_greevil:SpawnTreantling(location, health, center_point)
 	if IsServer() then
 		local boss = self:GetParent()
 		local treant_health = boss:GetMaxHealth() * health * 0.01
@@ -269,7 +521,7 @@ function boss_thinker_nevermore:SpawnTreantling(location, health, center_point)
 end
 
 -- Treantling passive modifier
-LinkLuaModifier("modifier_frostivus_treantling_passive", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_treantling_passive", "boss_scripts/boss_thinker_mega_greevil.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_treantling_passive = modifier_frostivus_treantling_passive or class({})
 
 function modifier_frostivus_treantling_passive:IsHidden() return true end
@@ -277,7 +529,7 @@ function modifier_frostivus_treantling_passive:IsPurgable() return false end
 function modifier_frostivus_treantling_passive:IsDebuff() return true end
 
 -- Make Treant invisible
-function boss_thinker_nevermore:TreantInvisStart(boss)
+function boss_thinker_mega_greevil:TreantInvisStart(boss)
 
 	-- Play invis sound
 	boss:EmitSound("Hero_Treant.NaturesGuise.On")
@@ -299,7 +551,7 @@ function boss_thinker_nevermore:TreantInvisStart(boss)
 end
 
 -- Make Treant visible again
-function boss_thinker_nevermore:TreantInvisEnd(boss)
+function boss_thinker_mega_greevil:TreantInvisEnd(boss)
 
 	-- Remove invis modifier
 	boss:RemoveModifierByName("modifier_invisible")
@@ -319,16 +571,14 @@ function boss_thinker_nevermore:TreantInvisEnd(boss)
 end
 
 -- Stack Leech Seed up
-function boss_thinker_nevermore:LeechSeedStackUp(boss, enemy)
-	if not enemy:HasModifier("modifier_frostivus_leech_seed_debuff") then
-		enemy:AddNewModifier(boss, boss:FindAbilityByName("frostivus_boss_leech_seed"), "modifier_frostivus_leech_seed_debuff", {})
-	end
+function boss_thinker_mega_greevil:LeechSeedStackUp(boss, enemy)
+	enemy:AddNewModifier(boss, boss:FindAbilityByName("frostivus_boss_leech_seed"), "modifier_frostivus_leech_seed_debuff", {duration = 60})
 	local seed_modifier = enemy:FindModifierByName("modifier_frostivus_leech_seed_debuff")
 	seed_modifier:SetStackCount(seed_modifier:GetStackCount() + 1)
 end
 
 -- Leech Seed debuff
-LinkLuaModifier("modifier_frostivus_leech_seed_debuff", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_leech_seed_debuff", "boss_scripts/boss_thinker_mega_greevil.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_leech_seed_debuff = modifier_frostivus_leech_seed_debuff or class({})
 
 function modifier_frostivus_leech_seed_debuff:IsHidden() return false end
@@ -353,7 +603,7 @@ end
 ---------------------------
 
 -- Vine Smash
-function boss_thinker_nevermore:VineSmash(center_point, altar_handle, delay, fixate_delay, target_amount, radius, damage, send_cast_bar)
+function boss_thinker_mega_greevil:VineSmash(center_point, altar_handle, delay, fixate_delay, target_amount, radius, damage, send_cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
 		local hit_damage = boss:GetAttackDamage() * damage * 0.01
@@ -468,7 +718,7 @@ function boss_thinker_nevermore:VineSmash(center_point, altar_handle, delay, fix
 	end
 end
 
-function boss_thinker_nevermore:ShootVineSmash(altar_handle, source, boss, target_loc, radius, damage)
+function boss_thinker_mega_greevil:ShootVineSmash(altar_handle, source, boss, target_loc, radius, damage)
 	local source_loc = source:GetAbsOrigin()
 	local forward_direction = (target_loc - source_loc):Normalized()
 	local spawn_count = math.ceil(radius * 0.02)
@@ -505,7 +755,7 @@ function boss_thinker_nevermore:ShootVineSmash(altar_handle, source, boss, targe
 end
 
 -- Vine Smash duplicate damage prevention modifier
-LinkLuaModifier("modifier_vine_smash_damage_dummy", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_vine_smash_damage_dummy", "boss_scripts/boss_thinker_mega_greevil.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_vine_smash_damage_dummy = modifier_vine_smash_damage_dummy or class({})
 
 function modifier_vine_smash_damage_dummy:IsHidden() return true end
@@ -513,7 +763,7 @@ function modifier_vine_smash_damage_dummy:IsPurgable() return false end
 function modifier_vine_smash_damage_dummy:IsDebuff() return false end
 
 -- Rock Smash
-function boss_thinker_nevermore:RockSmash(center_point, altar_handle, optional_target, rock_number, delay, radius, damage, send_cast_bar)
+function boss_thinker_mega_greevil:RockSmash(center_point, altar_handle, optional_target, rock_number, delay, radius, damage, send_cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
 		local tiny = self.tiny_entities[1]
@@ -592,7 +842,7 @@ function boss_thinker_nevermore:RockSmash(center_point, altar_handle, optional_t
 end
 
 -- Throws a Rock
-function boss_thinker_nevermore:ThrowRock(rock, target_loc)
+function boss_thinker_mega_greevil:ThrowRock(rock, target_loc)
 	if IsServer() then
 		local source_loc = rock:GetAbsOrigin()
 		rock:AddNewModifier(nil, nil, "modifier_phased", {})
@@ -634,7 +884,7 @@ function boss_thinker_nevermore:ThrowRock(rock, target_loc)
 end
 
 -- Ring of Thorns
-function boss_thinker_nevermore:RingOfThorns(center_point, altar_handle, delay, radius, damage, send_cast_bar)
+function boss_thinker_mega_greevil:RingOfThorns(center_point, altar_handle, delay, radius, damage, send_cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
 		local hit_damage = boss:GetAttackDamage() * damage * 0.01
@@ -742,7 +992,7 @@ function boss_thinker_nevermore:RingOfThorns(center_point, altar_handle, delay, 
 end
 
 -- Leech Seed
-function boss_thinker_nevermore:LeechSeed(center_point, altar_handle, delay, damage, heal, send_cast_bar)
+function boss_thinker_mega_greevil:LeechSeed(center_point, altar_handle, delay, damage, heal, send_cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
 		local leech_damage = boss:GetAttackDamage() * damage * 0.01
@@ -838,7 +1088,7 @@ function boss_thinker_nevermore:LeechSeed(center_point, altar_handle, delay, dam
 end
 
 -- Rapid Growth
-function boss_thinker_nevermore:RapidGrowth(center_point, altar_handle, delay, positions, health, send_cast_bar)
+function boss_thinker_mega_greevil:RapidGrowth(center_point, altar_handle, delay, positions, health, send_cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
 
@@ -870,7 +1120,7 @@ function boss_thinker_nevermore:RapidGrowth(center_point, altar_handle, delay, p
 end
 
 -- Eyes in the Forest
-function boss_thinker_nevermore:EyesInTheForest(center_point, altar_handle, delay, positions, health, send_cast_bar)
+function boss_thinker_mega_greevil:EyesInTheForest(center_point, altar_handle, delay, positions, health, send_cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
 
@@ -902,7 +1152,7 @@ function boss_thinker_nevermore:EyesInTheForest(center_point, altar_handle, dela
 end
 
 -- Living Armor
-function boss_thinker_nevermore:LivingArmor(center_point, altar_handle, delay, target_amount, layers, send_cast_bar)
+function boss_thinker_mega_greevil:LivingArmor(center_point, altar_handle, delay, target_amount, layers, send_cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
 
@@ -962,7 +1212,7 @@ function boss_thinker_nevermore:LivingArmor(center_point, altar_handle, delay, t
 end
 
 -- Living Armor buff
-LinkLuaModifier("modifier_frostivus_living_armor", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_living_armor", "boss_scripts/boss_thinker_mega_greevil.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_living_armor = modifier_frostivus_living_armor or class({})
 
 function modifier_frostivus_living_armor:IsHidden() return false end
@@ -1014,7 +1264,7 @@ end
 
 
 -- Overgrowth
-function boss_thinker_nevermore:Overgrowth(center_point, altar_handle, delay, radius, damage, duration, send_cast_bar)
+function boss_thinker_mega_greevil:Overgrowth(center_point, altar_handle, delay, radius, damage, duration, send_cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
 		local hit_damage = boss:GetAttackDamage() * damage * 0.01
@@ -1103,7 +1353,7 @@ function boss_thinker_nevermore:Overgrowth(center_point, altar_handle, delay, ra
 end
 
 -- Overgrowth debuff
-LinkLuaModifier("modifier_frostivus_overgrowth_root", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("modifier_frostivus_overgrowth_root", "boss_scripts/boss_thinker_mega_greevil.lua", LUA_MODIFIER_MOTION_NONE )
 modifier_frostivus_overgrowth_root = modifier_frostivus_overgrowth_root or class({})
 
 function modifier_frostivus_overgrowth_root:IsHidden() return false end
@@ -1127,7 +1377,7 @@ function modifier_frostivus_overgrowth_root:CheckState()
 end
 
 -- Nature's Guise
-function boss_thinker_nevermore:NaturesGuise(center_point, altar_handle, delay, send_cast_bar)
+function boss_thinker_mega_greevil:NaturesGuise(center_point, altar_handle, delay, send_cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
 

@@ -9,6 +9,7 @@ LinkLuaModifier("boss_thinker_zeus", "boss_scripts/boss_thinker_zeus.lua", LUA_M
 LinkLuaModifier("boss_thinker_venomancer", "boss_scripts/boss_thinker_venomancer.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("boss_thinker_treant", "boss_scripts/boss_thinker_treant.lua", LUA_MODIFIER_MOTION_NONE )
 LinkLuaModifier("boss_thinker_nevermore", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
+LinkLuaModifier("boss_thinker_mega_greevil", "boss_scripts/boss_thinker_mega_greevil.lua", LUA_MODIFIER_MOTION_NONE )
 
 ---------------------
 -- Arena lockdown
@@ -488,20 +489,53 @@ function CleanseBossDebuffs(hero)
 end
 
 function PresentWave(count)
-	local north = RandomVector(100):Normalized() * RandomInt(550, 750)
+	local north = RandomVector(100):Normalized()
 	local launch_positions = {}
 	for i = 1, count do
-		launch_positions[i] = RotatePosition(Vector(0, 0, 0), QAngle(0, (i - 1) * 360 / count, 0), north)
+		launch_positions[i] = RotatePosition(Vector(0, 0, 0), QAngle(0, (i - 1) * 360 / count, 0), north * RandomInt(550, 750))
 	end
 
-	-- Launch presents
-	local remaining_presents = count
-	for _, launch_position in pairs(launch_positions) do
-		Timers:CreateTimer(0.2 * (remaining_presents - 1), function()
-			local item = CreateItem("item_frostivus_present", nil, nil)
-			CreateItemOnPositionForLaunch(Vector(0, 0, 0), item)
-			item:LaunchLootInitialHeight(true, 150, 300, 0.8, launch_position)
-			remaining_presents = remaining_presents - 1
+	-- Play event stinger
+	PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "DOTAMusic_Stinger.005")
+	PlaySoundForTeam(DOTA_TEAM_BADGUYS, "DOTAMusic_Stinger.005")
+
+	-- Find Tusk and Mega Greevil
+	local tusk = false
+	local greevil = false
+	local fighters = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 400, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
+	for _, fighter in pairs(fighters) do
+		if fighter:HasModifier("modifier_frostivus_tusk") then
+			tusk = fighter
+		elseif fighter:HasModifier("modifier_frostivus_mega_greevil") then
+			greevil = fighter
+		end
+	end
+
+	-- Animate Tusk Punch
+	if tusk and greevil then
+		EndAnimation(tusk)
+		StartAnimation(tusk, {duration = 2.0, activity=ACT_DOTA_CAST_ABILITY_4, rate=1.0})
+		tusk:EmitSound("Hero_Tusk.WalrusPunch.Cast")
+		Timers:CreateTimer(0.36, function()
+
+			-- Sound
+			greevil:EmitSound("Hero_Tusk.WalrusPunch.Target")
+
+			-- Animation
+			EndAnimation(greevil)
+			StartAnimation(greevil, {duration = 2.0, activity=ACT_DOTA_FLAIL, rate=1.0})
+
+			-- Particle
+			local punch_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_tusk/tusk_walruspunch_txt_ult.vpcf", PATTACH_OVERHEAD_FOLLOW, greevil)
+			ParticleManager:SetParticleControl(punch_pfx, 0, greevil:GetAbsOrigin())
+			ParticleManager:ReleaseParticleIndex(punch_pfx)
+
+			-- Launch presents
+			for _, launch_position in pairs(launch_positions) do
+				local item = CreateItem("item_frostivus_present", nil, nil)
+				CreateItemOnPositionForLaunch(Vector(0, 0, 0), item)
+				item:LaunchLootInitialHeight(true, 750, 900, 0.8, launch_position)
+			end
 		end)
 	end
 end
@@ -537,7 +571,7 @@ function StartPhaseTwo()
 		end
 		local nearby_summons = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, altar_handle:GetAbsOrigin(), nil, 2200, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 		for _,summon in pairs(nearby_summons) do
-			if not summon:HasModifier("modifier_frostivus_boss") then
+			if not (summon:HasModifier("modifier_frostivus_boss") or summon:HasModifier("modifier_frostivus_tusk") or summon:HasModifier("modifier_frostivus_mega_greevil")) then
 				summon:Kill(nil, summon)
 			end
 		end
@@ -551,7 +585,6 @@ function StartPhaseTwo()
 			boss:RemoveModifierByName("boss_thinker_venomancer")
 			boss:RemoveModifierByName("boss_thinker_treant")
 			boss:RemoveModifierByName("boss_thinker_nevermore")
-			boss:RemoveModifierByName("boss_thinker_lich")
 			boss:Purge(true, true, false, true, true)
 			boss:Heal(999999, nil)
 			boss:GiveMana(boss:GetMaxMana())
@@ -560,8 +593,6 @@ function StartPhaseTwo()
 				boss:SetAbsOrigin(Entities:FindByName(nil, "altar_2"):GetAbsOrigin() + Vector(0, 300, 0))
 			elseif boss:GetUnitName() == "npc_frostivus_boss_venomancer" then
 				boss:SetAbsOrigin(Entities:FindByName(nil, "altar_3"):GetAbsOrigin() + Vector(0, 300, 0))
-			elseif boss:GetUnitName() == "npc_frostivus_boss_lich" then
-				boss:SetAbsOrigin(Entities:FindByName(nil, "altar_4"):GetAbsOrigin() + Vector(0, 300, 0))
 			elseif boss:GetUnitName() == "npc_frostivus_boss_treant" then
 				boss:SetAbsOrigin(Entities:FindByName(nil, "altar_5"):GetAbsOrigin() + Vector(0, 50, 0))
 			elseif boss:GetUnitName() == "npc_frostivus_boss_nevermore" then
@@ -572,15 +603,44 @@ function StartPhaseTwo()
 end
 
 function StartPhaseThree()
-	Timers:CreateTimer(10, function()
-		if PRESENT_SCORE_2 >= PRESENT_SCORE_3 then
-			GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
-			PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_death_Stinger")
-		else
-			GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
-			PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_death_Stinger")
+
+	-- Kill all regular greevils and remove captured greevil modifiers
+	local all_greevils = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 20000, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+	for _, greevil in pairs(all_greevils) do
+		if greevil:HasModifier("modifier_greevil_capture_aura") or greevil:HasModifier("modifier_greevil_captured_greevil") then
+			greevil:Kill(nil, greevil)
 		end
-	end)
+		greevil:RemoveModifierByName("modifier_greevil_captured_owner")
+	end
+
+	-- Find Tusk and Mega Greevil
+	local tusk = false
+	local greevil = false
+	local fighters = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 400, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
+	for _, fighter in pairs(fighters) do
+		if fighter:HasModifier("modifier_frostivus_tusk") then
+			tusk = fighter
+		elseif fighter:HasModifier("modifier_frostivus_mega_greevil") then
+			greevil = fighter
+		end
+	end
+
+	-- Kill Tusk
+	tusk:Kill(nil, tusk)
+
+	-- Start combat with the Mega Greevil
+	greevil:RemoveModifierByName("modifier_frostivus_mega_greevil")
+	greevil:AddNewModifier(nil, nil, "boss_thinker_mega_greevil", {})
+
+	--Timers:CreateTimer(10, function()
+	--	if PRESENT_SCORE_2 >= PRESENT_SCORE_3 then
+	--		GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+	--		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_death_Stinger")
+	--	else
+	--		GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+	--		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_death_Stinger")
+	--	end
+	--end)
 end
 
 function BossPhaseAbilityCastAlt(team, ability_image, ability_name, delay)

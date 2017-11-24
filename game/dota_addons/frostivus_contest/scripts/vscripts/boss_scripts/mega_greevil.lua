@@ -22,12 +22,10 @@ function modifier_frostivus_mega_greevil:OnIntervalThink()
 	if IsServer() then
 
 		-- Play a random aggressive animation
-		local random = RandomInt(1, 4)
+		local random = RandomInt(1, 2)
 		if random == 1 then
 			StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_ATTACK, rate=1.0})
 		elseif random == 2 then
-			StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_FLAIL, rate=1.0})
-		elseif random == 3 then
 			StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_SPAWN, rate=1.0})
 		end
 	end
