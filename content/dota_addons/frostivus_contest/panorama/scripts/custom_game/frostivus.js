@@ -1,7 +1,7 @@
 "use strict";
 
 var JS_PHASE = 0
-var TutorialPage = 1
+var TutorialPage = 0
 var playerPanels = {};
 
 function UpdateTimer( data )
@@ -36,7 +36,7 @@ function Phase(args)
 	if (JS_PHASE == 1)
 	{
 		$("#FrostivusHUD_alt").style.visibility = "visible";
-//		$("#FrostivusScore").style.visibility = "visible";
+		$("#FrostivusScore").style.visibility = "visible";
 	}
 }
 
@@ -62,7 +62,7 @@ function PrevTutorial() {
 }
 
 function NextTutorial() {
-	if (TutorialPage < 3) {
+	if (TutorialPage < 2) {
 		TutorialPage = TutorialPage +1
 		$("#TutorialTitle").text = $.Localize("#frostivus_phase_" + TutorialPage) + ":";
 		$("#TutorialTextLine").text = $.Localize("#frostivus_phase_" + TutorialPage + "_desc");
@@ -115,14 +115,14 @@ function OnPlayerReconnect( data ) {
 }
 
 function UpdateBossBar(args) {
-//	var RadiantScore = CustomNetTables.GetTableValue("game_options", "radiant").score;
-//	var DireScore = CustomNetTables.GetTableValue("game_options", "dire").score;
+	var RadiantScore = CustomNetTables.GetTableValue("game_options", "radiant").score;
+	var DireScore = CustomNetTables.GetTableValue("game_options", "dire").score;
 
-//	$("#RadiantScore").SetDialogVariableInt("radiant", RadiantScore);
-//	$("#RadiantScore").text = RadiantScore;
+	$("#RadiantScore").SetDialogVariableInt("radiant", RadiantScore);
+	$("#RadiantScore").text = RadiantScore;
 
-//	$("#DireScore").SetDialogVariableInt("dire", DireScore);
-//	$("#DireScore").text = DireScore;
+	$("#DireScore").SetDialogVariableInt("dire", DireScore);
+	$("#DireScore").text = DireScore;
 
 	var BossTable = CustomNetTables.GetTableValue("game_options", "boss");
 	if (BossTable !== null)

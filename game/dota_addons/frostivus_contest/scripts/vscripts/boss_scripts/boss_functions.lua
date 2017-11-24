@@ -386,9 +386,15 @@ function SpawnNevermore(altar)
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "nevermore", altar_handle = altar})
 
 	-- Abilities
-	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_necromastery"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_immolation"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_ragna_blade"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_meteorain"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_shadowraze"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_soul_harvest"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_nevermore"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_requiem_of_souls"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 
 	-- Cosmetics
 	boss:SetRenderColor(0, 0, 0)
@@ -501,34 +507,35 @@ function PresentWave(count)
 
 	-- Find Tusk and Mega Greevil
 	local tusk = false
-	local greevil = false
+--	local greevil = false
 	local fighters = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 400, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
 	for _, fighter in pairs(fighters) do
 		if fighter:HasModifier("modifier_frostivus_tusk") then
 			tusk = fighter
-		elseif fighter:HasModifier("modifier_frostivus_mega_greevil") then
-			greevil = fighter
+--		elseif fighter:HasModifier("modifier_frostivus_mega_greevil") then
+--			greevil = fighter
 		end
 	end
 
 	-- Animate Tusk Punch
-	if tusk and greevil then
+--	if tusk and greevil then
+	if tusk then
 		EndAnimation(tusk)
 		StartAnimation(tusk, {duration = 2.0, activity=ACT_DOTA_CAST_ABILITY_4, rate=1.0})
 		tusk:EmitSound("Hero_Tusk.WalrusPunch.Cast")
 		Timers:CreateTimer(0.36, function()
 
 			-- Sound
-			greevil:EmitSound("Hero_Tusk.WalrusPunch.Target")
+			tusk:EmitSound("Hero_Tusk.WalrusPunch.Target")
 
 			-- Animation
-			EndAnimation(greevil)
-			StartAnimation(greevil, {duration = 2.0, activity=ACT_DOTA_FLAIL, rate=1.0})
+--			EndAnimation(greevil)
+--			StartAnimation(greevil, {duration = 2.0, activity=ACT_DOTA_FLAIL, rate=1.0})
 
 			-- Particle
-			local punch_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_tusk/tusk_walruspunch_txt_ult.vpcf", PATTACH_OVERHEAD_FOLLOW, greevil)
-			ParticleManager:SetParticleControl(punch_pfx, 0, greevil:GetAbsOrigin())
-			ParticleManager:ReleaseParticleIndex(punch_pfx)
+--			local punch_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_tusk/tusk_walruspunch_txt_ult.vpcf", PATTACH_OVERHEAD_FOLLOW, greevil)
+--			ParticleManager:SetParticleControl(punch_pfx, 0, greevil:GetAbsOrigin())
+--			ParticleManager:ReleaseParticleIndex(punch_pfx)
 
 			-- Launch presents
 			for _, launch_position in pairs(launch_positions) do
@@ -605,42 +612,44 @@ end
 function StartPhaseThree()
 
 	-- Kill all regular greevils and remove captured greevil modifiers
-	local all_greevils = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 20000, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
-	for _, greevil in pairs(all_greevils) do
-		if greevil:HasModifier("modifier_greevil_capture_aura") or greevil:HasModifier("modifier_greevil_captured_greevil") then
-			greevil:Kill(nil, greevil)
-		end
-		greevil:RemoveModifierByName("modifier_greevil_captured_owner")
-	end
+--	local all_greevils = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 20000, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+--	for _, greevil in pairs(all_greevils) do
+--		if greevil:HasModifier("modifier_greevil_capture_aura") or greevil:HasModifier("modifier_greevil_captured_greevil") then
+--			greevil:Kill(nil, greevil)
+--		end
+--		greevil:RemoveModifierByName("modifier_greevil_captured_owner")
+--	end
 
 	-- Find Tusk and Mega Greevil
-	local tusk = false
-	local greevil = false
-	local fighters = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 400, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
-	for _, fighter in pairs(fighters) do
-		if fighter:HasModifier("modifier_frostivus_tusk") then
-			tusk = fighter
-		elseif fighter:HasModifier("modifier_frostivus_mega_greevil") then
-			greevil = fighter
-		end
-	end
+--	local tusk = false
+--	local greevil = false
+--	local fighters = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 400, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
+--	for _, fighter in pairs(fighters) do
+--		if fighter:HasModifier("modifier_frostivus_tusk") then
+--			tusk = fighter
+--		elseif fighter:HasModifier("modifier_frostivus_mega_greevil") then
+--			greevil = fighter
+--		end
+--	end
 
 	-- Kill Tusk
-	tusk:Kill(nil, tusk)
+--	tusk:Kill(nil, tusk)
 
 	-- Start combat with the Mega Greevil
-	greevil:RemoveModifierByName("modifier_frostivus_mega_greevil")
-	greevil:AddNewModifier(nil, nil, "boss_thinker_mega_greevil", {})
+--	greevil:RemoveModifierByName("modifier_frostivus_mega_greevil")
+--	greevil:AddNewModifier(nil, nil, "boss_thinker_mega_greevil", {})
 
-	--Timers:CreateTimer(10, function()
-	--	if PRESENT_SCORE_2 >= PRESENT_SCORE_3 then
-	--		GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
-	--		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_death_Stinger")
-	--	else
-	--		GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
-	--		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_death_Stinger")
-	--	end
-	--end)
+	Timers:CreateTimer(1, function()
+		if PRESENT_SCORE_2 >= PRESENT_SCORE_3 then
+			GameRules:SetCustomVictoryMessage("Radiant win!")
+			GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+			PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_death_Stinger")
+		else
+			GameRules:SetCustomVictoryMessage("Dire win!")
+			GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+			PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_death_Stinger")
+		end
+	end)
 end
 
 function BossPhaseAbilityCastAlt(team, ability_image, ability_name, delay)

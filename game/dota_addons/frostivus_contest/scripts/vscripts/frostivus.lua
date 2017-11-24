@@ -18,8 +18,8 @@ PRESENT_WAVES[5] = 120
 PRESENT_WAVES[6] = 120
 
 if IsInToolsMode() then 
-	PHASE_TIME[1] = 10
-	PHASE_TIME[2] = 20
+	PHASE_TIME[1] = 601
+	PHASE_TIME[2] = 361
 end
 
 function Frostivus()
@@ -57,17 +57,7 @@ function Frostivus()
 	SpawnTreant(BOSS_SPAWN_POINT_TABLE.treant)
 	SpawnNevermore(BOSS_SPAWN_POINT_TABLE.nevermore)
 	SpawnTusk()
-	SpawnMegaGreevil()
-
-	-- Launch some presents
-	local present_wave_count = 0
-	Timers:CreateTimer(0, function()
-		PresentWave(6 + 4 * present_wave_count)
-		present_wave_count = present_wave_count + 1
-		if present_wave_count <= 6 then
-			return PRESENT_WAVES[present_wave_count]
-		end
-	end)
+--	SpawnMegaGreevil()
 end
 
 function FrostivusPhase(PHASE)
@@ -173,6 +163,8 @@ function FrostivusPresentCountdown(tick)
 
 		if nCOUNTDOWNTIMER_PRESENT < 1 then
 			nCOUNTDOWNTIMER_PRESENT = PRESENT_SPAWN_TIME
+			-- Launch some presents
+			PresentWave(6)
 		end
 
 		-- Stop counting down after phase 2

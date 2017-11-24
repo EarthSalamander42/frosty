@@ -76,6 +76,7 @@ function Precache(context)
 	PrecacheResource("particle_folder", "particles/boss_nevermore/", context)
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_nevermore/", context)
 	PrecacheResource("particle_folder", "particles/econ/items/shadow_fiend/sf_fire_arcana", context)
+	PrecacheResource("particle", "particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_fire_arcana.vpcf", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts", context)
 
 	-- Models can also be precached by folder or individually

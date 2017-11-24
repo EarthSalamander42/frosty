@@ -1640,11 +1640,15 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"frostivus_boss_innate"
-		"Ability2"					"frostivus_boss_necromastery"
-		"Ability3"					"frostivus_boss_requiem_of_souls"
-		"Ability4"					""
-		"Ability5"					""
+		"Ability1"					"frostivus_boss_necromastery"
+		"Ability2"					"frostivus_boss_immolation"
+		"Ability3"					"frostivus_boss_ragna_blade"
+		"Ability4"					"frostivus_boss_meteorain"
+		"Ability5"					"frostivus_boss_shadowraze"
+		"Ability6"					"frostivus_boss_soul_harvest"
+		"Ability7"					"frostivus_boss_nevermore"
+		"Ability8"					"frostivus_boss_requiem_of_souls"
+		"Ability9"					"frostivus_boss_innate"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1724,8 +1728,8 @@
 
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"10"
-		"MagicalResistance"			"25"
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
 
 		// Attack
 		//----------------------------------------------------------------
@@ -1757,7 +1761,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"150000"
+		"StatusHealth"				"200000"
 		"StatusHealthRegen"			"0.0"
 		"StatusMana"				"3000"
 		"StatusManaRegen"			"10"
