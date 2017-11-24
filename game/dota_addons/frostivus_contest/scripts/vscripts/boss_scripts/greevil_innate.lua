@@ -232,7 +232,7 @@ function modifier_greevil_captured_greevil:OnIntervalThink()
 		greevil:SetAbsOrigin(self.capturer:GetAbsOrigin() - self.capturer:GetForwardVector() * 150)
 
 		-- Search for an altar to end this Greevil's misery
-		local nearby_units = FindUnitsInRadius(self.capturer:GetTeam(), self.capturer:GetAbsOrigin(), nil, 350, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
+		local nearby_units = FindUnitsInRadius(self.capturer:GetTeam(), self.capturer:GetAbsOrigin(), nil, 400, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
 		for _, unit in pairs(nearby_units) do
 			if unit:GetUnitName() == "npc_dota_altar" or unit:GetUnitName() == "npc_dota_altar_minor" then
 

@@ -16,8 +16,8 @@ PRESENT_WAVES[5] = 120
 PRESENT_WAVES[6] = 120
 
 if IsInToolsMode() then 
-	PHASE_TIME[1] = 601
-	PHASE_TIME[2] = 361
+	PHASE_TIME[1] = 10
+	PHASE_TIME[2] = 20
 end
 
 function Frostivus()
@@ -28,7 +28,6 @@ function Frostivus()
 				--sounds[1] = "Conquest.Stinger.HulkCreep.Generic" -- " oooOOOOOOhhhh"
 				--sounds[1] = "DOTAMusic_Stinger.003" -- item unboxing
 				--sounds[2] = "DOTAMusic_Stinger.004" -- mystery music
-				--sounds[3] = "DOTAMusic_Stinger.005" -- fight decision
 				EmitSoundOnClient("FrostivusGameStart.RadiantSide", PlayerResource:GetPlayer(player_id))
 			elseif PlayerResource:GetTeam(player_id) == DOTA_TEAM_BADGUYS then
 				EmitSoundOnClient("FrostivusGameStart.DireSide", PlayerResource:GetPlayer(player_id))
@@ -131,7 +130,7 @@ function FrostivusCountdown(tick)
 		end
 
 		-- Spawn greevils periodically during phase 2 
-		if PHASE == 2 and (nCOUNTDOWNTIMER % 15) == 0 then
+		if PHASE == 2 and (nCOUNTDOWNTIMER % 20) == 0 then
 			local spawn_locations = Entities:FindAllByName("greevil_node")
 			SpawnGreevil(spawn_locations[RandomInt(1, #spawn_locations)]:GetAbsOrigin(), RandomInt(1, 4), RandomInt(0, 255), RandomInt(0, 255), RandomInt(0, 255))
 		end

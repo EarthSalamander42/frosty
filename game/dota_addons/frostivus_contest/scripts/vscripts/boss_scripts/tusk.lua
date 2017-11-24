@@ -23,7 +23,7 @@ function modifier_frostivus_tusk:OnIntervalThink()
 
 		-- Play a random aggressive animation
 		Timers:CreateTimer(1.0, function()
-			local random = RandomInt(1, 4)
+			local random = RandomInt(1, 5)
 			if random == 1 then
 				StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_ATTACK, rate=1.0})
 			elseif random == 2 then
@@ -32,7 +32,15 @@ function modifier_frostivus_tusk:OnIntervalThink()
 				StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_GENERIC_CHANNEL_1, rate=1.0})
 			elseif random == 4 then
 				StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_SPAWN, rate=1.0})
+			elseif random == 5 then
+				StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_CAST_ABILITY_5, rate=1.0})
 			end
+		end)
+
+		-- Attack sounds
+		self:GetParent():EmitSound("Hero_Tusk.PreAttack")
+		Timers:CreateTimer(0.36, function()
+			self:GetParent():EmitSound("Hero_Tusk.Attack")
 		end)
 	end
 end

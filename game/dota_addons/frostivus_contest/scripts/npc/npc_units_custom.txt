@@ -153,7 +153,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"100"
+		"StatusHealth"				"50000"
 		"StatusHealthRegen"			"1.0"
 		"StatusMana"				"50"
 		"StatusManaRegen"			"1.0"
@@ -241,7 +241,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"500"
+		"StatusHealth"				"50000"
 		"StatusHealthRegen"			"1.0"
 		"StatusMana"				"100"
 		"StatusManaRegen"			"1.0"
@@ -330,7 +330,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"1000"
+		"StatusHealth"				"50000"
 		"StatusHealthRegen"			"1.0"
 		"StatusMana"				"200"
 		"StatusManaRegen"			"1.0"
@@ -419,7 +419,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"1500"
+		"StatusHealth"				"50000"
 		"StatusHealthRegen"			"1.0"
 		"StatusMana"				"300"
 		"StatusManaRegen"			"1.0"
@@ -1757,7 +1757,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"100000"
+		"StatusHealth"				"150000"
 		"StatusHealthRegen"			"0.0"
 		"StatusMana"				"3000"
 		"StatusManaRegen"			"10"
@@ -1786,7 +1786,7 @@
 		"Model"						"models/heroes/tuskarr/tuskarr.vmdl"
 		"SoundSet"					"Creep_Good_Range"
 		"Level"						"1"
-		"ModelScale"				"2.0"
+		"ModelScale"				"2.1"
 		"MinimapIcon"				"minimap_shield"
 		"MinimapIconSize"			"512"
 		
