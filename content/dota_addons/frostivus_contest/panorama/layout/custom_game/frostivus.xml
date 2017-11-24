@@ -15,6 +15,10 @@
 				<Button id="FrostivusAltarButton" onactivate="FrostivusAltar();">
 					<Label text="#frostivus_altar_button" />
 				</Button>
+
+				<Button id="FrostivusTutorialButton" onactivate="OpenTutorial();">
+					<Label text="#frostivus_tuto_button" />
+				</Button>
 			</Panel>
 
 			<Panel id="FrostivusAltarMenu">
@@ -37,13 +41,6 @@
 						<Label text="#frostivus_altar_3" />
 					</Button>
 					<Panel id="AltarState3" class="AltarState"/>
-				</Panel>
-
-				<Panel class="FrostivusAltarContent">
-					<Button id="AltarButton4" class="AltarButton" onactivate="ChooseAltar(4);">
-						<Label text="#frostivus_altar_4" />
-					</Button>
-					<Panel id="AltarState4" class="AltarState"/>
 				</Panel>
 
 				<Panel class="FrostivusAltarContent">
@@ -72,7 +69,6 @@
 		<Panel id="FrostivusHUD_alt" hittest="false">
 			<Panel id="FrostivusPanelTimer">
 				<Label id="PhaseLabel" text="#frostivus_phase_1" onmouseover="FrostivusInfo()" onmouseout="UIHideTextTooltip()"/>
-
 				<Label id="Timer" text="--:--"/>
 			</Panel>
 
@@ -146,6 +142,27 @@
 
 			<Panel id="DireScorePanel" hittest="false">
 				<Label id="DireScore" hittest="false" text="0"/>
+			</Panel>
+		</Panel>
+
+		<Panel id="TutorialPanel" hittest="false">
+			<Panel id="TutorialTextPanel" hittest="false">
+				<Label id="TutorialTitle" hittest="false" text="#frostivus_phase_0"/>
+				<Label id="TutorialTextLine" class="TutorialText" hittest="false" text="#frostivus_phase_0_desc"/>
+			</Panel>
+
+			<Panel id="TutorialButtonPanel" hittest="false">
+				<Button id="PreviousTutorial" class="CloseTutorial" onactivate="PrevTutorial();">
+					<Label text="#prev_tutorial" />
+				</Button>
+
+				<Button id="NextTutorial" class="CloseTutorial" onactivate="NextTutorial();">
+					<Label text="#next_tutorial" />
+				</Button>
+
+				<Button id="TutorialCloseButton" class="CloseTutorial" onactivate="CloseTutorial();">
+					<Label text="#close_tutorial" />
+				</Button>
 			</Panel>
 		</Panel>
 	</Panel>

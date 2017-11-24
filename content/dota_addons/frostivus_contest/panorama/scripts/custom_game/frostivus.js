@@ -1,7 +1,7 @@
 "use strict";
 
 var JS_PHASE = 0
-var update_boss_level = false
+var TutorialPage = 1
 var playerPanels = {};
 
 function UpdateTimer( data )
@@ -18,10 +18,10 @@ function UpdateTimer( data )
 
 function Phase(args)
 {
-	$("#PhaseLabel").text = $.Localize("#frostivus_phase_" + args.Phase) + ": ";
 	JS_PHASE = args.Phase
+	$("#PhaseLabel").text = $.Localize("#frostivus_phase_" + JS_PHASE);
 
-	if (args.Phase == 1)
+	if (JS_PHASE == 1)
 	{
 		$("#FrostivusHUD_alt").style.visibility = "visible";
 		$("#FrostivusScore").style.visibility = "visible";
@@ -38,6 +38,32 @@ function FrostivusAltar() {
 		$("#FrostivusAltarMenu").style.visibility = "collapse";
 		toggle = false
 	}
+}
+
+function PrevTutorial() {
+	if (TutorialPage > 0) {
+		TutorialPage = TutorialPage -1
+		$("#TutorialTitle").text = $.Localize("#frostivus_phase_" + TutorialPage) + ":";
+		$("#TutorialTextLine").text = $.Localize("#frostivus_phase_" + TutorialPage + "_desc");
+		$("#NextTutorial").style.visibility = "visible";
+	}
+}
+
+function NextTutorial() {
+	if (TutorialPage < 3) {
+		TutorialPage = TutorialPage +1
+		$("#TutorialTitle").text = $.Localize("#frostivus_phase_" + TutorialPage) + ":";
+		$("#TutorialTextLine").text = $.Localize("#frostivus_phase_" + TutorialPage + "_desc");
+		$("#PreviousTutorial").style.visibility = "visible";
+	}
+}
+
+function OpenTutorial() {
+	$("#TutorialPanel").style.visibility = "visible";
+}
+
+function CloseTutorial() {
+	$("#TutorialPanel").style.visibility = "collapse";
 }
 
 function FrostivusInfo()
@@ -101,27 +127,23 @@ function UpdateBossBar(args) {
 		$("#BossProgressBar" + TeamContest).value = BossHP_percent / 100;
 		$("#BossHealth" + TeamContest).text = BossHP + "/" + BossMaxHP;
 
-		if (update_boss_level == false)
-		{
-			if (BossShortLabel == "nevermore") {
-				bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #660000 ), color-stop( 0.3, #cc0000 ), color-stop( .5, #cc0000 ), to( #660000 ) )';
-			} else if (BossShortLabel == "venomancer") {
-				bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
-			} else if (BossShortLabel == "treant") {
-				bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
-			} else if (BossShortLabel == "zuus") {
-				bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #66a3ff ), color-stop( .5, #66a3ff ), to( #1A75FF ) )';
-			}
-
-			$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = bar_color;
-			$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = bar_color;
-			$("#BossCastProgressBar" + TeamContest + "_2_Left").style.backgroundColor = bar_color;
-
-			$("#BossLevel" + TeamContest).text = $.Localize("boss_level") + BossLvl
-			$("#BossLabel" + TeamContest).text = $.Localize(BossLabel)
-			$("#BossIcon" + TeamContest).style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_'+ BossShortLabel +'.png")';
-			update_boss_level = true
+		if (BossShortLabel == "nevermore") {
+			bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #660000 ), color-stop( 0.3, #cc0000 ), color-stop( .5, #cc0000 ), to( #660000 ) )';
+		} else if (BossShortLabel == "venomancer") {
+			bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #326114 ), color-stop( 0.3, #54BA07 ), color-stop( .5, #54BA07 ), to( #326114 ) )';
+		} else if (BossShortLabel == "treant") {
+			bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #808080 ), color-stop( 0.3, #808080 ), color-stop( .5, #595959 ), to( #595959 ) )';
+		} else if (BossShortLabel == "zuus") {
+			bar_color = 'gradient( linear, 0% 0%, 0% 100%, from( #1A75FF ), color-stop( 0.3, #66a3ff ), color-stop( .5, #66a3ff ), to( #1A75FF ) )';
 		}
+
+		$("#BossProgressBar" + TeamContest + "_Left").style.backgroundColor = bar_color;
+		$("#BossCastProgressBar" + TeamContest + "_Left").style.backgroundColor = bar_color;
+		$("#BossCastProgressBar" + TeamContest + "_2_Left").style.backgroundColor = bar_color;
+
+		$("#BossLevel" + TeamContest).text = $.Localize("boss_level") + BossLvl
+		$("#BossLabel" + TeamContest).text = $.Localize(BossLabel)
+		$("#BossIcon" + TeamContest).style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_'+ BossShortLabel +'.png")';
 	}
 }
 CustomNetTables.SubscribeNetTableListener("game_options", UpdateBossBar)
@@ -137,7 +159,6 @@ function HideBossBar(args)
 	var playerInfo = Game.GetPlayerInfo(Players.GetLocalPlayer())
 	$("#BossHP" + playerInfo.player_team_id).style.visibility = "collapse";
 	$("#BossLevel" + playerInfo.player_team_id).text = "";
-	update_boss_level = false
 }
 
 function UpdateAltar(args)
@@ -217,7 +238,7 @@ function CastBarAlt(args)
 	$("#AltarState1").style.backgroundImage = 'url("file://{images}/custom_game/altar_captured_2.png")';
 	$("#AltarState2").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_zuus.png")';
 	$("#AltarState3").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_venomancer.png")';
-	$("#AltarState4").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_lich.png")';
+//	$("#AltarState4").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_lich.png")';
 	$("#AltarState5").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_treant.png")';
 	$("#AltarState6").style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_nevermore.png")';
 	$("#AltarButton7").AddClass("dire");
@@ -239,4 +260,5 @@ function CastBarAlt(args)
 	GameEvents.Subscribe("update_altar", UpdateAltar);
 	GameEvents.Subscribe("BossStartedCast", CastBar);
 	GameEvents.Subscribe("BossStartedCastAlt", CastBarAlt);
+	GameEvents.Subscribe("open_tutorial", OpenTutorial)
 })();

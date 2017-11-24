@@ -7,14 +7,17 @@
 
 	"DOTA_GoodGuys"   								"Radiant"
 	"DOTA_BadGuys"    								"Dire"
-	
+
 	"addonname"										"The Degreeviling"
-	"frostivus_phase_1"								"Phase 1: Conquest"
-	"frostivus_phase_1_desc"						"Description"
-	"frostivus_phase_2"								"Phase 2: Capture"
-	"frostivus_phase_2_desc"						"Description"
-	"frostivus_phase_3"								"Phase 3: War"
-	"frostivus_phase_3_desc"						"Description"
+
+	"frostivus_phase_0"								"Goal"
+	"frostivus_phase_0_desc"						"The five elemental altars of Icewrack have been taken over by greevils, who brainwashed their guardians! Defeat those powerful bosses in order to gain the favor of each altar. \n\n- Defeating a boss awards presents, gold, experience, and control over its elemental altar. \n- Collecting presents grants gold and experience to your entire team. \nGood luck!"
+	"frostivus_phase_1"								"Phase 1"
+	"frostivus_phase_1_desc"						"- Controlling an altar allows you to respawn on it, teleport to it, and benefit from its guardian’s global aura. \n\n- Tusk is engaged in combat with a Mega Greevil at the central altar. Periodically, he will drop a huge amount of presents in the area. Be there to collect them!"
+	"frostivus_phase_2"								"Phase 2"
+	"frostivus_phase_2_desc"						"The greevils have been chased out of hiding! \nCapture and take them to your base or one of your altars, and you'll receive the presents they've been hiding. \n\n- Attack greevils to coax them into following you by force. \n- While carrying a greevil, you will be slowed, disarmed, silenced, and muted. \n- Kill enemy players to make them drop their greevils!"
+	"frostivus_phase_3"								"Phase 3"
+	"frostivus_phase_3_desc"						"Tusk has been taken down by the Mega Greevil! \nJoin forces with the enemy team to take down the unstoppable monstrosity. \n\n- As your team deals damage to the Mega Greevil, it will move to the enemy base. \n- If the Mega Greevil reaches a team's base, the other team automatically wins. \n- If you manage to kill the Mega Greevil while keeping it from destroying any of the bases, both teams win!"
 
 	//Picking Screen
 	"loading_pre_game"				"Loading heroes, please wait..."
@@ -36,7 +39,7 @@
 	"random_pick_button"			"Random Hero"
 
 	//Altars
-	"frostivus_altar_button"		"Choose Spawn Point"
+	"frostivus_altar_button"		"Choose Altar"
 
 	"frostivus_altar_1"				"Radiant Altar"
 	"frostivus_altar_2"				"Lightning Altar"
@@ -54,4 +57,10 @@
 	"ChatLine"						"<b><font color='{s:color}'>{s:name}</font></b>: {s:message}"
 	"ChatLinePass"					"<b><font color='{s:color}'>{s:name}</font></b>: <font color='gold'>{s:message}</font>"
 	"ChatRandomed"					"<b><font color='{s:color}'>{s:name}</font></b> has randomed <font color='gold'>{s:hero}</font>"
+
+	//Tutorial Window
+	"prev_tutorial"					"<"
+	"next_tutorial"					">"
+	"close_tutorial"				"Close"
+	"frostivus_tuto_button"			"Open Tutorial"
 }

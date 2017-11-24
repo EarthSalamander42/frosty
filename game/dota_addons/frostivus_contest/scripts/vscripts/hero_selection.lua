@@ -329,7 +329,8 @@ local time = 0.0
 	CustomGameEventManager:UnregisterListener( self.listener_repick )
 
 	-- Let all clients know the picking phase has ended
-	CustomGameEventManager:Send_ServerToAllClients("picking_done", {} )
+	CustomGameEventManager:Send_ServerToAllClients("picking_done", {})
+	CustomGameEventManager:Send_ServerToAllClients("open_tutorial", {})
 
 	-- Assign the picked heroes to all players that have picked
 	for player_id = 0, HeroSelection.numPickers do
