@@ -9,6 +9,7 @@
 	"DOTA_BadGuys"    								"Dire"
 
 	"addonname"										"The Degreeviling"
+
 	"frostivus_phase_0"								"Goal"
 	"frostivus_phase_0_desc"						"The five elemental altars of Icewrack have been taken over by greevils, who brainwashed their guardians! Defeat those powerful bosses in order to gain the favor of each altar. \n\n- Defeating a boss awards presents, gold, experience, and control over its elemental altar. \n- Collecting presents grants gold and experience to your entire team. \nGood luck!"
 	"frostivus_phase_1"								"Phase 1"
@@ -20,9 +21,9 @@
 
 	//Picking Screen
 	"loading_pre_game"				"Loading heroes, please wait..."
-	"hero_list_title_strength"		"Tank"
-	"hero_list_title_agility"		"DPS"
-	"hero_list_title_intellect"		"Support"
+	"hero_list_title_strength"		"Tanks"
+	"hero_list_title_agility"		"Damage Dealers"
+	"hero_list_title_intellect"		"Supports"
 	"hero_name_filler"				"Lock In"
 	"team_title_radiant"			"The Radiant"
 	"team_title_dire"				"The Dire"
@@ -31,7 +32,7 @@
 	"loading_heroes_button"			"Loading hero..."
 	"repick_button"					"Repick Hero"
 	"enter_game_button"				"Enter Game"
-	"welcome_label"					"Welcome to Dota IMBA!"
+	"welcome_label"					"Welcome to the Degreeviling"
 	"new_hero"						"New Hero!"
 	"disabled_hero"					"Disabled Hero!"
 	"picked_hero"					"Picked hero!"
@@ -43,7 +44,6 @@
 	"frostivus_altar_1"				"Radiant Altar"
 	"frostivus_altar_2"				"Lightning Altar"
 	"frostivus_altar_3"				"Venomous Altar"
-	"frostivus_altar_4"				"Frost Altar (boss soon)"
 	"frostivus_altar_5"				"Nature Altar"
 	"frostivus_altar_6"				"Fire Altar"
 	"frostivus_altar_7"				"Dire Altar"

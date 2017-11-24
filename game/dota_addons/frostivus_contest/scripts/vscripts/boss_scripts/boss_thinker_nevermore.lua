@@ -102,7 +102,7 @@ local target = keys.unit
 			-- Drop presents according to boss difficulty
 			local current_power = target:FindModifierByName("modifier_frostivus_boss"):GetStackCount()
 			local altar_loc = Entities:FindByName(nil, self.altar_handle):GetAbsOrigin()
-			local present_amount = 1 + current_power
+			local present_amount = 3 + current_power
 			Timers:CreateTimer(0, function()
 				local item = CreateItem("item_frostivus_present", nil, nil)
 				CreateItemOnPositionForLaunch(target_loc, item)
@@ -114,7 +114,7 @@ local target = keys.unit
 			end)
 
 			-- Spawn a greevil that runs away
-			local greevil = SpawnGreevil(target_loc, 1, 255, 100, 0)
+			local greevil = SpawnGreevil(target_loc, RandomInt(2, 3), 255, 100, 0)
 			Timers:CreateTimer(3, function()
 				StartAnimation(greevil, {duration = 2.5, activity=ACT_DOTA_FLAIL, rate=1.5})
 				greevil:MoveToPosition(altar_loc + RandomVector(10):Normalized() * 900)

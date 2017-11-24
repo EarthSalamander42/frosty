@@ -38,7 +38,8 @@ function modifier_greevil_capture_aura:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL,
 		MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL,
-		MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE
+		MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE,
+		MODIFIER_EVENT_ON_ATTACK_LANDED
 	}
 	return funcs 
 end
@@ -60,46 +61,42 @@ function modifier_greevil_capture_aura:OnCreated(keys)
 
 		-- Start movement
 		local starting_node = Entities:FindAllByNameWithin("greevil_node", self:GetParent():GetAbsOrigin(), 100)
-		self.think_counter = 0
 		self.previous_nodes = {}
 		self.previous_nodes[1] = starting_node[1]
 		self.previous_nodes[2] = starting_node[1]
 		self.previous_nodes[3] = starting_node[1]
 		self.current_target = self:FindValidNextNode(700)
 		self:GetParent():MoveToPosition(self.current_target:GetAbsOrigin())
-		self:StartIntervalThink(0.03)
+		self:StartIntervalThink(1.0)
 	end
 end
 
 function modifier_greevil_capture_aura:OnIntervalThink()
 	if IsServer() then
 
-		-- Search for a hero to capture this Greevil
-		local nearby_heroes = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, self:GetParent():GetAbsOrigin(), nil, 200, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-		for _, hero in pairs(nearby_heroes) do
+		-- If the target was reached, find a new one
+		if (self:GetParent():GetAbsOrigin() - self.current_target:GetAbsOrigin()):Length2D() < 150 then
+			self.previous_nodes[3] = self.previous_nodes[2]
+			self.previous_nodes[2] = self.previous_nodes[1]
+			self.previous_nodes[1] = self.current_target
+			self.current_target = self:FindValidNextNode(700)
+		end
+
+		-- Keep moving
+		self:GetParent():MoveToPosition(self.current_target:GetAbsOrigin())
+	end
+end
+
+function modifier_greevil_capture_aura:OnAttackLanded(keys)
+	if IsServer() then
+		if keys.target == self:GetParent() then
+			local hero = keys.attacker
 			if hero:IsRealHero() and not hero:HasModifier("modifier_greevil_captured_owner") then
 				hero:AddNewModifier(nil, nil, "modifier_greevil_captured_owner", {greevil = self:GetParent():entindex()})
 				self:GetParent():RemoveModifierByName("modifier_greevil_capture_aura")
 				self:GetParent():AddNewModifier(nil, nil, "modifier_greevil_captured_greevil", {capturer_entindex = hero:entindex()})
 				PlaySoundForTeam(hero:GetTeam(), "greevil_eventstart_Stinger")
-				break
 			end
-		end
-
-		-- Heavy operations only once a second
-		self.think_counter = self.think_counter + 1
-		if self.think_counter >= 30 then
-			-- If the target was reached, find a new one
-			if (self:GetParent():GetAbsOrigin() - self.current_target:GetAbsOrigin()):Length2D() < 150 then
-				self.previous_nodes[3] = self.previous_nodes[2]
-				self.previous_nodes[2] = self.previous_nodes[1]
-				self.previous_nodes[1] = self.current_target
-				self.current_target = self:FindValidNextNode(700)
-			end
-
-			-- Keep moving
-			self:GetParent():MoveToPosition(self.current_target:GetAbsOrigin())
-			self.think_counter = 0
 		end
 	end
 end
@@ -176,7 +173,7 @@ function modifier_greevil_captured_owner:OnDeath(keys)
 end
 
 function modifier_greevil_captured_owner:GetModifierMoveSpeedBonus_Percentage()
-	return -(25 + 10 * self:GetStackCount())
+	return -(20 + 5 * self:GetStackCount())
 end
 
 function modifier_greevil_captured_owner:GetModifierProvidesFOWVision()
@@ -235,7 +232,7 @@ function modifier_greevil_captured_greevil:OnIntervalThink()
 		greevil:SetAbsOrigin(self.capturer:GetAbsOrigin() - self.capturer:GetForwardVector() * 150)
 
 		-- Search for an altar to end this Greevil's misery
-		local nearby_units = FindUnitsInRadius(self.capturer:GetTeam(), self.capturer:GetAbsOrigin(), nil, 200, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
+		local nearby_units = FindUnitsInRadius(self.capturer:GetTeam(), self.capturer:GetAbsOrigin(), nil, 350, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
 		for _, unit in pairs(nearby_units) do
 			if unit:GetUnitName() == "npc_dota_altar" or unit:GetUnitName() == "npc_dota_altar_minor" then
 

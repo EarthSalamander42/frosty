@@ -2,10 +2,23 @@ nCOUNTDOWNTIMER = 0
 PHASE = 0
 FROSTIVUS_WINNER = 2
 COUNT_DOWN = 1
-PHASE_TIME = 481 -- 481
+PHASE_TIME = {}
+PHASE_TIME[1] = 601
+PHASE_TIME[2] = 361
 PRESENT_SCORE_2 = 0
 PRESENT_SCORE_3 = 0
-if IsInToolsMode() then PHASE_TIME = 120 end -- 481
+PRESENT_WAVES = {}
+PRESENT_WAVES[1] = 150
+PRESENT_WAVES[2] = 150
+PRESENT_WAVES[3] = 150
+PRESENT_WAVES[4] = 150
+PRESENT_WAVES[5] = 120
+PRESENT_WAVES[6] = 120
+
+if IsInToolsMode() then 
+	PHASE_TIME[1] = 601
+	PHASE_TIME[2] = 361
+end
 
 function Frostivus()
 	for player_id = 0, PlayerResource:GetPlayerCount() -1 do
@@ -21,27 +34,38 @@ function Frostivus()
 				EmitSoundOnClient("FrostivusGameStart.DireSide", PlayerResource:GetPlayer(player_id))
 			end
 
-			if PlayerResource:GetPlayer(player_id):GetAssignedHero():HasModifier("modifier_command_restricted") then
+			if PlayerResource:GetPlayer(player_id):GetAssignedHero() then
 				PlayerResource:GetPlayer(player_id):GetAssignedHero():RemoveModifierByName("modifier_command_restricted")
+				PlayerResource:GetPlayer(player_id):GetAssignedHero():AddNewModifier(nil, nil, "modifier_river", {})
 			end
 		end
 	end
 
 	PHASE = 1
-	nCOUNTDOWNTIMER = PHASE_TIME -- 481 / 8 Min
+	nCOUNTDOWNTIMER = PHASE_TIME[PHASE] -- 481 / 8 Min
 	CustomNetTables:SetTableValue("game_options", "radiant", {score = 0})
 	CustomNetTables:SetTableValue("game_options", "dire", {score = 0})
 	CustomGameEventManager:Send_ServerToAllClients("show_timer", {})
 	FrostivusPhase(PHASE)
 	FrostivusCountdown(1.0)
-	DoorThink(2)
-	DoorThink(3)
 
 	-- Spawn bosses
 	SpawnZeus(BOSS_SPAWN_POINT_TABLE.zeus)
 	SpawnVenomancer(BOSS_SPAWN_POINT_TABLE.venomancer)
 	SpawnTreant(BOSS_SPAWN_POINT_TABLE.treant)
 	SpawnNevermore(BOSS_SPAWN_POINT_TABLE.nevermore)
+	SpawnTusk()
+	SpawnMegaGreevil()
+
+	-- Launch some presents
+	local present_wave_count = 0
+	Timers:CreateTimer(0, function()
+		PresentWave(6 + 4 * present_wave_count)
+		present_wave_count = present_wave_count + 1
+		if present_wave_count <= 6 then
+			return PRESENT_WAVES[present_wave_count]
+		end
+	end)
 end
 
 function FrostivusPhase(PHASE)
@@ -71,9 +95,6 @@ function FrostivusPhase(PHASE)
 		-- Play phase 2 stinger
 		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_spawn_Stinger")
 		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_spawn_Stinger")
-
-		-- Spawn Mega Greevil
-		SpawnMegaGreevil()
 	end	
 end
 
@@ -104,7 +125,7 @@ function FrostivusCountdown(tick)
 --		end
 
 		if nCOUNTDOWNTIMER < 1 then
-			nCOUNTDOWNTIMER = PHASE_TIME
+			nCOUNTDOWNTIMER = PHASE_TIME[PHASE+1]
 			PHASE = PHASE + 1
 			FrostivusPhase(PHASE)
 		end
@@ -114,7 +135,11 @@ function FrostivusCountdown(tick)
 			local spawn_locations = Entities:FindAllByName("greevil_node")
 			SpawnGreevil(spawn_locations[RandomInt(1, #spawn_locations)]:GetAbsOrigin(), RandomInt(1, 4), RandomInt(0, 255), RandomInt(0, 255), RandomInt(0, 255))
 		end
-		return tick
+
+		-- Stop counting down after phase 2
+		if PHASE <= 2 then
+			return tick
+		end
 	end)
 end
 
@@ -189,7 +214,7 @@ end
 
 function FrostivusAltarRespawn(hero)
 	-- fix boss respawning at dire fountain
-	if hero:GetPlayerID() ~= -1 then
+	if hero:GetPlayerID() ~= -1 and hero:IsRealHero() then
 		-- Base spawn
 		local respawn_position
 		if hero.altar == 1 or hero.altar == 7 then
@@ -224,28 +249,59 @@ function FrostivusAltarRespawn(hero)
 end
 
 function DoorThink(team)
-local door = Entities:FindByName(nil, "gate_0"..team)
-local door_obs = Entities:FindAllByName(door:GetName().."_obs")
-local door_opened = false
+	if IsServer() then
+		local door = Entities:FindByName(nil, "gate_0"..team)
+		local door_obs = Entities:FindAllByName(door:GetName().."_obs")
+		local door_opened = false
 
-	Timers:CreateTimer(function()
-		local units = FindUnitsInRadius(team, door:GetAbsOrigin(), nil, 1000, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+		Timers:CreateTimer(function()
+			local units = FindUnitsInRadius(team, door:GetAbsOrigin(), nil, 800, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
 
-		if #units > 0 and door_opened == false then
-			for _, obs in pairs(door_obs) do
-				obs:SetEnabled(false, true)
+			if #units > 0 and door_opened == false then
+				for _, obs in pairs(door_obs) do
+					obs:SetEnabled(false, true)
+				end
+
+				door_opened = true
+				DoEntFire(door:GetName(), "SetAnimation", "gate_02_open", 0, nil, nil)
+			elseif #units == 0 and door_opened == true then
+				for _, obs in pairs(door_obs) do
+					obs:SetEnabled(true, false)
+				end
+
+				door_opened = false
+				DoEntFire(door:GetName(), "SetAnimation", "gate_02_close", 0, nil, nil)
 			end
+			return 1.0
+		end)
+	end
+end
 
-			door_opened = true
-			DoEntFire(door:GetName(), "SetAnimation", "gate_02_open", 0, nil, nil)
-		elseif #units == 0 and door_opened == true then
-			for _, obs in pairs(door_obs) do
-				obs:SetEnabled(true, false)
+function GateThink()
+	if IsServer() then
+		local door = Entities:FindByName(nil, "nevermore_gate")
+		local door_obs = Entities:FindAllByName("nevermore_gate_obs")
+		local door_opened = false
+
+		Timers:CreateTimer(function()
+			local units = FindUnitsInRadius(DOTA_TEAM_GOODGUYS, door:GetAbsOrigin(), nil, 350, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE + DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD, FIND_ANY_ORDER, false)
+
+			if #units > 0 and door_opened == false then
+				for _, obs in pairs(door_obs) do
+					obs:SetEnabled(false, true)
+				end
+
+				door_opened = true
+				DoEntFire(door:GetName(), "SetAnimation", "gate_entrance002_open", 0, nil, nil)
+			elseif #units == 0 and door_opened == true then
+				for _, obs in pairs(door_obs) do
+					obs:SetEnabled(true, false)
+				end
+
+				door_opened = false
+				DoEntFire(door:GetName(), "SetAnimation", "close_idle", 0, nil, nil)
 			end
-
-			door_opened = false
-			DoEntFire(door:GetName(), "SetAnimation", "gate_02_close", 0, nil, nil)
-		end
-		return 1.0
-	end)
+			return 0.5
+		end)
+	end
 end

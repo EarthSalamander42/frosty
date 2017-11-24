@@ -116,16 +116,30 @@
 	}
 
 	//=================================================================================================================
-	// Ice Altar: damage aura
+	// Tusk: innate ability
 	//=================================================================================================================
-	"frostivus_altar_aura_lich"
+	"frostivus_tusk"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"custom/frostivus_altar_aura_lich"
-		"ScriptFile"					"boss_scripts/aura_abilities/frostivus_altar_aura_lich.lua"
+		"AbilityTextureName"			"attribute_bonus"
+		"ScriptFile"					"boss_scripts/tusk.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Mega Greevil: innate ability
+	//=================================================================================================================
+	"frostivus_mega_greevil"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityTextureName"			"attribute_bonus"
+		"ScriptFile"					"boss_scripts/mega_greevil.lua"
 		"MaxLevel"						"1"
 	}
 
@@ -170,6 +184,71 @@
 	}
 
 	//=================================================================================================================
+	// Zeus: Lightning Bolt
+	//=================================================================================================================
+	"frostivus_boss_lightning_bolt"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"zuus_lightning_bolt"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Zeus: Arc Lightning
+	//=================================================================================================================
+	"frostivus_boss_arc_lightning"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"zuus_arc_lightning"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Zeus: El Thor
+	//=================================================================================================================
+	"frostivus_boss_el_thor"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"zuus_cloud"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Zeus: Static Field
+	//=================================================================================================================
+	"frostivus_boss_static_field"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"zuus_static_field"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Zeus: Thundergod's Wrath
+	//=================================================================================================================
+	"frostivus_boss_thundergods_wrath"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"zuus_thundergods_wrath"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
 	// Venomancer: Venomous Gale
 	//=================================================================================================================
 	"frostivus_boss_venomous_gale"
@@ -177,7 +256,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"venomancer_venomous_gale"
 		"ScriptFile"					"boss_scripts/boss_abilities/venomous_gale.lua"
 		"MaxLevel"						"1"
@@ -202,7 +281,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"custom/scourge_ward"
 		"MaxLevel"						"1"
 	}
@@ -215,7 +294,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"custom/vile_ward"
 		"MaxLevel"						"1"
 	}
@@ -228,7 +307,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"custom/parasite"
 		"MaxLevel"						"1"
 	}
@@ -241,7 +320,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"venomancer_poison_nova"
 		"ScriptFile"					"boss_scripts/boss_abilities/poison_nova.lua"
 		"MaxLevel"						"1"
@@ -255,7 +334,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"custom/unwilling_host"
 		"ScriptFile"					"boss_scripts/boss_abilities/unwilling_host.lua"
 		"MaxLevel"						"1"
@@ -269,7 +348,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"custom/green_death"
 		"ScriptFile"					"boss_scripts/boss_abilities/green_death.lua"
 		"MaxLevel"						"1"
@@ -311,8 +390,21 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"custom/vine_smash"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Treant: Rock Smash
+	//=================================================================================================================
+	"frostivus_boss_rock_smash"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"tiny_toss"
 		"MaxLevel"						"1"
 	}
 
@@ -324,21 +416,8 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"custom/ring_of_thorns"
-		"MaxLevel"						"1"
-	}
-
-	//=================================================================================================================
-	// Treant: Eyes in the Forest (summon Treantling)
-	//=================================================================================================================
-	"frostivus_boss_eyes_in_the_forest"
-	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"ability_datadriven"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"custom/eyes_in_the_forest"
 		"MaxLevel"						"1"
 	}
 
@@ -350,9 +429,35 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"treant_leech_seed"
 		"ScriptFile"					"boss_scripts/boss_abilities/leech_seed.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Treant: Rapid Growth
+	//=================================================================================================================
+	"frostivus_boss_rapid_growth"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"treant_eyes_in_the_forest"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Treant: Eyes in the Forest (summon Treantling)
+	//=================================================================================================================
+	"frostivus_boss_eyes_in_the_forest"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"custom/eyes_in_the_forest"
 		"MaxLevel"						"1"
 	}
 
@@ -364,7 +469,7 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"treant_living_armor"
 		"ScriptFile"					"boss_scripts/boss_abilities/living_armor.lua"
 		"MaxLevel"						"1"
@@ -378,9 +483,23 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"treant_overgrowth"
 		"ScriptFile"					"boss_scripts/boss_abilities/overgrowth.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Treant: Nature's Guise
+	//=================================================================================================================
+	"frostivus_boss_natures_guise"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"treant_natures_guise"
+		"ScriptFile"					"boss_scripts/boss_abilities/natures_guise.lua"
 		"MaxLevel"						"1"
 	}
 
@@ -493,7 +612,7 @@
 			"01"
 			{
 				"var_type"								"FIELD_INTEGER"
-				"bonus_gpm"								"30 60 90 120"
+				"bonus_gpm"								"60 90 120 150"
 			}
 			"02"
 			{
@@ -503,7 +622,7 @@
 			"03"
 			{
 				"var_type"								"FIELD_INTEGER"
-				"gold_per_tick"							"1 2 3 4"
+				"gold_per_tick"							"2 3 4 5"
 			}
 		}
 	}
