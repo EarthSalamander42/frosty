@@ -357,7 +357,6 @@ function GameMode:InitGameMode()
 --	GameRules:EnableCustomGameSetupAutoLaunch(true)
 --	GameRules:SetFirstBloodActive(true)
 --	GameRules:SetHideKillMessageHeaders(false)
-	GameRules:SetCustomVictoryMessage("Frostivus is saved!")
 
 	if mode == nil then
 		mode = GameRules:GetGameModeEntity()

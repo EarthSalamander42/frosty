@@ -54,9 +54,13 @@ function boss_thinker_nevermore:OnCreated( params )
 		end
 
 		-- Boss script constants
+		local altar_loc = Entities:FindByName(nil, self.altar_handle):GetAbsOrigin()
+		self.harvest_cooldown = 0
 		self.random_constants = {}
-		self.random_constants[1] = RandomInt(1, 360)
-		self.random_constants[2] = RandomInt(1, 360)
+		self.random_constants[1] = altar_loc + RandomVector(10):Normalized() * 850
+		self.random_constants[2] = altar_loc + RandomVector(10):Normalized() * 700
+		self.random_constants[3] = altar_loc + RandomVector(10):Normalized() * 700
+		self.random_constants[4] = altar_loc + RandomVector(10):Normalized() * 700
 
 		-- Start thinking
 		self.boss_timer = 0
@@ -168,14 +172,229 @@ function boss_thinker_nevermore:OnIntervalThink()
 		-- Sends boss health information to fighting team's clients
 		UpdateBossBar(boss, self.team)
 
+		-- Soul Harvest logic
+		if self.harvest_cooldown > 0 then
+			self.harvest_cooldown = self.harvest_cooldown - 0.1
+		else
+			local nearby_enemies = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, boss:GetAbsOrigin(), nil, 550, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_CLOSEST, false)
+			if #nearby_enemies >= 1 then
+
+				-- Attack first target
+				local damage = boss:GetAttackDamage() * 100 * 0.01 * self:GetNecromasteryAmp()
+				self.harvest_cooldown = math.max(4.0 - power_stacks * 0.1, 2.5)
+				StartAnimation(boss, {duration = 1.04, activity=ACT_DOTA_ATTACK, rate=1.0})
+				Timers:CreateTimer(0.5, function()
+					local attack_projectile = {
+						Target = nearby_enemies[1],
+						Source = boss,
+						Ability = boss:FindAbilityByName("frostivus_boss_soul_harvest"),
+						EffectName = "particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_fire_arcana.vpcf",
+						bDodgeable = true,
+						bProvidesVision = false,
+						bVisibleToEnemies = true,
+						bReplaceExisting = false,
+						iMoveSpeed = 1200,
+						iVisionRadius = 0,
+						iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1,
+					--	iVisionTeamNumber = boss:GetTeamNumber(),
+						ExtraData = {damage = damage}
+					}
+					ProjectileManager:CreateTrackingProjectile(attack_projectile)
+				end)
+			end
+		end
+
 		-- Think
 		self.boss_timer = self.boss_timer + 0.1
 
 		-- Boss move script
-		--if self.boss_timer > 0 and not self.events[1] then
-		--	self:VenomousGale(altar_loc, altar_entity, 3.0, RandomInt(0, 359), 225, math.min(20 + power_stacks * 5, 80), 10, 10, 250, 750, math.min(1 + 0.25 * power_stacks, 4), 6, math.max(2.0 - 0.05 * power_stacks, 1.0), 4)
-		--	self.events[1] = true
-		--end
+		if self.boss_timer > 1 and not self.events[1] then
+			boss:MoveToPosition(self.random_constants[1])
+			self:LineRaze(altar_entity, altar_loc, 3.5, 250, 275, 110, 1)
+			self.events[1] = true
+		end
+
+		if self.boss_timer > 6.5 and not self.events[2] then
+			boss:MoveToPosition(RotatePosition(altar_loc, QAngle(0, 180, 0), self.random_constants[1]))
+			self:LineRaze(altar_entity, altar_loc, 3.5, 250, 275, 110, 1)
+			self.events[2] = true
+		end
+
+		if self.boss_timer > 11 and not self.events[3] then
+			boss:MoveToPosition(altar_loc + Vector(0, 300, 0))
+			self:Meteorain(altar_entity, altar_loc, 3.5, 5.0, 1.0, 1, 250, 100, 1)
+			self.events[3] = true
+		end
+
+		if self.boss_timer > 21.5 and not self.events[4] then
+			boss:MoveToPosition(altar_loc + Vector(0, 300, 0))
+			self:RagnaBlade(altar_entity, altar_loc, 3.0, 1, 1)
+			self.events[4] = true
+		end
+
+		if self.boss_timer > 26.5 and not self.events[5] then
+			boss:MoveToPosition(altar_loc)
+			self:CircleRaze(altar_entity, altar_loc, 3.0, 250, 110, 700, 1)
+			self.events[5] = true
+		end
+
+		if self.boss_timer > 31.5 and not self.events[6] then
+			boss:MoveToPosition(altar_loc)
+			self:CircleRaze(altar_entity, altar_loc, 3.0, 250, 110, 300, 1)
+			self.events[6] = true
+		end
+
+		if self.boss_timer > 36.5 and not self.events[7] then
+			boss:MoveToPosition(altar_loc)
+			self:RequiemOfSouls(altar_entity, altar_loc, 3.5, 6, 70, 1)
+			self.events[7] = true
+		end
+
+		if self.boss_timer > 42 and not self.events[8] then
+			boss:MoveToPosition(altar_loc)
+			self:Meteorain(altar_entity, altar_loc, 3.5, 5.0, 1.0, 2, 250, 100, 1)
+			self.events[8] = true
+		end
+
+		if self.boss_timer > 52.5 and not self.events[9] then
+			boss:MoveToPosition(altar_loc)
+			self:CircleRaze(altar_entity, altar_loc, 4.0, 250, 110, 700, 1)
+			self.events[9] = true
+		end
+
+		if self.boss_timer > 52.5 and not self.events[10] then
+			self:Nevermore(altar_entity, altar_loc, 3.0, 3.0, 2)
+			self.events[10] = true
+		end
+
+		if self.boss_timer > 60.5 and not self.events[11] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:Immolation375(altar_entity, altar_loc, 3.5, 150, 1)
+			self.events[11] = true
+		end
+
+		if self.boss_timer > 66 and not self.events[12] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:RagnaBlade(altar_entity, altar_loc, 3.0, 2, 1)
+			self.events[12] = true
+		end
+
+		if self.boss_timer > 71 and not self.events[13] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:MovingRaze(altar_entity, altar_loc, 3.0, 250, 110, 0.3, 1, self.random_constants[2], 1)
+			self.events[13] = true
+		end
+
+		if self.boss_timer > 76 and not self.events[14] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:MovingRaze(altar_entity, altar_loc, 3.0, 250, 110, 0.3, 2, self.random_constants[2], 1)
+			self.events[14] = true
+		end
+
+		if self.boss_timer > 81 and not self.events[15] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:Meteorain(altar_entity, altar_loc, 3.5, 5.0, 1.0, 3, 250, 100, 1)
+			self.events[15] = true
+		end
+
+		if self.boss_timer > 91.5 and not self.events[16] then
+			boss:MoveToPosition(altar_loc)
+			self:RequiemOfSouls(altar_entity, altar_loc, 3.5, 6, 70, 1)
+			self.events[16] = true
+		end
+
+		if self.boss_timer > 97 and not self.events[17] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:MovingRaze(altar_entity, altar_loc, 3.0, 250, 110, 0.3, 1, altar_loc + RandomVector(10):Normalized() * 700, 1)
+			self.events[17] = true
+		end
+
+		if self.boss_timer > 97 and not self.events[18] then
+			self:Nevermore(altar_entity, altar_loc, 2.5, 3.5, 2)
+			self.events[18] = true
+		end
+
+		if self.boss_timer > 105 and not self.events[19] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:MovingRaze(altar_entity, altar_loc, 3.0, 250, 110, 0.5, 2, self.random_constants[3], 1)
+			self.events[19] = true
+		end
+
+		if self.boss_timer > 105 and not self.events[20] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:MovingRaze(altar_entity, altar_loc, 3.0, 250, 110, 0.5, 2, RotatePosition(altar_loc, QAngle(0, 180, 0), self.random_constants[3]), 2)
+			self.events[20] = true
+		end
+
+		if self.boss_timer > 110 and not self.events[21] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:RagnaBlade(altar_entity, altar_loc, 2.5, 2, 1)
+			self.events[21] = true
+		end
+
+		if self.boss_timer > 114.5 and not self.events[22] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:Meteorain(altar_entity, altar_loc, 3.5, 6.0, 1.0, 2, 250, 100, 1)
+			self.events[22] = true
+		end
+
+		if self.boss_timer > 114.5 and not self.events[23] then
+			self:CircleRaze(altar_entity, altar_loc, 4.0, 250, 110, 300, 2)
+			self.events[23] = true
+		end
+
+		if self.boss_timer > 120 and not self.events[24] then
+			boss:MoveToPosition(altar_loc + Vector(0, 500, 0))
+			self:CircleRaze(altar_entity, altar_loc, 3.0, 250, 110, 700, 1)
+			self.events[24] = true
+		end
+
+		if self.boss_timer > 126 and not self.events[25] then
+			boss:MoveToPosition(altar_loc + Vector(0, 700, 0))
+			self:Immolation550(altar_entity, altar_loc, 3.5, 150, 1)
+			self.events[25] = true
+		end
+
+		if self.boss_timer > 131.5 and not self.events[26] then
+			boss:MoveToPosition(altar_loc + Vector(0, 700, 0))
+			self:MovingRaze(altar_entity, altar_loc, 3.5, 250, 110, 0.5, 1, self.random_constants[4], 1)
+			self.events[26] = true
+		end
+
+		if self.boss_timer > 133.5 and not self.events[27] then
+			boss:MoveToPosition(altar_loc + Vector(0, 700, 0))
+			self:MovingRaze(altar_entity, altar_loc, 3.5, 250, 110, 0.5, 1, self.random_constants[4], 2)
+			self.events[27] = true
+		end
+
+		if self.boss_timer > 135.5 and not self.events[28] then
+			boss:MoveToPosition(altar_loc + Vector(0, 700, 0))
+			self:MovingRaze(altar_entity, altar_loc, 3.5, 250, 110, 0.5, 1, self.random_constants[4], 1)
+			self.events[28] = true
+		end
+
+		if self.boss_timer > 137.5 and not self.events[29] then
+			boss:MoveToPosition(altar_loc + Vector(0, 700, 0))
+			self:Meteorain(altar_entity, altar_loc, 3.5, 10.0, 0.7, 3, 250, 100, 2)
+			self.events[29] = true
+		end
+
+		if self.boss_timer > 141 and not self.events[30] then
+			self:Nevermore(altar_entity, altar_loc, 2.0, 6.0, 1)
+			self.events[30] = true
+		end
+
+		if self.boss_timer > 147 and not self.events[31] then
+			boss:MoveToPosition(altar_loc)
+			self:RequiemOfSouls(altar_entity, altar_loc, 2.0, 10, 70, 1)
+			self.events[31] = true
+		end
+
+		if self.boss_timer > 151 and not self.events[32] then
+			boss:MoveToPosition(altar_loc + Vector(0, 700, 0))
+			self:Meteorain(altar_entity, altar_loc, 3.5, 30.0, 0.5, 5, 250, 300, 2)
+			self.events[32] = true
+		end
 	end
 end
 
@@ -183,184 +402,265 @@ end
 -- Auxiliary stuff
 ---------------------------
 
--- Returns all treantlings
-function boss_thinker_nevermore:GetRealTrees(center_point)
-	local real_trees ={}
-	local nearby_allies = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
-	for _, ally in pairs(nearby_allies) do
-		if ally:HasModifier("modifier_frostivus_treantling_passive") then
-			real_trees[#real_trees + 1] = ally
-		end
-	end
-	return real_trees
+-- Returns current Necromastery bonus damage
+function boss_thinker_nevermore:GetNecromasteryAmp()
+	return 1 + self:GetParent():FindModifierByName("modifier_frostivus_necromastery"):GetStackCount() * 0.02
 end
 
--- Returns a random tree, or Treant if no fake trees are available
-function boss_thinker_nevermore:PickRandomFakeTree(center_point)
-	local fake_trees ={}
-	local nearby_allies = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
-	for _, ally in pairs(nearby_allies) do
-		if ally:HasModifier("modifier_frostivus_fake_tree_passive") then
-			fake_trees[#fake_trees + 1] = ally
-		end
-	end
-
-	if #fake_trees >= 1 then
-		return fake_trees[RandomInt(1, #fake_trees)]
-	else
-		return self:GetParent()
+-- Adds one stack of Necromastery to SF
+function boss_thinker_nevermore:ApplyNecromastery(amount)
+	for i = 1, amount do
+		self:GetParent():FindModifierByName("modifier_frostivus_necromastery"):IncrementStackCount()
 	end
 end
 
--- Spawns a fake tree
-function boss_thinker_nevermore:SpawnFakeTree(location, health)
+-- Raze a target location
+function boss_thinker_nevermore:Raze(altar_handle, target, delay, radius, damage, play_impact_sound)
+
+	-- Show warning pulses
+	local warning_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/pre_raze.vpcf", PATTACH_WORLDORIGIN, nil)
+	ParticleManager:SetParticleControl(warning_pfx, 0, target)
+	ParticleManager:SetParticleControl(warning_pfx, 1, Vector(radius, 0, 0))
+	ParticleManager:ReleaseParticleIndex(warning_pfx)
+
+	Timers:CreateTimer(delay, function()
+
+		-- If the fight has ended, do nothing else
+		if not altar_handle:HasModifier("modifier_altar_active") then
+			return nil
+		end
+	
+		-- Sound
+		if play_impact_sound then
+			altar_handle:EmitSound("Hero_Nevermore.Shadowraze")
+		end
+
+		-- Particles
+		local raze_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/raze_blast.vpcf", PATTACH_WORLDORIGIN, nil)
+		ParticleManager:SetParticleControl(raze_pfx, 0, target)
+		ParticleManager:SetParticleControl(raze_pfx, 1, Vector(0, 0, 0))
+		ParticleManager:ReleaseParticleIndex(raze_pfx)
+
+		-- Hit enemies
+		local hit_enemies = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, target, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+		for _, enemy in pairs(hit_enemies) do
+
+			-- Deal damage
+			local damage_dealt = ApplyDamage({victim = enemy, attacker = self:GetParent(), ability = nil, damage = damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, damage_dealt, nil)
+
+			-- Apply Necromastery
+			self:ApplyNecromastery(1)
+		end
+	end)
+end
+
+-- Meteor a target location
+function boss_thinker_nevermore:Meteor(altar_handle, altar_loc, target, radius, damage)
+
+	-- Warning particle & sound
+	altar_handle:EmitSound("Hero_Invoker.ChaosMeteor.Cast")
+	local warning_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/meteorain_pre.vpcf", PATTACH_WORLDORIGIN, nil)
+	ParticleManager:SetParticleControl(warning_pfx, 0, target)
+	ParticleManager:SetParticleControl(warning_pfx, 1, Vector(radius, 0, 0))
+	ParticleManager:ReleaseParticleIndex(warning_pfx)
+
+	-- Meteor particle
+	local meteor_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/meteorain.vpcf", PATTACH_WORLDORIGIN, nil)
+	ParticleManager:SetParticleControl(meteor_pfx, 0, target + Vector(300, -300, 1000))
+	ParticleManager:SetParticleControl(meteor_pfx, 1, target)
+	ParticleManager:SetParticleControl(meteor_pfx, 2, Vector(1.5, 0, 0))
+	ParticleManager:ReleaseParticleIndex(meteor_pfx)
+
+	-- Meteor travel delay
+	Timers:CreateTimer(1.5, function()
+
+		-- If the fight has ended, do nothing else
+		if not altar_handle:HasModifier("modifier_altar_active") then
+			return nil
+		end
+
+		-- Play impact sound
+		altar_handle:EmitSound("Hero_Invoker.ChaosMeteor.Impact")
+
+		-- Hit enemies
+		local hit_enemies = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, target, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
+		for _, enemy in pairs(hit_enemies) do
+
+			-- Deal damage
+			local damage_dealt = ApplyDamage({victim = enemy, attacker = self:GetParent(), ability = nil, damage = damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, damage_dealt, nil)
+
+			-- Apply Necromastery
+			self:ApplyNecromastery(1)
+		end
+	end)
+end
+
+---------------------------
+-- Nevermore's moves
+---------------------------
+
+-- Inner Immolation
+function boss_thinker_nevermore:Immolation375(altar_handle, altar_loc, delay, damage, cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
-		local tree_health = boss:GetMaxHealth() * health * 0.01
+		local tick_damage = boss:GetAttackDamage() * damage * 0.01 * self:GetNecromasteryAmp()
 
-		-- Spawn random type of tree
-		local fake_tree = CreateUnitByName("npc_frostivus_treant_tree_0"..RandomInt(1, 4), location, true, boss, boss, DOTA_TEAM_NEUTRALS)
-		fake_tree:AddNewModifier(nil, nil, "modifier_frostivus_boss_add", {})
-		fake_tree:AddNewModifier(nil, nil, "modifier_frostivus_fake_tree_passive", {})
+		-- Send cast bar event
+		if cast_bar == 1 then
+			BossPhaseAbilityCast(self.team, "frostivus_boss_immolation", "boss_nevermore_immolation", delay)
+		elseif cast_bar == 2 then
+			BossPhaseAbilityCastAlt(self.team, "frostivus_boss_immolation", "boss_nevermore_immolation", delay)
+		end
 
-		-- Adjust tree health
-		fake_tree:SetBaseMaxHealth(tree_health)
-		fake_tree:SetMaxHealth(tree_health)
-		fake_tree:SetHealth(tree_health)
+		-- Draw warning particle
+		local warning_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/immolation_warning.vpcf", PATTACH_WORLDORIGIN, nil)
+		ParticleManager:SetParticleControl(warning_pfx, 0, altar_loc)
+		ParticleManager:SetParticleControl(warning_pfx, 1, Vector(375, 0, 0))
 
-		-- Play tree spawn sound
-		fake_tree:EmitSound("Tree.GrowBack")
-	end
-end
+		-- Play warning sound
+		altar_handle:EmitSound("Frostivus.AbilityWarning")
 
--- Fake tree passive modifier
-LinkLuaModifier("modifier_frostivus_fake_tree_passive", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
-modifier_frostivus_fake_tree_passive = modifier_frostivus_fake_tree_passive or class({})
+		-- Animate boss cast
+		Timers:CreateTimer(delay - 2.0, function()
+			boss:FaceTowards(altar_loc)
+			StartAnimation(boss, {duration = 2.2, activity=ACT_DOTA_GENERIC_CHANNEL_1, rate=1.0})
+		end)
 
-function modifier_frostivus_fake_tree_passive:IsHidden() return true end
-function modifier_frostivus_fake_tree_passive:IsPurgable() return false end
-function modifier_frostivus_fake_tree_passive:IsDebuff() return true end
+		-- Wait [delay] seconds
+		Timers:CreateTimer(delay, function()
 
--- Spawns a treantling
-function boss_thinker_nevermore:SpawnTreantling(location, health, center_point)
-	if IsServer() then
-		local boss = self:GetParent()
-		local treant_health = boss:GetMaxHealth() * health * 0.01
+			-- If the fight has ended, do nothing else
+			if not altar_handle:HasModifier("modifier_altar_active") then
+				return nil
+			end
 
-		-- Spawn random type of tree
-		local treantling = CreateUnitByName("npc_frostivus_treantling", location, true, boss, boss, DOTA_TEAM_NEUTRALS)
-		treantling:AddNewModifier(nil, nil, "modifier_frostivus_boss_add", {})
-		treantling:AddNewModifier(nil, nil, "modifier_frostivus_treantling_passive", {})
+			-- Destroy warning particle
+			ParticleManager:DestroyParticle(warning_pfx, true)
+			ParticleManager:ReleaseParticleIndex(warning_pfx)
 
-		-- Adjust tree health
-		treantling:SetBaseMaxHealth(treant_health)
-		treantling:SetMaxHealth(treant_health)
-		treantling:SetHealth(treant_health)
+			-- Play cast sound
+			boss:EmitSound("Hero_Lina.DragonSlave.FireHair")
 
-		-- Play tree spawn sound
-		treantling:EmitSound("Hero_Furion.Sprout")
-
-		-- Start an idle animation
-		Timers:CreateTimer(1.0, function()
-			boss:FaceTowards(center_point)
-			StartAnimation(treantling, {duration = 30.0, activity=ACT_DOTA_IDLE, rate=1.0})
+			-- Apply the modifier to the altar
+			altar_handle:AddNewModifier(nil, nil, "modifier_frostivus_immolation", {damage = tick_damage, radius = 375, boss_entindex = boss:entindex()})
 		end)
 	end
 end
 
--- Treantling passive modifier
-LinkLuaModifier("modifier_frostivus_treantling_passive", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
-modifier_frostivus_treantling_passive = modifier_frostivus_treantling_passive or class({})
-
-function modifier_frostivus_treantling_passive:IsHidden() return true end
-function modifier_frostivus_treantling_passive:IsPurgable() return false end
-function modifier_frostivus_treantling_passive:IsDebuff() return true end
-
--- Make Treant invisible
-function boss_thinker_nevermore:TreantInvisStart(boss)
-
-	-- Play invis sound
-	boss:EmitSound("Hero_Treant.NaturesGuise.On")
-
-	-- Add invis/invul modifiers
-	boss:AddNewModifier(nil, nil, "modifier_invisible", {})
-	boss:AddNewModifier(nil, nil, "modifier_invulnerable", {})
-
-	-- Remove Treant's model after fade animation
-	Timers:CreateTimer(0.5, function()
-		boss:AddNoDraw()
-
-		-- Destroy cosmetics
-		boss.head:AddEffects(EF_NODRAW)
-		boss.shoulders:AddEffects(EF_NODRAW)
-		boss.arms:AddEffects(EF_NODRAW)
-		boss.feet:AddEffects(EF_NODRAW)
-	end)
-end
-
--- Make Treant visible again
-function boss_thinker_nevermore:TreantInvisEnd(boss)
-
-	-- Remove invis modifier
-	boss:RemoveModifierByName("modifier_invisible")
-	boss:RemoveModifierByName("modifier_invulnerable")
-
-	-- Re-add Treant's model
-	boss:RemoveNoDraw()
-
-	-- Cosmetics
-	boss.head:RemoveEffects(EF_NODRAW)
-	boss.shoulders:RemoveEffects(EF_NODRAW)
-	boss.arms:RemoveEffects(EF_NODRAW)
-	boss.feet:RemoveEffects(EF_NODRAW)
-
-	-- Play de-invis sound
-	boss:EmitSound("Hero_Treant.NaturesGuise.Off")
-end
-
--- Stack Leech Seed up
-function boss_thinker_nevermore:LeechSeedStackUp(boss, enemy)
-	if not enemy:HasModifier("modifier_frostivus_leech_seed_debuff") then
-		enemy:AddNewModifier(boss, boss:FindAbilityByName("frostivus_boss_leech_seed"), "modifier_frostivus_leech_seed_debuff", {})
-	end
-	local seed_modifier = enemy:FindModifierByName("modifier_frostivus_leech_seed_debuff")
-	seed_modifier:SetStackCount(seed_modifier:GetStackCount() + 1)
-end
-
--- Leech Seed debuff
-LinkLuaModifier("modifier_frostivus_leech_seed_debuff", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
-modifier_frostivus_leech_seed_debuff = modifier_frostivus_leech_seed_debuff or class({})
-
-function modifier_frostivus_leech_seed_debuff:IsHidden() return false end
-function modifier_frostivus_leech_seed_debuff:IsPurgable() return false end
-function modifier_frostivus_leech_seed_debuff:IsDebuff() return true end
-
-function modifier_frostivus_leech_seed_debuff:DeclareFunctions()
-	local funcs = {
-		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE
-	}
-	return funcs
-end
-
-function modifier_frostivus_leech_seed_debuff:GetModifierMoveSpeedBonus_Percentage()
-	return (-5) * self:GetStackCount()
-end
-
-
-
----------------------------
--- Treant's moves
----------------------------
-
--- Vine Smash
-function boss_thinker_nevermore:VineSmash(center_point, altar_handle, delay, fixate_delay, target_amount, radius, damage, send_cast_bar)
+-- Outer Immolation
+function boss_thinker_nevermore:Immolation550(altar_handle, altar_loc, delay, damage, cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
-		local hit_damage = boss:GetAttackDamage() * damage * 0.01
+		local tick_damage = boss:GetAttackDamage() * damage * 0.01 * self:GetNecromasteryAmp()
+
+		-- Send cast bar event
+		if cast_bar == 1 then
+			BossPhaseAbilityCast(self.team, "frostivus_boss_immolation", "boss_nevermore_immolation", delay)
+		elseif cast_bar == 2 then
+			BossPhaseAbilityCastAlt(self.team, "frostivus_boss_immolation", "boss_nevermore_immolation", delay)
+		end
+
+		-- Draw warning particle
+		local warning_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/immolation_warning.vpcf", PATTACH_WORLDORIGIN, nil)
+		ParticleManager:SetParticleControl(warning_pfx, 0, altar_loc)
+		ParticleManager:SetParticleControl(warning_pfx, 1, Vector(550, 0, 0))
+
+		-- Play warning sound
+		altar_handle:EmitSound("Frostivus.AbilityWarning")
+
+		-- Animate boss cast
+		Timers:CreateTimer(delay - 2.0, function()
+			boss:FaceTowards(altar_loc)
+			StartAnimation(boss, {duration = 2.2, activity=ACT_DOTA_GENERIC_CHANNEL_1, rate=1.0})
+		end)
+
+		-- Wait [delay] seconds
+		Timers:CreateTimer(delay, function()
+
+			-- If the fight has ended, do nothing else
+			if not altar_handle:HasModifier("modifier_altar_active") then
+				return nil
+			end
+
+			-- Destroy warning particle
+			ParticleManager:DestroyParticle(warning_pfx, true)
+			ParticleManager:ReleaseParticleIndex(warning_pfx)
+
+			-- Play cast sound
+			boss:EmitSound("Hero_Lina.DragonSlave.FireHair")
+
+			-- Apply the modifier to the altar
+			altar_handle:RemoveModifierByName("modifier_frostivus_immolation")
+			altar_handle:AddNewModifier(nil, nil, "modifier_frostivus_immolation", {damage = tick_damage, radius = 550, boss_entindex = boss:entindex()})
+		end)
+	end
+end
+
+-- Immolation buff
+LinkLuaModifier("modifier_frostivus_immolation", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
+modifier_frostivus_immolation = modifier_frostivus_immolation or class({})
+
+function modifier_frostivus_immolation:IsHidden() return true end
+function modifier_frostivus_immolation:IsPurgable() return false end
+function modifier_frostivus_immolation:IsDebuff() return false end
+
+function modifier_frostivus_immolation:OnCreated(keys)
+	if IsServer() then
+		self.tick_damage = keys.damage * 0.2
+		self.radius = keys.radius
+		self.boss = EntIndexToHScript(keys.boss_entindex)
+		self.tick_counter = 0
+
+		-- Play initial particle
+		if self.radius == 375 then
+			self.immolation_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/immolation_loop.vpcf", PATTACH_WORLDORIGIN, nil)
+			ParticleManager:SetParticleControl(self.immolation_pfx, 0, self:GetParent():GetAbsOrigin())
+		elseif self.radius == 550 then
+			self.immolation_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/immolation_loop_550.vpcf", PATTACH_WORLDORIGIN, nil)
+			ParticleManager:SetParticleControl(self.immolation_pfx, 0, self:GetParent():GetAbsOrigin())
+		end
+
+		self:StartIntervalThink(0.2)
+	end
+end
+
+function modifier_frostivus_immolation:OnDestroy()
+	if IsServer() then
+		ParticleManager:DestroyParticle(self.immolation_pfx, false)
+		ParticleManager:ReleaseParticleIndex(self.immolation_pfx)
+	end
+end
+
+function modifier_frostivus_immolation:OnIntervalThink()
+	if IsServer() then
+
+		-- Deal damage to enemies in the area
+		local nearby_enemies = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, self:GetParent():GetAbsOrigin(), nil, self.radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+		for _, enemy in pairs(nearby_enemies) do
+			enemy:EmitSound("Hero_Invoker.ChaosMeteor.Damage")
+			local damage_dealt = ApplyDamage({victim = enemy, attacker = self.boss, ability = nil, damage = self.tick_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(nil, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, damage_dealt, nil)
+		end
+
+		-- If it's time, play the particle again
+		self.tick_counter = self.tick_counter + 0.2
+		if self.tick_counter >= 2.0 then
+			self:GetParent():EmitSound("Frostivus.ImmolateLoop")
+			self.tick_counter = 0
+		end
+	end
+end
+
+-- Ragna Blade
+function boss_thinker_nevermore:RagnaBlade(altar_handle, altar_loc, delay, target_amount, cast_bar)
+	if IsServer() then
+		local boss = self:GetParent()
 
 		-- Look for valid targets
 		local targets = {}
-		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 1800, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
 		for _,enemy in pairs(nearby_enemies) do
 			if enemy:HasModifier("modifier_fighting_boss") then
 				targets[#targets + 1] = enemy
@@ -375,786 +675,417 @@ function boss_thinker_nevermore:VineSmash(center_point, altar_handle, delay, fix
 			return nil
 		end
 
-		-- If there are fake trees available, make the boss invisible
-		if self:PickRandomFakeTree(center_point) ~= boss then
-			self:TreantInvisStart(boss)
-		end
-
-		-- Calculate medium cast location (to look at)
-		local cast_position = center_point
-		for _, target in pairs(targets) do
-			local distance = target:GetAbsOrigin() - center_point
-			cast_position = cast_position + distance:Normalized() * distance:Length2D() / #targets
-		end
-
 		-- Send cast bar event
-		if send_cast_bar == 1 then
-			BossPhaseAbilityCast(self.team, "frostivus_boss_vine_smash", "boss_treant_vine_smash", delay)
-		elseif send_cast_bar == 2 then
-			BossPhaseAbilityCastAlt(self.team, "frostivus_boss_vine_smash", "boss_treant_vine_smash", delay)
+		if cast_bar == 1 then
+			BossPhaseAbilityCast(self.team, "frostivus_boss_ragna_blade", "boss_nevermore_ragna_blade", delay)
+		elseif cast_bar == 2 then
+			BossPhaseAbilityCastAlt(self.team, "frostivus_boss_ragna_blade", "boss_nevermore_ragna_blade", delay)
 		end
 
 		-- Draw warning particle on the targets' position
 		for _, target in pairs(targets) do
-			local warning_pfx = ParticleManager:CreateParticle("particles/boss_treant/vine_smash_pre_warning.vpcf", PATTACH_OVERHEAD_FOLLOW, target)
+			local warning_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/ragna_blade_pre_warning.vpcf", PATTACH_OVERHEAD_FOLLOW, target)
 			ParticleManager:SetParticleControl(warning_pfx, 0, target:GetAbsOrigin())
 
 			-- Play warning sound
 			target:EmitSound("Frostivus.AbilityWarning")
 
-			Timers:CreateTimer(fixate_delay, function()
+			Timers:CreateTimer(delay, function()
 				ParticleManager:DestroyParticle(warning_pfx, true)
 				ParticleManager:ReleaseParticleIndex(warning_pfx)
 			end)
 		end
 
 		-- Animate boss cast
-		Timers:CreateTimer(delay - 0.5, function()
-
-			-- Decide on the source
-			local main_source = self:PickRandomFakeTree(center_point)
-			FindClearSpaceForUnit(boss, main_source:GetAbsOrigin(), true)
-
-			-- Boss animation
-			self:TreantInvisEnd(boss)
-			boss:FaceTowards(cast_position)
-			StartAnimation(boss, {duration = 0.9, activity=ACT_DOTA_CAST_ABILITY_2, rate=1.0})
-		end)
-
-		-- Animate treantlings
-		Timers:CreateTimer(delay - 0.467, function()
-
-			-- Treantlings animation
-			for _, treantling in pairs(self:GetRealTrees(center_point)) do
-				treantling:FaceTowards(cast_position)
-				StartAnimation(treantling, {duration = 1.0, activity=ACT_DOTA_ATTACK, rate=1.0})
-
-				-- Resume idle animation after cast
-				Timers:CreateTimer(1.5, function()
-					StartAnimation(treantling, {duration = 30.0, activity=ACT_DOTA_IDLE, rate=1.0})
-				end)
-			end
-		end)
-
-		-- Locked-on particle
-		local target_locs = {}
-		Timers:CreateTimer(fixate_delay, function()
-			for _, target in pairs(targets) do
-				local warning_pfx = ParticleManager:CreateParticle("particles/boss_treant/vine_smash_pre_warning.vpcf", PATTACH_WORLDORIGIN, nil)
-				ParticleManager:SetParticleControl(warning_pfx, 0, target:GetAbsOrigin())
-
-				Timers:CreateTimer(delay - fixate_delay, function()
-					ParticleManager:DestroyParticle(warning_pfx, true)
-					ParticleManager:ReleaseParticleIndex(warning_pfx)
-				end)
-				target_locs[#target_locs + 1] = target:GetAbsOrigin()
-			end
+		Timers:CreateTimer(delay - 0.85, function()
+			boss:FaceTowards(targets[1]:GetAbsOrigin())
+			StartAnimation(boss, {duration = 1.75, activity=ACT_DOTA_VICTORY, rate=2.0})
 		end)
 
 		-- Wait [delay] seconds
 		Timers:CreateTimer(delay, function()
 
-			-- Play cast sound
-			altar_handle:EmitSound("Hero_Furion.ForceOfNature")
-
-			-- Shoot vines
-			for _, target_loc in pairs(target_locs) do
-				self:ShootVineSmash(altar_handle, boss, boss, target_loc, radius, hit_damage)
-				for _, source in pairs(self:GetRealTrees(center_point)) do
-					self:ShootVineSmash(altar_handle, source, boss, target_loc, radius, hit_damage)
-				end
+			-- If the fight has ended, do nothing else
+			if not altar_handle:HasModifier("modifier_altar_active") then
+				return nil
 			end
+
+			-- Play cast sound
+			boss:EmitSound("Hero_Lina.LagunaBlade.Immortal")
+
+			for _,target in pairs(targets) do
+
+				-- Play impact sound
+				target:EmitSound("Hero_Lina.LagunaBladeImpact.Immortal")
+
+				-- Play impact particle
+				local impact_pfx = ParticleManager:CreateParticle("particles/boss_nevermore/ragna_blade.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+				ParticleManager:SetParticleControlEnt(impact_pfx, 0, boss, PATTACH_POINT_FOLLOW, "attach_head", boss:GetAbsOrigin(), true)
+				ParticleManager:SetParticleControlEnt(impact_pfx, 1, target, PATTACH_POINT_FOLLOW, "attach_hitloc", target:GetAbsOrigin(), true)
+				ParticleManager:ReleaseParticleIndex(impact_pfx)
+
+				-- Deal damage
+				local damage_dealt = ApplyDamage({victim = target, attacker = boss, ability = nil, damage = target:GetHealth() - RandomInt(1, 9), damage_type = DAMAGE_TYPE_PURE})
+				SendOverheadEventMessage(nil, OVERHEAD_ALERT_DAMAGE, target, damage_dealt, nil)
+
+				-- Apply Necromastery
+				self:ApplyNecromastery(1)
+			end
+
 		end)
 	end
 end
 
-function boss_thinker_nevermore:ShootVineSmash(altar_handle, source, boss, target_loc, radius, damage)
-	local source_loc = source:GetAbsOrigin()
-	local forward_direction = (target_loc - source_loc):Normalized()
-	local spawn_count = math.ceil(radius * 0.02)
-	local spawn_limit = (-0.5) * (spawn_count - 1)
-
-	-- Calculate spawn locations
-	local spawn_locations = {}
-	for i = spawn_limit, (-spawn_limit) do
-		spawn_locations[i] = RotatePosition(source_loc, QAngle(0, 90, 0), source_loc + forward_direction * 100 * i)
-	end
-
-	-- VINE SMASH!
-	altar_handle:EmitSound("Frostivus.TreantVineSmashTravel")
-	for current_tick = 0, 18 do
-		for _,spawn_loc in pairs(spawn_locations) do
-			local current_loc = spawn_loc + current_tick * forward_direction * 100
-			local vine_pfx = ParticleManager:CreateParticle("particles/boss_treant/vine_smash_vines.vpcf", PATTACH_WORLDORIGIN, nil)
-			ParticleManager:SetParticleControl(vine_pfx, 0, current_loc)
-			ParticleManager:ReleaseParticleIndex(vine_pfx)
-
-			-- Damage nearby enemies
-			local nearby_enemies = FindUnitsInRadius(source:GetTeam(), current_loc, nil, 100, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-			for _, enemy in pairs(nearby_enemies) do
-				if not enemy:HasModifier("modifier_vine_smash_damage_dummy") then
-					self:LeechSeedStackUp(boss, enemy)
-					local damage_dealt = ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-					SendOverheadEventMessage(enemy, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, damage_dealt, nil)
-					enemy:EmitSound("Hero_Treant.Overgrowth.Target")
-					enemy:AddNewModifier(nil, nil, "modifier_vine_smash_damage_dummy", {duration = 0.1})
-				end
-			end
-		end
-	end
-end
-
--- Vine Smash duplicate damage prevention modifier
-LinkLuaModifier("modifier_vine_smash_damage_dummy", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
-modifier_vine_smash_damage_dummy = modifier_vine_smash_damage_dummy or class({})
-
-function modifier_vine_smash_damage_dummy:IsHidden() return true end
-function modifier_vine_smash_damage_dummy:IsPurgable() return false end
-function modifier_vine_smash_damage_dummy:IsDebuff() return false end
-
--- Rock Smash
-function boss_thinker_nevermore:RockSmash(center_point, altar_handle, optional_target, rock_number, delay, radius, damage, send_cast_bar)
+-- Meteorain
+function boss_thinker_nevermore:Meteorain(altar_handle, altar_loc, delay, duration, spawn_delay, spawn_amount, radius, damage, cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
-		local tiny = self.tiny_entities[1]
-		local rock = self.tiny_entities[1 + rock_number]
-		local hit_damage = boss:GetAttackDamage() * damage * 0.01
-
-		-- Pick a target position, if necessary
-		local target_loc = center_point + RandomVector(10):Normalized() * (900 - radius) * 0.5
-		if optional_target then
-			target_loc = optional_target
-		end
-
-		-- Move Tiny to the rock's side
-		tiny:MoveToPosition(rock:GetAbsOrigin() + Vector(50, 0, 0))
+		local impact_damage = boss:GetAttackDamage() * damage * 0.01 * self:GetNecromasteryAmp()
 
 		-- Send cast bar event
-		if send_cast_bar == 1 then
-			BossPhaseAbilityCast(self.team, "tiny_toss", "boss_treant_rock_smash", delay)
-		elseif send_cast_bar == 2 then
-			BossPhaseAbilityCastAlt(self.team, "tiny_toss", "boss_treant_rock_smash", delay)
+		if cast_bar == 1 then
+			BossPhaseAbilityCast(self.team, "frostivus_boss_meteorain", "boss_nevermore_meteorain", delay)
+		elseif cast_bar == 2 then
+			BossPhaseAbilityCastAlt(self.team, "frostivus_boss_meteorain", "boss_nevermore_meteorain", delay)
 		end
-
-		-- Draw warning particle on the target position
-		local warning_pfx = ParticleManager:CreateParticle("particles/boss_treant/rock_smash_warning.vpcf", PATTACH_WORLDORIGIN, nil)
-		ParticleManager:SetParticleControl(warning_pfx, 0, target_loc)
-		ParticleManager:SetParticleControl(warning_pfx, 1, Vector(radius, 0, 0))
 
 		-- Play warning sound
-		altar_handle:EmitSound("Frostivus.AbilityWarning")
-
-		-- Animate tiny cast
-		Timers:CreateTimer(delay - 1.5, function()
-			rock:EmitSound("Hero_Tiny.Toss.Target")
-			tiny:EmitSound("Ability.TossThrow")
-			tiny:FaceTowards(target_loc)
-			StartAnimation(tiny, {duration = 0.53, activity=ACT_TINY_TOSS, rate=1.0})
-			self:ThrowRock(rock, target_loc)
-		end)
-
-		-- Wait [delay] seconds
-		Timers:CreateTimer(delay, function()
-
-			-- Play impact sound
-			altar_handle:EmitSound("Ability.TossImpact")
-
-			-- Destroy the warning particle
-			ParticleManager:DestroyParticle(warning_pfx, true)
-			ParticleManager:ReleaseParticleIndex(warning_pfx)
-
-			-- Play impact particle
-			local impact_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf", PATTACH_WORLDORIGIN, nil)
-			ParticleManager:SetParticleControl(impact_pfx, 0, target_loc)
-			ParticleManager:ReleaseParticleIndex(impact_pfx)
-
-			-- Destroy the rock
-			rock:Kill(nil, rock)
-
-			-- Damage players in the AOE
-			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), target_loc, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-			for _, enemy in pairs(nearby_enemies) do
-
-				-- Add Leech Seed stacks
-				self:LeechSeedStackUp(boss, enemy)
-
-				-- Show damage dealt
-				local damage_dealt = ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = hit_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_PHYSICAL})
-				SendOverheadEventMessage(enemy, OVERHEAD_ALERT_DAMAGE, enemy, damage_dealt, nil)
-
-				-- Play hit particle
-				local hit_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_tiny/tiny_toss_impact.vpcf", PATTACH_WORLDORIGIN, enemy)
-				ParticleManager:SetParticleControl(hit_pfx, 0, enemy:GetAbsOrigin())
-				ParticleManager:ReleaseParticleIndex(hit_pfx)
-			end
-		end)
-	end
-end
-
--- Throws a Rock
-function boss_thinker_nevermore:ThrowRock(rock, target_loc)
-	if IsServer() then
-		local source_loc = rock:GetAbsOrigin()
-		rock:AddNewModifier(nil, nil, "modifier_phased", {})
-
-		-- Calculate trajectory
-		local direction = (target_loc - source_loc):Normalized()
-		local length = (target_loc - source_loc):Length2D()
-		local tick_length = length * 0.03 / 1.2
-		local horizontal_tick = direction * tick_length
-
-		-- Calculate height during trajectory
-		local height = {}
-		local missing_height = 750
-		local current_height = 0
-		local dummy_var = 0
-		for i = 1, 20 do
-			height[i] = current_height + missing_height * (0.075 + 0.005 * i)
-			current_height = height[i]
-			missing_height = 750 - current_height
-		end
-		for i = 21, 40 do
-			height[i]= height[41 - i]
-		end
-
-		-- Move the rock
-		local current_spot = source_loc
-		local traveled_distance = 0
-		local height_tick = 1
-		Timers:CreateTimer(0.03, function()
-			rock:SetAbsOrigin(current_spot + horizontal_tick + Vector(0, 0, height[height_tick]))
-			current_spot = current_spot + horizontal_tick
-			traveled_distance = traveled_distance + tick_length
-			if traveled_distance < length then
-				height_tick = height_tick + 1
-				return 0.03
-			end
-		end)
-	end
-end
-
--- Ring of Thorns
-function boss_thinker_nevermore:RingOfThorns(center_point, altar_handle, delay, radius, damage, send_cast_bar)
-	if IsServer() then
-		local boss = self:GetParent()
-		local hit_damage = boss:GetAttackDamage() * damage * 0.01
-
-		-- Send cast bar event
-		if send_cast_bar == 1 then
-			BossPhaseAbilityCast(self.team, "frostivus_boss_ring_of_thorns", "boss_treant_ring_of_thorns", delay)
-		elseif send_cast_bar == 2 then
-			BossPhaseAbilityCastAlt(self.team, "frostivus_boss_ring_of_thorns", "boss_treant_ring_of_thorns", delay)
-		end
-
-		-- If there are fake trees available, make the boss invisible
-		if self:PickRandomFakeTree(center_point) ~= boss then
-			self:TreantInvisStart(boss)
-		end
+		boss:EmitSound("Hero_Invoker.ChaosMeteor.Cast")
 
 		-- Animate boss cast
-		Timers:CreateTimer(delay - 0.4, function()
+		Timers:CreateTimer(delay - 0.9, function()
+			boss:FaceTowards(altar_loc)
+			StartAnimation(boss, {duration = 2.3, activity=ACT_DOTA_IDLE_RARE, rate=1.0})
 
-			-- Decide on the source
-			local main_source = self:PickRandomFakeTree(center_point)
-			FindClearSpaceForUnit(boss, main_source:GetAbsOrigin(), true)
-
-			-- Boss animation
-			self:TreantInvisEnd(boss)
-			boss:FaceTowards(center_point)
-			StartAnimation(boss, {duration = 1.03, activity=ACT_DOTA_CAST_ABILITY_4, rate=1.0})
-		end)
-
-		-- Animate treantlings
-		Timers:CreateTimer(delay - 0.467, function()
-
-			-- Treantlings animation
-			for _, treantling in pairs(self:GetRealTrees(center_point)) do
-				treantling:FaceTowards(center_point)
-				StartAnimation(treantling, {duration = 1.0, activity=ACT_DOTA_ATTACK, rate=1.0})
-
-				-- Resume idle animation after cast
-				Timers:CreateTimer(1.5, function()
-					StartAnimation(treantling, {duration = 30.0, activity=ACT_DOTA_IDLE, rate=1.0})
+			-- Taunt during the rain
+			Timers:CreateTimer(delay + 2.0, function()
+				StartAnimation(boss, {duration = 1.0, activity=ACT_DOTA_TAUNT, rate=1.0})
+				Timers:CreateTimer(delay + 2.0, function()
+					StartAnimation(boss, {duration = 1.0, activity=ACT_DOTA_TAUNT, rate=1.0})
 				end)
-			end
+			end)
 		end)
 
 		-- Wait [delay] seconds
 		Timers:CreateTimer(delay, function()
 
-			-- Play cast sound
-			altar_handle:EmitSound("Hero_Furion.ForceOfNature")
+			local elapsed_duration = 0
+			local remaining_spawns = spawn_amount
+			Timers:CreateTimer(0, function()
 
-			-- Set up particle spawn grid
-			local spawn_positions = {}
-			local particle_radius = 80
-			for x = (-900 + particle_radius), 900, (2 * particle_radius) do
-				for y = (-900 + particle_radius), 900, (2 * particle_radius) do
-					spawn_positions[#spawn_positions + 1] = center_point + Vector(x, y, 0)
+				-- If the fight has ended, do nothing else
+				if not altar_handle:HasModifier("modifier_altar_active") then
+					return nil
 				end
-			end
 
-			-- Draw particles in the grid, except in the safe zones
-			for _, spawn_position in pairs(spawn_positions) do
-				local should_draw = true
-				if (boss:GetAbsOrigin() - spawn_position):Length2D() < (radius + particle_radius * 0.5) then
-					should_draw = false
-				end
-				for _, treantling in pairs(self:GetRealTrees(center_point)) do
-					if (treantling:GetAbsOrigin() - spawn_position):Length2D() < (radius + particle_radius * 0.5) then
-						should_draw = false
+				-- Spawn meteors
+				local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 900, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES + DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
+				for _,enemy in pairs(nearby_enemies) do
+					self:Meteor(altar_handle, altar_loc, enemy:GetAbsOrigin(), radius, impact_damage)
+					remaining_spawns = remaining_spawns - 1
+					if remaining_spawns <= 0 then
 						break
 					end
 				end
-				if should_draw then
-					local thorns_pfx = ParticleManager:CreateParticle("particles/boss_treant/ring_of_thorns.vpcf", PATTACH_WORLDORIGIN, nil)
-					ParticleManager:SetParticleControl(thorns_pfx, 0, spawn_position)
-					Timers:CreateTimer(2.5, function()
-						ParticleManager:DestroyParticle(thorns_pfx, false)
-						ParticleManager:ReleaseParticleIndex(thorns_pfx)
-					end)
-				end
-			end
 
-			-- Hit enemy heroes outside the safe areas
-			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-			for _,enemy in pairs(nearby_enemies) do
-				local should_be_hit = true
-				local enemy_loc = enemy:GetAbsOrigin()
-				if (boss:GetAbsOrigin() - enemy_loc):Length2D() < radius then
-					should_be_hit = false
+				-- Check if the duration has ended
+				elapsed_duration = elapsed_duration + spawn_delay
+				if elapsed_duration <= duration then
+					return spawn_delay
 				end
-				for _, treantling in pairs(self:GetRealTrees(center_point)) do
-					if (treantling:GetAbsOrigin() - enemy_loc):Length2D() < radius then
-						should_be_hit = false
-						break
-					end
-				end
-				if should_be_hit then
-					self:LeechSeedStackUp(boss, enemy)
-					local damage_dealt = ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = hit_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-					SendOverheadEventMessage(enemy, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, damage_dealt, nil)
-					enemy:EmitSound("Hero_Treant.Overgrowth.Target")
-				end
-			end
+			end)
 		end)
 	end
 end
 
--- Leech Seed
-function boss_thinker_nevermore:LeechSeed(center_point, altar_handle, delay, damage, heal, send_cast_bar)
+-- Line Raze (Sav Omoz)
+function boss_thinker_nevermore:LineRaze(altar_handle, altar_loc, delay, radius, spawn_distance, damage, cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
-		local leech_damage = boss:GetAttackDamage() * damage * 0.01
+		local raze_damage = boss:GetAttackDamage() * damage * 0.01 * self:GetNecromasteryAmp()
 
-		-- Look for valid targets
-		local targets = {}
-		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+		-- Look for a valid target
+		local target = false
+		local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), altar_loc, nil, 900, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
 		for _,enemy in pairs(nearby_enemies) do
-			if enemy:HasModifier("modifier_frostivus_leech_seed_debuff") then
-				targets[#targets + 1] = enemy
+			if enemy:HasModifier("modifier_fighting_boss") then
+				target = enemy
+				break
 			end
-		end
-
-		-- Send cast bar event
-		if send_cast_bar == 1 then
-			BossPhaseAbilityCast(self.team, "treant_leech_seed", "boss_treant_leech_seed", delay)
-		elseif send_cast_bar == 2 then
-			BossPhaseAbilityCastAlt(self.team, "treant_leech_seed", "boss_treant_leech_seed", delay)
-		end
-
-		-- Animate boss cast
-		Timers:CreateTimer(delay - 0.5, function()
-
-			-- Boss animation
-			self:TreantInvisEnd(boss)
-			boss:FaceTowards(center_point)
-			StartAnimation(boss, {duration = 2.3, activity=ACT_DOTA_GENERIC_CHANNEL_1, rate=1.0})
-		end)
-
-		-- Wait [delay] seconds
-		Timers:CreateTimer(delay, function()
-
-			-- Define seed projectile
-			local boss_loc = boss:GetAbsOrigin()
-			local seed_projectile = {
-				Target = boss,
-			--	Source = ,
-				Ability = boss:FindAbilityByName("frostivus_boss_leech_seed"),
-				EffectName = "particles/units/heroes/hero_treant/treant_leech_seed_projectile.vpcf",
-				iMoveSpeed = 400,
-				bDrawsOnMinimap = false,
-				bDodgeable = false,
-				bIsAttack = false,
-				bVisibleToEnemies = true,
-				bReplaceExisting = false,
-				flExpireTime = GameRules:GetGameTime() + 20,
-				bProvidesVision = false,
-				ExtraData = {heal = heal}
-			}
-
-			-- Play cast sound
-			boss:EmitSound("Hero_Treant.LeechSeed.Cast")
-
-			-- Iterate through seed-affected enemies
-			for _, target in pairs(targets) do
-
-				-- Play hit sound
-				target:EmitSound("Hero_Treant.LeechSeed.Target")
-
-				-- Play hit particle
-				local seed_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_treant/treant_leech_seed.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
-				ParticleManager:SetParticleControl(seed_pfx, 0, boss_loc)
-				ParticleManager:SetParticleControl(seed_pfx, 1, target:GetAbsOrigin())
-				ParticleManager:ReleaseParticleIndex(seed_pfx)
-
-				-- Launch projectiles periodically
-				Timers:CreateTimer(0, function()
-
-					-- Play leech sound
-					target:EmitSound("Hero_Treant.LeechSeed.Tick")
-
-					-- Adjust and launch projectile
-					seed_projectile.Source = target
-					ProjectileManager:CreateTrackingProjectile(seed_projectile)
-
-					-- Deal damage
-					local damage_dealt = ApplyDamage({victim = target, attacker = boss, ability = nil, damage = leech_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-					SendOverheadEventMessage(target, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, target, damage_dealt, nil)
-
-					-- Reduce Leech Seed stacks and check if the cycle is over
-					local modifier_seed = target:FindModifierByName("modifier_frostivus_leech_seed_debuff")
-					modifier_seed:SetStackCount(modifier_seed:GetStackCount() - 1 )
-
-					if modifier_seed:GetStackCount() > 0 then
-						return 0.75
-					else
-						target:RemoveModifierByName("modifier_frostivus_leech_seed_debuff")
-					end
-				end)
-			end
-		end)
-	end
-end
-
--- Rapid Growth
-function boss_thinker_nevermore:RapidGrowth(center_point, altar_handle, delay, positions, health, send_cast_bar)
-	if IsServer() then
-		local boss = self:GetParent()
-
-		-- Send cast bar event
-		if send_cast_bar == 1 then
-			BossPhaseAbilityCast(self.team, "treant_eyes_in_the_forest", "boss_treant_rapid_growth", delay)
-		elseif send_cast_bar == 2 then
-			BossPhaseAbilityCastAlt(self.team, "treant_eyes_in_the_forest", "boss_treant_rapid_growth", delay)
-		end
-
-		-- Animate boss cast
-		Timers:CreateTimer(delay - 0.5, function()
-
-			-- Boss animation
-			self:TreantInvisEnd(boss)
-			boss:FaceTowards(center_point)
-			StartAnimation(boss, {duration = 0.9, activity=ACT_DOTA_CAST_ABILITY_3, rate=1.0})
-		end)
-
-		-- Wait [delay] seconds
-		Timers:CreateTimer(delay, function()
-
-			-- Spawn fake trees on the indicated positions
-			for _, spawn_location in pairs(positions) do
-				self:SpawnFakeTree(spawn_location, health)
-			end
-		end)
-	end
-end
-
--- Eyes in the Forest
-function boss_thinker_nevermore:EyesInTheForest(center_point, altar_handle, delay, positions, health, send_cast_bar)
-	if IsServer() then
-		local boss = self:GetParent()
-
-		-- Send cast bar event
-		if send_cast_bar == 1 then
-			BossPhaseAbilityCast(self.team, "frostivus_boss_eyes_in_the_forest", "boss_treant_eyes_in_the_forest", delay)
-		elseif send_cast_bar == 2 then
-			BossPhaseAbilityCastAlt(self.team, "frostivus_boss_eyes_in_the_forest", "boss_treant_eyes_in_the_forest", delay)
-		end
-
-		-- Animate boss cast
-		Timers:CreateTimer(delay - 0.5, function()
-
-			-- Boss animation
-			self:TreantInvisEnd(boss)
-			boss:FaceTowards(center_point)
-			StartAnimation(boss, {duration = 0.9, activity=ACT_DOTA_CAST_ABILITY_3, rate=1.0})
-		end)
-
-		-- Wait [delay] seconds
-		Timers:CreateTimer(delay, function()
-
-			-- Spawn fake trees on the indicated positions
-			for _, spawn_location in pairs(positions) do
-				self:SpawnTreantling(spawn_location, health, center_point)
-			end
-		end)
-	end
-end
-
--- Living Armor
-function boss_thinker_nevermore:LivingArmor(center_point, altar_handle, delay, target_amount, layers, send_cast_bar)
-	if IsServer() then
-		local boss = self:GetParent()
-
-		-- Look for valid targets
-		local trees ={}
-		local nearby_allies = FindUnitsInRadius(boss:GetTeam(), center_point, nil, 900, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_NONE, FIND_ANY_ORDER, false)
-		for _, ally in pairs(nearby_allies) do
-			if (ally:HasModifier("modifier_frostivus_treantling_passive") or ally:HasModifier("modifier_frostivus_fake_tree_passive")) and not ally:HasModifier("modifier_frostivus_living_armor") then
-				trees[#trees + 1] = ally
-				if #trees >= target_amount then
-					break
-				end
-			end
-		end
-
-		-- Send cast bar event
-		if send_cast_bar ==  1	then
-			BossPhaseAbilityCast(self.team, "treant_living_armor", "boss_treant_living_armor", delay)
-		elseif send_cast_bar ==  2	then
-			BossPhaseAbilityCastAlt(self.team, "treant_living_armor", "boss_treant_living_armor", delay)
 		end
 
 		-- If there's no valid target, do nothing
-		if #trees <= 0 then
+		if not target then
 			return nil
 		end
 
-		-- Animate boss cast
-		Timers:CreateTimer(delay - 0.5, function()
-
-			-- Boss animation
-			self:TreantInvisEnd(boss)
-			boss:FaceTowards(trees[1]:GetAbsOrigin())
-			StartAnimation(boss, {duration = 0.9, activity=ACT_DOTA_CAST_ABILITY_3, rate=1.0})
-		end)
-
-		-- Wait [delay] seconds
-		Timers:CreateTimer(delay, function()
-
-			-- Play cast sound
-			boss:EmitSound("Hero_Treant.LivingArmor.Cast")
-
-			-- Apply living armor to the targets
-			for _, tree in pairs(trees) do
-				if tree and tree:IsAlive() then
-
-					-- Play target sound
-					tree:EmitSound("Hero_Treant.LivingArmor.Target")
-
-					-- Apply the buff
-					local living_armor_buff = tree:AddNewModifier(boss, boss:FindAbilityByName("frostivus_boss_living_armor"), "modifier_frostivus_living_armor", {})
-					living_armor_buff:SetStackCount(layers)
-				end
-			end
-		end)
-	end
-end
-
--- Living Armor buff
-LinkLuaModifier("modifier_frostivus_living_armor", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
-modifier_frostivus_living_armor = modifier_frostivus_living_armor or class({})
-
-function modifier_frostivus_living_armor:IsHidden() return false end
-function modifier_frostivus_living_armor:IsPurgable() return false end
-function modifier_frostivus_living_armor:IsDebuff() return false end
-
-function modifier_frostivus_living_armor:OnCreated(keys)
-	if IsServer() then
-		self.particle = ParticleManager:CreateParticle("particles/units/heroes/hero_treant/treant_livingarmor.vpcf", PATTACH_WORLDORIGIN, nil)
-		ParticleManager:SetParticleControl(self.particle, 0, self:GetParent():GetAbsOrigin())
-		ParticleManager:SetParticleControl(self.particle, 1, self:GetParent():GetAbsOrigin())
-	end
-end
-
-function modifier_frostivus_living_armor:OnDestroy()
-	if IsServer() then
-		ParticleManager:DestroyParticle(self.particle, true)
-		ParticleManager:ReleaseParticleIndex(self.particle)
-	end
-end
-
-function modifier_frostivus_living_armor:DeclareFunctions()
-	local funcs = {
-		MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE,
-		MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
-		MODIFIER_EVENT_ON_TAKEDAMAGE
-	}
-	return funcs
-end
-
-function modifier_frostivus_living_armor:OnTakeDamage(keys)
-	if IsServer() then
-		if keys.unit == self:GetParent() then
-			self:SetStackCount(self:GetStackCount() - 1)
-			if self:GetStackCount() <= 0 then
-				self:GetParent():RemoveModifierByName("modifier_frostivus_living_armor")
-			end
+		-- Send cast bar event
+		if cast_bar == 1 then
+			BossPhaseAbilityCast(self.team, "frostivus_boss_shadowraze", "boss_nevermore_shadowraze_line", delay)
+		elseif cast_bar == 2 then
+			BossPhaseAbilityCastAlt(self.team, "frostivus_boss_shadowraze", "boss_nevermore_shadowraze_line", delay)
 		end
+
+		-- Face direction
+		Timers:CreateTimer(delay - 1.5, function()
+			boss:FaceTowards(target:GetAbsOrigin())
+
+			-- Calculate raze points
+			local raze_points = {}
+			local boss_loc = boss:GetAbsOrigin()
+			local direction = (target:GetAbsOrigin() - boss_loc):Normalized()
+			for i = 1, 7 do
+				raze_points[i] = boss_loc + direction * (radius * 0.5 + spawn_distance * (i - 1))
+			end
+
+			-- Raze
+			for _, raze_point in pairs(raze_points) do
+				self:Raze(altar_handle, raze_point, 1.5, radius, raze_damage, false)
+			end
+		end)
+
+		-- Animate boss cast
+		Timers:CreateTimer(delay - 0.55, function()
+			StartAnimation(boss, {duration = 0.55, activity=ACT_DOTA_RAZE_3, rate=1.0})
+		end)
+
+		-- Play raze sound
+		Timers:CreateTimer(delay, function()
+			boss:EmitSound("Hero_Nevermore.Shadowraze")
+		end)
 	end
 end
 
-function modifier_frostivus_living_armor:GetModifierHealthRegenPercentage()
-	return 10
-end
-
-function modifier_frostivus_living_armor:GetModifierIncomingDamage_Percentage()
-	return -50
-end
-
-
--- Overgrowth
-function boss_thinker_nevermore:Overgrowth(center_point, altar_handle, delay, radius, damage, duration, send_cast_bar)
+-- Circle Raze (Sah/Voo Omoz)
+function boss_thinker_nevermore:CircleRaze(altar_handle, altar_loc, delay, radius, damage, distance, cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
-		local hit_damage = boss:GetAttackDamage() * damage * 0.01
+		local raze_damage = boss:GetAttackDamage() * damage * 0.01 * self:GetNecromasteryAmp()
 
 		-- Send cast bar event
-		if send_cast_bar == 1 then
-			BossPhaseAbilityCast(self.team, "treant_overgrowth", "boss_treant_overgrowth", delay)
-		elseif send_cast_bar == 2 then
-			BossPhaseAbilityCastAlt(self.team, "treant_overgrowth", "boss_treant_overgrowth", delay)
+		if cast_bar == 1 then
+			if distance <= 450 then
+				BossPhaseAbilityCast(self.team, "frostivus_boss_shadowraze", "boss_nevermore_shadowraze_circle_near", delay)
+			else
+				BossPhaseAbilityCast(self.team, "frostivus_boss_shadowraze", "boss_nevermore_shadowraze_circle_far", delay)
+			end
+		elseif cast_bar == 2 then
+			if distance <= 450 then
+				BossPhaseAbilityCastAlt(self.team, "frostivus_boss_shadowraze", "boss_nevermore_shadowraze_circle_near", delay)
+			else
+				BossPhaseAbilityCastAlt(self.team, "frostivus_boss_shadowraze", "boss_nevermore_shadowraze_circle_far", delay)
+			end
 		end
 
-		-- Play warning sound
-		altar_handle:EmitSound("Hero_Treant.Overgrowth.CastAnim")
+		-- Raze
+		Timers:CreateTimer(delay - 1.5, function()
+			boss:FaceTowards(boss:GetAbsOrigin() + Vector(0, -100, 0))
 
-		-- If there are fake trees available, make the boss invisible
-		if self:PickRandomFakeTree(center_point) ~= boss then
-			self:TreantInvisStart(boss)
-		end
+			-- Calculate raze points
+			local raze_points = {}
+			if distance <= 450 then
+				for i = 1, 6 do
+					raze_points[i] = RotatePosition(altar_loc, QAngle(0, 60 * (i - 1), 0), altar_loc + Vector(0, 1, 0) * distance)
+				end
+			else
+				for i = 1, 12 do
+					raze_points[i] = RotatePosition(altar_loc, QAngle(0, 30 * (i - 1), 0), altar_loc + Vector(0, 1, 0) * distance)
+				end
+			end
+
+			-- Raze
+			for _, raze_point in pairs(raze_points) do
+				self:Raze(altar_handle, raze_point, 1.5, radius, raze_damage, false)
+			end
+		end)
 
 		-- Animate boss cast
-		Timers:CreateTimer(delay - 0.5, function()
-
-			-- Decide on the source
-			local main_source = self:PickRandomFakeTree(center_point)
-			FindClearSpaceForUnit(boss, main_source:GetAbsOrigin(), true)
-
-			-- Boss animation
-			self:TreantInvisEnd(boss)
-			boss:FaceTowards(center_point)
-			StartAnimation(boss, {duration = 1.67, activity=ACT_DOTA_CAST_ABILITY_5, rate=1.0})
-		end)
-
-		-- Animate treantlings
-		Timers:CreateTimer(delay - 0.467, function()
-
-			-- Treantlings animation
-			for _, treantling in pairs(self:GetRealTrees(center_point)) do
-				treantling:FaceTowards(center_point)
-				StartAnimation(treantling, {duration = 1.0, activity=ACT_DOTA_ATTACK, rate=1.0})
-
-				-- Resume idle animation after cast
-				Timers:CreateTimer(1.5, function()
-					StartAnimation(treantling, {duration = 30.0, activity=ACT_DOTA_IDLE, rate=1.0})
-				end)
+		Timers:CreateTimer(delay - 0.55, function()
+			if distance <= 450 then
+				StartAnimation(boss, {duration = 0.55, activity=ACT_DOTA_RAZE_1, rate=1.0})
+			else
+				StartAnimation(boss, {duration = 0.55, activity=ACT_DOTA_RAZE_2, rate=1.0})
 			end
 		end)
 
-		-- Wait [delay] seconds
+		-- Play raze sound
 		Timers:CreateTimer(delay, function()
-
-			-- Find targets around Treant
-			local ability_overgrowth = boss:FindAbilityByName("frostivus_boss_overgrowth")
-			altar_handle:EmitSound("Hero_Treant.Overgrowth.Cast")
-			local cast_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_treant/treant_overgrowth_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, boss)
-			ParticleManager:SetParticleControl(cast_pfx, 0, boss:GetAbsOrigin())
-			ParticleManager:ReleaseParticleIndex(cast_pfx)
-			local nearby_enemies = FindUnitsInRadius(boss:GetTeam(), boss:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-			for _,enemy in pairs(nearby_enemies) do
-				if not enemy:HasModifier("modifier_frostivus_overgrowth_root") then
-					self:LeechSeedStackUp(boss, enemy)
-					local damage_dealt = ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = hit_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-					SendOverheadEventMessage(enemy, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, damage_dealt, nil)
-					enemy:EmitSound("Hero_Treant.Overgrowth.Target")
-					enemy:AddNewModifier(boss, ability_overgrowth, "modifier_frostivus_overgrowth_root", {duration = duration})
-				end
-			end
-
-			-- Find targets around Treantlings
-			for _, treantling in pairs(self:GetRealTrees(center_point)) do
-				cast_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_treant/treant_overgrowth_cast.vpcf", PATTACH_ABSORIGIN_FOLLOW, treantling)
-				ParticleManager:SetParticleControl(cast_pfx, 0, treantling:GetAbsOrigin())
-				ParticleManager:ReleaseParticleIndex(cast_pfx)
-				nearby_enemies = FindUnitsInRadius(boss:GetTeam(), treantling:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
-				for _,enemy in pairs(nearby_enemies) do
-					if not enemy:HasModifier("modifier_frostivus_overgrowth_root") then
-						self:LeechSeedStackUp(boss, enemy)
-						local damage_dealt = ApplyDamage({victim = enemy, attacker = boss, ability = nil, damage = hit_damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
-						SendOverheadEventMessage(enemy, OVERHEAD_ALERT_BONUS_SPELL_DAMAGE, enemy, damage_dealt, nil)
-						enemy:EmitSound("Hero_Treant.Overgrowth.Target")
-						enemy:AddNewModifier(boss, ability_overgrowth, "modifier_frostivus_overgrowth_root", {duration = duration})
-					end
-				end
-			end
+			boss:EmitSound("Hero_Nevermore.Shadowraze")
 		end)
 	end
 end
 
--- Overgrowth debuff
-LinkLuaModifier("modifier_frostivus_overgrowth_root", "boss_scripts/boss_thinker_nevermore.lua", LUA_MODIFIER_MOTION_NONE )
-modifier_frostivus_overgrowth_root = modifier_frostivus_overgrowth_root or class({})
+-- Moving Raze (Ala/Ula Omoz)
+function boss_thinker_nevermore:MovingRaze(altar_handle, altar_loc, delay, radius, damage, spawn_delay, direction, start_position, cast_bar)
+	if IsServer() then
+		local boss = self:GetParent()
+		local raze_damage = boss:GetAttackDamage() * damage * 0.01 * self:GetNecromasteryAmp()
 
-function modifier_frostivus_overgrowth_root:IsHidden() return false end
-function modifier_frostivus_overgrowth_root:IsPurgable() return false end
-function modifier_frostivus_overgrowth_root:IsDebuff() return true end
+		-- Send cast bar event
+		if cast_bar == 1 then
+			if direction == 1 then
+				BossPhaseAbilityCast(self.team, "frostivus_boss_shadowraze", "boss_nevermore_shadowraze_moving_clock", delay)
+			else
+				BossPhaseAbilityCast(self.team, "frostivus_boss_shadowraze", "boss_nevermore_shadowraze_moving_counterclock", delay)
+			end
+		elseif cast_bar == 2 then
+			if direction == 1 then
+				BossPhaseAbilityCastAlt(self.team, "frostivus_boss_shadowraze", "boss_nevermore_shadowraze_moving_clock", delay)
+			else
+				BossPhaseAbilityCastAlt(self.team, "frostivus_boss_shadowraze", "boss_nevermore_shadowraze_moving_counterclock", delay)
+			end
+		end
 
-function modifier_frostivus_overgrowth_root:GetEffectName()
-	return "particles/units/heroes/hero_treant/treant_overgrowth_vines.vpcf"
+		-- Raze
+		Timers:CreateTimer(delay - 1.5, function()
+			boss:FaceTowards(start_position)
+
+			-- Calculate raze points
+			local raze_points = {}
+			if direction == 1 then
+				for i = 1, 12 do
+					raze_points[i] = RotatePosition(altar_loc, QAngle(0, -30 * (i - 1), 0), start_position)
+				end
+			else
+				for i = 1, 12 do
+					raze_points[i] = RotatePosition(altar_loc, QAngle(0, 30 * (i - 1), 0), start_position)
+				end
+			end
+
+			-- Raze
+			local raze_count = 1
+			Timers:CreateTimer(0, function()
+				self:Raze(altar_handle, raze_points[raze_count], 1.5, radius, raze_damage, true)
+				raze_count = raze_count + 1
+				if raze_count <= 12 then
+					return spawn_delay
+				end
+			end)
+		end)
+
+		-- Animate boss cast
+		Timers:CreateTimer(delay - 1.0, function()
+			StartAnimation(boss, {duration = 1.0 + 11 * spawn_delay, activity=ACT_DOTA_GENERIC_CHANNEL_1, rate=1.0})
+		end)
+	end
 end
 
-function modifier_frostivus_overgrowth_root:GetEffectAttachType()
-	return PATTACH_ABSORIGIN_FOLLOW
-end
-
-function modifier_frostivus_overgrowth_root:CheckState()
-	local state = {
-		[MODIFIER_STATE_ROOTED] = true,
-		[MODIFIER_STATE_DISARMED] = true
-	}
-	return state
-end
-
--- Nature's Guise
-function boss_thinker_nevermore:NaturesGuise(center_point, altar_handle, delay, send_cast_bar)
+-- Nevermore
+function boss_thinker_nevermore:Nevermore(altar_handle, altar_loc, delay, duration, cast_bar)
 	if IsServer() then
 		local boss = self:GetParent()
 
 		-- Send cast bar event
-		if send_cast_bar == 1 then
-			BossPhaseAbilityCast(self.team, "treant_natures_guise", "boss_treant_natures_guise", delay)
-		elseif send_cast_bar == 2 then
-			BossPhaseAbilityCastAlt(self.team, "treant_natures_guise", "boss_treant_natures_guise", delay)
+		if cast_bar == 1 then
+			BossPhaseAbilityCast(self.team, "frostivus_boss_nevermore", "boss_nevermore_nevermore", delay)
+		elseif cast_bar == 2 then
+			BossPhaseAbilityCastAlt(self.team, "frostivus_boss_nevermore", "boss_nevermore_nevermore", delay)
 		end
 
 		-- Play warning sound
-		boss:EmitSound("Hero_Treant.Eyes.Cast")
+		boss:EmitSound("Hero_Nevermore.RequiemOfSoulsCast")
 
 		-- Animate boss cast
-		Timers:CreateTimer(delay - 0.5, function()
+		boss:FaceTowards(altar_loc)
+		StartAnimation(boss, {duration = delay + 1.0, activity=ACT_DOTA_VERSUS, rate=2.0})
 
-			-- Boss animation
-			boss:FaceTowards(center_point)
-			StartAnimation(boss, {duration = 0.9, activity=ACT_DOTA_CAST_ABILITY_1, rate=1.0})
+		-- Wait [delay] seconds
+		Timers:CreateTimer(delay, function()
+
+			-- If the fight has ended, do nothing else
+			if not altar_handle:HasModifier("modifier_altar_active") then
+				return nil
+			end
+
+			-- Lights out!!
+			for player_id = 0, 20 do
+				if PlayerResource:GetPlayer(player_id) and PlayerResource:GetTeam(player_id) == self.team then
+					local win_pfx = ParticleManager:CreateParticleForPlayer("particles/boss_nevermore/screen_requiem_indicator.vpcf", PATTACH_EYES_FOLLOW, PlayerResource:GetSelectedHeroEntity(player_id), PlayerResource:GetPlayer(player_id))
+					self:AddParticle(win_pfx, false, false, -1, false, false)
+					Timers:CreateTimer(duration, function()
+						ParticleManager:DestroyParticle(win_pfx, true)
+						ParticleManager:ReleaseParticleIndex(win_pfx)
+					end)
+				end
+			end
+		end)
+	end
+end
+
+-- Requiem of Souls
+function boss_thinker_nevermore:RequiemOfSouls(altar_handle, altar_loc, delay, line_amount, damage, cast_bar)
+	if IsServer() then
+		local boss = self:GetParent()
+		local line_damage = boss:GetAttackDamage() * damage * 0.01 * self:GetNecromasteryAmp()
+
+		-- Send cast bar event
+		if cast_bar == 1 then
+			BossPhaseAbilityCast(self.team, "frostivus_boss_requiem_of_souls", "boss_nevermore_requiem_of_souls", delay)
+		elseif cast_bar == 2 then
+			BossPhaseAbilityCastAlt(self.team, "frostivus_boss_requiem_of_souls", "boss_nevermore_requiem_of_souls", delay)
+		end
+
+		-- Animate boss cast
+		Timers:CreateTimer(delay - 1.65, function()
+			boss:FaceTowards(boss:GetAbsOrigin() + Vector(0, -100, 0))
+			boss:EmitSound("Hero_Nevermore.ROS.Arcana.Cast")
+			StartAnimation(boss, {duration = 2.0, activity=ACT_DOTA_RAZE_3, rate=0.35})
 		end)
 
 		-- Wait [delay] seconds
 		Timers:CreateTimer(delay, function()
 
-			-- Go invis if there is at least one tree to hide in
-			if self:PickRandomFakeTree(center_point) ~= boss then
-				self:TreantInvisStart(boss)
+			-- If the fight has ended, do nothing else
+			if not altar_handle:HasModifier("modifier_altar_active") then
+				return nil
+			end
+
+			-- Successful cast sound
+			boss:EmitSound("Hero_Nevermore.ROS.Arcana")
+
+			-- Add souls from Necromastery
+			local line_count = line_amount + math.floor(boss:FindModifierByName("modifier_frostivus_necromastery"):GetStackCount() * 0.5)
+			boss:FindModifierByName("modifier_frostivus_necromastery"):SetStackCount(0)
+
+			-- Calculate projectile speed
+			local projectile_speeds = {}
+			local boss_loc = boss:GetAbsOrigin()
+			local north = boss_loc + Vector(0, 700, 0)
+			for i = 1, line_count do
+				projectile_speeds[i] = (RotatePosition(boss_loc, QAngle(0, (i - 1) * 360 / line_count, 0), north) - boss_loc):Normalized() * 700
+			end
+
+			-- Base projectile
+			local soul_projectile =	{
+				Ability				= boss:FindAbilityByName("frostivus_boss_requiem_of_souls"),
+				EffectName			= "particles/units/heroes/hero_nevermore/nevermore_requiemofsouls_line.vpcf",
+				vSpawnOrigin		= boss_loc,
+				fDistance			= 900,
+				fStartRadius		= 125,
+				fEndRadius			= 300,
+				Source				= boss,
+				bHasFrontalCone		= false,
+				bReplaceExisting	= false,
+				iUnitTargetTeam		= DOTA_UNIT_TARGET_TEAM_ENEMY,
+				iUnitTargetFlags	= DOTA_UNIT_TARGET_FLAG_NONE,
+				iUnitTargetType		= DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC,
+				fExpireTime 		= GameRules:GetGameTime() + 10.0,
+				bDeleteOnHit		= false,
+				vVelocity			= Vector(projectile_speeds[1].x, projectile_speeds[1].y, 0),
+				bProvidesVision		= false,
+				ExtraData			= {damage = line_damage}
+			}
+
+			-- Spawn projectiles and particles
+			for i = 1, line_count do
+				soul_projectile.vVelocity = Vector(projectile_speeds[i].x, projectile_speeds[i].y, 0)
+				ProjectileManager:CreateLinearProjectile(soul_projectile)
+
+				local line_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_nevermore/nevermore_requiemofsouls_line.vpcf", PATTACH_ABSORIGIN, boss)
+				ParticleManager:SetParticleControl(line_pfx, 0, boss_loc)
+				ParticleManager:SetParticleControl(line_pfx, 1, projectile_speeds[i])
+				ParticleManager:SetParticleControl(line_pfx, 2, Vector(0, 9 / 7, 0))
+				ParticleManager:ReleaseParticleIndex(line_pfx)
 			end
 		end)
 	end

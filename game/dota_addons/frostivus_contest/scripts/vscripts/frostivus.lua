@@ -8,18 +8,12 @@ PHASE_TIME[1] = 601
 PHASE_TIME[2] = 361
 PRESENT_SCORE_2 = 0
 PRESENT_SCORE_3 = 0
-PRESENT_SPAWN_TIME = 181
-PRESENT_WAVES = {}
-PRESENT_WAVES[1] = 150
-PRESENT_WAVES[2] = 150
-PRESENT_WAVES[3] = 150
-PRESENT_WAVES[4] = 150
-PRESENT_WAVES[5] = 120
-PRESENT_WAVES[6] = 120
+PRESENT_SPAWN_TIME = 180
 
 if IsInToolsMode() then 
-	PHASE_TIME[1] = 10
-	PHASE_TIME[2] = 20
+	PHASE_TIME[1] = 3
+	PHASE_TIME[2] = 3
+	PRESENT_SPAWN_TIME = 61
 end
 
 function Frostivus()
@@ -62,10 +56,10 @@ function Frostivus()
 	-- Launch some presents
 	local present_wave_count = 0
 	Timers:CreateTimer(0, function()
-		PresentWave(6 + 4 * present_wave_count)
+		PresentWave(7 + 5 * present_wave_count)
 		present_wave_count = present_wave_count + 1
 		if present_wave_count <= 6 then
-			return PRESENT_WAVES[present_wave_count]
+			return (PRESENT_SPAWN_TIME - 1)
 		end
 	end)
 end
@@ -94,7 +88,7 @@ function FrostivusPhase(PHASE)
 		-- Clean-up phase 2
 		StartPhaseThree()
 
-		-- Play phase 2 stinger
+		-- Play phase 3 stinger
 		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_spawn_Stinger")
 		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_spawn_Stinger")
 	end	

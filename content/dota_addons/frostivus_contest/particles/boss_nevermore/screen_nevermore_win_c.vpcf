@@ -16,7 +16,7 @@
 			m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
 			m_bAdditive = true
 			m_flOverbrightFactor = 10.0
-			m_hTexture = resource:"materials/particle/fire_particle_2/fire_particle_2.vtex"
+			m_hTexture = resource:"materials/particle/fire_particle_4/fire_particle_4_flat.vtex"
 		},
 	]
 	m_Operators = 
@@ -63,7 +63,8 @@
 	[
 		{
 			_class = "C_INIT_RandomRadius"
-			m_flRadiusMax = 8.0
+			m_flRadiusMax = 10.0
+			m_flRadiusMin = 3.0
 		},
 		{
 			_class = "C_INIT_RandomRotation"

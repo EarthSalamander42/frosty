@@ -52,7 +52,7 @@ function modifier_passive_bounty:OnIntervalThink()
 						extra_gold = extra_gold + 3
 						extra_exp = extra_exp + 3
 					end
-					if hero:HasModifier("modifier_frostivus_altar_aura_zeus") then
+					if hero:HasModifier("modifier_frostivus_altar_aura_zeus_buff") then
 						extra_gold = extra_gold + 3
 						extra_exp = extra_exp + 3
 					end

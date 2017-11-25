@@ -527,14 +527,15 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"frostivus_boss_venomous_gale"
-		"Ability2"					"frostivus_boss_scourge_ward"
-		"Ability3"					"frostivus_boss_vile_ward"
-		"Ability4"					"frostivus_boss_parasite"
-		"Ability5"					"frostivus_boss_poison_nova"
-		"Ability6"					"frostivus_boss_unwilling_host"
-		"Ability7"					"frostivus_boss_green_death"
-		"Ability8"					"frostivus_boss_innate"
+		"Ability1"					"frostivus_boss_plague_ward"
+		"Ability2"					"frostivus_boss_venomous_gale"
+		"Ability3"					"frostivus_boss_scourge_ward"
+		"Ability4"					"frostivus_boss_vile_ward"
+		"Ability5"					"frostivus_boss_parasite"
+		"Ability6"					"frostivus_boss_poison_nova"
+		"Ability7"					"frostivus_boss_unwilling_host"
+		"Ability8"					"frostivus_boss_green_death"
+		"Ability9"					"frostivus_boss_innate"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1640,11 +1641,15 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"frostivus_boss_innate"
-		"Ability2"					"frostivus_boss_necromastery"
-		"Ability3"					"frostivus_boss_requiem_of_souls"
-		"Ability4"					""
-		"Ability5"					""
+		"Ability1"					"frostivus_boss_necromastery"
+		"Ability2"					"frostivus_boss_immolation"
+		"Ability3"					"frostivus_boss_ragna_blade"
+		"Ability4"					"frostivus_boss_meteorain"
+		"Ability5"					"frostivus_boss_shadowraze"
+		"Ability6"					"frostivus_boss_soul_harvest"
+		"Ability7"					"frostivus_boss_nevermore"
+		"Ability8"					"frostivus_boss_requiem_of_souls"
+		"Ability9"					"frostivus_boss_innate"
 
 		// Armor
 		//----------------------------------------------------------------
@@ -1717,21 +1722,21 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"frostivus_mega_greevil"
-		"Ability2"					""
-		"Ability3"					""
+		"Ability2"					"frostivus_boss_poison_nova"
+		"Ability3"					"frostivus_boss_overgrowth"
 		"Ability4"					""
 		"Ability5"					""
 
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"10"
-		"MagicalResistance"			"25"
+		"ArmorPhysical"				"0"
+		"MagicalResistance"			"0"
 
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-		"AttackDamageMin"			"800"
-		"AttackDamageMax"			"800"
+		"AttackDamageMin"			"700"
+		"AttackDamageMax"			"700"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackRate"				"1.5"
 		"AttackAnimationPoint"		"0.0"
@@ -1752,12 +1757,12 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"1000"
+		"MovementSpeed"				"100"
 		"MovementTurnRate"			"1.0"
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"150000"
+		"StatusHealth"				"200000"
 		"StatusHealthRegen"			"0.0"
 		"StatusMana"				"3000"
 		"StatusManaRegen"			"10"

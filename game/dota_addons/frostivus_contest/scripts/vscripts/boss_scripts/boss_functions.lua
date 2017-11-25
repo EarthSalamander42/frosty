@@ -110,6 +110,7 @@ function UnlockArena(altar, victory, team, aura_ability)
 	end
 
 	-- Stop altar controlled modifier
+	altar_handle:RemoveModifierByName("modifier_frostivus_immolation")
 	altar_handle:RemoveModifierByName("modifier_altar_active")
 end
 
@@ -294,6 +295,7 @@ function SpawnVenomancer(altar)
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "venomancer", altar_handle = altar})
 
 	-- Abilities
+	boss:FindAbilityByName("frostivus_boss_plague_ward"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_venomous_gale"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_scourge_ward"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_vile_ward"):SetLevel(1)
@@ -386,9 +388,15 @@ function SpawnNevermore(altar)
 	boss:AddNewModifier(nil, nil, "capture_start_trigger", {boss_name = "nevermore", altar_handle = altar})
 
 	-- Abilities
-	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_necromastery"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_immolation"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_ragna_blade"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_meteorain"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_shadowraze"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_soul_harvest"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_nevermore"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_requiem_of_souls"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_innate"):SetLevel(1)
 
 	-- Cosmetics
 	boss:SetRenderColor(0, 0, 0)
@@ -440,6 +448,8 @@ function SpawnMegaGreevil()
 
 	-- Abilities
 	boss:FindAbilityByName("frostivus_mega_greevil"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_overgrowth"):SetLevel(1)
+	boss:FindAbilityByName("frostivus_boss_poison_nova"):SetLevel(1)
 
 	-- Cosmetics
 	boss:SetRenderColor(25, 0, 0)
@@ -565,6 +575,7 @@ function StartPhaseTwo()
 	for i = 1, 7 do
 		local altar_handle = Entities:FindByName(nil, "altar_"..i)
 		altar_handle:RemoveModifierByName("modifier_altar_active")
+		altar_handle:RemoveModifierByName("modifier_frostivus_immolation")
 		if altar_handle.arena_fence_pfx then
 			ParticleManager:DestroyParticle(altar_handle.arena_fence_pfx, true)
 			ParticleManager:ReleaseParticleIndex(altar_handle.arena_fence_pfx)

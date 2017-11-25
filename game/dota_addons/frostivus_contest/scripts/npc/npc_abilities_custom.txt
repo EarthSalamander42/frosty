@@ -274,6 +274,19 @@
 	}
 
 	//=================================================================================================================
+	// Venomancer: Plague Ward
+	//=================================================================================================================
+	"frostivus_boss_plague_ward"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"venomancer_plague_ward"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
 	// Venomancer: Scourge Ward
 	//=================================================================================================================
 	"frostivus_boss_scourge_ward"
@@ -362,9 +375,88 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"nevermore_necromastery"
 		"ScriptFile"					"boss_scripts/boss_abilities/necromastery.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Nevermore: Immolation
+	//=================================================================================================================
+	"frostivus_boss_immolation"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"custom/immolation"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Nevermore: Ragna Blade
+	//=================================================================================================================
+	"frostivus_boss_ragna_blade"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"custom/ragna_blade"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Nevermore: Meteor Rain
+	//=================================================================================================================
+	"frostivus_boss_meteorain"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"custom/meteorain"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Nevermore: Shadowraze
+	//=================================================================================================================
+	"frostivus_boss_shadowraze"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"nevermore_shadowraze2"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Nevermore: Soul Harvest
+	//=================================================================================================================
+	"frostivus_boss_soul_harvest"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_lua"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"custom/soul_harvest"
+		"ScriptFile"					"boss_scripts/boss_abilities/soul_harvest.lua"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
+	// Nevermore: Nevermore
+	//=================================================================================================================
+	"frostivus_boss_nevermore"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"nevermore_dark_lord"
 		"MaxLevel"						"1"
 	}
 
@@ -376,8 +468,8 @@
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_lua"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
-		"AbilityTextureName"			"nevermore_requiem_of_souls"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"nevermore_requiem"
 		"ScriptFile"					"boss_scripts/boss_abilities/requiem_of_souls.lua"
 		"MaxLevel"						"1"
 	}
@@ -496,10 +588,9 @@
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"ability_lua"
+		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"treant_natures_guise"
-		"ScriptFile"					"boss_scripts/boss_abilities/natures_guise.lua"
 		"MaxLevel"						"1"
 	}
 

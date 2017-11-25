@@ -19,7 +19,6 @@ function Precache(context)
 	LinkLuaModifier("modifier_greevil_captured_owner", "boss_scripts/greevil_innate.lua", LUA_MODIFIER_MOTION_NONE )
 	LinkLuaModifier("modifier_greevil_captured_greevil", "boss_scripts/greevil_innate.lua", LUA_MODIFIER_MOTION_NONE )
 
-
 	-- Stuff
 	PrecacheResource("particle_folder", "particles/hero", context)
 	PrecacheResource("particle_folder", "particles/ambient", context)
@@ -76,6 +75,9 @@ function Precache(context)
 	PrecacheResource("particle_folder", "particles/boss_nevermore/", context)
 	PrecacheResource("particle_folder", "particles/units/heroes/hero_nevermore/", context)
 	PrecacheResource("particle_folder", "particles/econ/items/shadow_fiend/sf_fire_arcana", context)
+	PrecacheResource("particle", "particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_fire_arcana.vpcf", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_invoker.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_lina.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_nevermore.vsndevts", context)
 
 	-- Models can also be precached by folder or individually
