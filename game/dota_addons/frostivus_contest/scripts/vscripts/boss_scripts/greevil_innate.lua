@@ -173,7 +173,7 @@ function modifier_greevil_captured_owner:OnDeath(keys)
 end
 
 function modifier_greevil_captured_owner:GetModifierMoveSpeedBonus_Percentage()
-	return -(20 + 5 * self:GetStackCount())
+	return -(15 + 7.5 * self:GetStackCount())
 end
 
 function modifier_greevil_captured_owner:GetModifierProvidesFOWVision()
@@ -232,7 +232,7 @@ function modifier_greevil_captured_greevil:OnIntervalThink()
 		greevil:SetAbsOrigin(self.capturer:GetAbsOrigin() - self.capturer:GetForwardVector() * 150)
 
 		-- Search for an altar to end this Greevil's misery
-		local nearby_units = FindUnitsInRadius(self.capturer:GetTeam(), self.capturer:GetAbsOrigin(), nil, 400, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
+		local nearby_units = FindUnitsInRadius(self.capturer:GetTeam(), self.capturer:GetAbsOrigin(), nil, 425, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BUILDING, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
 		for _, unit in pairs(nearby_units) do
 			if unit:GetUnitName() == "npc_dota_altar" or unit:GetUnitName() == "npc_dota_altar_minor" then
 
@@ -243,13 +243,13 @@ function modifier_greevil_captured_greevil:OnIntervalThink()
 
 				-- Calculate gifts
 				local greevil_pos = greevil:GetAbsOrigin()
-				local present_amount = 1
+				local present_amount = 2
 				if greevil:GetUnitName() == "npc_frostivus_greevil_advanced" then
-					present_amount = 2
-				elseif greevil:GetUnitName() == "npc_frostivus_greevil_super" then
 					present_amount = 3
-				elseif greevil:GetUnitName() == "npc_frostivus_greevil_gold" then
+				elseif greevil:GetUnitName() == "npc_frostivus_greevil_super" then
 					present_amount = 5
+				elseif greevil:GetUnitName() == "npc_frostivus_greevil_gold" then
+					present_amount = 7
 				end
 
 				-- Success stinger

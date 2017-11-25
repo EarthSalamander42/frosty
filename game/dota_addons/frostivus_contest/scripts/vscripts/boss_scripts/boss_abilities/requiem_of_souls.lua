@@ -10,12 +10,14 @@ function frostivus_boss_requiem_of_souls:OnProjectileHit_ExtraData(target, locat
 	if IsServer() then
 		if target then
 			local caster = self:GetCaster()
+			local damage = ExtraData.damage
 
 			-- Play hit sound
-			--target:EmitSound("Hero_Venomancer.VenomousGaleImpact")
+			target:EmitSound("Hero_Nevermore.RequiemOfSouls.Damage")
 
-			-- Apply gale modifier
-			--target:AddNewModifier(caster, self, "modifier_frostivus_venomancer_venomous_gale", ExtraData)
+			-- Deal damage
+			local damage_dealt = ApplyDamage({victim = target, attacker = caster, ability = nil, damage = damage * RandomInt(90, 110) * 0.01, damage_type = DAMAGE_TYPE_MAGICAL})
+			SendOverheadEventMessage(nil, OVERHEAD_ALERT_DAMAGE, target, damage_dealt, nil)
 		end
 	end
 end

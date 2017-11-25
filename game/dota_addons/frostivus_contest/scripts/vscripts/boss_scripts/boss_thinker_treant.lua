@@ -228,7 +228,7 @@ function boss_thinker_treant:OnIntervalThink()
 		-- Overgrowth + Rock Smash
 		if self.boss_timer > 42.5 and not self.events[11] then
 			boss:MoveToPosition(altar_loc + Vector(0, 50, 0))
-			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 4.0, 1)
+			self:Overgrowth(altar_loc, altar_entity, 2.5, 500, 50, 4.0, 1)
 			self.events[11] = true
 		end
 
@@ -268,7 +268,7 @@ function boss_thinker_treant:OnIntervalThink()
 		end
 
 		if self.boss_timer > 59 and not self.events[18] then
-			self:Overgrowth(altar_loc, altar_entity, 3.5, 450, 50, 5.5, 2)
+			self:Overgrowth(altar_loc, altar_entity, 3.5, 500, 50, 5.5, 2)
 			self.events[18] = true
 		end
 
@@ -305,7 +305,7 @@ function boss_thinker_treant:OnIntervalThink()
 
 		if self.boss_timer > 89 and not self.events[24] then
 			boss:MoveToPosition(self.random_constants[4])
-			self:Overgrowth(altar_loc, altar_entity, 3.0, 450, 50, 4.0, 1)
+			self:Overgrowth(altar_loc, altar_entity, 3.0, 500, 50, 4.0, 1)
 			self.events[24] = true
 		end
 
@@ -338,7 +338,7 @@ function boss_thinker_treant:OnIntervalThink()
 		end
 
 		if self.boss_timer > 103 and not self.events[30] then
-			self:Overgrowth(altar_loc, altar_entity, 2.5, 450, 50, 5.5, 1)
+			self:Overgrowth(altar_loc, altar_entity, 2.5, 500, 50, 5.5, 1)
 			self.events[30] = true
 		end
 
@@ -396,7 +396,7 @@ function boss_thinker_treant:OnIntervalThink()
 
 		if self.boss_timer > 134 and not self.events[40] then
 			boss:MoveToPosition(self.random_constants[6])
-			self:Overgrowth(altar_loc, altar_entity, 3.0, 450, 50, 4.0, 1)
+			self:Overgrowth(altar_loc, altar_entity, 3.0, 500, 50, 4.0, 1)
 			self.events[40] = true
 		end
 

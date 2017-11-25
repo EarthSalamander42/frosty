@@ -11,13 +11,13 @@
 	"addonname"										"The Degreeviling"
 
 	"frostivus_phase_0"								"Goal"
-	"frostivus_phase_0_desc"						"The five elemental altars of Icewrack have been taken over by greevils, who brainwashed their guardians! Defeat those powerful bosses in order to gain the favor of each altar. \n\n- Defeating a boss awards presents, gold, experience, and control over its elemental altar. \n- Collecting presents grants gold and experience to your entire team. \nGood luck!"
+	"frostivus_phase_0_desc"						"Greevils have taken over Icewrack!\n\nWith the Blue Heart crystal in their clutches, snow has stopped falling in the world. Recover the artifact and save Frostivus - after all, without snow, there's no truce on the lanes!\n\n- Several tasks during the game will grant you presents. Upon picking up one of those, your entire team will gain 50 gold and 50 experience.\n\nGood luck!"
 	"frostivus_phase_1"								"Phase 1"
-	"frostivus_phase_1_desc"						"- Controlling an altar allows you to respawn on it, teleport to it, and benefit from its guardian’s global aura. \n\n- Tusk is engaged in combat with a Mega Greevil at the central altar. Periodically, he will drop a huge amount of presents in the area. Be there to collect them!"
+	"frostivus_phase_1_desc"						"The guardians of the five elemental altars of Icewrack have been mind-controlled by Greevils! Tusk is still holding out, but he won't last long - help him by reconquering the other altars!\n\n- Defeating a guardian grants presents, gold, and experience.\n- Conquering an altar allows you to respawn on it, teleport to it, and increases your passive gold and experience income.\n- Each altar grants a powerful global aura to the team that owns it.\n- Every few minutes, Tusk will manage to Walrus PUNCH!! his greevil, causing it to spill its hidden presents. Make sure to collect them before the enemy team!"
 	"frostivus_phase_2"								"Phase 2"
-	"frostivus_phase_2_desc"						"The greevils have been chased out of hiding! \nCapture and take them to your base or one of your altars, and you'll receive the presents they've been hiding. \n\n- Attack greevils to coax them into following you by force. \n- While carrying a greevil, you will be slowed, disarmed, silenced, and muted. \n- Kill enemy players to make them drop their greevils!"
+	"frostivus_phase_2_desc"						"The greevils have been chased out of hiding!\n\n- Capture greevils by attacking them, and take them to your base or one of your altars.\n- Successfully taking a greevil to your zone of influence will award presents.\n- Bigger greevils give more presents!\n- While carrying a greevil, you become slow and extremely vulnerable.\n- Killing a player who is carrying a greevil frees it to bbe caught again.\n\nPlay as a team!"
 	"frostivus_phase_3"								"Phase 3"
-	"frostivus_phase_3_desc"						"Tusk has been taken down by the Mega Greevil! \nJoin forces with the enemy team to take down the unstoppable monstrosity. \n\n- As your team deals damage to the Mega Greevil, it will move to the enemy base. \n- If the Mega Greevil reaches a team's base, the other team automatically wins. \n- If you manage to kill the Mega Greevil while keeping it from destroying any of the bases, both teams win!"
+	"frostivus_phase_3_desc"						"Tusk has been taken down by the Mega Greevil! You'll have to join forces with the enemy team to take down the unstoppable monstrosity.\n\n- As your team deals damage to the Mega Greevil, it will move to the enemy base.\n- If the Mega Greevil reaches a team's base, the other team automatically wins.\n- If you manage to kill the Mega Greevil without destroying any of the bases, both teams win, and Frostivus is saved!"
 
 	//Picking Screen
 	"loading_pre_game"				"Loading heroes, please wait..."
@@ -32,7 +32,7 @@
 	"loading_heroes_button"			"Loading hero..."
 	"repick_button"					"Repick Hero"
 	"enter_game_button"				"Enter Game"
-	"welcome_label"					"Welcome to the Degreeviling"
+	"welcome_label"					"Welcome to the Degreeviling!"
 	"new_hero"						"New Hero!"
 	"disabled_hero"					"Disabled Hero!"
 	"picked_hero"					"Picked hero!"

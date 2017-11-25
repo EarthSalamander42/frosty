@@ -274,6 +274,19 @@
 	}
 
 	//=================================================================================================================
+	// Venomancer: Plague Ward
+	//=================================================================================================================
+	"frostivus_boss_plague_ward"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"venomancer_plague_ward"
+		"MaxLevel"						"1"
+	}
+
+	//=================================================================================================================
 	// Venomancer: Scourge Ward
 	//=================================================================================================================
 	"frostivus_boss_scourge_ward"
@@ -575,10 +588,9 @@
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
-		"BaseClass"						"ability_lua"
+		"BaseClass"						"ability_datadriven"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityTextureName"			"treant_natures_guise"
-		"ScriptFile"					"boss_scripts/boss_abilities/natures_guise.lua"
 		"MaxLevel"						"1"
 	}
 

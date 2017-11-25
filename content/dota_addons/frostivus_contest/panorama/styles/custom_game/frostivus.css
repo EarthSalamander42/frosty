@@ -433,8 +433,8 @@
 /* Tutorial HUD */
 #TutorialPanel {
 	width: 844px;
-	height: 800px;
-	margin-top: 4%;
+	height: 890px;
+	margin-top: 0%;
 	background-image: url("s2r://panorama/images/custom_game/tutorial.png");
 	background-position: 50% 0%;
 	align: center top;
@@ -443,16 +443,17 @@
 
 #TutorialTitle {
 	margin-top: 5%;
-	color: dodgerblue;
+	color: white;
+	text-shadow: 4px 4px #000000;
 	font-weight: bold;
 	text-align: center;
-	font-size: 28px;
+	font-size: 32px;
 	align: center top;
 }
 
 #TutorialTextPanel {
 	width: 700px;
-	height: 270px;
+	height: 355px;
 	align: center bottom;
 	flow-children: down;
 }

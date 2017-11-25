@@ -7,7 +7,7 @@
 	m_BoundingBoxMax = [ 16384.0, 16384.0, 16384.0 ]
 	m_flCullRadius = -1.0
 	m_flConstantRadius = 50.0
-	m_ConstantColor = [ 0, 255, 0, 85 ]
+	m_ConstantColor = [ 255, 140, 0, 85 ]
 	m_bShouldSort = false
 	m_bScreenSpaceEffect = true
 	m_Renderers = 
