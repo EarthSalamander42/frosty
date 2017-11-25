@@ -196,6 +196,7 @@ function boss_thinker_nevermore:OnIntervalThink()
 						iMoveSpeed = 1200,
 						iVisionRadius = 0,
 						iSourceAttachment = DOTA_PROJECTILE_ATTACHMENT_ATTACK_1,
+
 					--	iVisionTeamNumber = boss:GetTeamNumber(),
 						ExtraData = {damage = damage}
 					}

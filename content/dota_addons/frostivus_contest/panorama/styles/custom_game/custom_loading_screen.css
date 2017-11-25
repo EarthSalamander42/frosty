@@ -45,7 +45,7 @@
 	width: 100%;
 	height: 100%;
 	overflow: clip;
-	background-image: url("file://{images}/custom_game/loading_screen/loading_screen_bg.jpg");
+	background-image: url("file://{images}/custom_game/loading_screen/loading_screen.png");
 	background-repeat: no-repeat;
 	background-position: -275px 0px;
 	background-size: 100% 100%;

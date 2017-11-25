@@ -167,6 +167,8 @@ function FrostivusPresentCountdown(tick)
 
 		if nCOUNTDOWNTIMER_PRESENT < 1 then
 			nCOUNTDOWNTIMER_PRESENT = PRESENT_SPAWN_TIME
+			-- Launch some presents
+			PresentWave(6)
 		end
 
 		-- Stop counting down after phase 2
