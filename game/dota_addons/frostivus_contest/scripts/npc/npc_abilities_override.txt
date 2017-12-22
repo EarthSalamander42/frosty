@@ -1779,7 +1779,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"hp_leech_percent"		"0.8 1.2 1.6 2.0"
+				"hp_leech_percent"		"0.4 0.6 0.8 1.0"
 				"LinkedSpecialBonus"	"special_bonus_unique_lifestealer_3"
 			}
 		}
@@ -1795,7 +1795,7 @@
 			"01"
 			{
 				"var_type"				"FIELD_FLOAT"
-				"value"					"1.0"
+				"value"					"0.5"
 			}
 		}
 	}
@@ -1807,7 +1807,7 @@
 	{
 		"AbilityCastRange"				"400 500 600 700"
 
-		"AbilityCooldown"				"26 24 22 20"
+		"AbilityCooldown"				"26 22 18 14"
 
 		"AbilityManaCost"				"90 80 70 60"
 
@@ -1821,7 +1821,7 @@
 			"02"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"heal_percent"			"50"
+				"heal_percent"			"50 60 70 80"
 				"LinkedSpecialBonus"	"special_bonus_unique_lifestealer_2"
 			}
 			"03"

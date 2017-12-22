@@ -120,7 +120,7 @@ local target = keys.unit
 			-- Respawn the boss and grant it its new capture detection modifier
 			local boss
 			local current_level = target:GetLevel()
-			Timers:CreateTimer(15, function()
+			Timers:CreateTimer(5, function()
 				boss = SpawnTreant(self.altar_handle)
 
 				-- Increase the new boss' power

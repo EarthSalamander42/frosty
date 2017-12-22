@@ -128,16 +128,16 @@ function boss_thinker_mega_greevil:OnIntervalThink()
 
 		-- Calculate destination and current speed
 		local delta = 0
-		if self.damage_taken[DOTA_TEAM_GOODGUYS] >= self.damage_taken[DOTA_TEAM_BADGUYS] then
+		if self.damage_taken[DOTA_TEAM_GOODGUYS] > self.damage_taken[DOTA_TEAM_BADGUYS] then
 			boss:MoveToPosition(self.dire_altar:GetAbsOrigin())
 			delta = self.damage_taken[DOTA_TEAM_GOODGUYS] - self.damage_taken[DOTA_TEAM_BADGUYS]
-		else
+		elseif self.damage_taken[DOTA_TEAM_GOODGUYS] < self.damage_taken[DOTA_TEAM_BADGUYS] then
 			boss:MoveToPosition(self.radiant_altar:GetAbsOrigin())
 			delta = self.damage_taken[DOTA_TEAM_BADGUYS] - self.damage_taken[DOTA_TEAM_GOODGUYS]
 		end
 
 		self.rage_timer = self.rage_timer + 0.5
-		self:SetStackCount(2 * self.rage_timer + 300 * delta / math.max(boss:GetHealth(), 10000) + 300 * (boss:GetMaxHealth() - boss:GetHealth()) / boss:GetMaxHealth())
+		self:SetStackCount(2 * self.rage_timer + 200 * delta / math.max(boss:GetHealth(), 10000) + 200 * (boss:GetMaxHealth() - boss:GetHealth()) / boss:GetMaxHealth())
 
 		-- Check for the win condition
 		if boss:GetAbsOrigin().x < -4700 then
@@ -322,7 +322,7 @@ function boss_thinker_mega_greevil:RagnaBlade(boss, boss_loc, delay, target_amou
 				ParticleManager:ReleaseParticleIndex(impact_pfx)
 
 				-- Deal damage
-				local damage_dealt = ApplyDamage({victim = target, attacker = boss, ability = nil, damage = target:GetHealth() - RandomInt(1, 9), damage_type = DAMAGE_TYPE_PURE})
+				local damage_dealt = ApplyDamage({victim = target, attacker = boss, ability = nil, damage = target:GetHealth() * 0.5, damage_type = DAMAGE_TYPE_PURE})
 				SendOverheadEventMessage(nil, OVERHEAD_ALERT_DAMAGE, target, damage_dealt, nil)
 			end
 		end)

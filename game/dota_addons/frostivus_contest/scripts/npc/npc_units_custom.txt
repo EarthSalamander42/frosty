@@ -1729,14 +1729,14 @@
 
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"40"
-		"MagicalResistance"			"60"
+		"ArmorPhysical"				"100"
+		"MagicalResistance"			"75"
 
 		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_NO_ATTACK"
-		"AttackDamageMin"			"700"
-		"AttackDamageMax"			"700"
+		"AttackDamageMin"			"600"
+		"AttackDamageMax"			"600"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackRate"				"1.5"
 		"AttackAnimationPoint"		"0.0"
@@ -1762,7 +1762,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"666666"
+		"StatusHealth"				"333333"
 		"StatusHealthRegen"			"0.0"
 		"StatusMana"				"10000"
 		"StatusManaRegen"			"10"
@@ -1788,10 +1788,10 @@
 		// General
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_hero"
-		"Model"						"models/heroes/tuskarr/tuskarr.vmdl"
+		"Model"						"models/heroes/oracle/crystal_ball.vmdl"
 		"SoundSet"					"Creep_Good_Range"
 		"Level"						"1"
-		"ModelScale"				"2.1"
+		"ModelScale"				"5.0"
 		"MinimapIcon"				"minimap_shield"
 		"MinimapIconSize"			"256"
 		
@@ -1805,8 +1805,8 @@
 
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"
-		"MagicalResistance"			"0"
+		"ArmorPhysical"				"20"
+		"MagicalResistance"			"50"
 
 		// Attack
 		//----------------------------------------------------------------
@@ -1838,7 +1838,7 @@
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"100000"
+		"StatusHealth"				"50000"
 		"StatusHealthRegen"			"0.0"
 		"StatusMana"				"3000"
 		"StatusManaRegen"			"10"
