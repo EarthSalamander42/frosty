@@ -338,11 +338,11 @@ function GameMode:InitGameMode()
 	-- Game rules setup
 	-------------------------------------------------------------------------------------------------
 
-	HERO_SELECTION_TIME = 45.0 + 10.0 -- Add 10 additional seconds because there's a delay between entering game and hero applied
+	HERO_SELECTION_TIME = 30.0 + 10.0 -- Add 10 additional seconds because there's a delay between entering game and hero applied
 	if IsInToolsMode() then HERO_SELECTION_TIME = 5.0 end
 	GameRules:SetUseUniversalShopMode(true)
 	GameRules:SetHeroSelectionTime(0.0)
-	GameRules:SetPreGameTime(40.0 + HERO_SELECTION_TIME)
+	GameRules:SetPreGameTime(10.0 + HERO_SELECTION_TIME)
 	GameRules:SetPostGameTime(60.0)
 	GameRules:SetShowcaseTime(0.0)
 	GameRules:SetStrategyTime(0.0)

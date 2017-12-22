@@ -398,19 +398,29 @@ function HeroSelection:AssignHero(player_id, hero_name)
 		end)
 
 		-- Set up initial gold
-		-- local has_randomed = PlayerResource:HasRandomed(player_id)
-		-- This randomed variable gets reset when the player chooses to Repick, so you can detect a rerandom
-		local has_randomed = HeroSelection.playerPickState[player_id].random_state
-		local has_repicked = PlayerResource:CustomGetHasRepicked(player_id)
+		local player_team_size = 0
+		for pid = 0, PlayerResource:GetPlayerCount() -1 do
+			if PlayerResource:GetPlayer(pid) then
+				if PlayerResource:GetTeam(pid) == PlayerResource:GetTeam(player_id) then
+					player_team_size = player_team_size + 1
+				end
+			end
+		end
 
-		if has_repicked and has_randomed then
-			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD +100, false)
-		elseif has_repicked then
-			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD -100, false)
-		elseif has_randomed then
-			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD +200, false)
+		if player_team_size <= 1 then
+			PlayerResource:SetGold(player_id, 8000, false)
+			hero:AddExperience(6740, DOTA_ModifyXP_HeroKill, false, true) -- level 12
+		elseif player_team_size == 2 then
+			PlayerResource:SetGold(player_id, 5000, false)
+			hero:AddExperience(4280, DOTA_ModifyXP_HeroKill, false, true) -- level 9
+		elseif player_team_size == 3 then
+			PlayerResource:SetGold(player_id, 3000, false)
+			hero:AddExperience(2300, DOTA_ModifyXP_HeroKill, false, true) -- level 6
+		elseif player_team_size == 4 then
+			PlayerResource:SetGold(player_id, 1500, false)
+			hero:AddExperience(600, DOTA_ModifyXP_HeroKill, false, true) -- level 3
 		else
-			PlayerResource:SetGold(player_id, HERO_INITIAL_GOLD, false)
+			PlayerResource:SetGold(player_id, 900, false)
 		end
 
 		-- fail-safe, check it really needed else remove it

@@ -1717,7 +1717,7 @@
 		"Level"						"1"
 		"ModelScale"				"4.0"
 		"MinimapIcon"				"minimap_death"
-		"MinimapIconSize"			"512"
+		"MinimapIconSize"			"256"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -1729,8 +1729,8 @@
 
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"
-		"MagicalResistance"			"0"
+		"ArmorPhysical"				"40"
+		"MagicalResistance"			"60"
 
 		// Attack
 		//----------------------------------------------------------------
@@ -1757,14 +1757,14 @@
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"				"100"
+		"MovementSpeed"				"70"
 		"MovementTurnRate"			"1.0"
 
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"200000"
+		"StatusHealth"				"666666"
 		"StatusHealthRegen"			"0.0"
-		"StatusMana"				"3000"
+		"StatusMana"				"10000"
 		"StatusManaRegen"			"10"
 
 		// Team
@@ -1793,7 +1793,7 @@
 		"Level"						"1"
 		"ModelScale"				"2.1"
 		"MinimapIcon"				"minimap_shield"
-		"MinimapIconSize"			"512"
+		"MinimapIconSize"			"256"
 		
 		// Abilities
 		//----------------------------------------------------------------

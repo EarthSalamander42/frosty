@@ -6,26 +6,10 @@ var playerPanels = {};
 
 function UpdateTimer( data )
 {
-	var timerText = "";
-	timerText += data.timer_minute_10;
-	timerText += data.timer_minute_01;
-	timerText += ":";
-	timerText += data.timer_second_10;
-	timerText += data.timer_second_01;
-
-	$( "#Timer" ).text = timerText + " left";
 }
 
 function UpdatePresentTimer( data )
 {
-	var timerText = "";
-	timerText += data.timer_minute_10;
-	timerText += data.timer_minute_01;
-	timerText += ":";
-	timerText += data.timer_second_10;
-	timerText += data.timer_second_01;
-
-	$( "#PresentTimer" ).text = timerText + " left till next present drop";
 }
 
 function Phase(args)
