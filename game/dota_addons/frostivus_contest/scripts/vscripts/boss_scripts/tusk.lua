@@ -48,8 +48,6 @@ end
 function modifier_frostivus_tusk:CheckState()
 	if IsServer() then
 		local state = {
-			[MODIFIER_STATE_INVULNERABLE] = true,
-			[MODIFIER_STATE_NO_HEALTH_BAR] = true,
 			[MODIFIER_STATE_NO_UNIT_COLLISION] = true,
 			[MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY] = true
 		}
@@ -61,7 +59,8 @@ function modifier_frostivus_tusk:DeclareFunctions()
 	local funcs = {
 		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
 		MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE_MIN,
-		MODIFIER_PROPERTY_MOVESPEED_MAX
+		MODIFIER_PROPERTY_MOVESPEED_MAX,
+		MODIFIER_EVENT_ON_DEATH
 	}
 	return funcs
 end
@@ -76,4 +75,15 @@ end
 
 function modifier_frostivus_tusk:GetModifierMoveSpeed_Max()
 	return 1000
+end
+
+function modifier_frostivus_tusk:OnDeath(keys)
+	if keys.unit == self:GetParent() then
+		StartPhaseTwo()
+		StartPhaseThree()
+
+		-- Play phase 3 stinger
+		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_spawn_Stinger")
+		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_spawn_Stinger")
+	end
 end

@@ -77,7 +77,7 @@ local target = keys.unit
 			-- Drop presents according to boss difficulty
 			local current_power = target:FindModifierByName("modifier_frostivus_boss"):GetStackCount()
 			local altar_loc = Entities:FindByName(nil, self.altar_handle):GetAbsOrigin()
-			local present_amount = 3 + current_power
+			local present_amount = 5 + 2 * current_power
 			Timers:CreateTimer(0, function()
 				local item = CreateItem("item_frostivus_present", nil, nil)
 				CreateItemOnPositionForLaunch(target_loc, item)

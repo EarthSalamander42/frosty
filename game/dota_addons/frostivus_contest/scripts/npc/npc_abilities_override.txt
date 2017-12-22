@@ -2633,11 +2633,12 @@
 			{
 				"var_type"					"FIELD_FLOAT"
 				"maximum_purge_duration"	"2.0"
+				"LinkedSpecialBonus"		"special_bonus_unique_oracle_2"
 			}
 			"05"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"radius"					"400"
+				"radius"					"450"
 			}
 			"06"
 			{
@@ -2834,13 +2835,13 @@
 			"01"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"crit_bonus"				"230 340 450"
+				"crit_chance"				"15"
+				"LinkedSpecialBonus"		"special_bonus_unique_phantom_assassin_2"
 			}
 			"02"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"crit_chance"				"15"
-				"LinkedSpecialBonus"		"special_bonus_unique_phantom_assassin_2"
+				"crit_bonus"				"230 340 450"
 			}
 		}
 	}
@@ -3634,8 +3635,10 @@
 			}
 			"03"
 			{
-				"var_type"					"FIELD_INTEGER"
-				"total_cast_time_tooltip"	"2"
+				"var_type"						"FIELD_FLOAT"
+				"total_cast_time_tooltip"		"2.0"
+				"LinkedSpecialBonus"			"special_bonus_unique_sniper_4"
+				"LinkedSpecialBonusOperation"	"SPECIAL_BONUS_SUBTRACT"
 			}
 			"04"
 			{
@@ -4558,7 +4561,7 @@
 		"AbilityCooldown"				"50 45 40"
 
 		"AbilitySpecial"
-		{			
+		{
 			"01"
 			{
 				"var_type"					"FIELD_FLOAT"
@@ -4573,6 +4576,7 @@
 			{
 				"var_type"					"FIELD_FLOAT"
 				"duration"					"4.0"
+				"LinkedSpecialBonus"		"special_bonus_unique_ursa_3"
 			}
 			"04"
 			{
@@ -5224,6 +5228,7 @@
 			{	
 				"var_type"				"FIELD_FLOAT"
 				"duration"				"3.0 3.75 4.5"
+				"LinkedSpecialBonus"	"special_bonus_unique_winter_wyvern_3"
 			}
 		}
 	}

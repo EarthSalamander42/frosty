@@ -5,15 +5,15 @@ FROSTIVUS_WINNER = 2
 COUNT_DOWN = 1
 PHASE_TIME = {}
 PHASE_TIME[1] = 601
-PHASE_TIME[2] = 361
+PHASE_TIME[2] = 1
 PRESENT_SCORE_2 = 0
 PRESENT_SCORE_3 = 0
-PRESENT_SPAWN_TIME = 180
+PRESENT_SPAWN_TIME = 10
 
 if IsInToolsMode() then 
-	PHASE_TIME[1] = 3
-	PHASE_TIME[2] = 3
-	PRESENT_SPAWN_TIME = 61
+	PHASE_TIME[1] = 601
+	PHASE_TIME[2] = 1
+	PRESENT_SPAWN_TIME = 10
 end
 
 function Frostivus()
@@ -36,14 +36,8 @@ function Frostivus()
 		end
 	end
 
-	PHASE = 1
-	nCOUNTDOWNTIMER = PHASE_TIME[PHASE] -- 481 / 8 Min
 	CustomNetTables:SetTableValue("game_options", "radiant", {score = 0})
 	CustomNetTables:SetTableValue("game_options", "dire", {score = 0})
-	CustomGameEventManager:Send_ServerToAllClients("show_timer", {})
-	FrostivusPhase(PHASE)
-	FrostivusCountdown(1.0)
-	FrostivusPresentCountdown(1.0)
 
 	-- Spawn bosses
 	SpawnZeus(BOSS_SPAWN_POINT_TABLE.zeus)
@@ -53,128 +47,12 @@ function Frostivus()
 	SpawnTusk()
 	SpawnMegaGreevil()
 
-	-- Launch some presents
+	-- Launch presents every few seconds
 	local present_wave_count = 0
 	Timers:CreateTimer(0, function()
-		PresentWave(7 + 5 * present_wave_count)
+		PresentWave(4 + math.floor(0.34 * present_wave_count) )
 		present_wave_count = present_wave_count + 1
-		if present_wave_count <= 6 then
-			return (PRESENT_SPAWN_TIME - 1)
-		end
-	end)
-end
-
-function FrostivusPhase(PHASE)
-	print("Phase: ", PHASE)
-	CustomGameEventManager:Send_ServerToAllClients("frostivus_phase", {Phase = tostring(PHASE)})
-
-	-- Phase transitions
-	if PHASE == 2 then
-
-		-- Clean up phase 1
-		StartPhaseTwo()
-
-		-- Play phase 2 stinger
-		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_mega_spawn_Stinger")
-		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_mega_spawn_Stinger")
-
-		-- Spawn some initial greevils
-		local spawn_locations = Entities:FindAllByName("greevil_node")
-		for i = 1, 6 do
-			SpawnGreevil(spawn_locations[RandomInt(1, #spawn_locations)]:GetAbsOrigin(), RandomInt(1, 4), RandomInt(0, 255), RandomInt(0, 255), RandomInt(0, 255))
-		end
-	elseif PHASE == 3 then
-
-		-- Clean-up phase 2
-		StartPhaseThree()
-
-		-- Play phase 3 stinger
-		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_spawn_Stinger")
-		PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_loot_spawn_Stinger")
-	end	
-end
-
-function FrostivusCountdown(tick)
-	Timers:CreateTimer(function()
-		if COUNT_DOWN == 1 then
-			nCOUNTDOWNTIMER = nCOUNTDOWNTIMER - 1
-		else
-		end
-		local t = nCOUNTDOWNTIMER
-		local minutes = math.floor(t / 60)
-		local seconds = t - (minutes * 60)
-		local m10 = math.floor(minutes / 10)
-		local m01 = minutes - (m10 * 10)
-		local s10 = math.floor(seconds / 10)
-		local s01 = seconds - (s10 * 10)
-		local broadcast_gametimer = 
-		{
-			timer_minute_10 = m10,
-			timer_minute_01 = m01,
-			timer_second_10 = s10,
-			timer_second_01 = s01,
-		}
-
-		CustomGameEventManager:Send_ServerToAllClients("countdown", broadcast_gametimer)
---		if t <= 120 then
---			CustomGameEventManager:Send_ServerToAllClients("time_remaining", broadcast_gametimer)
---		end
-
-		if nCOUNTDOWNTIMER < 1 then
-			nCOUNTDOWNTIMER = PHASE_TIME[PHASE+1]
-			PHASE = PHASE + 1
-			FrostivusPhase(PHASE)
-		end
-
-		-- Spawn greevils periodically during phase 2 
-		if PHASE == 2 and (nCOUNTDOWNTIMER % 20) == 0 then
-			local spawn_locations = Entities:FindAllByName("greevil_node")
-			SpawnGreevil(spawn_locations[RandomInt(1, #spawn_locations)]:GetAbsOrigin(), RandomInt(1, 4), RandomInt(0, 255), RandomInt(0, 255), RandomInt(0, 255))
-		end
-
-		-- Stop counting down after phase 2
-		if PHASE <= 2 then
-			return tick
-		end
-	end)
-end
-
-function FrostivusPresentCountdown(tick)
-	Timers:CreateTimer(function()
-		if COUNT_DOWN == 1 then
-			nCOUNTDOWNTIMER_PRESENT = nCOUNTDOWNTIMER_PRESENT - 1
-		else
-		end
-		local t = nCOUNTDOWNTIMER_PRESENT
-		local minutes = math.floor(t / 60)
-		local seconds = t - (minutes * 60)
-		local m10 = math.floor(minutes / 10)
-		local m01 = minutes - (m10 * 10)
-		local s10 = math.floor(seconds / 10)
-		local s01 = seconds - (s10 * 10)
-		local broadcast_gametimer = 
-		{
-			timer_minute_10 = m10,
-			timer_minute_01 = m01,
-			timer_second_10 = s10,
-			timer_second_01 = s01,
-		}
-
-		CustomGameEventManager:Send_ServerToAllClients("countdown_present", broadcast_gametimer)
---		if t <= 120 then
---			CustomGameEventManager:Send_ServerToAllClients("time_remaining", broadcast_gametimer)
---		end
-
-		if nCOUNTDOWNTIMER_PRESENT < 1 then
-			nCOUNTDOWNTIMER_PRESENT = PRESENT_SPAWN_TIME
-			-- Launch some presents
-			PresentWave(6)
-		end
-
-		-- Stop counting down after phase 2
-		if PHASE <= 2 then
-			return tick
-		end
+		return PRESENT_SPAWN_TIME
 	end)
 end
 

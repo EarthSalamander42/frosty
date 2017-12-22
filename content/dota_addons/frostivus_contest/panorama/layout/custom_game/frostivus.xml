@@ -67,13 +67,6 @@
 		</Panel>
 
 		<Panel id="FrostivusHUD_alt" hittest="false">
-			<Panel id="FrostivusPanelTimer">
-				<Label id="PhaseLabel" text="#frostivus_phase_1" onmouseover="FrostivusInfo()" onmouseout="UIHideTextTooltip()"/>
-				<Label id="Timer" text="--:--"/>
-			</Panel>
-
-			<Label id="PresentTimer" text="--:--"/>
-
 			<Panel id="BossHP2" class="BossHP" hittest="false">
 				<Panel id="BossInfo2" class="BossInfo" hittest="false">
 					<Label id="BossLevel2" class="BossLevel" hittest="false" text="Level: "/>
@@ -154,14 +147,6 @@
 			</Panel>
 
 			<Panel id="TutorialButtonPanel" hittest="false">
-				<Button id="PreviousTutorial" class="CloseTutorial" onactivate="PrevTutorial();">
-					<Label text="#prev_tutorial" />
-				</Button>
-
-				<Button id="NextTutorial" class="CloseTutorial" onactivate="NextTutorial();">
-					<Label text="#next_tutorial" />
-				</Button>
-
 				<Button id="TutorialCloseButton" class="CloseTutorial" onactivate="CloseTutorial();">
 					<Label text="#close_tutorial" />
 				</Button>

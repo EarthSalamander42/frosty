@@ -173,12 +173,12 @@
 			"03"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"damage_per_power"			"20"
+				"damage_per_power"			"25"
 			}
 			"04"
 			{
 				"var_type"					"FIELD_INTEGER"
-				"health_per_power"			"20"
+				"health_per_power"			"50"
 			}
 		}
 	}

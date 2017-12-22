@@ -53,14 +53,34 @@ function boss_thinker_mega_greevil:DeclareFunctions()
 	{
 		MODIFIER_EVENT_ON_DEATH,
 		MODIFIER_EVENT_ON_TAKEDAMAGE,
-		MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE,
-		MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE
+		MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE,
+		MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE,
+		MODIFIER_PROPERTY_MOVESPEED_BASE_OVERRIDE,
+		MODIFIER_PROPERTY_MOVESPEED_ABSOLUTE_MIN,
+		MODIFIER_PROPERTY_MOVESPEED_LIMIT,
+		MODIFIER_PROPERTY_MOVESPEED_MAX
 	}
 	return funcs
 end
 
-function boss_thinker_mega_greevil:GetModifierMoveSpeedBonus_Percentage()
-	return self:GetStackCount() * 0.5
+function boss_thinker_mega_greevil:GetModifierMoveSpeed_Absolute()
+	return 70
+end
+
+function boss_thinker_mega_greevil:GetModifierMoveSpeedOverride()
+	return 70
+end
+
+function boss_thinker_mega_greevil:GetModifierMoveSpeed_AbsoluteMin()
+	return 70
+end
+
+function boss_thinker_mega_greevil:GetModifierMoveSpeed_Limit()
+	return 70
+end
+
+function boss_thinker_mega_greevil:GetModifierMoveSpeed_Max()
+	return 70
 end
 
 function boss_thinker_mega_greevil:GetModifierBaseAttack_BonusDamage()
@@ -69,7 +89,7 @@ end
 
 function boss_thinker_mega_greevil:OnDeath(keys)
 	if IsServer() and keys.unit == self:GetParent() then
-		GameRules:SetCustomVictoryMessage("Frostivus is saved!")
+		GameRules:SetCustomVictoryMessage("YOU DID IT!!!")
 		GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
 		GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
 	end
@@ -95,8 +115,16 @@ end
 function boss_thinker_mega_greevil:OnIntervalThink()
 	if IsServer() then
 
-		-- Parameters
+		-- Prevent excessive quill spray and fury swipes stacks
 		local boss = self:GetParent()
+		local quill_modifier = boss:FindModifierByName("modifier_bristleback_quill_spray")
+		local swipes_modifier = boss:FindModifierByName("modifier_ursa_fury_swipes_damage_increase")
+		if quill_modifier then
+			quill_modifier:SetStackCount(math.min(4, quill_modifier:GetStackCount()))
+		end
+		if swipes_modifier then
+			swipes_modifier:SetStackCount(math.min(4, swipes_modifier:GetStackCount()))
+		end
 
 		-- Calculate destination and current speed
 		local delta = 0
@@ -124,7 +152,7 @@ function boss_thinker_mega_greevil:OnIntervalThink()
 
 		-- Think
 		self.boss_timer = self.boss_timer + 0.5
-		local action_time = math.max(6.0 - self.rage_timer / 30, 3.0)
+		local action_time = math.max(5.5 - self.rage_timer / 30, 3.0)
 
 		-- Pick a random mechanic if it's time
 		if self.boss_timer >= action_time then
