@@ -14,37 +14,6 @@ function modifier_frostivus_tusk:IsHidden() return false end
 function modifier_frostivus_tusk:IsPurgable() return false end
 function modifier_frostivus_tusk:IsDebuff() return false end
 
-function modifier_frostivus_tusk:OnCreated()
-	self:StartIntervalThink(5.0)
-end
-
-function modifier_frostivus_tusk:OnIntervalThink()
-	if IsServer() then
-
-		-- Play a random aggressive animation
-		Timers:CreateTimer(1.0, function()
-			local random = RandomInt(1, 5)
-			if random == 1 then
-				StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_ATTACK, rate=1.0})
-			elseif random == 2 then
-				StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_CAST_ABILITY_3, rate=1.0})
-			elseif random == 3 then
-				StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_GENERIC_CHANNEL_1, rate=1.0})
-			elseif random == 4 then
-				StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_SPAWN, rate=1.0})
-			elseif random == 5 then
-				StartAnimation(self:GetParent(), {duration = 2.0, activity=ACT_DOTA_CAST_ABILITY_5, rate=1.0})
-			end
-		end)
-
-		-- Attack sounds
-		self:GetParent():EmitSound("Hero_Tusk.PreAttack")
-		Timers:CreateTimer(0.36, function()
-			self:GetParent():EmitSound("Hero_Tusk.Attack")
-		end)
-	end
-end
-
 function modifier_frostivus_tusk:CheckState()
 	if IsServer() then
 		local state = {
@@ -80,7 +49,9 @@ end
 function modifier_frostivus_tusk:OnDeath(keys)
 	if keys.unit == self:GetParent() then
 		StartPhaseTwo()
-		StartPhaseThree()
+
+		-- Spawn mega greevil
+		SpawnMegaGreevil(self:GetParent():GetTeam())
 
 		-- Play phase 3 stinger
 		PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_loot_spawn_Stinger")

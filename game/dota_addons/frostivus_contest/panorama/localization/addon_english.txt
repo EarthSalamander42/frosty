@@ -11,7 +11,7 @@
 	"addonname"										"EPIC BOSS CHALLENGE"
 
 	"frostivus_phase_0"								"KILL ALL THE BOSSES!"
-	"frostivus_phase_0_desc"						"\n- Defeating a boss allows you control of its altar, and grants a beneficial aura for your team.\n- Altars can also be used as respawn points, and as teleport destinations.\n- Bosses respawn a short time after being killed, becoming stronger every time.\n- Killing stronger bosses grants bonus gold, experience, and stronger altar auras.\n\nWhen you've had enough, start the last phase of the game by killing Tusk, to release the black Mega Greevil. He is a beast, so make sure you're strong enough!"
+	"frostivus_phase_0_desc"						"\n- Defeating a boss allows you control of its altar, and grants a beneficial aura for your team.\n- Altars can also be used as respawn points, and as teleport destinations.\n- Bosses respawn a short time after being killed, becoming stronger every time.\n- Killing stronger bosses grants bonus gold, experience, and stronger altar auras.\n\nWhen you've had enough, start the last phase of the game by killing the Giant Greevil Egg, releasing the Mega Greevil. He is a beast, so make sure you're strong enough!"
 	//Picking Screen
 	"loading_pre_game"				"Loading heroes, please wait..."
 	"hero_list_title_strength"		"Tanks"

@@ -395,37 +395,37 @@ function SpawnNevermore(altar)
 end
 
 function SpawnTusk()
-	local boss = CreateUnitByName("npc_frostivus_boss_tusk", Vector(-200, 0, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
-	boss:FaceTowards(boss:GetAbsOrigin() + Vector(10, 0, 0))
+	local boss = CreateUnitByName("npc_frostivus_boss_tusk", Vector(0, 0, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
+	boss:FaceTowards(boss:GetAbsOrigin() + Vector(0, -1, 0))
+	boss:SetAbsOrigin(Vector(0, 0, boss:GetAbsOrigin().z + 100))
 
 	-- Abilities
 	boss:FindAbilityByName("frostivus_tusk"):SetLevel(1)
 
 	-- Cosmetics
-	boss.head = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/frostiron_raider_helm/frostiron_raider_helm.vmdl"})
-	boss.head:FollowEntity(boss, true)
-	boss.glove = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/snowball_stinger/snowball_stinger.vmdl"})
-	boss.glove:FollowEntity(boss, true)
-	boss.weapon = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/nexon_glacialshard/nexon_glacialshard.vmdl"})
-	boss.weapon:FollowEntity(boss, true)
-	boss.shirt = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/onizaphk_ahunter_shoulder/onizaphk_ahunter_shoulder.vmdl"})
-	boss.shirt:FollowEntity(boss, true)
-	boss.tusks = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/onizaphk_ahunter_neck/onizaphk_ahunter_neck.vmdl"})
-	boss.tusks:FollowEntity(boss, true)
-	boss.back = SpawnEntityFromTableSynchronous("prop_dynamic", {model = "models/items/tuskarr/glaciomarine_back/glaciomarine_back.vmdl"})
-	boss.back:FollowEntity(boss, true)
+	boss:SetRenderColor(0, 0, 0)
 
 	return boss
 end
 
-function SpawnMegaGreevil()
-	local boss = CreateUnitByName("npc_frostivus_boss_greevil", Vector(200, 0, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
-	boss:FaceTowards(boss:GetAbsOrigin() + Vector(-10, 0, 0))
+function SpawnMegaGreevil(team)
+	local boss = CreateUnitByName("npc_frostivus_boss_greevil", Vector(0, 0, 0), true, nil, nil, DOTA_TEAM_NEUTRALS)
+
+	local radiant_altar = Entities:FindByName(nil, "altar_1")
+	local dire_altar = Entities:FindByName(nil, "altar_7")
+	if team == DOTA_TEAM_GOODGUYS then
+		boss:MoveToPosition(dire_altar:GetAbsOrigin())
+	elseif team == DOTA_TEAM_BADGUYS then
+		boss:MoveToPosition(radiant_altar:GetAbsOrigin())
+	end
 
 	-- Abilities
 	boss:FindAbilityByName("frostivus_mega_greevil"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_overgrowth"):SetLevel(1)
 	boss:FindAbilityByName("frostivus_boss_poison_nova"):SetLevel(1)
+
+	boss:RemoveModifierByName("modifier_frostivus_mega_greevil")
+	boss:AddNewModifier(nil, nil, "boss_thinker_mega_greevil", {})
 
 	-- Cosmetics
 	boss:SetRenderColor(25, 0, 0)
@@ -478,48 +478,18 @@ function PresentWave(count)
 	local north = RandomVector(100):Normalized()
 	local launch_positions = {}
 	for i = 1, count do
-		launch_positions[i] = RotatePosition(Vector(0, 0, 0), QAngle(0, (i - 1) * 360 / count, 0), north * RandomInt(550, 750))
+		launch_positions[i] = RotatePosition(Vector(0, 0, 0), QAngle(0, (i - 1) * 360 / count, 0), north * RandomInt(350, 750))
 	end
 
-	-- Find Tusk and Mega Greevil
-	local tusk = false
---	local greevil = false
-	local fighters = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 400, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
-	for _, fighter in pairs(fighters) do
-		if fighter:HasModifier("modifier_frostivus_tusk") then
-			tusk = fighter
---		elseif fighter:HasModifier("modifier_frostivus_mega_greevil") then
---			greevil = fighter
-		end
-	end
+	-- Presents stinger
+	PlaySoundForTeam(DOTA_TEAM_GOODGUYS, "greevil_eventstart_Stinger")
+	PlaySoundForTeam(DOTA_TEAM_BADGUYS, "greevil_eventstart_Stinger")
 
-	-- Animate Tusk Punch
---	if tusk and greevil then
-	if tusk then
-		EndAnimation(tusk)
-		StartAnimation(tusk, {duration = 2.0, activity=ACT_DOTA_CAST_ABILITY_4, rate=1.0})
-		tusk:EmitSound("Hero_Tusk.WalrusPunch.Cast")
-		Timers:CreateTimer(0.36, function()
-
-			-- Sound
-			tusk:EmitSound("Hero_Tusk.WalrusPunch.Target")
-
-			-- Animation
---			EndAnimation(greevil)
---			StartAnimation(greevil, {duration = 2.0, activity=ACT_DOTA_FLAIL, rate=1.0})
-
-			-- Particle
---			local punch_pfx = ParticleManager:CreateParticle("particles/units/heroes/hero_tusk/tusk_walruspunch_txt_ult.vpcf", PATTACH_OVERHEAD_FOLLOW, greevil)
---			ParticleManager:SetParticleControl(punch_pfx, 0, greevil:GetAbsOrigin())
---			ParticleManager:ReleaseParticleIndex(punch_pfx)
-
-			-- Launch presents
-			for _, launch_position in pairs(launch_positions) do
-				local item = CreateItem("item_frostivus_present", nil, nil)
-				CreateItemOnPositionForLaunch(Vector(0, 0, 0), item)
-				item:LaunchLootInitialHeight(true, 750, 900, 0.8, launch_position)
-			end
-		end)
+	-- Launch presents
+	for _, launch_position in pairs(launch_positions) do
+		local item = CreateItem("item_frostivus_present", nil, nil)
+		CreateItemOnPositionForLaunch(Vector(0, 0, 0), item)
+		item:LaunchLootInitialHeight(true, 750, 900, 0.8, launch_position)
 	end
 end
 
@@ -584,22 +554,6 @@ function StartPhaseTwo()
 			end
 		end
 	end
-end
-
-function StartPhaseThree()
-
-	-- Find the Mega Greevil
-	local greevil = false
-	local fighters = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, Vector(0, 0, 0), nil, 400, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
-	for _, fighter in pairs(fighters) do
-		if fighter:HasModifier("modifier_frostivus_mega_greevil") then
-			greevil = fighter
-		end
-	end
-
-	-- Start combat with the Mega Greevil
-	greevil:RemoveModifierByName("modifier_frostivus_mega_greevil")
-	greevil:AddNewModifier(nil, nil, "boss_thinker_mega_greevil", {})
 end
 
 function BossPhaseAbilityCastAlt(team, ability_image, ability_name, delay)

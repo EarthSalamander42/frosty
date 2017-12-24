@@ -8,12 +8,12 @@ PHASE_TIME[1] = 601
 PHASE_TIME[2] = 1
 PRESENT_SCORE_2 = 0
 PRESENT_SCORE_3 = 0
-PRESENT_SPAWN_TIME = 10
+PRESENT_SPAWN_TIME = 20
 
 if IsInToolsMode() then 
 	PHASE_TIME[1] = 601
 	PHASE_TIME[2] = 1
-	PRESENT_SPAWN_TIME = 10
+	PRESENT_SPAWN_TIME = 20
 end
 
 function Frostivus()
@@ -45,12 +45,11 @@ function Frostivus()
 	SpawnTreant(BOSS_SPAWN_POINT_TABLE.treant)
 	SpawnNevermore(BOSS_SPAWN_POINT_TABLE.nevermore)
 	SpawnTusk()
-	SpawnMegaGreevil()
 
 	-- Launch presents every few seconds
 	local present_wave_count = 0
 	Timers:CreateTimer(0, function()
-		PresentWave(4 + math.floor(0.34 * present_wave_count) )
+		PresentWave(1 + math.floor(0.34 * present_wave_count) )
 		present_wave_count = present_wave_count + 1
 		return PRESENT_SPAWN_TIME
 	end)

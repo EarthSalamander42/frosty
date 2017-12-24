@@ -98,15 +98,8 @@ function OnPlayerReconnect( data ) {
 	$("#FrostivusHUD_alt").style.visibility = "visible";
 }
 
+CustomNetTables.SubscribeNetTableListener("game_options", UpdateBossBar)
 function UpdateBossBar(args) {
-	var RadiantScore = CustomNetTables.GetTableValue("game_options", "radiant").score;
-	var DireScore = CustomNetTables.GetTableValue("game_options", "dire").score;
-
-	$("#RadiantScore").SetDialogVariableInt("radiant", RadiantScore);
-	$("#RadiantScore").text = RadiantScore;
-
-	$("#DireScore").SetDialogVariableInt("dire", DireScore);
-	$("#DireScore").text = DireScore;
 
 	var BossTable = CustomNetTables.GetTableValue("game_options", "boss");
 	if (BossTable !== null)
@@ -142,7 +135,6 @@ function UpdateBossBar(args) {
 		$("#BossIcon" + TeamContest).style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_'+ BossShortLabel +'.png")';
 	}
 }
-CustomNetTables.SubscribeNetTableListener("game_options", UpdateBossBar)
 
 function ShowBossBar(args)
 {
