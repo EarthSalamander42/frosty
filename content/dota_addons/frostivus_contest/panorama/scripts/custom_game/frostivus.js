@@ -1,6 +1,5 @@
 "use strict";
 
-var JS_PHASE = 0
 var TutorialPage = 0
 var playerPanels = {};
 
@@ -12,16 +11,10 @@ function UpdatePresentTimer( data )
 {
 }
 
-function Phase(args)
+function FrostivusBegins()
 {
-	JS_PHASE = args.Phase
-	$("#PhaseLabel").text = $.Localize("#frostivus_phase_" + JS_PHASE + ": ");
-
-	if (JS_PHASE == 1)
-	{
-		$("#FrostivusHUD_alt").style.visibility = "visible";
-		$("#FrostivusScore").style.visibility = "visible";
-	}
+	$("#FrostivusHUD_alt").style.visibility = "visible";
+	$("#FrostivusScore").style.visibility = "visible";
 }
 
 var toggle = true
@@ -62,11 +55,6 @@ function CloseTutorial() {
 	$("#TutorialPanel").style.visibility = "collapse";
 }
 
-function FrostivusInfo()
-{
-	$.DispatchEvent("UIShowTextTooltip", $("#PhaseLabel"), $.Localize("#frostivus_phase_" + JS_PHASE + "_desc"));
-}
-
 function ChooseAltar(number) {
 	var altar = $("#AltarButton" + number)
 	var playerInfo = Game.GetPlayerInfo(Players.GetLocalPlayer())
@@ -98,7 +86,6 @@ function OnPlayerReconnect( data ) {
 	$("#FrostivusHUD_alt").style.visibility = "visible";
 }
 
-CustomNetTables.SubscribeNetTableListener("game_options", UpdateBossBar)
 function UpdateBossBar(args) {
 
 	var BossTable = CustomNetTables.GetTableValue("game_options", "boss");
@@ -135,6 +122,7 @@ function UpdateBossBar(args) {
 		$("#BossIcon" + TeamContest).style.backgroundImage = 'url("file://{images}/heroes/icons/npc_dota_hero_'+ BossShortLabel +'.png")';
 	}
 }
+CustomNetTables.SubscribeNetTableListener("game_options", UpdateBossBar)
 
 function ShowBossBar(args)
 {
@@ -242,7 +230,7 @@ function CastBarAlt(args)
 
 	GameEvents.Subscribe("countdown", UpdateTimer);
 	GameEvents.Subscribe("countdown_present", UpdatePresentTimer);
-	GameEvents.Subscribe("frostivus_phase", Phase);
+	GameEvents.Subscribe("frostivus_begins", FrostivusBegins);
 	GameEvents.Subscribe("frostivus_player_reconnected", OnPlayerReconnect);
 	GameEvents.Subscribe("show_boss_hp", ShowBossBar);
 	GameEvents.Subscribe("hide_boss_hp", HideBossBar);

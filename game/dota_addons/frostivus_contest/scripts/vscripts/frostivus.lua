@@ -17,6 +17,7 @@ if IsInToolsMode() then
 end
 
 function Frostivus()
+	CustomGameEventManager:Send_ServerToAllClients("frostivus_begins", {})
 	for player_id = 0, PlayerResource:GetPlayerCount() -1 do
 		if PlayerResource:GetPlayer(player_id) then
 			if PlayerResource:GetTeam(player_id) == DOTA_TEAM_GOODGUYS then

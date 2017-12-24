@@ -1,0 +1,517 @@
+"lang"
+{
+	"Language"      "English"
+
+	"Tokens"
+	{   
+		//=================================================================================================================
+		//=================================================================================================================
+		// Gamemode strings
+		//=================================================================================================================
+		//=================================================================================================================
+
+		"addon_game_name"									"The Degreeviling"
+		"DOTA_GameMode_15"									"The Degreeviling"
+
+		"player_abandon_message"							" has <font color='#FF0000'>abandoned</font> the fight!"
+		"player_reconnect_message"							" is back to the fight!"
+
+		"team_good_abandon_message"							"The cowardly Radiant have fled the battle!"
+		"team_bad_abandon_message"							"The cowardly Dire have fled the battle!"
+
+		//=================================================================================================================
+		// Items
+		//=================================================================================================================
+
+		"DOTA_Tooltip_ability_item_frostivus_present"			"Present"
+		"DOTA_Tooltip_ability_item_force_staff_Description"		"<h1>Active: Force</h1>Pushes any target unit %push_length% units in the direction it is facing.\n<font color='#9090F0'>Does not work on bosses.</font><br><br>Range: %tooltip_range%"
+		"DOTA_Tooltip_Ability_item_hurricane_pike_Description"	"<h1>Active: Hurricane Thrust</h1> Pushes you and target enemy %enemy_length% units away from each other, and for %range_duration% seconds, allows you to make %max_attacks% attacks against the target without range restrictions and with +%bonus_attack_speed% attack speed.\n<font color='#9090F0'>Works on bosses, but does not push them away.</font><br><br>Works like Force Staff when used on self or allies.<br><br>Allied Range: %tooltip_range%<br>Enemy Range: %cast_range_enemy%\n<h1>Passive: Dragon's Reach</h1> Increases attack range of ranged heroes by %base_attack_range%."
+
+		//=================================================================================================================
+		// Greevils
+		//=================================================================================================================
+
+		"npc_frostivus_greevil_basic"						"Greevil Pup"
+		"npc_frostivus_greevil_advanced"					"Greevil"
+		"npc_frostivus_greevil_super"						"Super Greevil"
+		"npc_frostivus_greevil_gold"						"Golden Greevil"
+		"npc_dota_dungeon_checkpoint"						"Icewrack Lantern"
+		"npc_frostivus_boss_tusk"							"Greevil Egg"
+		"npc_frostivus_boss_greevil"						"Mega Greevil"
+
+		//=================================================================================================================
+		// Altar auras
+		//=================================================================================================================
+
+		"DOTA_Tooltip_modifier_frostivus_altar_aura_zeus_buff"					"Thundergod's Reach"
+		"DOTA_Tooltip_modifier_frostivus_altar_aura_zeus_buff_Description"		"Owning the Lightning Altar grants an extra %dMODIFIER_PROPERTY_ATTACK_RANGE_BONUS% attack range, %dMODIFIER_PROPERTY_CAST_RANGE_BONUS_STACKING% cast range, and %dMODIFIER_PROPERTY_BONUS_DAY_VISION% day vision range."
+
+		"DOTA_Tooltip_modifier_frostivus_altar_aura_veno_buff"					"Insidious Celerity"
+		"DOTA_Tooltip_modifier_frostivus_altar_aura_veno_buff_Description"		"Owning the Venomous Altar increases movement by %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%, attack speed by %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT%, and reduces cooldowns by %dMODIFIER_PROPERTY_COOLDOWN_PERCENTAGE_STACKING%%%."
+
+		"DOTA_Tooltip_modifier_frostivus_altar_aura_fire_buff"					"Blazing Power"
+		"DOTA_Tooltip_modifier_frostivus_altar_aura_fire_buff_Description"		"Owning the Fire Altar grants +%dMODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE%%% damage, %dMODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE%%% spell amplification, and %dMODIFIER_PROPERTY_BONUS_NIGHT_VISION% night vision range."
+
+		"DOTA_Tooltip_modifier_frostivus_altar_aura_treant_buff"				"Nature's Protection"
+		"DOTA_Tooltip_modifier_frostivus_altar_aura_treant_buff_Description"	"Owning the Nature Altar increases armor by %dMODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS%, magic resistance by %dMODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS%%%, and health by 10%%."
+
+		//=================================================================================================================
+		// Bosses
+		//=================================================================================================================
+
+		"DOTA_Tooltip_modifier_frostivus_boss"								"Boss Power"
+		"DOTA_Tooltip_modifier_frostivus_boss_Description"					"Each stack makes the boss sturdier and deadlier. Increases whenever a boss is defeated."
+
+		// Zeus
+		//====================================
+		"npc_frostivus_boss_zuus"											"Zeus"
+
+		"boss_zeus_lightning_bolt"											"Lightning Bolt"
+		"boss_zeus_arc_lightning"											"Arc Lightning"
+		"boss_zeus_el_thor"													"El Thor"
+		"boss_zeus_static_field"											"Static Field"
+		"boss_zeus_thundergod_wrath"										"Thundergod's Wrath"
+
+		"DOTA_Tooltip_ability_frostivus_boss_lightning_bolt"				"Lightning Bolt"
+		"DOTA_Tooltip_ability_frostivus_boss_lightning_bolt_Description"	"Marks several spots on the ground. After a short delay, zaps all of them with lightning.\n\nDeals more damage if you are close to the center of the impact."
+		"DOTA_Tooltip_ability_frostivus_boss_arc_lightning"					"Arc Lightning"
+		"DOTA_Tooltip_ability_frostivus_boss_arc_lightning_Description"		"Throws out an arc of lightning that can keep bouncing indefinitely, as long as there are targets nearby.\n\nEach jump deals more damage than the last."
+		"DOTA_Tooltip_ability_frostivus_boss_el_thor"						"El Thor"
+		"DOTA_Tooltip_ability_frostivus_boss_el_thor_Description"			"Marks a random player, then charges up to deliver a massive electric blast on their sorry ass.\n\nEl Thor's damage is distributed equally between all players in its area of effect."
+		"DOTA_Tooltip_ability_frostivus_boss_static_field"					"Static Field"
+		"DOTA_Tooltip_ability_frostivus_boss_static_field_Description"		"Marks players randomly with positive or negative charges.\n\nIf charged players come too close to each other, their charges will interact, resulting in a swift damaging jolt, and a brief knockback."
+		"DOTA_Tooltip_ability_frostivus_boss_thundergods_wrath"				"Thundergod's Wrath"
+		"DOTA_Tooltip_ability_frostivus_boss_thundergods_wrath_Description"	"The Thundergod covers the battlefield in lightning, damaging all enemies.\n\nThundergod's Wrath forces charged players to interact from any distance, consuming their charges in the process. Players will be attracted to all opposite charges, and moved away from all similar charges, simultaneously."
+
+		"DOTA_Tooltip_modifier_frostivus_zeus_positive_charge"				"Positive Charge"
+		"DOTA_Tooltip_modifier_frostivus_zeus_positive_charge_Description"	"Positively charged. Going near another charged hero will result in charge interaction and damage."
+
+		"DOTA_Tooltip_modifier_frostivus_zeus_negative_charge"				"Negative Charge"
+		"DOTA_Tooltip_modifier_frostivus_zeus_negative_charge_Description"	"Negatively charged. Going near another charged hero will result in charge interaction and damage."
+
+		// Venomancer
+		//====================================
+		"npc_frostivus_boss_venomancer"										"Venomancer"
+
+		"npc_frostivus_plague_ward"											"Plague Ward"
+		"npc_frostivus_scourge_ward"										"Scourge Ward"
+		"npc_frostivus_vile_ward"											"Vile Ward"
+
+		"boss_veno_venomous_gale"											"Venomous Gale"
+		"boss_veno_poison_nova"												"Poison Nova"
+		"boss_veno_unwilling_host"											"Unwilling Host"
+		"boss_veno_parasite"												"Parasite"
+		"boss_veno_green_death"												"Green Death"
+		"boss_veno_scourge_ward"											"Plant Scourge Ward"
+		"boss_veno_vile_ward"												"Plant Vile Ward"
+
+		"DOTA_Tooltip_ability_frostivus_boss_venomous_gale"					"Venomous Gale"
+		"DOTA_Tooltip_ability_frostivus_boss_venomous_gale_Description"		"Spits a giant ball of poison which travels in a straight line towards the chosen player.\n\nPoisoned players are slowed and take damage over time."
+		"DOTA_Tooltip_ability_frostivus_boss_plague_ward"					"Plague Ward"
+		"DOTA_Tooltip_ability_frostivus_boss_plague_ward_Description"		"Passively spawns a Plague Ward every time Venomancer casts an ability.\n\nPlague Wards attack their nearest target, applying <font color='#9090F0'>Poison Sting</font>, which slows and deals minor damage over time. Poison Sting stacks with itself."
+		"DOTA_Tooltip_ability_frostivus_boss_scourge_ward"					"Scourge Ward"
+		"DOTA_Tooltip_ability_frostivus_boss_scourge_ward_Description"		"Plants a Scourge Ward on the battlefield.\n\nScourge Wards periodically shoot three <font color='#9090F0'>Venomous Gales</font> in a cone pattern."
+		"DOTA_Tooltip_ability_frostivus_boss_vile_ward"						"Vile Ward"
+		"DOTA_Tooltip_ability_frostivus_boss_vile_ward_Description"			"Plants a Vile Ward on the battlefield.\n\nVile Wards periodically shoot eight <font color='#9090F0'>Venomous Gales</font> in a circular pattern."
+		"DOTA_Tooltip_ability_frostivus_boss_parasite"						"Parasite"
+		"DOTA_Tooltip_ability_frostivus_boss_parasite_Description"			"Implants a parasite into the target's brain, hijacking its base motor functions for a short duration.\n\nAffected targets can perform no actions except running uncontrollably towards the center of arena."
+		"DOTA_Tooltip_ability_frostivus_boss_poison_nova"					"Poison Nova"
+		"DOTA_Tooltip_ability_frostivus_boss_poison_nova_Description"		"Poisons all enemies.\n\nPoison Nova deals minor damage over time, but amplifies all incoming damage by a large amount."
+		"DOTA_Tooltip_ability_frostivus_boss_unwilling_host"				"Unwilling Host"
+		"DOTA_Tooltip_ability_frostivus_boss_unwilling_host_Description"	"Infects an enemy with a poisonous seed that is harmless to it, but harmful to any ally that comes close.\n\nInfects any player that comes too close to the host with <font color='#9090F0'>Virulent Plague</font>, slowing it and dealing damage over time."
+		"DOTA_Tooltip_ability_frostivus_boss_green_death"					"Green Death"
+		"DOTA_Tooltip_ability_frostivus_boss_green_death_Description"		"Venomancer unleashes his ultimate move, channeling deadly acid rain through the battlefield.\n\nDeals high damage over time to any player standing in the area of effect."
+
+		"DOTA_Tooltip_modifier_frostivus_venomancer_poison_sting_debuff"				"Poison Sting"
+		"DOTA_Tooltip_modifier_frostivus_venomancer_poison_sting_debuff_Description"	"Slowed and taking periodic damage."
+
+		"DOTA_Tooltip_modifier_frostivus_venomancer_venomous_gale"						"Venomous Gale"
+		"DOTA_Tooltip_modifier_frostivus_venomancer_venomous_gale_Description"			"Slowed and taking periodic damage."
+
+		"DOTA_Tooltip_modifier_frostivus_venomancer_poison_nova"						"Poison Nova"
+		"DOTA_Tooltip_modifier_frostivus_venomancer_poison_nova_Description"			"Taking periodic damage. All incoming damage is amplified by %dMODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE%%%"
+
+		"DOTA_Tooltip_modifier_frostivus_venomancer_poison_nova_greevil"				"Poison Nova"
+		"DOTA_Tooltip_modifier_frostivus_venomancer_poison_nova_greevil_Description"	"Taking periodic damage. All incoming damage is amplified by %dMODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE%%%"
+
+		"DOTA_Tooltip_modifier_frostivus_venomancer_unwilling_host"						"Unwilling Host"
+		"DOTA_Tooltip_modifier_frostivus_venomancer_unwilling_host_Description"			"Hosting a deadly disease. Going near any ally will infect them with Virulent Plague, slowing them and dealing damage over time."
+
+		"DOTA_Tooltip_modifier_frostivus_venomancer_virulent_plague"					"Virulent Plague"
+		"DOTA_Tooltip_modifier_frostivus_venomancer_virulent_plague_Description"		"Slowed and taking periodic damage."
+
+		// Shadow Fiend
+		//====================================
+		"npc_frostivus_boss_nevermore"										"Shadow Fiend"
+
+		"boss_nevermore_immolation"											"Immolation"
+		"boss_nevermore_ragna_blade"										"Ragna Blade"
+		"boss_nevermore_meteorain"											"Meteor Rain"
+		"boss_nevermore_nevermore"											"Nevermore"
+		"boss_nevermore_requiem_of_souls"									"Requiem of Souls"
+		"boss_nevermore_shadowraze_line"									"Sav Omoz"
+		"boss_nevermore_shadowraze_circle_near"								"Sah Omoz"
+		"boss_nevermore_shadowraze_circle_far"								"Voo Omoz"
+		"boss_nevermore_shadowraze_moving_clock"							"Ala Omoz"
+		"boss_nevermore_shadowraze_moving_counterclock"						"Ula Omoz"
+
+		"DOTA_Tooltip_ability_frostivus_boss_immolation"					"Immolation"
+		"DOTA_Tooltip_ability_frostivus_boss_immolation_Description"		"Ignites the Fire Altar in a whirlwind of fire.\n\nCauses high damage over time to anyone standing in the area of effect."
+		"DOTA_Tooltip_ability_frostivus_boss_ragna_blade"					"Ragna Blade"
+		"DOTA_Tooltip_ability_frostivus_boss_ragna_blade_Description"		"Deals massive damage to a single target."
+		"DOTA_Tooltip_ability_frostivus_boss_meteorain"						"Meteor Rain"
+		"DOTA_Tooltip_ability_frostivus_boss_meteorain_Description"			"Calls down a swarm of meteors to damage anyone in their path.\n\nMeteors leave fire puddles after their initial impact, dealing damage over time to anyone standing in them."
+		"DOTA_Tooltip_ability_frostivus_boss_shadowraze"					"Shadowraze"
+		"DOTA_Tooltip_ability_frostivus_boss_shadowraze_Description"		"Razes an area with fire and shadow, dealing damage to anything inside it.\n\nShadowraze comes in several patterns, indicated by the name of the ability being cast."
+		"DOTA_Tooltip_ability_frostivus_boss_nevermore"						"Nevermore"
+		"DOTA_Tooltip_ability_frostivus_boss_nevermore_Description"			"Envelops the whole battlefield in darkness, making vision impossible."
+		"DOTA_Tooltip_ability_frostivus_boss_requiem_of_souls"				"Requiem of Souls"
+		"DOTA_Tooltip_ability_frostivus_boss_requiem_of_souls_Description"	"Unleashes the souls captured by Shadow Fiend as several damaging lines of fire.\n\nConsumes any accumulated Necromastery stacks to create extra lines."
+		"DOTA_Tooltip_ability_frostivus_boss_soul_harvest"					"Soul Harvest"
+		"DOTA_Tooltip_ability_frostivus_boss_soul_harvest_Description"		"Shadow Fiend attacks the enemy closest to him every few seconds.\n\nHas a maximum attack range of 550."
+		"DOTA_Tooltip_ability_frostivus_boss_necromastery"					"Necromastery"
+		"DOTA_Tooltip_ability_frostivus_boss_necromastery_Description"		"Shadow Fiend gains a soul every time he deals damage to a player.\n\nEvery soul slightly increases the damage done by all of Shadow Fiend's abilities."
+
+		"DOTA_Tooltip_modifier_frostivus_necromastery"						"Necromastery"
+		"DOTA_Tooltip_modifier_frostivus_necromastery_Description"			"Each soul increases Shadow Fiend's damage output."
+
+		// Treant
+		//====================================
+		"npc_frostivus_boss_treant"											"Treant Protector"
+
+		"npc_frostivus_tiny"												"Tiny"
+		"npc_frostivus_treantling"											"Treantling"
+		"npc_frostivus_treant_tree_01"										"Enchanted Tree"
+		"npc_frostivus_treant_tree_02"										"Enchanted Tree"
+		"npc_frostivus_treant_tree_03"										"Enchanted Tree"
+		"npc_frostivus_treant_tree_04"										"Enchanted Tree"
+
+		"boss_treant_vine_smash"											"Vine Smash"
+		"boss_treant_rock_smash"											"Rock Smash"
+		"boss_treant_ring_of_thorns"										"Ring of Thorns"
+		"boss_treant_leech_seed"											"Leech Seed"
+		"boss_treant_rapid_growth"											"Rapid Growth"
+		"boss_treant_eyes_in_the_forest"									"Eyes in the Forest"
+		"boss_treant_living_armor"											"Living Armor"
+		"boss_treant_overgrowth"											"Overgrowth"
+		"boss_treant_natures_guise"											"Nature's Guise"
+
+		"DOTA_Tooltip_ability_frostivus_boss_vine_smash"						"Vine Smash"
+		"DOTA_Tooltip_ability_frostivus_boss_vine_smash_Description"			"Marks a player's position. After a short delay, unleashes a massive bramble of vines towards it, damaging everything in the way."
+		"DOTA_Tooltip_ability_frostivus_boss_rock_smash"						"Rock Smash"
+		"DOTA_Tooltip_ability_frostivus_boss_rock_smash_Description"			"Treant calls in for help from his best man Tiny, who throws a giant rock in the battlefield, damaging anyone in the impact point."
+		"DOTA_Tooltip_ability_frostivus_boss_ring_of_thorns"					"Ring of Thorns"
+		"DOTA_Tooltip_ability_frostivus_boss_ring_of_thorns_Description"		"Treant creates a maze of damaging thorns that covers the entire battlefield, except for the area around him."
+		"DOTA_Tooltip_ability_frostivus_boss_leech_seed"						"Leech Seed"
+		"DOTA_Tooltip_ability_frostivus_boss_leech_seed_Description"			"Passively implants a Leech Seed every time a target is hit by one of Treant's abilities, lightly slowing it.\n\nPeriodically, Treant will cast Leech Seed, absorbing each stack from affected players in the form of healing."
+		"DOTA_Tooltip_ability_frostivus_boss_rapid_growth"						"Rapid Growth"
+		"DOTA_Tooltip_ability_frostivus_boss_rapid_growth_Description"			"Spawns several trees on the battlefield, which allow the usage of Nature's Guise."
+		"DOTA_Tooltip_ability_frostivus_boss_eyes_in_the_forest"				"Eyes in the Forest"
+		"DOTA_Tooltip_ability_frostivus_boss_eyes_in_the_forest_Description"	"Spawns a Treantling, which mimics Treant's most potent abilities.\n\nTreantlings will cast their own Vine Smash, Overgrowth, and Ring of Thorns every time Treant does the same."
+		"DOTA_Tooltip_ability_frostivus_boss_living_armor"						"Living Armor"
+		"DOTA_Tooltip_ability_frostivus_boss_living_armor_Description"			"Grants some of Treant's summons massive damage mitigation and health regeneration.\n\nLiving Armor can be removed by damaging the affected unit until it runs out of protective stacks."
+		"DOTA_Tooltip_ability_frostivus_boss_overgrowth"						"Overgrowth"
+		"DOTA_Tooltip_ability_frostivus_boss_overgrowth_Description"			"Treant unleashes his ultimate move, dealing damage, rooting, and disarming any enemies near his position."
+		"DOTA_Tooltip_ability_frostivus_boss_natures_guise"						"Nature's Guise"
+		"DOTA_Tooltip_ability_frostivus_boss_natures_guise_Description"			"Treant goes invisible by hiding inside one of his trees. He will become visible again right before casting his next move.\n\nIf there are no trees for treant to use Nature's Guise on, its cast is wasted and nothing happens."
+
+		"DOTA_Tooltip_modifier_frostivus_leech_seed_debuff"					"Leech Seed"
+		"DOTA_Tooltip_modifier_frostivus_leech_seed_debuff_Description"		"Movement speed slowed by %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%."
+
+		"DOTA_Tooltip_modifier_frostivus_living_armor"						"Living Armor"
+		"DOTA_Tooltip_modifier_frostivus_living_armor_Description"			"Blocking damage and regenerating at incredible speed."
+
+		"DOTA_Tooltip_modifier_frostivus_overgrowth_root"					"Overgrowth"
+		"DOTA_Tooltip_modifier_frostivus_overgrowth_root_Description"		"Rooted to the ground and unable to move."
+
+		"DOTA_Tooltip_modifier_frostivus_overgrowth_root_greevil"				"Overgrowth"
+		"DOTA_Tooltip_modifier_frostivus_overgrowth_root_greevil_Description"	"Rooted to the ground and unable to move."
+
+		//=================================================================================================================
+		// Hero custom abilities
+		//=================================================================================================================
+
+		// Abaddon
+		//============================
+		"DOTA_Tooltip_modifier_death_coil_debuff"								"Suffocating Mist"
+		"DOTA_Tooltip_modifier_death_coil_debuff_Description"					"Part of the damage you take will be dealt again when this debuff expires."
+
+		"DOTA_Tooltip_modifier_death_coil_buff"									"Guardian Mist"
+		"DOTA_Tooltip_modifier_death_coil_buff_Description"						"Part of the damage you take will be healed when this debuff expires."
+
+		"DOTA_Tooltip_ability_custom_abaddon_death_coil"						"Mist Coil"
+		"DOTA_Tooltip_ability_custom_abaddon_death_coil_Description"			"Abaddon releases a coil of deathly mist that can damage an enemy unit or heal a friendly unit at the cost of some of Abaddon's health.\n<font color='#9090F0'>Mist Caress:</font> also heals allies for %bonus_heal_pct%%% of their maximum health.\n<font color='#9090F0'>Mist Shroud:</font> mist envelops the target for %mist_duration% seconds. If it is an ally, %ally_heal_pct%%% of the damage it takes will be healed at the end of the duration. If it is an enemy, %enemy_damage_pct%%% of the damage it takes will be dealt again at the end of the duration.\n<font color='#9090F0'>Does not cost health while fighting bosses.</font>"
+		"DOTA_Tooltip_ability_custom_abaddon_death_coil_Note0"					"Self-castable."
+		"DOTA_Tooltip_ability_custom_abaddon_death_coil_Lore"					"A mysterious vapor from the Curse of Avernus now infuses the breath of Abaddon, who releases it at will."
+		"DOTA_Tooltip_ability_custom_abaddon_death_coil_damage"					"ENEMY DAMAGE:"
+		"DOTA_Tooltip_ability_custom_abaddon_death_coil_heal"					"BASE HEAL:"
+		"DOTA_Tooltip_ability_custom_abaddon_death_coil_self_damage"			"SELF DAMAGE:"
+
+		// Alchemist
+		//============================
+		"DOTA_Tooltip_ability_custom_alchemist_goblins_greed"					"Greevil's Greed"
+		"DOTA_Tooltip_ability_custom_alchemist_goblins_greed_Description"		"Alchemist synthesizes additional gold from his enemies and environment.\n<font color='#9090F0'>Capitalist:</font> Alchemist's passive gold gain is increased.\n<font color='#9090F0'>Mug:</font> gains a small amount of gold every time you hit an enemy hero."
+		"DOTA_Tooltip_ability_custom_alchemist_goblins_greed_Lore"				"While it is not a mountain, Razzil has mastered the conversion of smaller compounds to line his pockets."
+		"DOTA_Tooltip_ability_custom_alchemist_goblins_greed_bonus_gpm"			"BONUS PASSIVE GPM:"
+		"DOTA_Tooltip_ability_custom_alchemist_goblins_greed_gold_per_hit"		"GOLD PER HIT:"
+
+		"DOTA_Tooltip_ability_alchemist_chemical_rage_Description"				"Alchemist causes his Ogre to enter a chemically induced rage, reducing base attack cooldown and increasing movement speed and regeneration.\n<font color='#9090F0'>Ogresized:</font> also grants %bonus_health% bonus health when raging."
+
+		// Anti-Mage
+		//============================
+		"DOTA_Tooltip_modifier_custom_spell_shield_active"						"Spellblock"
+		"DOTA_Tooltip_modifier_custom_spell_shield_active_Description"			"Magic resistance greatly increased."
+
+		"DOTA_Tooltip_modifier_custom_spell_shield_active_upgraded"				"Spellblock"
+		"DOTA_Tooltip_modifier_custom_spell_shield_active_upgraded_Description"	"Magic resistance greatly increased."
+
+		"DOTA_Tooltip_ability_custom_antimage_spell_shield"						"Spell Shield"
+		"DOTA_Tooltip_ability_custom_antimage_spell_shield_Description"			"Increases Anti-Mage's resistance to magic damage.\n<font color='#9090F0'>Spellblock:</font> can be activated to further increase your magic resistance for %active_duration% seconds."
+		"DOTA_Tooltip_ability_custom_antimage_spell_shield_Lore"				"Years of meditation and obsession with revenge have hardened Anti-Mage's skin against mystical opponents."
+		"DOTA_Tooltip_ability_custom_antimage_spell_shield_passive_mr"			"%BONUS MAGIC RESISTANCE:"
+		"DOTA_Tooltip_ability_custom_antimage_spell_shield_active_mr_tooltip"	"%ACTIVE MAGIC RESISTANCE:"
+
+		// Axe
+		//============================
+		"DOTA_Tooltip_custom_battle_hunger_debuff"								"Battle Hunger"
+		"DOTA_Tooltip_custom_battle_hunger_debuff_Description"					"Damage dealt reduced by %dMODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE%%%."
+
+		"DOTA_Tooltip_custom_battle_hunger_caster_buff"							"Battle Hunger"
+		"DOTA_Tooltip_custom_battle_hunger_caster_buff_Description"				"Movement speed increased by %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%, lifestealing from all damage dealt to Battle Hunger targets."
+
+		"DOTA_Tooltip_ability_custom_axe_battle_hunger"							"Battle Hunger"
+		"DOTA_Tooltip_ability_custom_axe_battle_hunger_Description"				"<font color='#9090F0'>Enrages an enemy unit, reducing its damage output and causing Axe to lifesteal from all the damage it takes for the duration.</font>\nAxe gains movement speed for each unit affected by Battle Hunger."
+		"DOTA_Tooltip_ability_custom_axe_battle_hunger_Lore"					"Ordinary heroes cannot withstand Mogul Khan's rage for battle, such that it injures them until it is satisfied."
+		"DOTA_Tooltip_ability_custom_axe_battle_hunger_damage_reduction"		"%ENEMY DAMAGE REDUCTION:"
+		"DOTA_Tooltip_ability_custom_axe_battle_hunger_speed_bonus"				"%BONUS MOVE SPEED:"
+		"DOTA_Tooltip_ability_custom_axe_battle_hunger_lifesteal_pct"			"%LIFESTEAL:"
+		"DOTA_Tooltip_ability_custom_axe_battle_hunger_duration"				"DURATION:"
+
+		"DOTA_Tooltip_ability_holdout_culling_blade"							"A Cut Above"
+		"DOTA_Tooltip_ability_holdout_culling_blade_Description"				"<font color='#9090F0'>Axe leaps forward into combat. Upon landing, Axe delivers a strike to all enemies in a small area around his position.\nIf an enemy is below the kill threshold, it dies and Axe grants himself and nearby allies %speed_bonus%%% movement and attack speed bonus for %speed_duration% seconds.</font>"
+		"DOTA_Tooltip_ability_holdout_culling_blade_Lore"						"Mogul Khan is the embodiment of battle and fury, launching into a gruesome fatality against those who dare engage the Axe in combat."
+		"DOTA_Tooltip_ability_holdout_culling_blade_leap_radius"				"EFFECT RADIUS:"
+		"DOTA_Tooltip_ability_holdout_culling_blade_kill_threshold"				"KILL THRESHOLD:"
+		"DOTA_Tooltip_ability_holdout_culling_blade_damage"						"FAILURE DAMAGE:"
+
+		// Bristleback
+		//============================
+		"DOTA_Tooltip_ability_bristleback_quill_spray_Description"				"Sprays enemy units with quills dealing damage in an area of effect around Bristleback. Deals bonus damage for every time a unit was hit by Quill Spray in the last 14 seconds.\n<font color='#9090F0'>Can only stack up to 4 times on bosses.</font>"
+
+		// Crystal Maiden
+		//============================
+		"DOTA_Tooltip_modifier_custom_frostbite_debuff"							"Frostbite"
+		"DOTA_Tooltip_modifier_custom_frostbite_debuff_Description"				"Rooted, disarmed, damage dealt reduced by %dMODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE%%%"
+
+		"DOTA_Tooltip_ability_custom_crystal_maiden_frostbite"						"Frostbite"
+		"DOTA_Tooltip_ability_custom_crystal_maiden_frostbite_Description"			"Encases an enemy unit in ice, prohibiting movement and attack, while dealing damage over time.\n<font color='#9090F0'>Arcane Chill:</font> reduces target's damage dealt by %damage_reduction%%%, and converts %mana_conversion%%% of any damage it takes into mana for the attacker."
+		"DOTA_Tooltip_ability_custom_crystal_maiden_frostbite_Lore"					"Rylai channels winds from the Blueheart Glacier, imprisoning attackers in thick blocks of ice."
+		"DOTA_Tooltip_ability_custom_crystal_maiden_frostbite_damage_per_second"	"DAMAGE PER SECOND:"
+		"DOTA_Tooltip_ability_custom_crystal_maiden_frostbite_duration"				"DURATION:"
+		"DOTA_Tooltip_ability_custom_crystal_maiden_frostbite_boss_duration"		"BOSS DURATION:"
+
+		// Dazzle
+		//============================
+		"DOTA_Tooltip_modifier_custom_shadow_wave_buff"							"Shadow Blessing"
+		"DOTA_Tooltip_modifier_custom_shadow_wave_buff_Description"				"Gaining %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%% movement and %dMODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT% attack speed"
+
+		"DOTA_Tooltip_ability_custom_dazzle_shadow_wave"						"Shadow Wave"
+		"DOTA_Tooltip_ability_custom_dazzle_shadow_wave_Description"			"Sends out a bolt of power that arcs between allies, healing them.\n<font color='#9090F0'>Shadow of the Grave:</font> heals a bonus amount equal to %bonus_heal%%% of each target's missing health.\n<font color='#9090F0'>Shadow Blessing:</font> increases targets' movement and attack speed for %buff_duration% seconds."
+		"DOTA_Tooltip_ability_custom_dazzle_shadow_wave_Lore"					"While it is a simplistic and routine rite among Shadow Priests, the Shadow Wave is also the most critical for success."
+		"DOTA_Tooltip_ability_custom_dazzle_shadow_wave_bounce_distance"		"BOUNCE DISTANCE:"
+		"DOTA_Tooltip_ability_custom_dazzle_shadow_wave_base_heal"				"BASE HEAL:"
+		"DOTA_Tooltip_ability_custom_dazzle_shadow_wave_buff_ms"				"%BONUS MOVEMENT SPEED:"
+		"DOTA_Tooltip_ability_custom_dazzle_shadow_wave_buff_as"				"BONUS ATTACK SPEED:"
+
+		// Drow Ranger
+		//============================
+		"DOTA_Tooltip_modifier_custom_frost_arrows_buff"						"Swift Arrows"
+		"DOTA_Tooltip_modifier_custom_frost_arrows_buff_Description"			"Gaining %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%% movement speed and %dMODIFIER_PROPERTY_STATS_AGILITY_BONUS% agility"
+
+		"DOTA_Tooltip_modifier_custom_frost_arrows_debuff"						"Frost Arrows"
+		"DOTA_Tooltip_modifier_custom_frost_arrows_debuff_Description"			"Movement slowed by %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%"
+
+		"DOTA_Tooltip_ability_custom_drow_ranger_frost_arrows"					"Frost Arrows"
+		"DOTA_Tooltip_ability_custom_drow_ranger_frost_arrows_Description"		"Adds a freezing effect to Drow's attacks, slowing enemies' movement.\n<font color='#9090F0'>Swift Arrows:</font> when attacking bosses, Drow uses especially enchanted arrows that increase her agility and movement speed with each hit."
+		"DOTA_Tooltip_ability_custom_drow_ranger_frost_arrows_Lore"				"Ice-encased arrows pierce the silence, chilling their victims to the core."
+		"DOTA_Tooltip_ability_custom_drow_ranger_frost_arrows_ms_slow"			"%MOVEMENT SLOW:"
+		"DOTA_Tooltip_ability_custom_drow_ranger_frost_arrows_slow_duration"	"SLOW DURATION:"
+		"DOTA_Tooltip_ability_custom_drow_ranger_frost_arrows_agi_bonus"		"SWIFT ARROWS AGILITY:"
+		"DOTA_Tooltip_ability_custom_drow_ranger_frost_arrows_ms_bonus"			"%SWIFT ARROWS MOVE SPEED:"
+		"DOTA_Tooltip_ability_custom_drow_ranger_frost_arrows_buff_duration"	"SWIFT ARROWS DURATION:"
+
+		// Legion Commander
+		//============================
+		"DOTA_Tooltip_modifier_custom_moment_of_courage_heal"					"Shared Courage"
+		"DOTA_Tooltip_modifier_custom_moment_of_courage_heal_Description"		"Regenerating health every second"
+
+		"DOTA_Tooltip_modifier_holdout_gladiators_unite"						"Gladiators Unite"
+		"DOTA_Tooltip_modifier_holdout_gladiators_unite_Description"			"Gaining %dMODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS% armor, %dMODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE% damage, and bonus lifesteal."
+
+		"DOTA_Tooltip_ability_custom_legion_commander_moment_of_courage"				"Moment of Courage"
+		"DOTA_Tooltip_ability_custom_legion_commander_moment_of_courage_Description"	"Performs an attack with bonus damage.\n<font color='#9090F0'>Shared Courage:</font> heals all allies in %ally_radius% radius based on the amount of damage of the attack, distributed over %duration% seconds."
+		"DOTA_Tooltip_ability_custom_legion_commander_moment_of_courage_Lore"			"Tresdin's fierce attacks inspire her allies, renewing their will to fight."
+		"DOTA_Tooltip_ability_custom_legion_commander_moment_of_courage_bonus_damage"	"%BONUS DAMAGE:"
+		"DOTA_Tooltip_ability_custom_legion_commander_moment_of_courage_lifesteal_pct"	"%LIFESTEAL:"
+
+		"DOTA_Tooltip_ability_holdout_gladiators_unite"							"Gladiators Unite"
+		"DOTA_Tooltip_ability_holdout_gladiators_unite_Description"				"<font color='#9090F0'>Legion Commander calls her allied heroes together to fight in an arena. Each additional friendly hero that joins the fight in the arena grants additional bonus damage, armor, and lifesteal to each arena combatant.</font>"
+		"DOTA_Tooltip_ability_holdout_gladiators_unite_Lore"					"To face a soldier of Stonehall in single combat is a challenge few can resist To face an entire Phalanx is a nightmare none have escaped from."
+		"DOTA_Tooltip_ability_holdout_gladiators_unite_radius"					"EFFECT RADIUS:"
+		"DOTA_Tooltip_ability_holdout_gladiators_unite_bonus_armor_per_hero"	"ARMOR PER HERO:"
+		"DOTA_Tooltip_ability_holdout_gladiators_unite_bonus_damage_per_hero"	"DAMAGE PER HERO:"
+		"DOTA_Tooltip_ability_holdout_gladiators_unite_lifesteal_per_hero"		"LIFESTEAL PER HERO:"
+		"DOTA_Tooltip_ability_holdout_gladiators_unite_duration"				"DURATION:"
+
+		// Omniknight
+		//============================
+		"DOTA_Tooltip_modifier_custom_degen_aura_debuff"						"Degen Aura"
+		"DOTA_Tooltip_modifier_custom_degen_aura_debuff_Description"			"Slowed by %dMODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE%%%, incoming damage amplified by %dMODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE%%%, outgoing damage reduced by %dMODIFIER_PROPERTY_TOTALDAMAGEOUTGOING_PERCENTAGE%%."
+
+		"DOTA_Tooltip_ability_custom_omniknight_purification"					"Purification"
+		"DOTA_Tooltip_ability_custom_omniknight_purification_Description"		"Instantly heals a friendly unit and damages all nearby enemy units.\n<font color='#9090F0'>Strength is Virtue:</font> also applies bonus healing equal to %bonus_heal%%% of the target's maximum health. This effect does not increase Purification's damage."
+		"DOTA_Tooltip_ability_custom_omniknight_purification_Lore"				"Priests of the Omniscience are adept at removing impurities from fellow warriors."
+		"DOTA_Tooltip_ability_custom_omniknight_purification_base_heal"			"DAMAGE/HEAL:"
+		"DOTA_Tooltip_ability_custom_omniknight_purification_radius"			"DAMAGE RADIUS:"
+
+		"DOTA_Tooltip_ability_custom_omniknight_degen_aura"						"Degen Aura"
+		"DOTA_Tooltip_ability_custom_omniknight_degen_aura_Description"			"Greatly degenerates the movement and attack capabilities of enemy units that stray too near.\n<font color='#9090F0'>Virtue is Strength:</font> also reduces the damage affected enemies deal, while amplifying the damage they take."
+		"DOTA_Tooltip_ability_custom_omniknight_degen_aura_Lore"				"The holy embodiment of Purist Thunderwrath is enough to weaken those of lesser faith."
+		"DOTA_Tooltip_ability_custom_omniknight_degen_aura_dmg_reduction"		"%DAMAGE REDUCTION:"
+		"DOTA_Tooltip_ability_custom_omniknight_degen_aura_dmg_amp"				"%DAMAGE AMPLIFICATION:"
+		"DOTA_Tooltip_ability_custom_omniknight_degen_aura_move_slow"			"%MOVEMENT SLOW:"
+		"DOTA_Tooltip_ability_custom_omniknight_degen_aura_radius"				"EFFECT. RADIUS:"
+
+		// Phantom Assassin
+		//============================
+		"DOTA_Tooltip_modifier_custom_blur_active"								"Phantom Dance"
+		"DOTA_Tooltip_modifier_custom_blur_active_Description"					"Invulnerable to all damage"
+
+		"DOTA_Tooltip_ability_custom_phantom_assassin_blur"						"Blur"
+		"DOTA_Tooltip_ability_custom_phantom_assassin_blur_Description"			"Phantom Assassin focuses inward, increasing her ability to evade enemy attacks.\n<font color='#9090F0'>Phantom Dance:</font> activate to become a phantom, immune to all damage, for a short duration."
+		"DOTA_Tooltip_ability_custom_phantom_assassin_blur_Lore"				"Meditation allows a Veiled Sister to carefully anticipate her opponents in combat."
+		"DOTA_Tooltip_ability_custom_phantom_assassin_blur_passive_evasion"		"%PASSIVE EVASION:"
+		"DOTA_Tooltip_ability_custom_phantom_assassin_blur_active_duration"		"PHANTOM DANCE DURATION:"
+
+		// Pugna
+		//============================
+		"DOTA_Tooltip_ability_pugna_life_drain_Description"						"CHANNELED - When cast on an enemy, Pugna drains health from the target enemy unit to heal himself and granting vision over the target. If Pugna has full HP, and the enemy target is a Hero, Life Drain will restore mana instead.\n\nWhen cast on an ally, Pugna will drain his own health into his ally.\n<font color='#9090F0'>Healing allies does not cost health while fighting bosses.</font>\n\nUpgradable by Aghanim's Scepter."
+
+		// Rubick
+		//============================
+		"DOTA_Tooltip_ability_rubick_fade_bolt_Description"						"Rubick creates a powerful stream of arcane energy that travels between enemy units, dealing damage and reducing their attack damage.\n<font color='#9090F0'>Does not reduce boss damage.</font>"
+
+		// Spectre
+		//============================
+		"DOTA_Tooltip_modifier_custom_haunt_debuff"								"Haunt"
+		"DOTA_Tooltip_modifier_custom_haunt_debuff_Description"					"Any damage dealt to this target will result in an additional hit from Spectre."
+
+		"DOTA_Tooltip_ability_custom_spectre_haunt"								"Haunt"
+		"DOTA_Tooltip_ability_custom_spectre_haunt_Description"					"Creates a spectral nemesis to attack the target enemy.\n<font color='#9090F0'>Spectral Echo:</font> causes the Haunted enemy to be attacked by Spectre every time it takes damage."
+		"DOTA_Tooltip_ability_custom_spectre_haunt_Lore"						"At the height of combat, Mercurial's physical manifestation shatters, and the shadowy pieces haunt those who still cling to life."
+		"DOTA_Tooltip_ability_custom_spectre_haunt_haunt_duration"				"DURATION:"
+
+		// Sven
+		//============================
+		"DOTA_Tooltip_ability_custom_sven_great_cleave"							"Great Cleave"
+		"DOTA_Tooltip_ability_custom_sven_great_cleave_Description"				"Sven strikes with great force, cleaving all nearby enemy units with his attack.\n<font color='#9090F0'>Focused Strike:</font> when fighting bosses, trades the cleave attack for the same amount of bonus damage."
+		"DOTA_Tooltip_ability_custom_sven_great_cleave_Lore"					"The Vigil Knights still seek to reclaim the stolen Outcast Blade from Sven, a weapon capable of cutting wide swaths through lesser warriors."
+		"DOTA_Tooltip_ability_custom_sven_great_cleave_great_cleave_damage"		"%BONUS DAMAGE/CLEAVE:"
+
+		// Tidehunter
+		//============================
+		"DOTA_Tooltip_modifier_custom_kraken_shell"								"Kraken Shell"
+		"DOTA_Tooltip_modifier_custom_kraken_shell_Description"					"Blocking damage from all sources"
+
+		"DOTA_Tooltip_ability_custom_tidehunter_kraken_shell"					"Kraken Shell"
+		"DOTA_Tooltip_ability_custom_tidehunter_kraken_shell_Description"		"Tidehunter's thick hide passively block a portion of any incoming damage.\n<font color='#9090F0'>Regenerating Shell:</font> Can block up to %max_block%%% of Tidehunter's maximum health in damage. After a successful block, Kraken Shell regains its block power over time."
+		"DOTA_Tooltip_ability_custom_tidehunter_kraken_shell_Lore"				"Claddish navymen tell tales of a mighty sea-faring beast that suffered spear and sword but continued to lay waste to the fleet."
+		"DOTA_Tooltip_ability_custom_tidehunter_kraken_shell_recovery_time"		"TIME TO RECOVER:"
+
+		"DOTA_Tooltip_ability_tidehunter_anchor_smash_Description"				"Tidehunter swings his mighty anchor to damage nearby enemies and reduce their attack damage.\n<font color='#9090F0'>Does not reduce boss damage.</font>"
+
+		// Timbersaw
+		//============================
+		"DOTA_Tooltip_ability_custom_shredder_reactive_armor"						"Reactive Armor"
+		"DOTA_Tooltip_ability_custom_shredder_reactive_armor_Description"			"Each time Timbersaw is attacked, he gains increased health regen.\n<font color='#9090F0'>Self-repairing Armor:</font> regenerates %regen_pct%%% of any damage taken over the next %regen_duration% seconds.\n<font color='#9090F0'>Adaptive Armor:</font> while regenerating damage, gains bonus armor if the source of the damage was physical, and magic resistance if it was magical. This effect stacks with itself."
+		"DOTA_Tooltip_ability_custom_shredder_reactive_armor_Lore"					"The saw-suit is equipped to react to the slightest touch with fortified defenses."
+		"DOTA_Tooltip_ability_custom_shredder_reactive_armor_reactive_armor"		"ARMOR:"
+		"DOTA_Tooltip_ability_custom_shredder_reactive_armor_reactive_magic_resist"	"%MAGIC RESISTANCE:"
+
+		// Ursa
+		//============================
+		"DOTA_Tooltip_ability_ursa_fury_swipes_Description"						"Ursa's claws dig deeper wounds in the enemy, causing consecutive attacks to the same enemy to deal more damage. If the same target is not attacked after 15 seconds, the bonus damage is lost.\n<font color='#9090F0'>Can only stack up to 4 times on bosses.</font>"
+
+		// Vengeful Spirit
+		//============================
+		"DOTA_Tooltip_ability_vengefulspirit_nether_swap_Description"			"Instantaneously swaps positions with a target Hero, friend or enemy. Nether Swap interrupts channeling abilities on the target.\n<font color='#9090F0'>Cannot be used on a boss you're not currently fighting.</font>\n\nUpgradable by Aghanim's Scepter."
+
+		// Winter Wyvern
+		//============================
+		"DOTA_Tooltip_ability_winter_wyvern_splinter_blast_Description"			"Launches a ball of brittle ice toward an unit. The ice shatters on impact, leaving the primary target completely unaffected, while hurling damaging splinters into nearby enemies in a %split_radius% radius. Enemies struck by these splinters are slowed by %movespeed_slow_tooltip%%%.\n<font color='#9090F0'>Can be used on allies.</font>"
+		
+		// Witch Doctor
+		//============================
+		"DOTA_Tooltip_ability_holdout_death_ward"								"Death Ward"
+		"DOTA_Tooltip_ability_holdout_death_ward_Description"					"Summons a deadly ward to attack enemy heroes within 700 range. Lasts up to 10 seconds.\n<font color='#9090F0'>Indiscriminate Death:</font> Death Ward targets any enemy, not only heroes.\n<font color='#9090F0'>Ward of Mass Destruction:</font> bounces up to %bounces% times.\n<font color='#FF2020'>WARNING: buying aghanim's scepter removes Death Ward's bounces. DO NOT buy it.</font>"
+		"DOTA_Tooltip_ability_holdout_death_ward_Lore"							"Witch Doctor performs a ritualistic dance, one that haunts the dreams of those who live to recount it."
+		"DOTA_Tooltip_ability_holdout_death_ward_damage"						"DAMAGE:"
+		"DOTA_Tooltip_ability_holdout_death_ward_bounce_radius"					"BOUNCE RADIUS:"
+
+		//=================================================================================================================
+		// Talent overrides
+		//=================================================================================================================
+
+		"DOTA_Tooltip_ability_special_bonus_haste"							"Hasted Movement"
+		"DOTA_Tooltip_ability_special_bonus_vision_200"						"+600 Vision range"
+		"DOTA_Tooltip_ability_special_bonus_unique_juggernaut"				"+1s Blade Fury"
+		"DOTA_Tooltip_ability_special_bonus_unique_juggernaut_2"			"+7 Omnislash strikes"
+		"DOTA_Tooltip_ability_special_bonus_unique_juggernaut_3"			"+120 Blade Fury DPS"
+		"DOTA_Tooltip_ability_special_bonus_unique_lifestealer"				"+1.5s Rage Duration"
+		"DOTA_Tooltip_ability_special_bonus_unique_lifestealer_3"			"+1.0% Feast Damage/Lifesteal"
+		"DOTA_Tooltip_ability_special_bonus_unique_rubick"					"+500 Telekinesis Land Distance"
+		"DOTA_Tooltip_ability_special_bonus_unique_rubick_3"				"+4% Null Field"
+		"DOTA_Tooltip_ability_special_bonus_unique_abaddon_2"				"+4% Mist Coil health-based healing"
+		"DOTA_Tooltip_ability_special_bonus_unique_abaddon_3"				"+20% Curse of Avernus movement slow"
+		"DOTA_Tooltip_ability_special_bonus_unique_templar_assassin"		"+1 Refraction instance"
+		"DOTA_Tooltip_ability_special_bonus_unique_templar_assassin_2"		"+8 Meld armor reduction"
+		"DOTA_Tooltip_ability_special_bonus_unique_antimage_4"				"+20% Spell Shield magic resistance"
+		"DOTA_Tooltip_ability_special_bonus_unique_axe"						"+24s Battle Hunger duration"
+		"DOTA_Tooltip_ability_special_bonus_unique_dazzle_1"				"-4s Shadow Wave cooldown"
+		"DOTA_Tooltip_ability_special_bonus_unique_dazzle_2"				"+35 Shadow Wave base heal"
+		"DOTA_Tooltip_ability_special_bonus_unique_dazzle_3"				"+50 Poison Touch DPS"
+		"DOTA_Tooltip_ability_special_bonus_unique_witch_doctor_1"			"+200 Death Ward attack range"
+		"DOTA_Tooltip_ability_special_bonus_unique_witch_doctor_2"			"+1% Max Health/second Voodoo Restoration"
+		"DOTA_Tooltip_ability_special_bonus_unique_witch_doctor_3"			"+5 Paralyzing Cask bounces"
+		"DOTA_Tooltip_ability_special_bonus_unique_witch_doctor_5"			"+100 Death Ward damage"
+		"DOTA_Tooltip_ability_special_bonus_unique_legion_commander_3"		"+50% Moment of Courage healing"
+		"DOTA_Tooltip_ability_special_bonus_unique_omniknight_1"			"+200 Purification healing"
+		"DOTA_Tooltip_ability_special_bonus_unique_omniknight_2"			"+300 Degen Aura radius"
+		"DOTA_Tooltip_ability_special_bonus_unique_omniknight_3"			"+2s Repel Duration"
+		"DOTA_Tooltip_ability_special_bonus_unique_omniknight_4"			"+1 Purification target"
+		"DOTA_Tooltip_ability_special_bonus_unique_spectre"					"-11s Spectral Dagger cooldown"
+		"DOTA_Tooltip_ability_special_bonus_unique_spectre_2"				"+30 Desolate damage"
+		"DOTA_Tooltip_ability_special_bonus_unique_spectre_3"				"+50% Spectral Dagger speed bonus"
+		"DOTA_Tooltip_ability_special_bonus_unique_spectre_4"				"+5s Haunt duration"
+		"DOTA_Tooltip_ability_special_bonus_unique_spectre_5"				"+8% Dispersion damage reduction"
+		"DOTA_Tooltip_ability_special_bonus_unique_phantom_assassin_3"		"+1.0s Blur duration"
+		"DOTA_Tooltip_ability_special_bonus_unique_phantom_assassin_2"		"+9% Coup de Grace chance"
+		"DOTA_Tooltip_ability_special_bonus_unique_crystal_maiden_4"		"+20% mana loss/mana cost reduction"
+		"DOTA_Tooltip_ability_special_bonus_unique_drow_ranger_1"			"+24% Precision Aura damage"
+		"DOTA_Tooltip_ability_special_bonus_unique_drow_ranger_3"			"+30 Marksmanship agility"
+		"DOTA_Tooltip_ability_special_bonus_unique_lina_3"					"+175 Light Strike Array damage"
+		"DOTA_Tooltip_ability_special_bonus_unique_luna_3"					"+32 Lunar Blessing damage"
+		"DOTA_Tooltip_ability_special_bonus_unique_nevermore_5"				"+3 Presence of the Dark Lord armor reduction"
+		"DOTA_Tooltip_ability_special_bonus_unique_sniper_1"				"+30 Shrapnel DPS"
+		"DOTA_Tooltip_ability_special_bonus_unique_tidehunter_2"			"+120 Gush damage"
+		"DOTA_Tooltip_ability_special_bonus_unique_tidehunter_3"			"+20% Anchor Smash damage reduction"
+		"DOTA_Tooltip_ability_special_bonus_unique_timbersaw_2"				"+33% faster Reactive Armor regeneration"
+		"DOTA_Tooltip_ability_special_bonus_unique_ursa"					"+20 Fury Swipes damage"
+		"DOTA_Tooltip_ability_special_bonus_unique_ursa_5"					"+475 Earthshock radius"
+		"DOTA_Tooltip_ability_special_bonus_unique_vengeful_spirit_1"		"+275 Magic Missile damage"
+		"DOTA_Tooltip_ability_special_bonus_unique_vengeful_spirit_2"		"+15% Vengeance Aura damage bonus"
+		"DOTA_Tooltip_ability_special_bonus_unique_vengeful_spirit_4"		"+3 Wave of Terror armor reduction"
+		"DOTA_Tooltip_ability_special_bonus_unique_viper_1"					"+8 Corrosive Skin stats"
+		"DOTA_Tooltip_ability_special_bonus_unique_alchemist_4"				"+34 Chemical Rage regeneration"
+	}
+}
